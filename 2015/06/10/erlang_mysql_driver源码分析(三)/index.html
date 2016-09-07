@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>erlang_mysql_driver源码分析(三) | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;lt;!-- toc --&amp;gt;
+&amp;lt;!-- tocstop --&amp;gt;
+mysql_recv:start_link1init(Host, Port, User, Password, Database, LogFun, Encoding, PoolId, Parent) -&amp;#62;&amp;#10;    case mysql_recv:start_link(Host, Port, LogFun, self()) o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="erlang_mysql_driver源码分析(三)">
+<meta property="og:url" content="http://youthy.github.io/2015/06/10/erlang_mysql_driver源码分析(三)/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="&amp;lt;!-- toc --&amp;gt;
+&amp;lt;!-- tocstop --&amp;gt;
+mysql_recv:start_link1init(Host, Port, User, Password, Database, LogFun, Encoding, PoolId, Parent) -&amp;#62;&amp;#10;    case mysql_recv:start_link(Host, Port, LogFun, self()) o">
+<meta property="og:updated_time" content="2016-08-18T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="erlang_mysql_driver源码分析(三)">
+<meta name="twitter:description" content="&amp;lt;!-- toc --&amp;gt;
+&amp;lt;!-- tocstop --&amp;gt;
+mysql_recv:start_link1init(Host, Port, User, Password, Database, LogFun, Encoding, PoolId, Parent) -&amp;#62;&amp;#10;    case mysql_recv:start_link(Host, Port, LogFun, self()) o">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">youthy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap，vim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/二次元/" style="font-size: 10px;">二次元</a> <a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/情感/" style="font-size: 10px;">情感</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.win">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">youthy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">youthy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-erlang_mysql_driver源码分析(三)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/10/erlang_mysql_driver源码分析(三)/" class="article-date">
+  	<time datetime="2015-06-10T07:37:35.000Z" itemprop="datePublished">6月 10 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      erlang_mysql_driver源码分析(三)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/">erlang</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/erlang/">erlang</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<!-- tocstop -->
+<h1 id="mysql_recvstart_link">mysql_recv:start_link</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init(Host, Port, User, Password, Database, LogFun, Encoding, PoolId, Parent) -&gt;
+    case mysql_recv:start_link(Host, Port, LogFun, self()) of
+	{ok, RecvPid, Sock} -&gt;
+	    case mysql_init(Sock, RecvPid, User, Password, LogFun) of
+		{ok, Version} -&gt;</span><br></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x6B21;&#x5728;mysql_conn:init&#x91CC;&#x9762;&#x8C03;&#x7528;&#x4E86;mysql_recv:start_link,&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;RecvPid&#x63A5;&#x6536;&#x8FDB;&#x7A0B;&#x7684;Pid&#x548C;Sock&#x5957;&#x63A5;&#x5B57;&#x3002;mysql_recv:start_link&#x8FC7;&#x7A0B;&#x5982;&#x4E0B;<br><a id="more"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_link(Host, Port, LogFun, Parent) when is_list(Host), is_integer(Port) -&gt;
+    RecvPid =
+	spawn_link(fun () -&gt;
+			   init(Host, Port, LogFun, Parent)
+		   end),
+    %% wait for the socket from the spawned pid
+    receive
+	{mysql_recv, RecvPid, init, {error, E}} -&gt;
+	    {error, E};
+	{mysql_recv, RecvPid, init, {ok, Socket}} -&gt;
+	    {ok, RecvPid, Socket}
+    after ?CONNECT_TIMEOUT -&gt;
+	    catch exit(RecvPid, kill),
+	    {error, &quot;timeout&quot;}
+    end.</span><br></pre></td></tr></table></figure>
+<p>&#x4E0E;mysql_conn&#x5927;&#x4F53;&#x76F8;&#x540C;&#xFF0C;&#x540C;&#x6837;spawn&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#xFF0C;&#x5C06;mysql_conn&#x7684;Pid&#x4F20;&#x5165;&#x5F53;&#x505A;Parent&#x7236;&#x8FDB;&#x7A0B;&#xFF0C;&#x7136;&#x540E;mysql_conn&#x7B49;&#x5F85;receive&#x6D88;&#x606F;&#xFF0C;&#x5982;&#x679C;spawn&#x7684;mysql_recv&#x8FDB;&#x7A0B;&#x8FD4;&#x56DE;{mysql_recv, RecvPid, init, {ok, Socket}},&#x5C31;&#x4EE3;&#x8868;&#x521B;&#x5EFA;&#x6210;&#x529F;&#xFF0C;&#x7136;&#x540E;&#x5C06;RecvPid, Socket&#x8FD9;&#x4E9B;&#x6709;&#x7528;&#x7684;&#x53D8;&#x91CF;&#x8FD4;&#x56DE;&#xFF0C;&#x4EE5;&#x4FBF;&#x4E8E;mysql_init&#x8FDB;&#x884C;,<br>&#x5982;&#x679C;&#x8D85;&#x8FC7;?CONNECT_TIMEOUT&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5219;&#x4F1A;&#x8C03;&#x7528;exit(RecvPid, kill)&#x5173;&#x95ED;mysql_recv&#x8FDB;&#x7A0B;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;{error, &quot;timeout&quot;}.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init(Host, Port, LogFun, Parent) -&gt;
+    case gen_tcp:connect(Host, Port, [binary, {packet, 0}]) of
+	{ok, Sock} -&gt;
+	    Parent ! {mysql_recv, self(), init, {ok, Sock}},
+	    State = #state{socket  = Sock,
+			   parent  = Parent,
+			   log_fun = LogFun,
+			   data    = &lt;&lt;&gt;&gt;
+			  },
+	    loop(State);
+	E -&gt;
+	    LogFun(?MODULE, ?LINE, error,
+		   fun() -&gt;
+			   {&quot;mysql_recv: Failed connecting to ~p:~p : ~p&quot;,
+			    [Host, Port, E]}
+		   end),
+	    Msg = lists:flatten(io_lib:format(&quot;connect failed : ~p&quot;, [E])),
+	    Parent ! {mysql_recv, self(), init, {error, Msg}}
+    end.</span><br></pre></td></tr></table></figure>
+<p>init&#x91CC;&#x9762;&#x901A;&#x8FC7;gen_tcp:connect&#x8FDE;&#x63A5;&#x4E86;&#x7AEF;&#x53E3;&#xFF0C;&#x8FD4;&#x56DE;&#x5957;&#x63A5;&#x5B57;&#xFF0C;&#x5C06;&#x8FD9;&#x4E2A;&#x5957;&#x63A5;&#x5B57;&#x53D1;&#x9001;&#x7ED9;&#x7236;&#x8FDB;&#x7A0B;&#x4E5F;&#x5C31;&#x662F;&#x5728;&#x4E0A;&#x9762;receive&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x4E4B;&#x540E;&#x8FDB;&#x5165;loop&#x3002;&#x5982;&#x679C;&#x8FDE;&#x63A5;&#x5931;&#x8D25;&#xFF0C;&#x6253;&#x5370;&#x9519;&#x8BEF;&#xFF0C;&#x5E76;&#x901A;&#x77E5;&#x7236;&#x8FDB;&#x7A0B;&#x3002;</p>
+<blockquote>
+<p>state{socket,   %&#x5957;&#x63A5;&#x5B57;<br>        parent,   %&#x7236;&#x8FDB;&#x7A0B;pid<br>        log_fun,  %&#x6253;&#x5370;&#x65E5;&#x5FD7;&#x51FD;&#x6570;<br>        data,     %&#x7AEF;&#x53E3;&#x53D1;&#x6765;&#x7684;&#x6570;&#x636E;<br>}</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loop(State) -&gt;
+    Sock = State#state.socket,
+    receive
+	{tcp, Sock, InData} -&gt;
+	    NewData = list_to_binary([State#state.data, InData]),
+	    %% send data to parent if we have enough data
+	    Rest = sendpacket(State#state.parent, NewData),
+	    loop(State#state{data = Rest});
+	{tcp_error, Sock, Reason} -&gt;
+	    LogFun = State#state.log_fun,
+	    LogFun(?MODULE, ?LINE, error,
+		   fun() -&gt;
+			   {&quot;mysql_recv: Socket ~p closed : ~p&quot;,
+			    [Sock, Reason]}
+		   end),
+	    State#state.parent ! {mysql_recv, self(), closed, {error, Reason}},
+	    error;
+	{tcp_closed, Sock} -&gt;
+	    LogFun = State#state.log_fun,
+	    LogFun(?MODULE, ?LINE, debug,
+		   fun() -&gt;
+			   {&quot;mysql_recv: Socket ~p closed&quot;, [Sock]}
+		   end),
+	    State#state.parent ! {mysql_recv, self(), closed, normal},
+	    error
+    end.</span><br></pre></td></tr></table></figure>
+<p>gen_tcp:connect&#x6CA1;&#x6709;&#x6307;&#x5B9A;{active, false},&#x8FD9;&#x6837;&#x7684;&#x8BDD;&#xFF0C;&#x7AEF;&#x53E3;&#x53EF;&#x4EE5;&#x4E3B;&#x52A8;&#x53D1;&#x7ED9;recv&#x8FDB;&#x7A0B;&#x6D88;&#x606F;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x5728;&#x5728;gen_tcp:connect&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x5F97;&#x5230;Socket&#x7684;&#x540C;&#x65F6;&#xFF0C;mysql_recv&#x8FDB;&#x7A0B;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x91CC;&#x5DF2;&#x7ECF;&#x6709;Socket&#x7684;&#x53D1;&#x6765;&#x7684;&#x6D88;&#x606F;&#x4E86;&#x3002;&#x6211;&#x4EEC;&#x5728;shell&#x91CC;&#x9762;&#x53EF;&#x4EE5;&#x8BD5;&#x4E00;&#x4E0B;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&gt; gen_tcp:connect(&quot;localhost&quot;, 3306, [binary, {packet, 0}]).
+{ok,#Port&lt;0.595&gt;}
+2&gt; rp(process_info(self())).
+[{current_function,{erl_eval,do_apply,6}},
+ {initial_call,{erlang,apply,2}},
+ {status,running},
+ {message_queue_len,2},
+ {messages,[{tcp,#Port&lt;0.595&gt;,
+                 &lt;&lt;91,0,0,0,10,53,46,53,46,51,55,45,48,117,98,117,110,116,
+                   117,48,46,49,52,46,48,52,46,49,0,187,1,0,0,57,98,97,67,
+                   104,98,52,123,0,255,247,8,2,0,15,128,21,0,0,0,0,0,0,0,
+                   0,0,0,50,36,92,38,67,96,59,67,125,112,59,115,0,109,121,
+                   115,113,108,95,110,97,116,105,118,101,95,112,97,115,
+                   115,119,111,114,100,0&gt;&gt;},
+            {tcp_closed,#Port&lt;0.595&gt;}]},
+ {links,[&lt;0.26.0&gt;]},
+ {dictionary,[]},
+ {trap_exit,false},
+ {error_handler,error_handler},
+ {priority,normal},
+ {group_leader,&lt;0.25.0&gt;},
+ {total_heap_size,3571},
+ {heap_size,987},
+ {stack_size,37},
+ {reductions,4070},
+ {garbage_collection,[{min_bin_vheap_size,46368},
+                      {min_heap_size,233},
+                      {fullsweep_after,65535},
+                      {minor_gcs,5}]},
+ {suspending,[]}]
+ok</span><br></pre></td></tr></table></figure></p>
+<p>&#x6211;&#x4EEC;&#x6240;&#x505A;&#x7684;&#x64CD;&#x4F5C;&#x4EE5;mysql_recv:init&#x91CC;&#x9762;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;&#x6253;&#x5F00;&#x4E86;3306&#x7AEF;&#x53E3;&#x3002;&#x8FD9;&#x662F;shell&#x7684;messagebox&#x91CC;&#x9762;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x4E24;&#x5929;Socket&#x53D1;&#x6765;&#x7684;&#x6D88;&#x606F;&#x3002;loop&#x51FD;&#x6570;&#x5C06;&#x8FD9;&#x6BB5;&#x6D88;&#x606F;&#x4EA4;&#x7ED9;&#x4E86;sendpacket&#x5904;&#x7406;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendpacket(Parent, Data) -&gt;
+    case Data of
+	&lt;&lt;Length:24/little, Num:8, D/binary&gt;&gt; -&gt;
+	    if
+		Length =&lt; size(D) -&gt;
+		    {Packet, Rest} = split_binary(D, Length),
+		    Parent ! {mysql_recv, self(), data, Packet, Num},
+		    sendpacket(Parent, Rest);
+		true -&gt;
+		    Data
+	    end;
+	_ -&gt;
+	    Data
+    end.</span><br></pre></td></tr></table></figure>
+<p>packet&#x5934;3&#x4E2A;&#x5B57;&#x8282;&#x8868;&#x793A;&#x6570;&#x636E;&#x957F;&#x5EA6;&#xFF0C;&#x7B2C;&#x56DB;&#x4E2A;&#x5B57;&#x8282;&#x662F;&#x5E27;&#x5E8F;&#x53F7;&#xFF0C;&#x4E4B;&#x540E;&#x6240;&#x6709;&#x7684;&#x662F;&#x6570;&#x636E;&#x3002;&#x90A3;&#x4E48;&#x8FD9;&#x6BB5;&#x6570;&#x636E;&#x5934;&#x4E09;&#x4E2A;&lt;<91,0,0>&gt;&#x4EE3;&#x8868;&#x6570;&#x636E;&#x957F;&#x5EA6;&#x662F;91&#x5B57;&#x8282;&#xFF08;&#x5C0F;&#x7AEF;&#x5B58;&#x50A8;&#xFF09;&#xFF0C;&#x4E4B;&#x540E;&#x7684;0&#x4EE3;&#x8868;&#x8FD9;&#x4E2A;&#x5E27;&#x5E8F;&#x53F7;&#x662F;0&#xFF0C;&lt;<10....>&gt;&#x5C31;&#x662F;&#x771F;&#x6B63;&#x7684;&#x6570;&#x636E;&#x3002;sendpacket&#x5C06;&#x8FD9;&#x6BB5;&#x6570;&#x636E;&#x53D1;&#x7ED9;&#x4E86;parent&#x3002;&#x5728;&#x5982;&#x4E0B;&#x7684;&#x5730;&#x65B9;&#x5339;&#x914D;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init(Host, Port, User, Password, Database, LogFun, Encoding, PoolId, Parent) -&gt;
+    case mysql_recv:start_link(Host, Port, LogFun, self()) of
+	{ok, RecvPid, Sock} -&gt;
+	    case mysql_init(Sock, RecvPid, User, Password, LogFun) of
+		{ok, Version} -&gt;
+------
+mysql_init(Sock, RecvPid, User, Password, LogFun) -&gt;
+    case do_recv(LogFun, RecvPid, undefined) of
+	{ok, Packet, InitSeqNum} -&gt;
+		    {Version, Salt1, Salt2, Caps} = greeting(Packet, LogFun),
+-----
+do_recv(LogFun, RecvPid, SeqNum)  when is_function(LogFun);
+				       LogFun == undefined,
+				       SeqNum == undefined -&gt;
+    receive
+        {mysql_recv, RecvPid, data, Packet, Num} -&gt;
+	    {ok, Packet, Num};
+	{mysql_recv, RecvPid, closed, _E} -&gt;
+	    {error, &quot;mysql_recv: socket was closed&quot;}
+    end;</span><br></pre></td></tr></table></figure></10....></91,0,0></p>
+<p>&#x5728;mysql_conn&#x7684;do_recv&#x5B8C;&#x6210;&#x5BF9;&#x6D88;&#x606F;&#x7684;&#x5339;&#x914D;&#x3002;<br>&#x4E0A;&#x9762;&#x7684;&#x6570;&#x636E;&#x5176;&#x5B9E;&#x5C31;&#x662F;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=INFO REPORT==== 10-Jun-2015::11:59:21 ===
+I(&lt;0.116.0&gt;:mysql_conn:620) : greeting packet &lt;&lt;10,53,46,53,46,51,55,45,48,117,
+                                                98,117,110,116,117,48,46,49,52,
+                                                46,48,52,46,49,0,173,1,0,0,100,
+                                                44,77,124,75,63,60,78,0,255,
+                                                247,8,2,0,15,128,21,0,0,0,0,0,
+                                                0,0,0,0,0,84,60,110,54,95,93,
+                                                55,57,88,46,122,66,0,109,121,
+                                                115,113,108,95,110,97,116,105,
+                                                118,101,95,112,97,115,115,119,
+                                                111,114,100,0&gt;&gt; version &quot;5.5.37-0ubuntu0.14.04.1&quot; (protocol 10) salt &quot;d,M|K?&lt;N&quot; caps 63487 serverchar &lt;&lt;8,2,0,
+                                                                                                                                                        15,128,
+                                                                                                                                                        21,0,0,
+                                                                                                                                                        0,0,0,0,
+                                                                                                                                                        0,0,0,0&gt;&gt;salt2 &quot;T&lt;n6_]79X.zB&quot;</span><br></pre></td></tr></table></figure></p>
+<p>greeting&#x51FD;&#x6570;&#x7528;&#x6765;&#x8F6C;&#x5316;&#x4E3A;&#x7248;&#x672C;&#x53F7;&#xFF0C;salt&#x7B49;&#x53C2;&#x6570;&#x7684;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">greeting(Packet, LogFun) -&gt;
+    &lt;&lt;Protocol:8, Rest/binary&gt;&gt; = Packet,
+    {Version, Rest2} = asciz(Rest),
+    &lt;&lt;_TreadID:32/little, Rest3/binary&gt;&gt; = Rest2,
+    {Salt, Rest4} = asciz(Rest3),
+    &lt;&lt;Caps:16/little, Rest5/binary&gt;&gt; = Rest4,
+    &lt;&lt;ServerChar:16/binary-unit:8, Rest6/binary&gt;&gt; = Rest5,
+    {Salt2, _Rest7} = asciz(Rest6),
+    ?Log2(LogFun, debug,
+	  &quot;greeting packet ~p version ~p (protocol ~p) salt ~p caps ~p serverchar ~p&quot;
+	  &quot;salt2 ~p&quot;,
+	  [Packet, Version, Protocol, Salt, Caps, ServerChar, Salt2]),
+    {normalize_version(Version, LogFun), Salt, Salt2, Caps}.
+------------------------------------------
+asciz(Data) when is_binary(Data) -&gt;
+    mysql:asciz_binary(Data, []).
+-----------------------------------------
+asciz_binary(&lt;&lt;&gt;&gt;, Acc) -&gt;
+    {lists:reverse(Acc), &lt;&lt;&gt;&gt;};
+asciz_binary(&lt;&lt;0:8, Rest/binary&gt;&gt;, Acc) -&gt;
+    {lists:reverse(Acc), Rest};
+asciz_binary(&lt;&lt;C:8, Rest/binary&gt;&gt;, Acc) -&gt;
+    asciz_binary(Rest, [C | Acc]).</span><br></pre></td></tr></table></figure></p>
+<p>Packet&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x662F;protocol,&#x4E4B;&#x540E;asciz&#x51FD;&#x6570;&#x5C06;&#x5269;&#x4E0B;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x4EE5;0&#x4F4D;&#x5206;&#x754C;&#x70B9;&#x5206;&#x5F00;&#x3002;&#x90A3;&#x4E48;<br>Packet&#x88AB;&#x5206;&#x6210;&#x4E86;</p>
+<blockquote>
+<p>Protocol : &lt;<10>&gt;<br>Version:&lt;<53,46,53,46,51,55,45,48,117,98,117,110,116,117,48,46,49,52,46,48,52,46,49>&gt;,<br>Salt:&lt;<100,44,77,124,75,63,60,78>&gt;<br>Caps:&lt;<255,247>&gt;<br>ServerChar:&lt;<15,128,21,0,0,0,0,0,0,0,0,0,0,84,60,110>&gt;(ServerChar&#x662F;16&#x4E2A;&#x5B57;&#x8282;&#x4E0D;&#x662F;16&#x4E2A;bit)<br>Salt2:&lt;<97,116,105,118,101,95,112,97,115,115,119,111,114,100>&gt;</97,116,105,118,101,95,112,97,115,115,119,111,114,100></15,128,21,0,0,0,0,0,0,0,0,0,0,84,60,110></255,247></100,44,77,124,75,63,60,78></53,46,53,46,51,55,45,48,117,98,117,110,116,117,48,46,49,52,46,48,52,46,49></10></p>
+</blockquote>
+<p>&#x5728;shell&#x4E2D;&#x68C0;&#x6D4B;&#x4E0B;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4&gt; &lt;&lt;53,46,53,46,51,55,45,48,117,98,117,110,116,117,48,46,49,52,46,48,52,46,49&gt;&gt;.
+&lt;&lt;&quot;5.5.37-0ubuntu0.14.04.1&quot;&gt;&gt;
+5&gt; &lt;&lt;100,44,77,124,75,63,60,78&gt;&gt;.
+&lt;&lt;&quot;d,M|K?&lt;N&quot;&gt;&gt;
+6&gt; &lt;&lt;Caps:16/little&gt;&gt; = &lt;&lt;255,247&gt;&gt;.
+&lt;&lt;&quot;&#xFF;&#xF7;&quot;&gt;&gt;
+7&gt; Caps.
+63487</span><br></pre></td></tr></table></figure></p>
+<p>&#x548C;&#x4E0A;&#x9762;&#x6253;&#x5370;&#x7684;log&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/15/关于hexo的toc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          关于hexo的toc
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/09/erlang_mysql_driver源码分析(二)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">erlang_mysql_driver　源码分析(二)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="erlang_mysql_driver源码分析(三)" data-title="erlang_mysql_driver源码分析(三)" data-url="http://youthy.github.io/2015/06/10/erlang_mysql_driver源码分析(三)/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

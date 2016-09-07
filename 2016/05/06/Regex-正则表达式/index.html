@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Regex 正则表达式 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;quot;regex&amp;quot; 精确的匹配 regex这个词
+上面可能会把&amp;quot;regex2&amp;quot;这种词的前面也匹配到。此时需要&amp;quot;\bregex\b&amp;quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Regex 正则表达式">
+<meta property="og:url" content="http://youthy.github.io/2016/05/06/Regex-正则表达式/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="&amp;quot;regex&amp;quot; 精确的匹配 regex这个词
+上面可能会把&amp;quot;regex2&amp;quot;这种词的前面也匹配到。此时需要&amp;quot;\bregex\b&amp;quot;">
+<meta property="og:updated_time" content="2016-08-18T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Regex 正则表达式">
+<meta name="twitter:description" content="&amp;quot;regex&amp;quot; 精确的匹配 regex这个词
+上面可能会把&amp;quot;regex2&amp;quot;这种词的前面也匹配到。此时需要&amp;quot;\bregex\b&amp;quot;">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">youthy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap，vim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/二次元/" style="font-size: 10px;">二次元</a> <a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/情感/" style="font-size: 10px;">情感</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.win">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">youthy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">youthy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Regex-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/06/Regex-正则表达式/" class="article-date">
+  	<time datetime="2016-05-06T07:56:24.000Z" itemprop="datePublished">5月 6 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Regex 正则表达式
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/">erlang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>&quot;regex&quot; &#x7CBE;&#x786E;&#x7684;&#x5339;&#x914D; regex&#x8FD9;&#x4E2A;&#x8BCD;</li>
+<li>&#x4E0A;&#x9762;&#x53EF;&#x80FD;&#x4F1A;&#x628A;&quot;regex2&quot;&#x8FD9;&#x79CD;&#x8BCD;&#x7684;&#x524D;&#x9762;&#x4E5F;&#x5339;&#x914D;&#x5230;&#x3002;&#x6B64;&#x65F6;&#x9700;&#x8981;&quot;\bregex\b&quot; </li>
+</ol>
+<a id="more"></a>
+<blockquote>
+<p>\b&#x662F;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x89C4;&#x5B9A;&#x7684;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x4EE3;&#x7801;&#xFF08;&#x597D;&#x5427;&#xFF0C;&#x67D0;&#x4E9B;&#x4EBA;&#x53EB;&#x5B83;&#x5143;&#x5B57;&#x7B26;&#xFF0C;metacharacter&#xFF09;&#xFF0C;&#x4EE3;&#x8868;&#x7740;&#x5355;&#x8BCD;&#x7684;&#x5F00;&#x5934;&#x6216;&#x7ED3;&#x5C3E;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5355;&#x8BCD;&#x7684;&#x5206;&#x754C;&#x5904;&#x3002;&#x867D;&#x7136;&#x901A;&#x5E38;&#x82F1;&#x6587;&#x7684;&#x5355;&#x8BCD;&#x662F;&#x7531;&#x7A7A;&#x683C;&#xFF0C;&#x6807;&#x70B9;&#x7B26;&#x53F7;&#x6216;&#x8005;&#x6362;&#x884C;&#x6765;&#x5206;&#x9694;&#x7684;&#xFF0C;&#x4F46;&#x662F;\b&#x5E76;&#x4E0D;&#x5339;&#x914D;&#x8FD9;&#x4E9B;&#x5355;&#x8BCD;&#x5206;&#x9694;&#x5B57;&#x7B26;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#xFF0C;&#x5B83;&#x53EA;&#x5339;&#x914D;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x3002;</p>
+</blockquote>
+<p><strong>erlang&#x4E2D;&#x9700;&#x8981;&#x7528;<code>\\</code> &#x4EE3;&#x8868; <code>\</code></strong></p>
+<blockquote>
+<p>The Erlang literal syntax for strings uses the &quot;\&quot; (backslash) character as an escape code. You need to escape backslashes in literal strings, both in your code and in the shell, with an additional backslash, i.e.: &quot;\&quot;.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14&gt; re:run(&quot;hey hi hihi&quot;, &quot;hi&quot;, [global]).
+{match,[[{4,2}],[{7,2}],[{9,2}]]}
+15&gt; re:run(&quot;hey hi hihi&quot;, &quot;\\bhi\\b&quot;, [global]).
+{match,[[{4,2}]]}</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p><code>.</code> &#x8868;&#x793A;&#x5339;&#x914D;&#x51FA;&#x4E86;&#x6362;&#x884C;&#x7684;&#x4EFB;&#x610F;&#x5B57;&#x7B26; <code>*</code> &#x8868;&#x793A;&#x4EFB;&#x610F;&#x6570;&#x91CF;&#x3002; &#x8868;&#x793A;<code>*</code>&#x524D;&#x9762;&#x7684;&#x5B57;&#x7B26;&#x53EF;&#x4EE5;&#x91CD;&#x590D;&#x4EFB;&#x610F;&#x4E2A; &#x6BD4;&#x5982;&quot;.<em>&quot;, &quot;h</em>&quot;, &quot;2*&quot; &#x5339;&#x914D;&#x4EFB;&#x610F;&#x5B57;&#x7B26;&#xFF0C;&#x4EFB;&#x610F;&#x4E2A;h&#xFF0C;&#x4EFB;&#x610F;&#x4E2A;2</p>
+</li>
+<li><p><code>\d</code> &#x5339;&#x914D;&#x6570;&#x5B57;&#x3002; <code>&quot;4\d\d\d\d\d\d\d&quot;</code> &#x5339;&#x914D;4&#x5F00;&#x5934;&#x7684;8&#x4F4D;&#x6570;&#x5B57;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x5199;&#x6210;<code>&quot;4\d{7}&quot;</code>  &quot;\d{7, 10}&quot; &#x8868;&#x793A;7&#x5230;10&#x4E2A;&#x4E0D;&#x7B49;<br>\d&#x5728;erlang&#x4E2D;&#x540C;&#x6837;&#x9700;&#x8981;&#x6362;&#x6210;<code>\\d</code></p>
+</li>
+</ol>
+<blockquote>
+<p>.    &#x5339;&#x914D;&#x9664;&#x6362;&#x884C;&#x7B26;&#x4EE5;&#x5916;&#x7684;&#x4EFB;&#x610F;&#x5B57;&#x7B26;<br>\w    &#x5339;&#x914D;&#x5B57;&#x6BCD;&#x6216;&#x6570;&#x5B57;&#x6216;&#x4E0B;&#x5212;&#x7EBF;&#x6216;&#x6C49;&#x5B57;<br>\s    &#x5339;&#x914D;&#x4EFB;&#x610F;&#x7684;&#x7A7A;&#x767D;&#x7B26;<br>\d    &#x5339;&#x914D;&#x6570;&#x5B57;<br>\b    &#x5339;&#x914D;&#x5355;&#x8BCD;&#x7684;&#x5F00;&#x59CB;&#x6216;&#x7ED3;&#x675F;<br>^    &#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5F00;&#x59CB;<br>$    &#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x7ED3;&#x675F;</p>
+<p>&#x8868;2.&#x5E38;&#x7528;&#x7684;&#x9650;&#x5B9A;&#x7B26;<br>&#x4EE3;&#x7801;/&#x8BED;&#x6CD5;    &#x8BF4;&#x660E;</p>
+<ul>
+<li>&#x91CD;&#x590D;&#x96F6;&#x6B21;&#x6216;&#x66F4;&#x591A;&#x6B21;</li>
+</ul>
+<ul>
+<li>&#x91CD;&#x590D;&#x4E00;&#x6B21;&#x6216;&#x66F4;&#x591A;&#x6B21;<br>?    &#x91CD;&#x590D;&#x96F6;&#x6B21;&#x6216;&#x4E00;&#x6B21;<br>{n}    &#x91CD;&#x590D;n&#x6B21;<br>{n,}    &#x91CD;&#x590D;n&#x6B21;&#x6216;&#x66F4;&#x591A;&#x6B21;<br>{n,m}    &#x91CD;&#x590D;n&#x5230;m&#x6B21;</li>
+</ul>
+</blockquote>
+<ol>
+<li>&quot;[aeiou]&quot; &#x89C4;&#x5B9A;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x96C6;&#x3002; &#x6BD4;&#x5982;&quot;[0-9]&quot;&#x5C31;&#x4E0E;&quot;\d&quot;&#x4E00;&#x81F4;&#x3002;</li>
+<li>&#x5206;&#x7EC4; &quot;(2[0-4]\d){2,3}&quot; &#x62EC;&#x53F7;&#x6269;&#x8D77;&#x6765;&#x7684;&#x90E8;&#x5206;&#x662F;&#x4E00;&#x7EC4;&#x3002;&#x91CD;&#x590D;2,3&#x6B21;&#x3002;</li>
+<li><p>&#x53CD;&#x4E49;</p>
+<blockquote>
+<p>&#x8868;3.&#x5E38;&#x7528;&#x7684;&#x53CD;&#x4E49;&#x4EE3;&#x7801;<br>&#x4EE3;&#x7801;/&#x8BED;&#x6CD5;    &#x8BF4;&#x660E;<br>\W    &#x5339;&#x914D;&#x4EFB;&#x610F;&#x4E0D;&#x662F;&#x5B57;&#x6BCD;&#xFF0C;&#x6570;&#x5B57;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#xFF0C;&#x6C49;&#x5B57;&#x7684;&#x5B57;&#x7B26;<br>\S    &#x5339;&#x914D;&#x4EFB;&#x610F;&#x4E0D;&#x662F;&#x7A7A;&#x767D;&#x7B26;&#x7684;&#x5B57;&#x7B26;<br>\D    &#x5339;&#x914D;&#x4EFB;&#x610F;&#x975E;&#x6570;&#x5B57;&#x7684;&#x5B57;&#x7B26;<br>\B    &#x5339;&#x914D;&#x4E0D;&#x662F;&#x5355;&#x8BCD;&#x5F00;&#x5934;&#x6216;&#x7ED3;&#x675F;&#x7684;&#x4F4D;&#x7F6E;<br>[^x]    &#x5339;&#x914D;&#x9664;&#x4E86;x&#x4EE5;&#x5916;&#x7684;&#x4EFB;&#x610F;&#x5B57;&#x7B26;<br>[^aeiou]    &#x5339;&#x914D;&#x9664;&#x4E86;aeiou&#x8FD9;&#x51E0;&#x4E2A;&#x5B57;&#x6BCD;&#x4EE5;&#x5916;&#x7684;&#x4EFB;&#x610F;&#x5B57;&#x7B26;</p>
+</blockquote>
+</li>
+<li><p>&#x540E;&#x5411;&#x5F15;&#x7528; &#x53EF;&#x4EE5;&#x7ED9;&#x5206;&#x7EC4;&#x547D;&#x540D; &#x901A;&#x8FC7;&quot;\1&quot;&#x6216;&quot;\name&quot;&#x518D;&#x6B21;&#x5339;&#x914D;&#x8FD9;&#x4E2A;&#x5206;&#x7EC4;</p>
+<blockquote>
+<p>&#x8868;4.&#x5E38;&#x7528;&#x5206;&#x7EC4;&#x8BED;&#x6CD5;<br>&#x5206;&#x7C7B;    &#x4EE3;&#x7801;/&#x8BED;&#x6CD5;    &#x8BF4;&#x660E;<br>&#x6355;&#x83B7;    (exp)    &#x5339;&#x914D;exp,&#x5E76;&#x6355;&#x83B7;&#x6587;&#x672C;&#x5230;&#x81EA;&#x52A8;&#x547D;&#x540D;&#x7684;&#x7EC4;&#x91CC;<br>(?<name>exp)    &#x5339;&#x914D;exp,&#x5E76;&#x6355;&#x83B7;&#x6587;&#x672C;&#x5230;&#x540D;&#x79F0;&#x4E3A;name&#x7684;&#x7EC4;&#x91CC;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5199;&#x6210;(?&apos;name&apos;exp)<br>(?:exp)    &#x5339;&#x914D;exp,&#x4E0D;&#x6355;&#x83B7;&#x5339;&#x914D;&#x7684;&#x6587;&#x672C;&#xFF0C;&#x4E5F;&#x4E0D;&#x7ED9;&#x6B64;&#x5206;&#x7EC4;&#x5206;&#x914D;&#x7EC4;&#x53F7;<br>&#x96F6;&#x5BBD;&#x65AD;&#x8A00;    (?=exp)    &#x5339;&#x914D;exp&#x524D;&#x9762;&#x7684;&#x4F4D;&#x7F6E;<br>(?&lt;=exp)    &#x5339;&#x914D;exp&#x540E;&#x9762;&#x7684;&#x4F4D;&#x7F6E;<br>(?!exp)    &#x5339;&#x914D;&#x540E;&#x9762;&#x8DDF;&#x7684;&#x4E0D;&#x662F;exp&#x7684;&#x4F4D;&#x7F6E;<br>(?&lt;!exp)    &#x5339;&#x914D;&#x524D;&#x9762;&#x4E0D;&#x662F;exp&#x7684;&#x4F4D;&#x7F6E;<br>&#x6CE8;&#x91CA;    (?#comment)    &#x8FD9;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x5206;&#x7EC4;&#x4E0D;&#x5BF9;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x5904;&#x7406;&#x4EA7;&#x751F;&#x4EFB;&#x4F55;&#x5F71;&#x54CD;&#xFF0C;&#x7528;&#x4E8E;&#x63D0;&#x4F9B;&#x6CE8;&#x91CA;&#x8BA9;&#x4EBA;&#x9605;&#x8BFB;</name></p>
+</blockquote>
+</li>
+<li><p>&#x61D2;&#x60F0;&#x5339;&#x914D;<br>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B; &quot;h.<em>p&quot; &#x5339;&#x914D;&#x6700;&#x957F;&#x7684;&#x5F00;&#x5934;&#x4E3A;h&#x5C3E;&#x90E8;&#x4E3A;p&#x7684;&#x4E2D;&#x95F4;&#x4E3A;&#x4EFB;&#x610F;&#x4E2A;&#x5B57;&#x7B26;&#x7684;&#x5B57;&#x7B26;&#x4E32; &#x79F0;&#x8D2A;&#x5A6A;&#x5339;&#x914D;<br>&quot;happy&quot; =&gt; &quot;happ&quot;<br>&#x5982;&#x679C;&#x4F7F;&#x7528;&quot;h.</em>?p&quot; &#x5C06;&#x5339;&#x914D;&#x5F97;&#x5230;&#x7684;&#x6700;&#x77ED;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x79F0;&#x4E3A;&#x61D2;&#x60F0;&#x5339;&#x914D;<br>&quot;happy&quot; =&gt; &quot;hap&quot;<br><code>?</code>&#x53EF;&#x4EE5;&#x653E;&#x5728;&#x4EFB;&#x610F;&#x9650;&#x5B9A;&#x7B26;&#x7684;&#x540E;&#x9762;&#x6BD4;&#x5982;</p>
+<blockquote>
+<p>&#x8868;5.&#x61D2;&#x60F0;&#x9650;&#x5B9A;&#x7B26;<br>&#x4EE3;&#x7801;/&#x8BED;&#x6CD5;    &#x8BF4;&#x660E;<br>*?    &#x91CD;&#x590D;&#x4EFB;&#x610F;&#x6B21;&#xFF0C;&#x4F46;&#x5C3D;&#x53EF;&#x80FD;&#x5C11;&#x91CD;&#x590D;<br>+?    &#x91CD;&#x590D;1&#x6B21;&#x6216;&#x66F4;&#x591A;&#x6B21;&#xFF0C;&#x4F46;&#x5C3D;&#x53EF;&#x80FD;&#x5C11;&#x91CD;&#x590D;<br>??    &#x91CD;&#x590D;0&#x6B21;&#x6216;1&#x6B21;&#xFF0C;&#x4F46;&#x5C3D;&#x53EF;&#x80FD;&#x5C11;&#x91CD;&#x590D;<br>{n,m}?    &#x91CD;&#x590D;n&#x5230;m&#x6B21;&#xFF0C;&#x4F46;&#x5C3D;&#x53EF;&#x80FD;&#x5C11;&#x91CD;&#x590D;<br>{n,}?    &#x91CD;&#x590D;n&#x6B21;&#x4EE5;&#x4E0A;&#xFF0C;&#x4F46;&#x5C3D;&#x53EF;&#x80FD;&#x5C11;&#x91CD;&#x590D;</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/06/vimscript笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vimscript笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Regex-正则表达式" data-title="Regex 正则表达式" data-url="http://youthy.github.io/2016/05/06/Regex-正则表达式/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

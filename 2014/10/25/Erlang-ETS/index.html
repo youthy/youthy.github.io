@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Erlang存储模块之ETS | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Erlang存储模块之ETS">
+<meta property="og:url" content="http://youthy.github.io/2014/10/25/Erlang-ETS/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description">
+<meta property="og:image" content="http://youthy.github.io/../../../../img/选区_045.png">
+<meta property="og:image" content="http://youthy.github.io/../../../../img/选区_046.png">
+<meta property="og:image" content="http://youthy.github.io/../../../../img/ets1.png">
+<meta property="og:image" content="http://youthy.github.io/../../../../img/ets2.png">
+<meta property="og:updated_time" content="2016-08-18T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Erlang存储模块之ETS">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">youthy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap，vim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/二次元/" style="font-size: 10px;">二次元</a> <a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/情感/" style="font-size: 10px;">情感</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.win">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">youthy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">youthy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Erlang-ETS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/10/25/Erlang-ETS/" class="article-date">
+  	<time datetime="2014-10-25T10:31:33.000Z" itemprop="datePublished">10月 25 2014</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Erlang存储模块之ETS
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/">erlang</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/erlang/">erlang</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#&#x521B;&#x5EFA;">&#x521B;&#x5EFA;:</a><ul>
+<li><a href="#new2">new/2</a></li>
+</ul>
+</li>
+<li><a href="#&#x5BF9;&#x8868;&#x7684;&#x64CD;&#x4F5C;">&#x5BF9;&#x8868;&#x7684;&#x64CD;&#x4F5C;</a><ul>
+<li><a href="#&#x4E00;&#x63D2;&#x5165;">&#x4E00;.&#x63D2;&#x5165;</a><ul>
+<li><a href="#insert2">insert/2</a></li>
+<li><a href="#insert_new2">insert_new/2</a></li>
+</ul>
+</li>
+<li><a href="#&#x4E8C;&#x67E5;&#x8BE2;">&#x4E8C;.&#x67E5;&#x8BE2;</a><ul>
+<li><a href="#lookup2">lookup/2</a></li>
+<li><a href="#lookup_element3">lookup_element/3</a></li>
+</ul>
+</li>
+<li><a href="#&#x4E09;&#x5220;&#x9664;">&#x4E09;.&#x5220;&#x9664;</a><ul>
+<li><a href="#delete1">delete/1</a></li>
+<li><a href="#delete2">delete/2</a></li>
+<li><a href="#delete_all_objects1">delete_all_objects/1</a></li>
+<li><a href="#delete_object2">delete_object/2</a></li>
+</ul>
+</li>
+<li><a href="#&#x4E09;&#x5176;&#x4ED6;">&#x4E09;.&#x5176;&#x4ED6;</a><ul>
+<li><a href="#tab2list1">tab2list/1</a></li>
+<li><a href="#all1">all/1</a></li>
+<li><a href="#tab2file2">tab2file/2</a></li>
+<li><a href="#tab2file3">tab2file/3</a></li>
+<li><a href="#file2tab1">file2tab/1</a></li>
+<li><a href="#file2tab2">file2tab/2</a></li>
+<li><a href="#first1">first/1</a></li>
+<li><a href="#last1">last/1</a></li>
+<li><a href="#next2">next/2</a></li>
+<li><a href="#prev2">prev/2</a></li>
+<li><a href="#foldl3">foldl/3</a></li>
+<li><a href="#foldr3">foldr/3</a></li>
+<li><a href="#give_away3">give_away/3</a></li>
+<li><a href="#i0-i1">i/0 i/1</a></li>
+<li><a href="#info1-info2">info/1 info/2</a></li>
+<li><a href="#match2-match3-match1">match/2 match/3 match/1</a></li>
+<li><a href="#match_object2-match_object3">match_object/2 match_object/3</a></li>
+<li><a href="#init_table2">init_table/2</a></li>
+<li><a href="#member2">member/2</a></li>
+<li><a href="#rename2">rename/2</a></li>
+<li><a href="#safe_fixtable2">safe_fixtable/2</a></li>
+<li><a href="#setopts2">setopts/2</a></li>
+<li><a href="#update_counter3">update_counter/3</a></li>
+<li><a href="#update_element3">update_element/3</a></li>
+</ul>
+</li>
+<li><a href="#&#x6240;&#x6709;&#x5173;&#x4E8E;match-specification">&#x6240;&#x6709;&#x5173;&#x4E8E;match specification</a><ul>
+<li><a href="#fun2ms1">fun2ms/1</a></li>
+<li><a href="#select123">select/1/2/3</a></li>
+<li><a href="#select_count2">select_count/2</a></li>
+<li><a href="#select_delete2">select_delete/2</a></li>
+<li><a href="#select_reverse123">select_reverse/1/2/3</a></li>
+<li><a href="#match_spec_compile1">match_spec_compile/1</a></li>
+<li><a href="#match_spec_run2">match_spec_run/2</a></li>
+<li><a href="#is_compiled_ms1">is_compiled_ms/1</a></li>
+<li><a href="#repair_continuation2">repair_continuation/2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h2 id="&#x521B;&#x5EFA;">&#x521B;&#x5EFA;:</h2><h4 id="new2">new/2</h4><blockquote>
+<p>new(Name, Options) -&gt; tid() | atom()</p>
+</blockquote>
+<p>Name = atom()<br>Options = [Option]<br> Option = Type | Access | named_table | {keypos,Pos} | {heir,pid(),HeirData} | {heir,none} | Tweaks<br>  Type = set | ordered_set | bag | duplicate_bag<br>  Access = public | protected | private<br>  Tweaks = {write_concurrency,boolean()} | {read_concurrency,boolean()} | compressed<br>  Pos = integer()<br>  HeirData = term()</p>
+<p>&#x9996;&#x5148;ets&#x4E2D;&#x4FDD;&#x5B58;&#x7684;&#x662F;&#x5143;&#x7EC4;(tuple),&#x5143;&#x7EC4;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4E3A;key</p>
+<p><strong>Type</strong><br>&#x5373;&#x7C7B;&#x578B;,set&#x662F;&#x5F02;&#x952E;&#x8868;,&#x8868;&#x793A;&#x8FD9;&#x4E2A;ets&#x4E2D;&#x7684;key&#x662F;&#x552F;&#x4E00;&#x7684;,&#x4E0D;&#x80FD;&#x76F8;&#x540C;,bag&#x8868;&#x793A;&#x7684;&#x662F;&#x540C;&#x952E;&#x8868;,&#x5B83;&#x5141;&#x8BB8;&#x591A;&#x4E2A;&#x5143;&#x7D20;&#x6709;&#x76F8;&#x540C;&#x7684;key,&#x4F46;&#x662F;key&#x4E4B;&#x540E;&#x7684;&#x5143;&#x7D20;&#x4E0D;&#x80FD;&#x76F8;&#x540C;,&#x5373;&#x4E0D;&#x80FD;&#x6709;&#x5B8C;&#x5168;&#x76F8;&#x540C;&#x7684;tuple.order_set&#x662F;set&#x7684;&#x53D8;&#x79CD;,&#x8868;&#x793A;&#x6309;key&#x6392;&#x5E8F;&#x7684;ets&#x8868;,duplicate_bag&#x8868;&#x793A;key&#x4E4B;&#x5916;&#x7684;&#x5143;&#x7D20;&#x4E5F;&#x53EF;&#x4EE5;&#x76F8;&#x540C;,&#x5373;&#x53EF;&#x4EE5;&#x5B58;&#x5728;&#x5B8C;&#x5168;&#x76F8;&#x540C;&#x7684;tuple.<br>set: {playerid1, &lt;&lt;&quot;yuyouqi&quot;&gt;&gt;, 1},{playerid2, &lt;&lt;&quot;youthy&quot;&gt;&gt;, 0}. ---default type<br>bag: {playerid1, &lt;&lt;&quot;yuyouqi&quot;&gt;&gt;, 1}, {playerid1, lvl90}.<br>duplicate_bag: {playerid1, hello}, {playerid1, hello}....{playerid1, hello}</p>
+<p>&#x8FD8;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;orderd_set &#x91CC;&#x9762;&#x5224;&#x65AD;key&#x662F;&#x5426;&#x76F8;&#x540C;&#x7528;&#x7684;&#x662F;==&#x800C;&#x4E0D;&#x662F;=:=,&#x4E5F;&#x5C31;&#x610F;&#x5473;&#x7740;1&#x548C;1.0&#x662F;&#x76F8;&#x540C;&#x7684;key,&#x800C;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;ets&#x5219;&#x4E0D;&#x662F;.<br><strong>Access</strong><br>public&#x662F;&#x4EFB;&#x4F55;&#x8FDB;&#x7A0B;&#x90FD;&#x53EF;&#x8BFB;&#x5199;&#x8FD9;&#x4E2A;ets<br>protected&#x662F;&#x53EA;&#x6709;&#x521B;&#x5EFA;&#x8005;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x6539;&#x5199;ets,&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x53EA;&#x80FD;&#x8BFB;&#x53D6;,&#x8FD9;&#x4E2A;&#x662F;&#x9ED8;&#x8BA4;&#x9009;&#x9879;<br>private&#x662F;&#x53EA;&#x6709;&#x521B;&#x5EFA;&#x8005;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x8BFB;&#x5199;.<br><strong>{keypos, Pos}</strong><br>&#x7528;&#x6765;&#x6307;&#x5B9A;Pos&#x4F4D;&#x7F6E;&#x4E3A;key.</p>
+<blockquote>
+<p>&#x5728;&#x4E0D;&#x6307;&#x5B9A;&#x4EFB;&#x4F55;Option&#x7684;&#x65F6;&#x5019;,&#x9ED8;&#x8BA4;&#x662F;&#x4EE5;&#x4E0A;&#x4E09;&#x4E2A;[set, protected, {keypos, 1}]</p>
+</blockquote>
+<p><strong>&#x5176;&#x4ED6;</strong><br>named_table &#x6307;&#x5B9A;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;Name&#x8BBF;&#x95EE;&#x8FD9;&#x4E2A;ets.<br><strong>{heir,Pid,HeirData} | {heir,none}</strong>&#x8FD9;&#x4E2A;&#x7528;&#x6765;&#x63A7;&#x5236;&#x7EE7;&#x627F;,&#x5728;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;ets&#x65F6;,&#x5982;&#x679C;&#x58F0;&#x660E;&#x4E86;&#x8FD9;&#x4E2A;,&#x8868;&#x793A;&#x8FD9;&#x4E2A;ets&#x7684;owner&#x6B7B;&#x6389;&#x4E4B;&#x540E;,&#x5C06;&#x53D1;&#x9001;{&apos;ETS-TRANSFER&apos;,tid(),FromPid,HeirData}&#x8FD9;&#x4E2A;&#x6D88;&#x606F;&#x7ED9;Pid&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;,&#x5176;&#x4E2D;tid()&#x662F;ets&#x7684;table id.&#x770B;&#x4EE5;&#x4E0B;&#x7684;&#x4F8B;&#x5B50;<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>&gt; <span class="variable">HeirPid</span> = spawn(<span class="keyword">fun</span>() -&gt; <span class="keyword">receive</span> <span class="tuple">{&apos;<span class="variable">ETS</span>-<span class="variable">TRANSFER</span>&apos;, <span class="variable">Tid</span>, <span class="variable">FromPid</span>, <span class="variable">HeirData</span>}</span> -&gt; ets:insert(<span class="variable">Tid</span>, <span class="variable">HeirData</span>), timer:sleep(<span class="number">100000</span>) <span class="keyword">end</span> <span class="keyword">end</span>).</span><br><span class="line"><span class="comment">%% &#x521B;&#x5EFA;&#x7528;&#x4E8E;&#x7EE7;&#x627F;&#x7684;&#x8FDB;&#x7A0B;</span></span><br><span class="line">&lt;<span class="number">0.34</span>.<span class="number">0</span>&gt;</span><br><span class="line"><span class="number">2</span>&gt; <span class="variable">OwnerPid</span> = spawn(<span class="keyword">fun</span>() -&gt; ets:new(person, [named_table, <span class="tuple">{heir, <span class="variable">HeirPid</span>, <span class="tuple">{<span class="number">1</span>, youthy}</span>}</span>]), <span class="keyword">receive</span> die -&gt; ok <span class="keyword">end</span> <span class="keyword">end</span>).</span><br><span class="line">&lt;<span class="number">0.36</span>.<span class="number">0</span>&gt;</span><br><span class="line"><span class="comment">%% &#x521B;&#x5EFA;&#x7528;&#x4E8E;&#x521D;&#x59CB;&#x5316;ets&#x7684;&#x8FDB;&#x7A0B;,&#x58F0;&#x660E;heir&#x53C2;&#x6570;.</span></span><br><span class="line"><span class="number">3</span>&gt; observer:start().</span><br><span class="line">ok</span><br><span class="line"><span class="comment">%% &#x542F;&#x52A8;&#x89C2;&#x5BDF;&#x5668;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="../../../../img/&#x9009;&#x533A;_045.png" alt=""><br>&#x6B64;&#x65F6;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;person&#x8FD9;&#x4E2A;&#x8868;&#x7684;owner&#x662F;<0.36.0><br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span>&gt; ets:tab2list(person).</span><br><span class="line">[]</span><br><span class="line"><span class="comment">%% person&#x4E2D;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6570;&#x636E;</span></span><br><span class="line"><span class="number">5</span>&gt; <span class="variable">OwnerPid</span> ! die.</span><br><span class="line">die</span><br><span class="line"><span class="comment">%% &#x8BA9;OwnerPid&#x6B7B;&#x4EA1;</span></span><br><span class="line"><span class="number">6</span>&gt; observer:start(). </span><br><span class="line">ok</span><br><span class="line"><span class="number">7</span>&gt; ets:tab2list(person).</span><br><span class="line">[<span class="tuple">{<span class="number">1</span>,youthy}</span>]</span><br></pre></td></tr></table></figure></0.36.0></p>
+<p><img src="../../../../img/&#x9009;&#x533A;_046.png" alt=""><br>&#x518D;&#x6B21;&#x89C2;&#x5BDF;&#x53EF;&#x4EE5;&#x770B;&#x5230;person&#x8FD9;&#x4E2A;&#x8868;&#x5DF2;&#x7ECF;&#x7EE7;&#x627F;&#x7ED9;&#x4E86;HeirPid,&#x5E76;&#x4E14;&#x91CC;&#x9762;&#x6709;&#x4E86;&#x6570;&#x636E;.&#x6570;&#x636E;&#x662F;&#x6211;&#x4E3B;&#x52A8;&#x63D2;&#x5165;&#x7684;HeirData.</p>
+<p>{write_concurrency,boolean()}/{read_concurrency,boolean()}/compressed<br>write,read&#x9ED8;&#x8BA4;&#x90FD;&#x662F;false,&#x5F53;&#x5206;&#x522B;&#x6307;&#x5B9A;&#x4E3A;true&#x65F6;,&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x4F18;&#x5316;,&#x4F1A;&#x4F7F;write&#x66F4;&#x5FEB;,read&#x66F4;&#x5FEB;,&#x4F46;&#x662F;&#x5728;&#x8BFB;&#x5199;&#x4E4B;&#x95F4;&#x7684;&#x5207;&#x6362;&#x4F1A;&#x5F88;&#x6162;,&#x53EA;&#x9002;&#x5408;&#x4E8E;&#x5355;&#x7EAF;&#x7684;&#x5199;&#x8868;&#x6216;&#x8BFB;&#x8868;.<br>compressed&#x4F1A;&#x538B;&#x7F29;ets&#x8282;&#x7701;&#x7A7A;&#x95F4;,&#x4F46;&#x662F;&#x5BF9;ets&#x7684;&#x64CD;&#x4F5C;&#x5C24;&#x5176;,match,select&#x7B49;&#x904D;&#x5386;&#x6240;&#x6709;&#x5143;&#x7D20;&#x7684;&#x64CD;&#x4F5C;&#x4F1A;&#x6162;&#x5F88;&#x591A;,&#x614E;&#x7528;.</p>
+<hr>
+<h2 id="&#x5BF9;&#x8868;&#x7684;&#x64CD;&#x4F5C;">&#x5BF9;&#x8868;&#x7684;&#x64CD;&#x4F5C;</h2><p>&#x4E0A;&#x9762;&#x5B8C;&#x6210;&#x4E86;&#x5BF9;ets&#x7684;&#x521B;&#x5EFA;,&#x63A5;&#x4E0B;&#x6765;&#x81EA;&#x7136;&#x5C31;&#x662F;&#x5BF9;ets&#x7684;&#x64CD;&#x4F5C;.</p>
+<h3 id="&#x4E00;&#x63D2;&#x5165;">&#x4E00;.&#x63D2;&#x5165;</h3><h4 id="insert2">insert/2</h4><blockquote>
+<p> insert(Tab, ObjectOrObjects) -&gt; true<br>Types:<br>Tab = tid() | atom()<br>ObjectOrObjects = tuple() | [tuple()]</p>
+</blockquote>
+<p>Tab&#x4E3A;ets&#x7684;TableId, &#x5982;&#x679C;&#x58F0;&#x660E;&#x4E3A;named_table&#x53EF;&#x4EE5;&#x4E3A;&#x5BF9;&#x5E94;&#x7684;&#x540D;&#x5B57;.<br>1.<strong>insert&#x662F;&#x539F;&#x5B50;&#x64CD;&#x4F5C;,BIF,&#x4E0D;&#x7BA1;object&#x662F;&#x591A;&#x4E2A;tuple&#x7EC4;&#x6210;&#x7684;list&#x8FD8;&#x662F;&#x5355;&#x72EC;&#x4E00;&#x4E2A;tuple</strong><br>2.<strong>&#x5982;&#x679C;&#x50CF;set&#x8868;&#x4E2D;&#x63D2;&#x5165;&#x5177;&#x6709;&#x76F8;&#x540C;key&#x7684;&#x591A;&#x4E2A;&#x5143;&#x7D20;,&#x5219;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x80FD;&#x88AB;&#x63D2;&#x5165;,&#x800C;&#x4E14;&#x4E0D;&#x77E5;&#x9053;&#x5177;&#x4F53;&#x54EA;&#x4E2A;&#x4F1A;&#x88AB;&#x63D2;&#x5165;,&#x5982;&#x679C;&#x662F;order_set&#x8981;&#x8BB0;&#x4F4F;&#x6B64;&#x65F6;key&#x76F8;&#x540C;&#x7684;&#x539F;&#x5219;&#x4E0D;&#x662F;&#x9760;=:=&#x800C;&#x662F;==,&#x4E5F;&#x5C31;&#x662F;match(&#x6A21;&#x5F0F;&#x5339;&#x914D;)&#x548C;equal(&#x76F8;&#x7B49;)&#x7684;&#x533A;&#x522B;</strong></p>
+<h4 id="insert_new2">insert_new/2</h4><blockquote>
+<p>insert_new(Tab, ObjectOrObjects) -&gt; boolean()<br>Types:<br>Tab = tid() | atom()<br>ObjectOrObjects = tuple() | [tuple()]</p>
+</blockquote>
+<p>&#x5927;&#x4F53;&#x4E0E;insert&#x76F8;&#x540C;,&#x53EA;&#x4E0D;&#x8FC7;&#x8FD9;&#x4E2A;insert&#x76F4;&#x63D2;&#x5165;ets&#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#x952E;&#x503C;,&#x5F53;&#x53D1;&#x73B0;key&#x5728;ets&#x8868;&#x4E2D;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;,&#x5219;&#x8FD4;&#x56DE;false.&#x4E5F;&#x662F;&#x539F;&#x5B50;&#x64CD;&#x4F5C;,&#x4E5F;&#x5C31;&#x662F;&#x5C31;&#x7B97;&#x662F;insert_new&#x4E00;&#x4E2A;list&#x7684;&#x4E1C;&#x897F;,&#x53EA;&#x8981;&#x6709;&#x4E00;&#x4E2A;key&#x5B58;&#x5728;&#x4E86;,&#x8FD9;&#x4E2A;&#x63D2;&#x5165;&#x5C31;&#x662F;&#x5931;&#x8D25;&#x7684;</p>
+<h3 id="&#x4E8C;&#x67E5;&#x8BE2;">&#x4E8C;.&#x67E5;&#x8BE2;</h3><h4 id="lookup2">lookup/2</h4><blockquote>
+<p>lookup(Tab, Key) -&gt; [Object]<br>Types:<br>Tab = tid() | atom()<br>Key = term()<br>Object = tuple()</p>
+</blockquote>
+<p>&#x6CE8;&#x610F;&#x7ED3;&#x679C;&#x8FD4;&#x56DE;&#x662F;list.&#x540C;&#x6837;order_set&#x662F;&#x7279;&#x522B;&#x7684;,1.0&#x4E0E;1&#x662F;&#x76F8;&#x540C;&#x7684;key.</p>
+<h4 id="lookup_element3">lookup_element/3</h4><blockquote>
+<p>lookup_element(Tab, Key, Pos) -&gt; Elem<br>Types:<br>Tab = tid() | atom()<br>Key = term()<br>Pos = integer()<br>Elem = term() | [term()]</p>
+</blockquote>
+<p>&#x8FD9;&#x4E2A;&#x8FD4;&#x56DE;&#x7684;&#x662F;key&#x7684;tuple&#x91CC;&#x9762;pos&#x4F4D;&#x7F6E;&#x7684;&#x5143;&#x7D20;.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&gt; ets:new(person, [named_table, set]).
+person
+2&gt; ets:insert(person, {player1, man, sword}).
+true
+3&gt; ets:lookup_element(person, player1, 3).
+sword</span><br></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x679C;pos&#x5904;&#x4E0D;&#x5B58;&#x5728;&#x5143;&#x7D20;&#x5219;&#x4F1A;&#x62A5;bagarg&#x9519;&#x8BEF;</p>
+<h3 id="&#x4E09;&#x5220;&#x9664;">&#x4E09;.&#x5220;&#x9664;</h3><h4 id="delete1">delete/1</h4><blockquote>
+<p>delete(Tab) -&gt; true<br>Types:<br>Tab = tid() | atom()</p>
+</blockquote>
+<h4 id="delete2">delete/2</h4><p>&#x5220;&#x9664;&#x6574;&#x4E2A;ets</p>
+<blockquote>
+<p>delete(Tab, Key) -&gt; true<br>Types:<br>Tab = tid() | atom()<br>Key = term()</p>
+</blockquote>
+<h4 id="delete_all_objects1">delete_all_objects/1</h4><p>&#x5220;&#x9664;key&#x6240;&#x5BF9;&#x5E94;&#x7684;&#x952E;&#x503C;</p>
+<blockquote>
+<p>delete_all_objects(Tab) -&gt; true<br>Types:<br>Tab = tid() | atom()</p>
+</blockquote>
+<h4 id="delete_object2">delete_object/2</h4><p>&#x5220;&#x9664;Tab&#x91CC;&#x9762;&#x6240;&#x6709;&#x7684;&#x503C;,&#x4E0E;delete&#x4E0D;&#x540C;&#x7684;&#x662F;&#x4E0D;&#x4F1A;&#x5220;&#x6389;&#x8FD9;&#x4E2A;ets</p>
+<blockquote>
+<p>delete_object(Tab,Object) -&gt; true<br>Types:<br>Tab = tid() | atom()<br>Object = tuple()</p>
+</blockquote>
+<p>&#x5220;&#x9664;object,&#x4E3B;&#x8981;&#x7528;&#x4E8E;bag&#x578B;,&#x56E0;&#x4E3A;bag&#x662F;key&#x5BF9;&#x5E94;&#x591A;&#x4E2A;object,&#x53EA;&#x5220;&#x9664;&#x8FD9;&#x4E2A;object,&#x800C;&#x4FDD;&#x7559;key&#x5BF9;&#x5E94;&#x5176;&#x4ED6;&#x7684;object.<br>example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&gt; ets:new(ingredients, [set, named_table]).
+ingredients
+2&gt; ets:insert(ingredients, {bacon, great}).
+true
+3&gt; ets:lookup(ingredients, bacon).
+[{bacon,great}]
+4&gt; ets:insert(ingredients, [{bacon, awesome}, {cabbage, alright}]).
+true
+5&gt; ets:lookup(ingredients, bacon).
+[{bacon,awesome}]
+6&gt; ets:lookup(ingredients, cabbage).
+[{cabbage,alright}]
+7&gt; ets:delete(ingredients, cabbage).
+true
+8&gt; ets:lookup(ingredients, cabbage).
+[]</span><br></pre></td></tr></table></figure></p>
+<h3 id="&#x4E09;&#x5176;&#x4ED6;">&#x4E09;.&#x5176;&#x4ED6;</h3><h4 id="tab2list1">tab2list/1</h4><blockquote>
+<p>tab2list(Tab) -&gt; [Object]<br>Types:<br>Tab = tab()<br>Object = tuple()<br>Returns a list of all objects in the table Tab.</p>
+</blockquote>
+<p>&#x5217;&#x51FA;Tab&#x4E2D;&#x6240;&#x6709;&#x5143;&#x7D20;</p>
+<h4 id="all1">all/1</h4><blockquote>
+<p>all() -&gt; [Tab]<br>Types:<br>Tab = tid() | atom()</p>
+</blockquote>
+<p>&#x5217;&#x51FA;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x6240;&#x6709;&#x7684;ets</p>
+<h4 id="tab2file2">tab2file/2</h4><blockquote>
+<p>tab2file(Tab, Filename) -&gt; ok | {error, Reason}<br>Types:<br>Tab = tab()<br>Filename = file:name()<br>Reason = term()<br>Dumps the table Tab to the file Filename.</p>
+</blockquote>
+<h4 id="tab2file3">tab2file/3</h4><blockquote>
+<p>tab2file(Tab, Filename, Options) -&gt; ok | {error, Reason}<br>Types:<br>Tab = tab()<br>Filename = file:name()<br>Options = [Option]<br>Option = {extended_info, [ExtInfo]}<br>ExtInfo = md5sum | object_count<br>Reason = term()</p>
+</blockquote>
+<p>&#x5C06;ets&#x50A8;&#x5B58;&#x5230;&#x6587;&#x4EF6;,<br>extended_info &#x9009;&#x9879;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x4EC0;&#x4E48;&#x989D;&#x5916;&#x4FE1;&#x606F;&#x8981;&#x5728;&#x8F6C;&#x50A8;&#x8FC7;&#x7A0B;&#x4E2D;&#x4E00;&#x540C;&#x88AB;&#x5199;&#x8FDB;&#xFF0C;&#x53C2;&#x6570;&#x9009;&#x9879;&#x6709;&#x4EE5;&#x4E0B;&#x503C;&#xFF1A;<br>object_count&#xFF1A;&#x88AB;&#x6807;&#x8BB0;&#x5728;&#x6587;&#x4EF6;&#x5C3E;&#x540E;&#x7684;&#x5B9E;&#x9645;&#x88AB;&#x5199;&#x8FDB;&#x6587;&#x4EF6;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x91CF;&#x3002;<br>md5sum&#xFF1A;&#x5728;&#x6587;&#x4EF6;&#x91CC;&#x7684;&#x6587;&#x4EF6;&#x5934;&#x6570;&#x636E;&#x548C;&#x5BF9;&#x8C61;&#x6570;&#x636E;&#x90FD;&#x4F1A;&#x7528;&#x5185;&#x7F6E;&#x7684; MD5 &#x51FD;&#x6570;&#x6765;&#x6548;&#x9A8C;&#x3002;&#x6240;&#x6709;&#x5BF9;&#x8C61;&#x6570;&#x636E;&#x7684; MD5 &#x6821;&#x9A8C;&#x503C;&#x4F1A;&#x88AB;&#x5378;&#x8F7D;&#x6587;&#x4EF6;&#x5C3E;&#xFF0C;&#x56E0;&#x6B64;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x7684;&#x9A8C;&#x8BC1;&#x5C06;&#x68C0;&#x6D4B;&#x5728;&#x6587;&#x4EF6;&#x6570;&#x636E;&#x91CC;&#x7684;&#x6821;&#x9A8C;&#x503C;&#x3002;<br>&#x4E0D;&#x7BA1;&#x53C2;&#x6570; extended_info &#x662F;&#x5426;&#x4F7F;&#x7528;&#xFF0C;&#x5728; stdlib-1.15.1 &#x4E4B;&#x524D;&#x7684; ets &#x7248;&#x672C;&#x8BE5;&#x53C2;&#x6570;&#x65E0;&#x6548;&#x3002;&#x53CD;&#x4E4B;&#x53EF;&#x4EE5;&#x5C06;&#x6587;&#x4EF6;&#x4E2D;&#x7684;ets&#x8BFB;&#x5165;.</p>
+<h4 id="file2tab1">file2tab/1</h4><blockquote>
+<p>file2tab(Filename) -&gt; {ok, Tab} | {error, Reason}<br>Types:<br>Filename = file:name()<br>Tab = tab()<br>Reason = term()</p>
+</blockquote>
+<h4 id="file2tab2">file2tab/2</h4><blockquote>
+<p>file2tab(Filename, Options) -&gt; {ok, Tab} | {error, Reason}<br>Types:<br>Filename = file:name()<br>Tab = tab()<br>Options = [Option]<br>Option = {verify, boolean()}<br>Reason = term()</p>
+</blockquote>
+<p>file2tab    &#x7684;option&#x662F;[{verify, true|false}], &#x9ED8;&#x8BA4;&#x662F;false,&#x5373;&#x662F;&#x5426;&#x9A8C;&#x8BC1;.&#x5F53;&#x6307;&#x5B9A;&#x4E3A;true&#x65F6;,&#x5982;&#x679C;tab2file&#x65F6;&#x6CA1;&#x6709;&#x6307;&#x5B9A;{extended_info},&#x5219;&#x5199;&#x5165;&#x5185;&#x5B58;&#x65F6;&#x6BD4;&#x8F83;&#x5927;&#x5C0F;&#x662F;&#x5426;&#x4E00;&#x81F4;,&#x5728;ets&#x4E3A;public&#x6216;&#x8005;&#x8BE5;ets&#x5728;&#x5199;&#x5165;&#x7684;&#x65F6;&#x5019;&#x540C;&#x65F6;&#x66F4;&#x65B0;&#x4E86;&#x6570;&#x636E;,&#x5F88;&#x5BB9;&#x6613;&#x5728;&#x8BFB;&#x5165;&#x65F6;&#x51FA;&#x9519;,&#x6240;&#x4EE5;&#x4E00;&#x822C;&#x9700;&#x8981;&#x6307;&#x5B9A;{extended_info, [object_count]},&#x5199;&#x5165;&#x5B9E;&#x9645;&#x5199;&#x5165;&#x7684;&#x5927;&#x5C0F;.&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E3A;{extended_info, [md5sum]},&#x5219;&#x4F1A;&#x6D88;&#x8017;&#x66F4;&#x591A;&#x7684;&#x65F6;&#x95F4;&#x4E0E;cpu&#x8D44;&#x6E90;&#x6765;&#x8BFB;&#x5165;.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]
+
+Eshell V5.9  (abort with ^G)
+1&gt; 
+1&gt; ets:new(person, [named_table]).
+person
+2&gt; ets:insert(person, {name, sex, career}).
+true
+3&gt; ets:all().
+[person,8207,4110,13,file_io_servers,inet_hosts_file_byaddr,
+ inet_hosts_file_byname,inet_hosts_byaddr,inet_hosts_byname,
+ inet_cache,inet_db,global_pid_ids,global_pid_names,
+ global_names_ext,global_names,global_locks,ac_tab]
+4&gt; ets:tab2file(person, &quot;person.ets&quot;).
+ok
+5&gt; ets:delete(person).
+true
+6&gt; ets:all().
+[disk_log_pids,disk_log_names,8207,4110,13,file_io_servers,
+ inet_hosts_file_byaddr,inet_hosts_file_byname,
+ inet_hosts_byaddr,inet_hosts_byname,inet_cache,inet_db,
+ global_pid_ids,global_pid_names,global_names_ext,
+ global_names,global_locks,ac_tab]
+7&gt; ets:file2tab(&quot;person.ets&quot;).
+{ok,person}
+8&gt; ets:all().
+[disk_log_pids,disk_log_names,person,8207,4110,13,
+ file_io_servers,inet_hosts_file_byaddr,
+ inet_hosts_file_byname,inet_hosts_byaddr,inet_hosts_byname,
+ inet_cache,inet_db,global_pid_ids,global_pid_names,
+ global_names_ext,global_names,global_locks,ac_tab]
+9&gt; ets:tab2list(person).
+[{name,sex,career}]
+10&gt; ets:tab2file(person, &quot;person.ets&quot;, [{extended_info, [object_count]}]).
+ok
+11&gt; ets:delete(person).
+true
+12&gt; ets:file2tab(&quot;person.ets&quot;,[{verify, true}]).
+{ok,person}
+13&gt; ets:tab2list(person).
+[{name,sex,career}]</span><br></pre></td></tr></table></figure>
+<h4 id="first1">first/1</h4><blockquote>
+<p>first(Tab) -&gt; Key | &apos;$end_of_table&apos;<br>Types:<br>Tab = tid() | atom()<br>Key = term()</p>
+</blockquote>
+<h4 id="last1">last/1</h4><blockquote>
+<p>last(Tab) -&gt; Key | &apos;$end_of_table&apos;</p>
+</blockquote>
+<h4 id="next2">next/2</h4><blockquote>
+<p>next(Tab, Key1) -&gt; Key2 | &apos;$end_of_table&apos;<br>Types:<br>Tab = tid() | atom()<br>Key1 = Key2 = term()</p>
+</blockquote>
+<h4 id="prev2">prev/2</h4><blockquote>
+<p>prev(Tab, Key1) -&gt; Key2 | &apos;$end_of_table&apos;</p>
+</blockquote>
+<p>first&#x8FD4;&#x56DE;ets&#x7B2C;&#x4E00;&#x4E2A;key,last&#x8FD4;&#x56DE;&#x6700;&#x540E;&#x4E00;&#x4E2A;key, &#x5982;&#x679C;&#x6CA1;&#x6709;&#x5185;&#x5BB9;&#x5219;&#x8FD4;&#x56DE;end_of_table, &#x53EF;&#x4EE5;&#x7528;next&#x8FD4;&#x56DE;&#x4E0B;&#x4E00;&#x4E2A;key,prev&#x8FD4;&#x56DE;&#x4E0A;&#x4E00;&#x4E2A;key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">31&gt; ets:tab2list(person).
+[{4,ok},{1,23},{2,34}]
+32&gt; ets:first(person).
+2
+33&gt; ets:next(person, 2).
+1
+34&gt; ets:next(person, 1).
+4
+35&gt; ets:next(person, 4).
+&apos;$end_of_table&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="foldl3">foldl/3</h4><blockquote>
+<p>foldl(Function, Acc0, Tab) -&gt; Acc1<br>Types:<br>Function = fun((Element :: term(), AccIn) -&gt; AccOut)<br>Tab = tab()<br>Acc0 = Acc1 = AccIn = AccOut = term()</p>
+</blockquote>
+<p>&#x5185;&#x90E8;&#x5B9E;&#x9645;&#x8C03;&#x7528;&#x7684;&#x8FD8;&#x662F;lists:foldl,&#x6839;&#x636E;&#x770B;&#x6E90;&#x7801;&#x53D1;&#x73B0;,&#x9996;&#x5148;&#x901A;&#x8FC7;ets:first&#x627E;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;key,&#x7136;&#x540E;&#x8C03;&#x7528;ets:lookup(Table, Key),&#x627E;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;,&#x6B64;&#x65F6;&#x8FD4;&#x56DE;&#x7684;&#x5143;&#x7D20;&#x5728;&#x4E00;&#x4E2A;list&#x91CC;&#x9762;,&#x7136;&#x540E;&#x5BF9;&#x8FD9;&#x4E2A;&#x5217;&#x8868;&#x7528;lists:foldl,Function&#x672C;&#x8EAB;&#x662F;&#x5BF9;ets&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x6267;&#x884C;&#x7684;,&#x5305;&#x62EC;key.&#x4F8B;&#x5B50;&#x5982;&#x4E0B;.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&gt; ets:new(double, [named_table]).
+double
+2&gt; ets:insert(double, [{1, 14},{2, 12}, {3, 23}]).
+true
+3&gt; ets:tab2list(double).
+[{1,14},{2,12},{3,23}]
+4&gt; ets:foldl(fun({K, V}, Acc) -&gt; [{K, V * 2}|Acc] end, [], double).
+[{1,28},{2,24},{3,46}]</span><br></pre></td></tr></table></figure></p>
+<h4 id="foldr3">foldr/3</h4><blockquote>
+<p>foldr(Function, Acc0, Tab) -&gt; Acc1<br>Types:<br>Function = fun((Element :: term(), AccIn) -&gt; AccOut)<br>Tab = tab()<br>Acc0 = Acc1 = AccIn = AccOut = term()</p>
+</blockquote>
+<p>&#x540C;foldl.</p>
+<h4 id="give_away3">give_away/3</h4><p>give_away(Tab, Pid, GiftData) -&gt; true<br>Types:<br>Tab = tid() | atom()<br>Pid = pid()<br>GiftData = term()<br>&#x7C7B;&#x4F3C;&#x4E8E;new&#x7684;heir&#x7EE7;&#x627F;,&#x5728;ets&#x7684;owner&#x8FDB;&#x7A0B;&#x8C03;&#x7528;,&#x5C06;Tab&#x8FD9;&#x4E2A;ets&#x7A7F;&#x7ED9;Pid&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;,&#x4F20;&#x9001;&#x7684;&#x6D88;&#x606F;&#x4E3A;{&apos;ETS-TRANSFER&apos;,Tab,FromPid,GiftData},Pid&#x53EF;&#x4EE5;receive&#x8FD9;&#x4E2A;&#x6D88;&#x606F;&#x505A;&#x4E0D;&#x540C;&#x7684;&#x4E8B;&#x60C5;.</p>
+<h4 id="i0-i1">i/0 i/1</h4><blockquote>
+<p>i() -&gt; ok<br>i(Tab) -&gt; ok</p>
+</blockquote>
+<p>&#x7528;&#x4E8E;&#x67E5;&#x770B;ets&#x4FE1;&#x606F;</p>
+<h4 id="info1-info2">info/1 info/2</h4><blockquote>
+<p>info(Tab) -&gt; [{Item, Value}] | undefined<br>Types:<br>Tab = tid() | atom()<br>Item = atom(), see below<br>Value = term(), see below<br>info(Tab, Item) -&gt; Value | undefined<br>Types:<br>Tab = tid() | atom()<br>Item, Value - see below</p>
+</blockquote>
+<p>&#x5F53;Tab&#x662F;&#x4E2A;TableId,&#x4F46;&#x662F;&#x8FD9;&#x4E2A;ets&#x5DF2;&#x7ECF;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8FD4;&#x56DE;undefined</p>
+<h4 id="match2-match3-match1">match/2 match/3 match/1</h4><blockquote>
+<p>match(Tab, Pattern) -&gt; [Match]<br>Types:<br>Tab = tid() | atom()<br>Pattern = tuple()<br>Match = [term()]</p>
+<p>match(Tab, Pattern, Limit) -&gt; {[Match],Continuation} | &apos;$end_of_table&apos;<br>Types:<br>Tab = tid() | atom()<br>Pattern = tuple()<br>Match = [term()]<br>Continuation = term()</p>
+<p>match(Continuation) -&gt; {[Match],Continuation} | &apos;$end_of_table&apos;<br>Types:<br>Match = [term()]<br>Continuation = term()</p>
+</blockquote>
+<p>&#x8BF4;&#x767D;&#x4E86;&#x5C31;&#x662F;&#x6A21;&#x5F0F;&#x5339;&#x914D;,lookup&#x53EA;&#x80FD;&#x901A;&#x8FC7;key&#x67E5;&#x627E;,&#x800C;&#x5B9E;&#x9645;&#x4E0A;&#x9762;&#x5BF9;bag&#x7C7B;&#x578B;,&#x540C;&#x6837;&#x7684;key&#x5BF9;&#x5E94;&#x5F88;&#x591A;&#x503C;,&#x6211;&#x4EEC;&#x9700;&#x8981;&#x989D;&#x5916;&#x7684;&#x6DFB;&#x52A0;&#x7B5B;&#x9009;&#x6761;&#x4EF6;,&#x6240;&#x4EE5;&#x5C31;&#x6709;&#x4E86;match.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3&gt; ets:new(player, [bag, named_table]).
+player
+4&gt; ets:insert(player,[{player1, career1, goodsbag1},{player1, career2, goodsbag2}, {player1, career3, goodsbag3}]).
+true
+5&gt; ets:tab2list(player).
+[{player1,career1,goodsbag1},
+ {player1,career2,goodsbag2},
+ {player1,career3,goodsbag3}]
+6&gt; ets:match(player, {player1, &apos;$1&apos;, goodsbag2}).
+[[career2]]
+7&gt; ets:match(player, {player1, &apos;$1&apos;, &apos;_&apos;}).      
+[[career1],[career2],[career3]]
+8&gt; ets:match(player, {&apos;_&apos;, &apos;$1&apos;, &apos;goodsbag3&apos;}).
+[[career3]]</span><br></pre></td></tr></table></figure></p>
+<p>$&#x540E;&#x9762;&#x52A0;&#x6570;&#x5B57;&#x7528;&#x6765;&#x8868;&#x793A;&#x60F3;&#x8981;&#x5F97;&#x5230;&#x7684;&#x53D8;&#x91CF;,&apos;_&apos;&#x8868;&#x793A;&#x8981;&#x5FFD;&#x7565;&#x7684;&#x53D8;&#x91CF;.&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5982;&#x679C;key&#x6307;&#x5B9A;&#x7684;match&#x662F;&#x641E;&#x7B11;&#x7684;,&#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A;key&#x5219;&#x9700;&#x8981;&#x904D;&#x5386;&#x6574;&#x4E2A;&#x8868;,&#x5982;&#x679C;ets&#x5F88;&#x5927;,&#x5219;&#x4F1A;&#x5F88;&#x8017;&#x65F6;.</p>
+<h4 id="match_object2-match_object3">match_object/2 match_object/3</h4><blockquote>
+<p>match_object(Tab, Pattern) -&gt; [Object]<br>Types:<br>Tab = tid() | atom()<br>Pattern = Object = tuple()</p>
+<p>match_object(Tab, Pattern, Limit) -&gt; {[Match],Continuation} | &apos;$end_of_table&apos;<br>Types:<br>Tab = tid() | atom()<br>Pattern = tuple()<br>Match = [term()]<br>Continuation = term()</p>
+<p>match_object(Continuation) -&gt; {[Match],Continuation} | &apos;$end_of_table&apos;<br>Types:<br>Match = [term()]<br>Continuation = term()</p>
+</blockquote>
+<p>&#x4E0E;match&#x4E00;&#x6837;,&#x53EA;&#x4E0D;&#x8FC7;&#x8FD9;&#x4E2A;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x6574;&#x4E2A;object,&#x800C;&#x4E0D;&#x662F;$&#x6240;&#x6307;&#x5B9A;&#x7684;&#x503C;</p>
+<h4 id="init_table2">init_table/2</h4><blockquote>
+<p>init_table(Tab, InitFun) -&gt; true<br>Types:<br>Tab = tab()<br>InitFun = fun((Arg) -&gt; Res)<br>Arg = read | close<br>Res = end_of_input | {Objects :: [term()], InitFun} | term()</p>
+</blockquote>
+<p> &#x5B98;&#x65B9;doc&#x4E0A;&#x9762;&#x8BF4;</p>
+<blockquote>
+<p>This function is provided for compatibility with the dets module, it is not more efficient than filling a table by using ets:insert/2</p>
+</blockquote>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x8FD9;&#x4E2A;&#x662F;&#x4E3A;&#x4E86;&#x548C;dets&#x517C;&#x5BB9;&#x624D;&#x63D0;&#x4F9B;&#x4E86;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;,&#x5176;&#x5B9E;&#x6548;&#x7387;&#x4E0D;&#x6BD4;insert&#x9AD8;,<br>InitFun&#x662F;&#x4E2A;fun&#x51FD;&#x6570;,&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x63A5;&#x53D7;read&#x548C;close&#x8FD9;&#x4E24;&#x4E2A;&#x4F20;&#x5165;&#x503C;, &#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x5982;Res&#x6240;&#x793A;,&#x5982; fun(read) -&gt; end_of_input end. &#x5176;&#x5B9E;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x6587;&#x6863;&#x5199;&#x7684;&#x6709;&#x4E9B;&#x8BED;&#x7109;&#x4E0D;&#x8BE6;,&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5B98;&#x65B9;&#x4EE3;&#x7801;&#x76F4;&#x5230;&#x5177;&#x4F53;&#x4EC0;&#x4E48;&#x610F;&#x601D;.<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp"><span class="keyword">-spec</span> init_table<span class="params">(<span class="variable">Tab</span>, <span class="variable">InitFun</span>)</span> -&gt; &apos;true&apos; when</span><br><span class="line">      Tab :: tab<span class="params">()</span>,</span><br><span class="line">      InitFun :: fun<span class="params">((<span class="variable">Arg</span>)</span> -&gt; Res),</span><br><span class="line">      Arg :: &apos;read&apos; | &apos;close&apos;,</span><br><span class="line">      Res :: &apos;end_of_input&apos; | {Objects :: [term<span class="params">()</span>], InitFun} | term<span class="params">()</span></span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">init_table</span><span class="params">(<span class="variable">Table</span>, <span class="variable">Fun</span>)</span> -&gt;</span></span><br><span class="line">    <span class="function_name">ets:delete_all_objects</span>(<span class="variable">Table</span>),</span><br><span class="line">    <span class="function_name">init_table_continue</span>(<span class="variable">Table</span>, <span class="variable">Fun</span>(read)).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">init_table_continue</span><span class="params">(<span class="variable">_Table</span>, end_of_input)</span> -&gt;</span></span><br><span class="line">    <span class="literal">true</span>;</span><br><span class="line"><span class="function"><span class="title">init_table_continue</span><span class="params">(<span class="variable">Table</span>, <span class="tuple">{<span class="variable">List</span>, <span class="variable">Fun</span>}</span>)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(<span class="variable">List</span>)</span>, <span class="title">is_function</span><span class="params">(<span class="variable">Fun</span>)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">case</span> (<span class="keyword">catch</span> <span class="function_name">init_table_sub</span>(<span class="variable">Table</span>, <span class="variable">List</span>)) <span class="keyword">of</span></span><br><span class="line">	<span class="tuple">{&apos;<span class="variable">EXIT</span>&apos;, <span class="variable">Reason</span>}</span> -&gt;</span><br><span class="line">	    (<span class="keyword">catch</span> <span class="variable">Fun</span>(close)),</span><br><span class="line">	    <span class="function_name">exit</span>(<span class="variable">Reason</span>);</span><br><span class="line">	<span class="literal">true</span> -&gt;</span><br><span class="line">	    <span class="function_name">init_table_continue</span>(<span class="variable">Table</span>, <span class="variable">Fun</span>(read))</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line"><span class="function"><span class="title">init_table_continue</span><span class="params">(<span class="variable">_Table</span>, <span class="variable">Error</span>)</span> -&gt;</span></span><br><span class="line">    <span class="function_name">exit</span>(<span class="variable">Error</span>).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">init_table_sub</span><span class="params">(<span class="variable">_Table</span>, [])</span> -&gt;</span></span><br><span class="line">    <span class="literal">true</span>;</span><br><span class="line"><span class="function"><span class="title">init_table_sub</span><span class="params">(<span class="variable">Table</span>, [<span class="variable">H</span>|<span class="variable">T</span>])</span> -&gt;</span></span><br><span class="line">    <span class="function_name">ets:insert</span>(<span class="variable">Table</span>, <span class="variable">H</span>),</span><br><span class="line">    <span class="function_name">init_table_sub</span>(<span class="variable">Table</span>, <span class="variable">T</span>).</span><br></pre></td></tr></table></figure></p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x9996;&#x5148;&#x7528;delete_all_objects&#x5220;&#x6389;&#x4E86;&#x4E4B;&#x524D;ets&#x7684;&#x6570;&#x636E;,&#x4E4B;&#x540E;&#x5728;init_table_sub&#x4E2D;&#x5206;&#x522B;&#x63D2;&#x5165;List&#x4E2D;&#x7684;&#x5143;&#x7D20;,&#x5728;&#x8C03;&#x7528;List,&#x4E4B;&#x540E;&#x7684;initfun,&#x9047;&#x5230;end_of_input&#x4E3A;&#x6B62;. j<br>&#x4E3E;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">21</span>&gt; ets:new(test, [named_table]).</span><br><span class="line">test</span><br><span class="line"><span class="number">22</span>&gt; ets:insert(test, <span class="tuple">{test1, result1}</span>).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">23</span>&gt; ets:tab2list(test).</span><br><span class="line">[<span class="tuple">{test1,result1}</span>]</span><br><span class="line"><span class="number">24</span>&gt; ets:init_table(test, <span class="keyword">fun</span>(read) -&gt; <span class="tuple">{[<span class="tuple">{test2, result2}</span>,<span class="tuple">{test3, result3}</span>], <span class="keyword">fun</span>(read) -&gt; <span class="keyword">end</span>_of_input end}</span> <span class="keyword">end</span>).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">25</span>&gt; ets:tab2list(test).</span><br><span class="line">[<span class="tuple">{test3,result3}</span>,<span class="tuple">{test2,result2}</span>]</span><br></pre></td></tr></table></figure></p>
+<h4 id="member2">member/2</h4><blockquote>
+<p>member(Tab, Key) -&gt; true | false</p>
+</blockquote>
+<p>&#x5982;&#x679C;key&#x5728;Tab&#x4E2D;&#x6709;&#x503C;&#x5219;&#x8FD4;&#x56DE;true,&#x5426;&#x5219;false</p>
+<h4 id="rename2">rename/2</h4><blockquote>
+<p>rename(Tab, Name) -&gt; Name</p>
+</blockquote>
+<p>&#x91CD;&#x547D;&#x540D;&#x4E00;&#x4E2A;table,&#x53EA;&#x5BF9;&#x6709;&#x540D;&#x5B57;&#x7684;table&#x6709;&#x6548;</p>
+<h4 id="safe_fixtable2">safe_fixtable/2</h4><blockquote>
+<p>safe_fixtable(Tab, true|false) -&gt; true</p>
+</blockquote>
+<p>&#x5F53;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x5BF9;&#x67D0;&#x4E2A;ets&#x7528;&#x4E86;safe_fixtable(Tab, true)&#x540E;,&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x5BF9;&#x8FD9;&#x4E2A;ets&#x7684;first&#x548C;next&#x64CD;&#x4F5C;&#x7684;key&#x53EA;&#x8FD4;&#x56DE;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x8FC7;&#x7684;key,&#x4E5F;&#x5C31;&#x662F;&#x8BF4;ets&#x8868;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;key&#x53EA;&#x8FD4;&#x56DE;&#x4E00;&#x6B21;,&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;&#x8BF4;&#x5462;.&#x6211;&#x4EEC;&#x77E5;&#x9053;ordered_set&#x4E2D;&#x7684;key&#x662F;&#x6392;&#x597D;&#x5E8F;&#x7684;,&#x53EA;&#x8981;&#x4E0D;&#x505C;&#x7684;next,&#x80AF;&#x5B9A;&#x4F1A;&#x5F97;&#x5230;&#x66F4;&#x5927;&#x7684;key,&#x52A0;&#x5165;&#x5220;&#x9664;&#x4E86;&#x4E4B;&#x524D;&#x4E00;&#x4E2A;&#x8F83;&#x5C0F;&#x7684;key,&#x90A3;&#x4E48;&#x518D;&#x6B21;&#x63D2;&#x5165;&#x65F6;,&#x4E5F;&#x4E0D;&#x8FC7;next&#x5230;&#x8FD9;&#x4E2A;key,&#x4F46;&#x662F;set,bag&#x8868;&#x4E0D;&#x662F;,&#x6709;&#x53EF;&#x80FD;&#x5728;next&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;,&#x5982;&#x679C;&#x6709;&#x522B;&#x7684;&#x8FDB;&#x7A0B;&#x5220;&#x9664;&#x4E86;&#x4F60;&#x4E4B;&#x524D;&#x904D;&#x5386;&#x8FC7;&#x7684;key,&#x4E4B;&#x540E;&#x5728;&#x63D2;&#x5165;,&#x5C06;&#x6709;&#x53EF;&#x80FD;&#x518D;&#x6B21;next&#x5230;&#x8FD9;&#x4E2A;key,safe_fixtable&#x7684;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x5BF9;&#x6BCF;&#x4E2A;&#x7ED3;&#x679C;&#x53EA;&#x8FD4;&#x56DE;&#x4E00;&#x6B21;,&#x8FD9;&#x4E2A;&#x5728;&#x6E38;&#x620F;&#x4E2D;&#x5BF9;&#x7EBF;&#x4E0A;&#x73A9;&#x5BB6;&#x5217;&#x8868;&#x7684;&#x64CD;&#x4F5C;&#x6709;&#x4E00;&#x5B9A;&#x4F5C;&#x7528;,ets&#x7684;&#x5B98;&#x65B9;&#x6587;&#x6863;&#x4E2D;&#x7684;foldl&#x7B49;&#x4E5F;&#x7528;&#x5230;&#x4E86;.</p>
+<blockquote>
+<p>Note that no deleted objects are actually removed from a fixed table until it has been released. If a process fixes a table but never releases it, the memory used by the deleted objects will never be freed. The performance of operations on the table will also degrade significantly.</p>
+</blockquote>
+<p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5728;&#x6709;&#x8FDB;&#x7A0B;&#x5BF9;ets fixtable&#x7684;&#x60C5;&#x51B5;&#x5BF9;ets&#x4E2D;&#x6570;&#x636E;&#x7684;&#x5220;&#x9664;&#x5E76;&#x6CA1;&#x6709;&#x771F;&#x6B63;&#x7684;&#x5220;&#x9664;,&#x76F4;&#x5230;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x6B7B;&#x6389;&#x6216;&#x8005;&#x91CA;&#x653E;&#x6389;safe_fixtable&#x4E3A;&#x6B62;,&#x6B64;&#x65F6;&#x5BF9;ets&#x7684;&#x64CD;&#x4F5C;&#x6548;&#x7387;&#x5C06;&#x663E;&#x8457;&#x964D;&#x4F4E;, &#x6240;&#x4EE5;&#x5C3D;&#x91CF;&#x5C11;&#x7528;ets:foldl.<br>&#x53EF;&#x53C2;&#x8003;:<a href="http://stackoverflow.com/questions/20327171/etsfoldl-vs-deleted-elements/20338795#20338795" target="_blank" rel="external">http://stackoverflow.com/questions/20327171/etsfoldl-vs-deleted-elements/20338795#20338795</a></p>
+<h4 id="setopts2">setopts/2</h4><blockquote>
+<p>setopts(Tab, Opts) -&gt; true</p>
+</blockquote>
+<p>opts&#x53EA;&#x80FD;&#x662F;[{heir,pid(),HeirData} | {heir,none}],&#x7528;&#x4E8E;&#x5728;table&#x521B;&#x5EFA;&#x540E;&#x4FEE;&#x6539;&#x7EE7;&#x627F;&#x9009;&#x9879;,&#x53EA;&#x80FD;&#x7531;table&#x7684;owner&#x8C03;&#x7528;</p>
+<h4 id="update_counter3">update_counter/3</h4><blockquote>
+<p>update_counter(Tab, Key, UpdateOp) -&gt; Result<br>update_counter(Tab, Key, [UpdateOp]) -&gt; [Result]<br>update_counter(Tab, Key, Incr) -&gt; Result<br>Types:<br>Tab = tid() | atom()<br>Key = term()<br>UpdateOp = {Pos,Incr} | {Pos,Incr,Threshold,SetValue}<br>Pos = Incr = Threshold = SetValue = Result = integer()</p>
+</blockquote>
+<p>&#x66F4;&#x65B0;ets&#x4E2D;&#x7684;&#x6570;&#x636E;,&#x7701;&#x53BB;&#x4ECE;ets&#x53BB;&#x6570;&#x636E;,&#x76F8;&#x52A0;&#x5728;&#x5B58;&#x5165;&#x8FD9;&#x4E2A;&#x6D41;&#x7A0B;, Threshold&#x662F;&#x9608;&#x503C;,&#x6839;&#x636E;incr&#x7684;&#x6B63;&#x8D1F;,&#x5F53;&#x7ED3;&#x679C;&#x5927;&#x4E8E;&#x6216;&#x5C0F;&#x4E8E;&#x9608;&#x503C;&#x65F6;,&#x5C06;&#x503C;&#x8BBE;&#x4E3A;SetValue.<br><strong><em>&#x53EA;&#x80FD;&#x7528;&#x4E8E;set&#x548C;ordered_set</em></strong><br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>&gt; ets:new(test, [named_table]).</span><br><span class="line">test</span><br><span class="line"><span class="number">4</span>&gt; </span><br><span class="line"><span class="number">4</span>&gt; ets:insert(test,[<span class="tuple">{one, <span class="number">1</span>}</span>,<span class="tuple">{two, <span class="number">2</span>}</span>,<span class="tuple">{three, <span class="number">3</span>}</span>,<span class="tuple">{four, <span class="number">4</span>}</span>]).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">5</span>&gt; ets:update_counter(test, one, <span class="number">1</span>). </span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">6</span>&gt; ets:tab2list(test).</span><br><span class="line">[<span class="tuple">{two,<span class="number">2</span>}</span>,<span class="tuple">{three,<span class="number">3</span>}</span>,<span class="tuple">{one,<span class="number">2</span>}</span>,<span class="tuple">{four,<span class="number">4</span>}</span>]</span><br><span class="line"><span class="number">7</span>&gt; ets:insert(test,<span class="tuple">{five, haha, <span class="number">5</span>}</span>).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">8</span>&gt; ets:update_counter(test, five, <span class="tuple">{<span class="number">3</span>, <span class="number">1</span>}</span>).</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">9</span>&gt; ets:tab2list(test).</span><br><span class="line">[<span class="tuple">{two,<span class="number">2</span>}</span>,<span class="tuple">{five,haha,<span class="number">6</span>}</span>,<span class="tuple">{three,<span class="number">3</span>}</span>,<span class="tuple">{one,<span class="number">2</span>}</span>,<span class="tuple">{four,<span class="number">4</span>}</span>]</span><br><span class="line"><span class="number">10</span>&gt; ets:update_counter(test, five, <span class="tuple">{<span class="number">3</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">5</span>}</span>).</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">11</span>&gt; ets:tab2list(test).</span><br><span class="line">[<span class="tuple">{two,<span class="number">2</span>}</span>,<span class="tuple">{five,haha,<span class="number">5</span>}</span>,<span class="tuple">{three,<span class="number">3</span>}</span>,<span class="tuple">{one,<span class="number">2</span>}</span>,<span class="tuple">{four,<span class="number">4</span>}</span>]</span><br></pre></td></tr></table></figure></p>
+<h4 id="update_element3">update_element/3</h4><blockquote>
+<p>update_element(Tab, Key, {Pos,Value}) -&gt; true | false<br>update_element(Tab, Key, [{Pos,Value}]) -&gt; true | false<br>Types:<br>Tab = tid() | atom()<br>Key = Value = term()<br>Pos = integer()</p>
+</blockquote>
+<p>&#x5927;&#x81F4;&#x8DDF;&#x4E0A;&#x9762;&#x4E00;&#x6837;,&#x672A;&#x627E;&#x5230;Key&#x4F1A;&#x8FD4;&#x56DE;false.</p>
+<h3 id="&#x6240;&#x6709;&#x5173;&#x4E8E;match-specification">&#x6240;&#x6709;&#x5173;&#x4E8E;match specification</h3><p>&#x4E0B;&#x9762;&#x7684;&#x51FD;&#x6570;&#x90FD;&#x6709;&#x7528;&#x5230;MatchSpec&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;<br>&#x5B9A;&#x4E49;&#x89C1;: [doc]: (<a href="http://www.erlang.org/doc/apps/erts/match_spec.html" target="_blank" rel="external">http://www.erlang.org/doc/apps/erts/match_spec.html</a>).<br>match specification&#x7528;&#x4E8E;&#x66F4;&#x4E3A;&#x590D;&#x6742;&#x7684;&#x5339;&#x914D;&#x60C5;&#x51B5;,&#x53EF;&#x4EE5;&#x7528;&#x4E8E;ets&#x548C;erlang:trace_pattern&#x4E2D;,&#x4E00;&#x4E2A;ms&#x7684;&#x5177;&#x4F53;&#x4F8B;&#x5B50;&#x53EF;&#x80FD;&#x5982;&#x4E0B;</p>
+<p><img src="../../../../img/ets1.png" alt=""></p>
+<p>&#x4E4D;&#x770B;&#x4E4B;&#x4E0B;&#x662F;&#x975E;&#x5E38;&#x96BE;&#x61C2;&#x7684;,&#x62BD;&#x8C61;&#x4E00;&#x4E0B;&#x5927;&#x81F4;&#x662F;&#x8FD9;&#x4E2A;&#x6837;&#x5B50;<br>[{InitialPattern1, Guards1, ReturnedValue1},<br>{InitialPattern2, Guards2, ReturnedValue2}].<br>&#x4E0A;&#x9762;&#x7684;{&apos;$1&apos;,&apos;$2&apos;,&lt;<1>&gt;,&apos;$3&apos;,&apos;$4&apos;}&#x662F;InitialPattern, [{&apos;andalso&apos;,{&apos;&gt;&apos;,&apos;$4&apos;,150},{&apos;&lt;&apos;,&apos;$4&apos;,500}},<br>{&apos;orelse&apos;,{&apos;==&apos;,&apos;$2&apos;,meat},{&apos;==&apos;,&apos;$2&apos;,dairy}}]&#x548C;[{&apos;&lt;&apos;,&apos;$3&apos;,4.0},{is_float,&apos;$3&apos;}]&#x662F;Guards1&#x548C;Guards2,[&apos;$1&apos;]&#x662F;returnedvalue.</1></p>
+<p>InitialPattern&#x662F;&#x5C06;&#x53D8;&#x91CF;&#x7ED1;&#x5B9A;&#x5230;&#x5177;&#x4F53;&#x7684;$&#x6570;&#x5B57;&#x4E0A;,&#x7136;&#x540E;&#x901A;&#x8FC7;guard,&#x5F97;&#x5230;returnvalue.<br>Guard&#x7684;&#x8BED;&#x5E8F;&#x662F;{FunctionOrOperator, Arg1, ..., ArgN},&apos;andalso&apos; &apos;orelse&apos;&#x548C;&apos;&lt;&apos;&#x7B49;&#x5C5E;&#x4E8E;FunctionorOperator,&#x540E;&#x9762;&#x7684;&#x662F;&#x53C2;&#x6570;.<br>{&apos;andalso&apos;,{&apos;&gt;&apos;,&apos;$4&apos;,150},{&apos;&lt;&apos;,&apos;$4&apos;,500}}&#x7FFB;&#x8BD1;&#x8FC7;&#x6765;&#x5C31;&#x662F; when $4 &gt; 150 andalso $4 &lt; 500.<br>&#x5982;&#x679C;&#x6EE1;&#x8DB3;&#x8FD9;&#x4E2A;Guard&#x5C31;&#x8FD4;&#x56DE;$1.</p>
+<p>&#x5F53;&#x7136;&#x8BA9;&#x6211;&#x4EEC;&#x53BB;&#x5199;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;match&#x662F;&#x5F88;&#x4E0D;&#x7B26;&#x5408;&#x4EBA;&#x7C7B;&#x7684;&#x53D1;&#x5C55;&#x7684;,&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x8981;&#x7528;&#x5230;&#x4E0B;&#x9762;&#x7684;&#x51FD;&#x6570;</p>
+<h4 id="fun2ms1">fun2ms/1</h4><blockquote>
+<p>fun2ms(LiteralFun) -&gt; MatchSpec<br>Types:<br>LiteralFun = function()<br>MatchSpec = match_spec()<br>&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5C06;&#x6211;&#x4EEC;&#x719F;&#x6089;&#x7684;fun&#x51FD;&#x6570;&#x8F6C;&#x6362;&#x6210;match specification&#x7684;&#x5F62;&#x5F0F;,&#x8FD9;&#x4E2A;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#x7531;ms_transform&#x5B8C;&#x6210;,<br>&#x9700;&#x8981;&#x5728;&#x6A21;&#x5757;&#x5F00;&#x5934;&#x52A0;&#x4E0A;<br><strong><em>-include_lib(&quot;stdlib/include/ms_transform.hrl&quot;).</em></strong><br>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;fun&#x7684;&#x53C2;&#x6570;&#x53EA;&#x6709;&#x4E00;&#x4E2A;,&#x53EA;&#x80FD;&#x662F;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x4E00;&#x4E2A;tuple&#x4E0D;&#x80FD;&#x4F7F;list&#x7B49;,&#x4E0D;&#x80FD;&#x4F7F;bit&#x6D41;.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&gt; ets:fun2ms(fun(X) when X &gt; 10 -&gt; X end).   
+[{&apos;$1&apos;,[{&apos;&gt;&apos;,&apos;$1&apos;,10}],[&apos;$1&apos;]}]
+2&gt; ets:fun2ms(fun({X, Y}) when X &gt; 10, Y &lt; 20 -&gt; X * Y end).
+[{{&apos;$1&apos;,&apos;$2&apos;},
+  [{&apos;&gt;&apos;,&apos;$1&apos;,10},{&apos;&lt;&apos;,&apos;$2&apos;,20}],
+  [{&apos;*&apos;,&apos;$1&apos;,&apos;$2&apos;}]}]</span><br></pre></td></tr></table></figure>
+<p>ms&#x7684;&#x5728;ets&#x4E2D;&#x7684;&#x4E3B;&#x8981;&#x4F5C;&#x7528;&#x662F;&#x7528;&#x5728;select&#x8BED;&#x53E5;&#x4E2D;,&#x8FBE;&#x5230;&#x7C7B;&#x4F3C;&#x4E8E;mysql&#x4E2D;select&#x7684;&#x6548;&#x679C;</p>
+<h4 id="select123">select/1/2/3</h4><blockquote>
+<p>select(Tab, MatchSpec) -&gt; [Match]<br>select(Tab, MatchSpec, Limit) -&gt; {[Match],Continuation} | &apos;$end_of_table&apos;<br>select(Continuation) -&gt; {[Match],Continuation} | &apos;$end_of_table&apos;<br>Types:<br>Tab = tid() | atom()<br>Match = term()<br>MatchSpec = match_spec()<br>Continuation = term()</p>
+</blockquote>
+<p>select/2&#x5C06;&#x6240;&#x6709;&#x7B26;&#x5408;MatchSpec&#x7684;&#x7ED3;&#x679C;&#x8FD4;&#x56DE;&#xFF0C;select/3&#x5236;&#x5B9A;&#x4E86;limit&#x3002;&#x8FD4;&#x56DE;&#x7684;Continuation&#x53EF;&#x4EE5;&#x7528;&#x5728;select/1&#x4E2D;&#x3002;&#x4E3A;&#x4F55;&#x8FD9;&#x4E48;&#x505A;&#xFF1F;&#x5B98;&#x65B9;&#x8BF4;&#x660E;&#x662F;</p>
+<blockquote>
+<p>This is a space efficient way to work on objects in a table which is still faster than traversing the table object by object using ets:first/1 and ets:next/1.</p>
+</blockquote>
+<p>&#x8FD9;&#x6837;&#x8282;&#x7701;&#x7A7A;&#x95F4;&#xFF0C;&#x540C;&#x65F6;&#x6BD4;&#x7528;first&#xFF0C;next&#x66F4;&#x52A0;&#x5FEB;&#x3002;<br>&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x662F;&#x5728;player&#x8868;&#x4E2D;&#x6709;&#x4E24;&#x4E2A;#player&#x7ED3;&#x6784;&#x7684;&#x6570;&#x636E;&#x3002;&#x4E00;&#x4E2A;&#x8FD4;&#x56DE;&#x7684;&#x662F;10010&#x8FD9;&#x4E2A;id&#x7684;&#x73A9;&#x5BB6;&#xFF0C;&#x4E4B;&#x540E;&#x8C03;&#x7528;select(C)&#x5C06;&#x7B2C;&#x4E8C;&#x4E2A;10011&#x73A9;&#x5BB6;&#x73A9;&#x5BB6;&#x8FD4;&#x56DE;&#x540C;&#x65F6;&#x8FD4;&#x56DE;end of table&#x3002;&#x5982;&#x679C;&#x5C06;end of table&#x4F20;&#x5165;select&#x4F1A;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;end of table&#x3002;</p>
+<p><img src="../../../../img/ets2.png" alt=""></p>
+<p>learn you some erlang&#x4E66;&#x4E2D;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11&gt; rd(food, {name, calories, price, group}).
+food
+12&gt; ets:new(food, [ordered_set, {keypos,#food.name}, named_table]).
+food
+13&gt; ets:insert(food, [#food{name=salmon, calories=88, price=4.00, group=meat},
+13&gt; #food{name=cereals, calories=178, price=2.79, group=bread},
+13&gt; #food{name=milk, calories=150, price=3.23, group=dairy},
+13&gt; #food{name=cake, calories=650, price=7.21, group=delicious},
+13&gt; #food{name=bacon, calories=800, price=6.32, group=meat},
+13&gt; #food{name=sandwich, calories=550, price=5.78, group=whatever}]).
+true
+14&gt; ets:select(food, ets:fun2ms(fun(N = #food{calories=C}) when C &lt; 600 -&gt; N end)).
+[#food{name = cereals,calories = 178,price = 2.79,group = bread},
+#food{name = milk,calories = 150,price = 3.23,group = dairy},
+#food{name = salmon,calories = 88,price = 4.0,group = meat},
+#food{name = sandwich,calories = 550,price = 5.78,group = whatever}]
+15&gt; ets:select_reverse(food, ets:fun2ms(fun(N = #food{calories=C}) when C &lt; 600 -&gt; N end)).
+[#food{name = sandwich,calories = 550,price = 5.78,group = whatever},
+#food{name = salmon,calories = 88,price = 4.0,group = meat},
+#food{name = milk,calories = 150,price = 3.23,group = dairy},
+#food{name = cereals,calories = 178,price = 2.79,group = bread}]</span><br></pre></td></tr></table></figure></p>
+<p> &#x540C;&#x65F6;&#x5728;&#x5B98;&#x65B9;doc&#x7684;ms_transform&#x4E2D;&#x6709;&#x4E2A;&#x591A;&#x4E2A;&#x5B50;&#x53E5;&#x7684;&#x4F8B;&#x5B50;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ets:select(emp_tab, ets:fun2ms(
+                     fun(#emp{empno = E, surname = &quot;Smith&quot; }) -&gt;
+                             {guru,E};
+                        (#emp{empno = E, empyear = Y}) when Y &lt; 1997  -&gt;
+                             {inventory, E};
+                        (#emp{empno = E, empyear = Y}) when Y &gt; 2001  -&gt;
+                             {newbie, E};
+                        (#emp{empno = E, empyear = Y}) -&gt; % 1997 -- 2001
+                             {rookie, E}
+                     end)).</span><br></pre></td></tr></table></figure>
+<h4 id="select_count2">select_count/2</h4><blockquote>
+<p>select_count(Tab, MatchSpec) -&gt; NumMatched<br>Types:<br>Tab = tid() | atom()<br>Object = tuple()<br>MatchSpec = match_spec()<br>NumMatched = integer()<br>&#x5BF9;MS&#x8FD4;&#x56DE;&#x4E3A;true&#x7684;&#x4F1A;&#x8BA1;&#x6570;&#x3002;&#x5982;&#x4E0B;&#xFF0C;&#x5F97;&#x51FA;player&#x8868;&#x4E2D;id&#x5927;&#x4E8E;0&#x7684;&#x73A9;&#x5BB6;&#x6570;&#x3002;</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> ets:select_count(player, ets:fun2ms(fun(#player{id = ID}) -&gt; ID &gt; 0  end)).    
+2</span><br></pre></td></tr></table></figure>
+<h4 id="select_delete2">select_delete/2</h4><blockquote>
+<p>select_delete(Tab, MatchSpec) -&gt; NumDeleted<br>Types:<br>Tab = tid() | atom()<br>Object = tuple()<br>MatchSpec = match_spec()<br>NumDeleted = integer()</p>
+</blockquote>
+<p>&#x5927;&#x81F4;&#x540C;count&#xFF0C;&#x5C06;&#x8FD4;&#x56DE;true&#x7684;object&#x4ECE;&#x8868;&#x4E2D;&#x5220;&#x6389;&#x3002;</p>
+<h4 id="select_reverse123">select_reverse/1/2/3</h4><blockquote>
+<p>select_reverse(Tab, MatchSpec) -&gt; [Match]<br>Types:<br>Tab = tid() | atom()<br>Match = term()<br>MatchSpec = match_spec()<br>select_reverse(Tab, MatchSpec, Limit) -&gt; {[Match],Continuation} | &apos;$end_of_table&apos;<br>Types:<br>Tab = tid() | atom()<br>Match = term()<br>MatchSpec = match_spec()<br>Continuation = term()<br>select_reverse(Tab, MatchSpec) -&gt; [Match]<br>Types:<br>Tab = tid() | atom()<br>Match = term()<br>MatchSpec = match_spec()</p>
+</blockquote>
+<p>&#x4E0E;&#x53EA;&#x4E0D;&#x8FC7;&#x5C06;select&#x7684;&#x7ED3;&#x679C;&#x53CD;&#x5E8F;&#xFF0C;&#x5BF9;order_set&#x8868;&#x6709;&#x6548;&#xFF0C;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;&#x8868;&#x4E0E;select&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x4E00;&#x81F4;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&gt; T = ets:new(x,[ordered_set]).
+2&gt; [ ets:insert(T,{N}) || N &lt;- lists:seq(1,10) ].
+...
+3&gt; {R0,C0} = ets:select_reverse(T,[{&apos;_&apos;,[],[&apos;$_&apos;]}],4).
+...
+4&gt; R0.
+[{10},{9},{8},{7}]
+5&gt; {R1,C1} = ets:select_reverse(C0).
+...
+6&gt; R1.
+[{6},{5},{4},{3}]
+7&gt; {R2,C2} = ets:select_reverse(C1).
+...
+8&gt; R2.
+[{2},{1}]
+9&gt; &apos;$end_of_table&apos; = ets:select_reverse(C2).
+...</span><br></pre></td></tr></table></figure></p>
+<h4 id="match_spec_compile1">match_spec_compile/1</h4><h4 id="match_spec_run2">match_spec_run/2</h4><h4 id="is_compiled_ms1">is_compiled_ms/1</h4><blockquote>
+<p>match_spec_compile(MatchSpec) -&gt; CompiledMatchSpec<br>Types:<br>MatchSpec = match_spec()<br>CompiledMatchSpec = comp_match_spec()<br>match_spec_run(List,CompiledMatchSpec) -&gt; list()<br>Types:<br>List = [ tuple() ]<br>CompiledMatchSpec = comp_match_spec()<br>is_compiled_ms(Term) -&gt; boolean()<br>Types:<br>Term = term()</p>
+</blockquote>
+<p>match_spec_compile&#x5C06;&#x4E00;&#x4E2A;MS&#x7F16;&#x8BD1;&#x6210;&#x4E00;&#x4E2A;&#x4E0D;&#x53EF;&#x89C1;&#x7684;&#x5185;&#x90E8;&#x5F62;&#x5F0F;&#x4F9B;match_spec_run&#x8C03;&#x7528;&#xFF0C;is_compile_ms&#x7528;&#x6765;&#x5224;&#x65AD;&#x8FD9;&#x4E2A;&#x7F16;&#x8BD1;&#x7ED3;&#x679C;&#x662F;&#x5426;&#x662F;&#x4E2A;&#x6B63;&#x786E;&#x7684;&#x7F16;&#x8BD1;&#xFF0C;&#x56E0;&#x4E3A;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x5185;&#x90E8;&#x5F62;&#x5F0F;&#x4E0D;&#x80FD;&#x518D;&#x8282;&#x70B9;&#x95F4;&#x4F20;&#x9012;&#x4E5F;&#x4E0D;&#x80FD;&#x50A8;&#x5B58;&#x5728;&#x786C;&#x76D8;&#x4E0A;&#x3002;<br>&#x6BD4;&#x5982;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ets:is_compiled_ms(ets:match_spec_compile([{&apos;_&apos;,[],[true]}])).</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD4;&#x56DE;&#x7684;&#x662F;true<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MS = ets:match_spec_compile([{&apos;_&apos;,[],[true]}]),
+Broken = binary_to_term(term_to_binary(MS)),
+ets:is_compiled_ms(Broken).</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD4;&#x56DE;&#x7684;&#x662F;false&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x63A5;&#x53D7;&#x5916;&#x90E8;&#x7684;&#x8F6C;&#x5316;&#x3002;&#x4F1A;&#x4F7F;&#x5176;&#x5931;&#x53BB;&#x539F;&#x6709;&#x7684;&#x4FE1;&#x606F;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MatchSpec = ets:fun2ms(fun({M, N}) when N &gt; 3 -&gt; M end),
+CompiledMatchSpec = ets:match_spec_compile(MatchSpec),
+List = [{1, 2}, {3, 4}, {5, 6}],
+ets:match_spec_run(List, CompiledMatchSpec).</span><br></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x679C;MatchSpec&#x4E0D;&#x662F;&#x4E2A;&#x5408;&#x683C;&#x7684;Ms&#x4F1A;&#x629B;badarg&#x7684;&#x9519;&#x8BEF;&#x3002;</p>
+<h4 id="repair_continuation2">repair_continuation/2</h4><blockquote>
+<p>repair_continuation(Continuation, MatchSpec) -&gt; Continuation<br>Types:<br>Continuation = continuation()<br>MatchSpec = match_spec()</p>
+</blockquote>
+<p>&#x7528;&#x6765;&#x4FEE;&#x590D;select/3&#x8FD4;&#x56DE;&#x7684;continuation&#xFF0C;&#x5982;&#x679C;continuation&#x5728;&#x88AB;&#x8F6C;&#x5316;&#x4E3A;&#x5916;&#x90E8;&#x5F62;&#x52BF;&#xFF08;&#x7528;&#x6765;&#x5728;&#x8282;&#x70B9;&#x95F4;&#x4F20;&#x9012;)&#xFF0C;&#x4F1A;&#x5931;&#x6548;&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;repair_continuation&#x53EF;&#x4EE5;&#x6062;&#x590D;&#x3002;<br>&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%% &#x65E0;&#x6548;
+T=ets:new(x,[]),
+{_,C} = ets:select(T,ets:fun2ms(fun({N,_}=A)
+when (N rem 10) =:= 0 -&gt;
+A
+end),10),
+Broken = binary_to_term(term_to_binary(C)),
+ets:select(Broken).
+
+%% &#x6709;&#x6548;
+T=ets:new(x,[]),
+MS = ets:fun2ms(fun({N,_}=A)
+when (N rem 10) =:= 0 -&gt;
+A
+end),
+{_,C} = ets:select(T,MS,10),
+Broken = binary_to_term(term_to_binary(C)),
+ets:select(ets:repair_continuation(Broken,MS)).</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/08/erlang_mysql_driver/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          erlang_mysql_driver 源码分析(一)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/13/工作五个月后/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">工作五个月后</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Erlang-ETS" data-title="Erlang存储模块之ETS" data-url="http://youthy.github.io/2014/10/25/Erlang-ETS/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>makefile笔记 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Makefile
+&amp;lt;!-- toc --&amp;gt;
+
+Base
+Rule
+规则
+命令
+变量
+条件判断
+函数
+string
+file
+list
+
+
+隐含规则
+
+
+SomeMore
+
+&amp;lt;!-- tocstop --&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="makefile笔记">
+<meta property="og:url" content="http://youthy.github.io/2015/09/29/makefile笔记/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="Makefile
+&amp;lt;!-- toc --&amp;gt;
+
+Base
+Rule
+规则
+命令
+变量
+条件判断
+函数
+string
+file
+list
+
+
+隐含规则
+
+
+SomeMore
+
+&amp;lt;!-- tocstop --&amp;gt;">
+<meta property="og:updated_time" content="2016-08-18T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="makefile笔记">
+<meta name="twitter:description" content="Makefile
+&amp;lt;!-- toc --&amp;gt;
+
+Base
+Rule
+规则
+命令
+变量
+条件判断
+函数
+string
+file
+list
+
+
+隐含规则
+
+
+SomeMore
+
+&amp;lt;!-- tocstop --&amp;gt;">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">youthy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap，vim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/二次元/" style="font-size: 10px;">二次元</a> <a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/情感/" style="font-size: 10px;">情感</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.win">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">youthy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">youthy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-makefile笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/29/makefile笔记/" class="article-date">
+  	<time datetime="2015-09-29T11:33:58.000Z" itemprop="datePublished">9月 29 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      makefile笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/makefile/">makefile</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Makefile</p>
+<!-- toc -->
+<ul>
+<li><a href="#base">Base</a></li>
+<li><a href="#rule">Rule</a><ul>
+<li><a href="#&#x89C4;&#x5219;">&#x89C4;&#x5219;</a></li>
+<li><a href="#&#x547D;&#x4EE4;">&#x547D;&#x4EE4;</a></li>
+<li><a href="#&#x53D8;&#x91CF;">&#x53D8;&#x91CF;</a></li>
+<li><a href="#&#x6761;&#x4EF6;&#x5224;&#x65AD;">&#x6761;&#x4EF6;&#x5224;&#x65AD;</a></li>
+<li><a href="#&#x51FD;&#x6570;">&#x51FD;&#x6570;</a><ul>
+<li><a href="#string">string</a></li>
+<li><a href="#file">file</a></li>
+<li><a href="#list">list</a></li>
+</ul>
+</li>
+<li><a href="#&#x9690;&#x542B;&#x89C4;&#x5219;">&#x9690;&#x542B;&#x89C4;&#x5219;</a></li>
+</ul>
+</li>
+<li><a href="#somemore">SomeMore</a></li>
+</ul>
+<!-- tocstop -->
+<a id="more"></a>
+<h2 id="base">Base</h2><blockquote>
+<p>target (&#x76EE;&#x6807;) : prerequisites (&#x4F9D;&#x8D56;&#x6587;&#x4EF6;)<br>     command (&#x547D;&#x4EE4;,&#x751F;&#x6210;&#x89C4;&#x5219;&#xFF09;</p>
+</blockquote>
+<p>&#x4F9D;&#x8D56;&#x6BD4;&#x76EE;&#x6807;&#x65B0;&#xFF0C;command&#x6267;&#x884C;</p>
+<h2 id="rule">Rule</h2><h3 id="&#x89C4;&#x5219;">&#x89C4;&#x5219;</h3><ul>
+<li>&#x53D8;&#x91CF;&#x58F0;&#x660E;<br>Name = sth<br>&#x7C7B;&#x4F3C;&#x5B8F;&#xFF0C;$(Name)&#x7B49;&#x540C;&#x4E8E;&#x7B49;&#x53F7;&#x53F3;&#x8FB9;&#x7684;</li>
+<li><code>#</code>&#x4E3A;&#x6CE8;&#x91CA;&#xFF0C;\&#x53EF;&#x4EE5;&#x8F6C;&#x4E49;</li>
+<li>&#x547D;&#x4EE4;&#x9700;&#x8981;<strong>Tab</strong>&#x952E;&#x5F00;&#x59CB;</li>
+<li>&#x6587;&#x4EF6;&#x540D;&#x4E00;&#x822C;&#x4E3A;makefile&#xFF0C;Makefile&#x3002;&#x4E5F;&#x53EF;&#x901A;&#x8FC7;<code>make -f/--file FileName</code> &#x6307;&#x5B9A;</li>
+<li>include <filename> &#x7528;filename&#x66FF;&#x6362;&#x5F53;&#x524D;&#x5185;&#x5BB9;<ul>
+<li>include&#x4E0D;&#x80FD;&#x5DF2;Tab&#x5F00;&#x59CB;&#x3002;</li>
+<li>&#x6CA1;&#x6307;&#x5B9A;&#x8DEF;&#x5F84;<ul>
+<li>&#x4ECE;&#x5F53;&#x524D;&#x76EE;&#x5F55;</li>
+<li><code>make -I/--include-dir</code>&#x6307;&#x5B9A;&#x7684;&#x8DEF;&#x5F84;</li>
+<li>/usr/local/bin, /usr/include</li>
+<li>-include &#x52A0;&#x4E0A;<code>-</code>&#x53EF;&#x4EE5;&#x8BA9;&#x5176;&#x5FFD;&#x7565;&#x9519;&#x8BEF;</li>
+</ul>
+</li>
+</ul>
+</filename></li>
+<li>&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x901A;&#x914D;&#x7B26;&#x4E0D;&#x8D77;&#x4F5C;&#x7528;&#x3002;<br>object = <em>.erl &#x6307;&#x7684;&#x5C31;&#x662F;&quot;</em>.erl&quot;, &#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>$(wildcard *.erl)</code>, &#x5339;&#x914D;&#x6240;&#x6709;erl&#x6587;&#x4EF6;.</li>
+<li>&#x641C;&#x5BFB;&#x8DEF;&#x5F84;<ul>
+<li>VPATH = DIR1:DIR2... (VPATH = /usr/lib:...)</li>
+<li>vpath FileName DIR1:DIR2 (vpath %.erl ../src:../deps)</li>
+</ul>
+</li>
+<li>&#x4F2A;&#x76EE;&#x6807; .PHONY:target &#x4F2A;&#x76EE;&#x6807;&#x662F;&#x6807;&#x7B7E;&#x3002;&#x5B83;&#x5E76;&#x4E0D;&#x751F;&#x6210;&#x3002;</li>
+<li>&#x9759;&#x6001;&#x89C4;&#x5219;&#xFF1A; target&#xFF1A;&#x76EE;&#x6807;&#x5339;&#x914D;&#xFF1A;&#x4F9D;&#x8D56;&#x5339;&#x914D; . &#x901A;&#x8FC7;&#x5339;&#x914D;&#x7B5B;&#x9009;&#x51FA;target&#x4E2D;&#x6EE1;&#x8DB3; &#x76EE;&#x6807;&#x5339;&#x914D;&#x7684;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8FDB;&#x884C;&#x4F9D;&#x8D56;&#x5339;&#x914D;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objects=$(wildcard *.o)
+all: $(objects)
+$(objects):h?.o : h?.c
+...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="&#x547D;&#x4EE4;">&#x547D;&#x4EE4;</h3><ul>
+<li>@command &#x4E0D;&#x4F1A;&#x8F93;&#x51FA;&#x547D;&#x4EE4;&#x5185;&#x5BB9; ex:<code>@echo haha</code></li>
+<li><code>make -n/--just-print</code> &#x53EA;&#x663E;&#x793A;&#xFF0C;&#x4E0D;&#x6267;&#x884C;</li>
+<li><code>make -s/--silent</code> &#x5168;&#x90E8;&#x7981;&#x6B62;&#x663E;&#x793A; </li>
+<li>&#x5F53;&#x547D;&#x4EE4;&#x4F9D;&#x8D56;&#x524D;&#x4E00;&#x6761;&#x547D;&#x4EE4;&#x65F6;&#x5E94;&#x8BE5;&#x7528;&#x5206;&#x53F7;&#x9694;&#x5F00;&#x3002; <code>cd test;pwd</code> ,&#x5982;&#x679C;&#x5199;&#x5230;&#x4E24;&#x884C;&#x91CC;&#x4F1A;&#x4E0D;&#x8D77;&#x4F5C;&#x7528;</li>
+<li>&#x540C;&#x6307;&#x5B9A;&#x8DEF;&#x5F84;&#xFF0C;<code>-</code>&#x53EF;&#x4EE5;&#x8BA9;&#x547D;&#x4EE4;&#x5FFD;&#x7565;&#x9519;&#x8BEF;&#xFF0C;&#x800C;&#x4E0D;&#x81F3;&#x4E8E;&#x56E0;&#x4E3A;&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#x7684;&#x9519;&#x8BEF;&#x800C;&#x7EC8;&#x6B62;&#x3002;</li>
+<li>&#x53D8;&#x91CF;&#x5BFC;&#x51FA; export value1 =(:=) value2. MAKEFLAGS&#x662F;make&#x7684;&#x53C2;&#x6570;&#x4E0E;SHELL&#x9ED8;&#x8BA4;&#x4F20;&#x9012;&#x3002;</li>
+<li>&#x5B9A;&#x4E49;&#x547D;&#x4EE4;&#x5305;: <code>define Name function() endef</code></li>
+</ul>
+<h3 id="&#x53D8;&#x91CF;">&#x53D8;&#x91CF;</h3><ul>
+<li>&#x5B57;&#x7B26;&#xFF0C;&#x6570;&#x5B57;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#x3002;&#x53EF;&#x4EE5;&#x6570;&#x5B57;&#x5F00;&#x5934;&#xFF0C;&#x5927;&#x5C0F;&#x5199;&#x654F;&#x611F;</li>
+<li><code>A = $(B), B = somevalue</code> &#x53D8;&#x91CF;&#x5B9A;&#x4E49;&#x53EF;&#x4EE5;&#x7528;&#x5230;&#x540E;&#x9762;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x3002;</li>
+<li>&#x4F7F;&#x7528;<code>:=</code>&#x65F6;&#xFF0C;&#x4E0D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x540E;&#x9762;&#x7684;&#x53D8;&#x91CF;</li>
+<li><code>A&#xFF1F;= B</code> &#x7528;&#x4E8E;&#x5F53;A&#x524D;&#x9762;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;&#x65F6;&#x8D4B;&#x4E88;&#x5B83;B&#xFF0C;&#x5426;&#x5219;&#x4EC0;&#x4E48;&#x90FD;&#x4E0D;&#x505A;&#x3002;</li>
+<li>&#x66FF;&#x6362;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo = a.erl b.erl c.erl 
+beam = $(foo:.erl=.beam) 
+beam2 = $(foo:%.erl=%.beam)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x90FD;&#x5C06;erl&#x66FF;&#x6362;&#x6210;beam</p>
+<ul>
+<li><code>+=</code> &#x8FFD;&#x52A0;&#x53D8;&#x91CF;</li>
+<li><p>&#x76EE;&#x6807;&#x53D8;&#x91CF;&#xFF1A;target: &#x53D8;&#x91CF;&#x58F0;&#x660E;  &#x5C06;&#x53D8;&#x91CF;&#x7684;&#x8D4B;&#x503C;&#x4F5C;&#x7528;&#x5728;&#x67D0;&#x4E00;&#x89C4;&#x5219;&#x91CC;<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">all: DIR=./src
+all: a.erl
+   erl -pa $(DIR)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x6A21;&#x5F0F;&#x53D8;&#x91CF; &#x8BBE;&#x7F6E;&#x6240;&#x6709;&#x5339;&#x914D;&#x7684;&#x76EE;&#x6807;&#x7684;&#x53D8;&#x91CF;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%.beam: DIR=./src</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="&#x6761;&#x4EF6;&#x5224;&#x65AD;">&#x6761;&#x4EF6;&#x5224;&#x65AD;</h3><ul>
+<li><code>ifeq (A, B) ... else ... endif</code></li>
+<li><code>ifneq (A, B) ... else ... endif</code></li>
+<li><code>ifdef A ... else ... endif</code></li>
+<li><code>ifndef A ... else .... endif</code></li>
+<li>&#x4E0D;&#x8981;&#x628A;&#x81EA;&#x52A8;&#x5316;&#x53D8;&#x91CF;<code>$@</code>&#x7B49;&#x653E;&#x5165;&#x5224;&#x65AD;&#x3002;&#x56E0;&#x4E3A;&#x5224;&#x65AD;&#x5B9E;&#x5728;&#x52A0;&#x8F7D;Makefile&#x65F6;&#x5C31;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#x7684;&#x3002;&#x8FD0;&#x884C;&#x65F6;&#x53D8;&#x91CF;&#x4E0D;&#x80FD;&#x653E;&#x5165;</li>
+</ul>
+<h3 id="&#x51FD;&#x6570;">&#x51FD;&#x6570;</h3><h4 id="string">string</h4><ul>
+<li><code>$(function, arguments),</code> &#x6216;&#x8005;&#x7528;<code>{</code>&#x6269;&#x8D77;&#x6765;</li>
+<li><code>$(subst, &lt;from&gt;, &lt;to&gt;, &lt;text&gt;)</code>  &#x628A;text&#x4E2D;&#x7684;from&#x66FF;&#x6362;&#x6210;to</li>
+<li><code>$(patsubst, &lt;pattern&gt;, &lt;replacement&gt;, &lt;text&gt;)</code></li>
+<li><code>$(strip, &lt;string&gt;)</code> &#x53BB;&#x6389;&#x5F00;&#x5934;&#x548C;&#x7ED3;&#x5C3E;&#x7684;&#x7A7A;&#x683C;</li>
+<li><code>$(findstring, &lt;find&gt;, &lt;text&gt;)</code> &#x67E5;&#x627E;text&#x4E2D;&#x7684;find</li>
+<li><code>$(filter, &lt;pattern&gt; ,&lt;text&gt;)</code> &#x8FC7;&#x6EE4;&#xFF0C;&#x53D6;&#x51FA;&#x7B26;&#x5408;pattern&#x7684;</li>
+<li><code>$(filter-out, &lt;pattern&gt; ,&lt;text&gt;)</code> &#x4E0E;&#x4E0A;&#x9762;&#x76F8;&#x53CD;</li>
+<li><code>$(sort, &lt;list&gt;)</code> &#x6392;&#x5E8F;&#x5E76;&#x53D6;&#x51FA;&#x91CD;&#x590D;&#x7684;&#x8BCD; </li>
+<li><code>$(word, &lt;n&gt;, &lt;text&gt;)</code> &#x53D6;&#x51FA;text&#x7B2C;n&#x4E2A;&#x8BCD;</li>
+<li><code>$(wordlist, &lt;begin&gt;, &lt;end&gt;, &lt;text&gt;)</code> &#x53D6;&#x51FA;text&#x4E2D;begin&#x5230;end&#x4E4B;&#x95F4;&#x7684;&#x5355;&#x8BCD;</li>
+<li><code>$(words, &lt;text&gt;)</code> &#x7EDF;&#x8BA1;&#x5355;&#x8BCD;&#x4E2A;&#x6570;</li>
+<li><code>$(firstword, &lt;text&gt;)</code>  &#x53D6;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;</li>
+<li><code>$(lastword, &lt;text&gt;)</code></li>
+</ul>
+<h4 id="file">file</h4><ul>
+<li><code>$(dir &lt;names&gt;)</code> &#x8FD4;&#x56DE;name&#x6240;&#x5728;&#x76EE;&#x5F55;</li>
+<li><code>$(notdir &lt;names&gt;)</code> &#x8FD4;&#x56DE;&#x975E;&#x76EE;&#x5F55;&#x90E8;&#x5206;</li>
+<li><code>$(suffix &lt;names&gt;) &#x540E;&#x7F00;&#x51FD;&#x6570;</code> <code>a.erl b.erl -&gt; &quot;.erl .erl&quot;</code></li>
+<li><code>$(basename &lt;names&gt;)</code> &#x524D;&#x7F00;&#x51FD;&#x6570; <code>a.cpp -&gt; a</code></li>
+<li><code>$(addsuffix &lt;suffix&gt;, &lt;names&gt;)</code>  &#x7ED9;name&#x6DFB;&#x52A0;&#x540E;&#x7F00;  <code>addsuffix .erl, hello -&gt; hello.erl</code></li>
+<li><code>$(addprefix &lt;prefix&gt;, &lt;names&gt;)</code><h4 id="list">list</h4></li>
+<li><code>$(join &lt;list1&gt;, &lt;list2&gt;)</code> &#x8FDE;&#x63A5;list1&#x548C;list2&#x4E2D;&#x7684;&#x5355;&#x8BCD;`join aaa bbb, 11 22 33 -&gt; &quot;aaa11, bbb33, 33&quot;</li>
+<li><code>$(foreach &lt;var&gt;, &lt;list&gt;, &lt;text&gt;)</code> &#x7C7B;&#x4F3C;&#x4E8E;lists:foreach(fun(H) -&gt; ....end, List), text&#x5C31;&#x662F;fun, var&#x662F;H,list&#x662F;List</li>
+<li><p><code>$(if &lt;condition&gt;, &lt;then&gt;, &lt;else&gt;)</code> else&#x53EF;&#x7701;&#x7565;</p>
+</li>
+<li><p><code>$(call &lt;expression&gt;, &lt;param1&gt;,&lt;param2&gt;...)</code><br>param1&#x548C;param2&#x5C31;&#x662F;$(1),$(2).expression&#x662F;&#x5BF9;&#x8FD9;&#x4E9B;&#x53D8;&#x91CF;&#x7684;&#x64CD;&#x4F5C;&#x8868;&#x8FBE;&#x5F0F;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reverse = $(2) $(1)
+$(call reverse, a,b) -&gt; &quot;b a&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>call&#x7684;&#x53D8;&#x91CF;&#x6570;&#x91CF;&#x4E0D;&#x9650;&#x3002;</p>
+<ul>
+<li><code>$(origin &lt;variable&gt;)</code> </li>
+<li><p><code>$(shell cmd)</code>   &#x4F8B;&#x5982; <code>Files = $(shell ls)</code></p>
+</li>
+<li><p><code>$(error msg)</code> <code>$(warning msg)</code>  error&#x4F1A;&#x7EC8;&#x6B62;&#xFF0C; warn&#x4E0D;&#x4F1A; </p>
+</li>
+</ul>
+<h3 id="&#x9690;&#x542B;&#x89C4;&#x5219;">&#x9690;&#x542B;&#x89C4;&#x5219;</h3><p><a href="http://wiki.ubuntu.org.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile:%E9%9A%90%E5%90%AB%E8%A7%84%E5%88%99" target="_blank" rel="external">ubuntu&#x793E;&#x533A;</a><br><a href="https://www.gnu.org/software/make/manual/html_node/Catalogue-of-Rules.html#Catalogue-of-Rules" target="_blank" rel="external">GUN make</a></p>
+<h2 id="somemore">SomeMore</h2><ul>
+<li>&#x9012;&#x5F52;&#x8C03;&#x7528;make&#x7684;&#x65F6;&#x5019;&#x4E00;&#x822C;&#x4F7F;&#x7528;&#x7684;&#x662F;<code>$(MAKE)</code>&#x4EE3;&#x66FF;make&#x3002;&#x5B83;&#x7684;&#x7684;&#x5C55;&#x5F00;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x8C03;&#x7528;make&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x6BD4;&#x5982;<code>/usr/bin/make</code><br>&#x5B83;&#x6709;&#x4E2A;&#x7279;&#x70B9;&#x5C31;&#x662F;&#x4E0D;&#x4F1A;&#x4F20;&#x9012;<code>-t -q -n</code>&#x53C2;&#x6570;&#x3002;&#x8BE6;&#x89C1;<br><a href="http://www.gnu.org/software/make/manual/html_node/MAKE-Variable.html#MAKE-Variable" target="_blank" rel="external">GUN MAKE variable</a></li>
+<li><a href="http://www.gnu.org/software/make/manual/html_node/Options-Summary.html#Options-Summary" target="_blank" rel="external">make options summary</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/04/ssh登陆远程主机/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          ssh登陆远程主机
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/28/ranch笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ranch笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="makefile笔记" data-title="makefile笔记" data-url="http://youthy.github.io/2015/09/29/makefile笔记/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>erlang_mysql_driver　源码分析(二) | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="mysql_conn:start回到mysql:start_link这个最开始这个地方
+1LogFun1 = if LogFun == undefined -&amp;#62; fun log/4; true -&amp;#62; LogFun end,&amp;#10;   case mysql_conn:start(Host, Port, User, Password, Database, LogFun1,&amp;#10;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="erlang_mysql_driver　源码分析(二)">
+<meta property="og:url" content="http://youthy.github.io/2015/06/09/erlang_mysql_driver源码分析(二)/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="mysql_conn:start回到mysql:start_link这个最开始这个地方
+1LogFun1 = if LogFun == undefined -&amp;#62; fun log/4; true -&amp;#62; LogFun end,&amp;#10;   case mysql_conn:start(Host, Port, User, Password, Database, LogFun1,&amp;#10;">
+<meta property="og:updated_time" content="2016-08-18T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="erlang_mysql_driver　源码分析(二)">
+<meta name="twitter:description" content="mysql_conn:start回到mysql:start_link这个最开始这个地方
+1LogFun1 = if LogFun == undefined -&amp;#62; fun log/4; true -&amp;#62; LogFun end,&amp;#10;   case mysql_conn:start(Host, Port, User, Password, Database, LogFun1,&amp;#10;">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">youthy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap，vim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/二次元/" style="font-size: 10px;">二次元</a> <a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/情感/" style="font-size: 10px;">情感</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.win">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">youthy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">youthy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-erlang_mysql_driver源码分析(二)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/09/erlang_mysql_driver源码分析(二)/" class="article-date">
+  	<time datetime="2015-06-09T09:21:15.000Z" itemprop="datePublished">6月 9 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      erlang_mysql_driver　源码分析(二)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/">erlang</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/erlang/">erlang</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mysql_connstart">mysql_conn:start</h1><p>&#x56DE;&#x5230;mysql:start_link&#x8FD9;&#x4E2A;&#x6700;&#x5F00;&#x59CB;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LogFun1 = if LogFun == undefined -&gt; fun log/4; true -&gt; LogFun end,
+   case mysql_conn:start(Host, Port, User, Password, Database, LogFun1,
+		  Encoding, PoolId) of
+{ok, ConnPid} -&gt;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>&#x8D77;&#x521D;&#x4E3A;&#x4E86;&#x4E0D;&#x65AD;&#x5F00;gen_server&#x7684;&#x521B;&#x5EFA;&#xFF0C;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x8FDB;&#x5165;mysql_conn&#x91CC;&#x9762;&#x3002;&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x8FDB;&#x53BB;&#x4E00;&#x7AA5;&#x7A76;&#x7ADF;&#x5566;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start(Host, Port, User, Password, Database, LogFun, Encoding, PoolId) -&gt;
+    ConnPid = self(),
+    Pid = spawn(fun () -&gt;
+			init(Host, Port, User, Password, Database,
+			     LogFun, Encoding, PoolId, ConnPid)
+		end),
+    post_start(Pid, LogFun).
+    --------------------
+post_start(Pid, LogFun) -&gt;
+    receive
+	{mysql_conn, Pid, ok} -&gt;
+	    {ok, Pid};
+	{mysql_conn, Pid, {error, Reason}} -&gt;
+	    {error, Reason};
+	Unknown -&gt;
+	    ?Log2(LogFun, error,
+		 &quot;received unknown signal, exiting: ~p&quot;, [Unknown]),
+	    {error, &quot;unknown signal received&quot;}
+    after 5000 -&gt;
+	    {error, &quot;timed out&quot;}
+    end.</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x91CC;&#x4F5C;&#x8005;&#x5C06;post_start&#x62BD;&#x51FA;&#x6765;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0E;start&#x7C7B;&#x4F3C;&#x8FD8;&#x6709;&#x4E2A;start_link&#x4E5F;&#x9700;&#x8981;&#x8FD9;&#x5757;&#x4EE3;&#x7801;&#xFF0C;&#x4F46;&#x662F;&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;<br>post_start&#x91CC;&#x9762;&#x7684;receive&#x4ECD;&#x7136;&#x662F;&#x7531;mysql:start_link&#x751F;&#x6210;&#x7684;my_sql_game&#x8FD9;&#x4E2A;gen_server &#x5728;&#x8C03;&#x7528;&#xFF0C;&#x800C;&#x4E14;<code>ConnPid = self()</code>&#x8FD9;&#x53E5;&#x4EE3;&#x7801;&#x5F88;&#x6709;&#x6B67;&#x4E49;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;ConnPid&#x4E0E;mysql&#x4E2D;&#x7684;<code>{ok, ConnPid}</code>&#x660E;&#x663E;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x610F;&#x601D;&#x3002;&#x8FD9;&#x91CC;&#x7684;ConnPid&#x5B9E;&#x9645;&#x5C31;&#x662F;gen_server&#x7684;Pid&#xFF0C;&#x7528;&#x6765;&#x4F20;&#x7ED9;init&#x4F5C;&#x4E3A;&#x7236;&#x8FDB;&#x7A0B;&#x53C2;&#x6570;&#xFF0C;&#x5728;&#x5B50;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x7ED9;&#x7236;&#x8FDB;&#x7A0B;&#x53D1;&#x6D88;&#x606F;,&#x6211;&#x89C9;&#x5F97;&#x628A;&#x8FD9;&#x6BB5;post_start&#x653E;&#x5230;mysql&#x4E2D;&#x66F4;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#x4E00;&#x70B9;&#x3002;<br>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x6765;&#xFF0C;start&#x51FD;&#x6570;spawn&#x4E00;&#x4E2A;mysql_conn:init&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#xFF0C;&#x7136;&#x540E;&#x7B49;&#x5F85;&#x6D88;&#x606F;&#xFF0C;&#x5982;&#x679C;&#x6210;&#x529F;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;{ok, Pid}&#xFF0C;&#x8FD9;&#x4E2A;Pid&#x662F;&#x771F;&#x6B63;&#x610F;&#x4E49;&#x7684;ConnPid&#xFF0C;&#x7528;&#x6765;&#x751F;&#x6210;#conn&#x52A0;&#x5165;my_sql_game&#x7684;#state&#x91CC;&#x9762;&#x7684;&#x3002;&#x5176;&#x4ED6;&#x60C5;&#x51B5;&#x4F1A;&#x8FD4;&#x56DE;{error, Reason}.<br>&#x7136;&#x540E;&#x770B;&#x4E00;&#x4E0B;init<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init(Host, Port, User, Password, Database, LogFun, Encoding, PoolId, Parent) -&gt;
+    case mysql_recv:start_link(Host, Port, LogFun, self()) of
+	{ok, RecvPid, Sock} -&gt;
+	    case mysql_init(Sock, RecvPid, User, Password, LogFun) of
+		{ok, Version} -&gt;
+		    Db = iolist_to_binary(Database),
+		    case do_query(Sock, RecvPid, LogFun,
+				  &lt;&lt;&quot;use &quot;, Db/binary&gt;&gt;,
+				  Version) of
+			{error, MySQLRes} -&gt;
+			    ?Log2(LogFun, error,
+				 &quot;mysql_conn: Failed changing to database &quot;
+				 &quot;~p : ~p&quot;,
+				 [Database,
+				  mysql:get_result_reason(MySQLRes)]),
+			    Parent ! {mysql_conn, self(),
+				      {error, failed_changing_database}};
+
+			%% ResultType: data | updated
+			{_ResultType, _MySQLRes} -&gt;
+			    Parent ! {mysql_conn, self(), ok},
+			    case Encoding of
+				undefined -&gt; undefined;
+				_ -&gt;
+				    EncodingBinary = list_to_binary(atom_to_list(Encoding)),
+				    do_query(Sock, RecvPid, LogFun,
+					     &lt;&lt;&quot;set names &apos;&quot;, EncodingBinary/binary, &quot;&apos;&quot;&gt;&gt;,
+					     Version)
+			    end,
+			    State = #state{mysql_version=Version,
+					   recv_pid = RecvPid,
+					   socket   = Sock,
+					   log_fun  = LogFun,
+					   pool_id  = PoolId,
+					   data     = &lt;&lt;&gt;&gt;
+					  },
+			    loop(State)
+		    end;
+		{error, _Reason} -&gt;
+		    Parent ! {mysql_conn, self(), {error, login_failed}}
+	    end;
+	E -&gt;
+	    ?Log2(LogFun, error,
+		 &quot;failed connecting to ~p:~p : ~p&quot;,
+		 [Host, Port, E]),
+	    Parent ! {mysql_conn, self(), {error, connect_failed}}
+    end.</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x4E2A;init&#x6BD4;&#x8F83;&#x957F;&#xFF0C;&#x800C;&#x4E14;&#x91CC;&#x9762;&#x53C8;&#x8C03;&#x4E86;mysql_recv:start_link&#xFF0C;&#x4E4B;&#x524D;&#x4E4B;&#x6240;&#x4EE5;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x5206;&#x6790;&#x8FD9;&#x91CC;&#x9762;&#x4E5F;&#x662F;&#x8FD9;&#x4E2A;&#x539F;&#x56E0;&#xFF0C;&#x5728;start_link&#x91CC;&#x9762;&#x91CD;&#x590D;&#x8C03;&#x7528;&#x5404;&#x4E2A;&#x6A21;&#x5757;&#x7684;start_link&#x5F88;&#x5BB9;&#x6613;&#x7ED5;&#x8FDB;&#x53BB;&#x3002;<br>&#x540C;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x6839;&#x636E;case&#x8BED;&#x53E5;&#xFF0C;&#x77E5;&#x9053;mysql_recv:start_link&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;RecvPid&#x548C;&#x4E00;&#x4E2A;Sock&#xFF0C;&#x53EF;&#x77E5;&#x521B;&#x5EFA;&#x8FDB;&#x7A0B;&#x7684;&#x540C;&#x65F6;&#x76D1;&#x542C;&#x4E86;&#x67D0;&#x4E2A;&#x7AEF;&#x53E3;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6210;&#x529F;&#x4F1A;&#x8FD4;&#x56DE;{error&#xFF0C; Reason}</p>
+<p>&#x4E4B;&#x540E;&#x8FDB;&#x5165;mysql_init&#x51FD;&#x6570;&#x3002;&#x6211;&#x4EEC;&#x5148;&#x4E0D;&#x8981;&#x8FDB;&#x5165;mysql_init&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5B8C;&#x6210;&#x4E86;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;&#x7684;&#x8BA4;&#x8BC1;&#xFF0C;&#x8BA4;&#x8BC1;&#x6210;&#x529F;&#x4F1A;&#x8FD4;&#x56DE;{ok, Version}</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x8981;&#x505A;&#x7684;&#x662F;<br><code>case do_query(Sock, RecvPid, LogFun,
+                  &lt;&lt;&quot;use &quot;, Db/binary&gt;&gt;,
+                  Version) of</code><br>&#x901A;&#x77E5;&#x7AEF;&#x53E3;&#x6211;&#x4EEC;&#x8981;&#x4F7F;&#x7528;&#x54EA;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x6253;&#x5370;&#x51FA;&#x6765;&#x662F;&#x8FD9;&#x6BB5;&#x6587;&#x5B57;<br><code>fetch &lt;&lt;&quot;use aries_game&quot;&gt;&gt;</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;{error, MysqlRes}&#x6216;&#x8005;{ResultType, MysqlRes}.<br>MysqlRes&#x662F;&#x4E00;&#x4E2A;record</p>
+<blockquote>
+<p>-record(mysql_result,<br>    {fieldinfo=[],<br>     rows=[],<br>     affectedrows=0,<br>     error=&quot;&quot;}).</p>
+</blockquote>
+<p>&#x5728;do_query&#x7684;&#x91CC;&#x9762;&#xFF0C;&#x5C06;&#x7AEF;&#x53E3;&#x8FD4;&#x56DE;&#x6765;&#x7684;&#x7ED3;&#x679C;&#x6784;&#x9020;&#x6210;#mysql_result&#x7684;&#x6837;&#x5B50;&#xFF0C;&#x4ED6;&#x5305;&#x542B;&#x4E86;&#x9700;&#x8981;&#x7684;rows&#xFF0C;&#x6216;&#x8005;&#x64CD;&#x4F5C;&#x6240;&#x5F71;&#x54CD;&#x7684;affetedrows&#xFF0C;fieldinfo&#x4EE5;&#x53CA;&#x5982;&#x679C;&#x51FA;&#x9519;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;error.<br>&#x5982;&#x679C;&#x8FD4;&#x56DE;{error, MysqlRes}, &#x6211;&#x4EEC;&#x8C03;&#x7528;&#x63A5;&#x53E3;mysql:get_result_reason(MysqlRes)&#x83B7;&#x53D6;&#x9519;&#x8BEF;&#x539F;&#x56E0;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_result_reason(#mysql_result{error=Reason}) -&gt;
+    Reason.</span><br></pre></td></tr></table></figure></p>
+<p>&#x5E76;&#x901A;&#x77E5;&#x7236;&#x8FDB;&#x7A0B;&#x51FA;&#x9519;&#x4E86;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Parent ! {mysql_conn, self(), {error, failed_changing_database}};</span><br></pre></td></tr></table></figure></p>
+<p>&#x76F8;&#x53CD;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{_ResultType, _MySQLRes} -&gt;
+			    Parent ! {mysql_conn, self(), ok},</span><br></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x51FA;&#x9519;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x544A;&#x8BC9;&#x7236;&#x8FDB;&#x7A0B;ok&#x3002;<br>&#x8FD8;&#x8BB0;&#x5F97;post_start&#x91CC;&#x9762;&#x7684;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_start(Pid, LogFun) -&gt;
+    receive
+	{mysql_conn, Pid, ok} -&gt;
+	    {ok, Pid};
+	{mysql_conn, Pid, {error, Reason}} -&gt;
+	    {error, Reason};</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x5C31;&#x662F;receive&#x6211;&#x4EEC;&#x8FD9;&#x4E9B;&#x6D88;&#x606F;&#x7684;&#x5730;&#x65B9;&#x3002;<br>&#x540E;&#x9762;&#x7684;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EncodingBinary = list_to_binary(atom_to_list(Encoding)),
+		    do_query(Sock, RecvPid, LogFun,
+			     &lt;&lt;&quot;set names &apos;&quot;, EncodingBinary/binary, &quot;&apos;&quot;&gt;&gt;,
+			     Version)</span><br></pre></td></tr></table></figure></p>
+<p>&#x7528;&#x6765;&#x8BBE;&#x5B9A;&#x6211;&#x4EEC;&#x7684;&#x7F16;&#x7801;&#x65B9;&#x5F0F;&#xFF0C;&#x76EE;&#x524D;&#x7528;&#x7684;utf8.<br>&#x4E0B;&#x9762;&#x4E86;&#x89E3;&#x4E0B;do_query&#x7684;&#x7EC6;&#x8282;&#xFF0C;&#x56E0;&#x4E3A;&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x8981;&#x505A;&#x7684;&#x67E5;&#x8BE2;&#xFF0C;&#x63D2;&#x5165;&#x7B49;&#x64CD;&#x4F5C;&#x4E5F;&#x7ECF;&#x8FC7;&#x5B83;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">do_query(Sock, RecvPid, LogFun, Query, Version) -&gt;
+    Query1 = iolist_to_binary(Query),
+    ?Log2(LogFun, debug, &quot;fetch ~p (id ~p)&quot;, [Query1,RecvPid]),
+    Packet =  &lt;&lt;?MYSQL_QUERY_OP, Query1/binary&gt;&gt;,
+    case do_send(Sock, Packet, 0, LogFun) of
+	ok -&gt;
+	    get_query_response(LogFun,RecvPid,
+				    Version);
+	{error, Reason} -&gt;
+	    Msg = io_lib:format(&quot;Failed sending data &quot;
+				&quot;on socket : ~p&quot;,
+				[Reason]),
+	    {error, Msg}
+    end.</span><br></pre></td></tr></table></figure></p>
+<p>Query&#x662F;&#x6211;&#x4EEC;&#x7684;sql&#x8BED;&#x53E5;&#xFF0C;&#x6BD4;&#x5982;&#x4E0A;&#x9762;&#x7684;&lt;&lt;&lt;&quot;use aries_game&quot;&gt;&gt;,<br>Query1&#x4F7F;&#x6211;&#x4EEC;&#x7ED9;Query&#x52A0;&#x4E0A;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x7684;3(?MYSQL_QUERY_OP&#x662F;3&#xFF09;.<br>do_send&#x5C06;packet&#x6253;&#x5305;&#x5E76;&#x53D1;&#x9001;&#xFF0C;&#x5934;&#x4E09;&#x4E2A;&#x5B57;&#x8282;&#x662F;packet&#x5927;&#x5C0F;&#xFF0C;&#x7B2C;4&#x4E2A;&#x5B57;&#x8282;&#x662F;&#x5E8F;&#x5217;&#x53F7;&#xFF0C;&#x4E4B;&#x540E;&#x662F;packet&#x5185;&#x5BB9;&#xFF0C;&#x5982;&#x4E0B;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">do_send(Sock, Packet, SeqNum, _LogFun) when is_binary(Packet), is_integer(SeqNum) -&gt;
+    Data = &lt;&lt;(size(Packet)):24/little, SeqNum:8, Packet/binary&gt;&gt;,
+    gen_tcp:send(Sock, Data).</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x65F6;&#x5019;&#x5411;&#x7AEF;&#x53E3;&#x53D1;&#x9001;&#x4E86;&#x8BF7;&#x6C42;,get_query_response&#x7B49;&#x5F85;&#x56DE;&#x5E94;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_query_response(LogFun, RecvPid, Version) -&gt;
+    case do_recv(LogFun, RecvPid, undefined) of
+	{ok, &lt;&lt;Fieldcount:8, Rest/binary&gt;&gt;, _} -&gt;
+	    case Fieldcount of
+		0 -&gt;
+		    %% No Tabular data
+            &lt;&lt;AffectedRows:8, _Rest2/binary&gt;&gt; = Rest,
+            ?Log2(LogFun, debug, &quot;updated ~p&quot;, [AffectedRows]),
+		    {updated, #mysql_result{affectedrows=AffectedRows}};
+		255 -&gt;
+		    &lt;&lt;_Code:16/little, Message/binary&gt;&gt;  = Rest,
+		    {error, #mysql_result{error=Message}};
+		_ -&gt;
+		    %% Tabular data received
+		    case get_fields(LogFun, RecvPid, [], Version) of
+			{ok, Fields} -&gt;
+			    case get_rows(Fields, LogFun, RecvPid, []) of
+				{ok, Rows} -&gt;
+                    ?Log2(LogFun, debug, &quot;data: field:~p, rows:~p&quot;, [Fields, Rows]),
+                    {data, #mysql_result{fieldinfo=Fields,
+                            rows=Rows}};
+				{error, Reason} -&gt;
+				    {error, #mysql_result{error=Reason}}
+			    end;
+			{error, Reason} -&gt;
+			    {error, #mysql_result{error=Reason}}
+		    end
+	    end;
+	{error, Reason} -&gt;
+	    {error, #mysql_result{error=Reason}}
+    end.</span><br></pre></td></tr></table></figure></p>
+<p>&#x7B2C;&#x4E00;&#x53E5;do_recv&#x4E3B;&#x8981;&#x7528;&#x6765;&#x5BF9;&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x5E27;&#x5E8F;&#x5217;&#x53F7;&#x7684;&#x4E0D;&#x540C;&#x505A;&#x5339;&#x914D;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;undefined&#xFF0C;&#x610F;&#x5728;&#x63A5;&#x53D7;&#x4EFB;&#x4F55;&#x5E27;&#xFF0C;&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5E27;&#x53F7;A&#xFF0C;&#x90A3;&#x4E48;do_recv&#x53EA;&#x63A5;&#x53D7;A+1&#x7684;&#x6D88;&#x606F;&#x3002;&#x5982;&#x4E0B;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> do_recv(LogFun, RecvPid, SeqNum)  when is_function(LogFun);
+				       LogFun == undefined,
+				       SeqNum == undefined -&gt;
+    receive
+        {mysql_recv, RecvPid, data, Packet, Num} -&gt;
+	    {ok, Packet, Num};
+	{mysql_recv, RecvPid, closed, _E} -&gt;
+	    {error, &quot;mysql_recv: socket was closed&quot;}
+    end;
+do_recv(LogFun, RecvPid, SeqNum) when is_function(LogFun);
+				      LogFun == undefined,
+				      is_integer(SeqNum) -&gt;
+    ResponseNum = SeqNum + 1,
+    receive
+        {mysql_recv, RecvPid, data, Packet, ResponseNum} -&gt;
+	    {ok, Packet, ResponseNum};
+	{mysql_recv, RecvPid, closed, _E} -&gt;
+	    {error, &quot;mysql_recv: socket was closed&quot;}
+    end.</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5C06;&#x7AEF;&#x53E3;&#x8FD4;&#x56DE;&#x7684;Packet&#x548C;&#x5E27;&#x5E8F;&#x53F7;&#x8FD4;&#x56DE;&#xFF0C;&#x6216;&#x8005;&#x5E27;&#x5E8F;&#x53F7;+1&#x8FD4;&#x56DE;&#x3002;<br>&#x56DE;&#x5230;<code>case do_recv(LogFun, RecvPid, undefined) of</code><br>&#x63A5;&#x4E0B;&#x6765;&#x662F;&#x5BF9;&#x7ED3;&#x679C;&#x7684;&#x5339;&#x914D;&#xFF0C;Fieldcount&#x4E3A;0&#x8868;&#x793A;&#x6267;&#x884C;&#x7684;&#x662F;update&#x64CD;&#x4F5C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x8BF7;&#x6C42;&#x67D0;&#x4E9B;&#x6570;&#x636E;&#x3002;&#x5982;&#x679C;&#x4E3A;255&#x5219;&#x8868;&#x793A;&#x51FA;&#x9519;&#xFF0C;&#x8FD4;&#x56DE;{error, #mysql_result{error = Message}}.<br>&#x5176;&#x4ED6;&#x6570;&#x503C;&#x65F6;&#xFF0C;&#x4F1A;&#x6267;&#x884C;get_field().<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%% Support for MySQL 4.1.x and 5.x:
+get_fields(LogFun, RecvPid, Res, ?MYSQL_4_1) -&gt;
+    case do_recv(LogFun, RecvPid, undefined) of
+	{ok, Packet, _Num} -&gt;
+        ?Log2(LogFun, debug, &quot;get_field: packet ~p&quot;, [Packet]),
+	    case Packet of
+		&lt;&lt;254:8&gt;&gt; -&gt;
+		    {ok, lists:reverse(Res)};
+		&lt;&lt;254:8, Rest/binary&gt;&gt; when size(Rest) &lt; 8 -&gt;
+		    {ok, lists:reverse(Res)};
+		_ -&gt;
+		    {_Catalog, Rest} = get_with_length(Packet),
+		    {_Database, Rest2} = get_with_length(Rest),
+		    {Table, Rest3} = get_with_length(Rest2),
+		    %% OrgTable is the real table name if Table is an alias
+		    {_OrgTable, Rest4} = get_with_length(Rest3),
+		    {Field, Rest5} = get_with_length(Rest4),
+		    %% OrgField is the real field name if Field is an alias
+		    {_OrgField, Rest6} = get_with_length(Rest5),
+
+		    &lt;&lt;_Metadata:8/little, _Charset:16/little,
+		     Length:32/little, Type:8/little,
+		     _Flags:16/little, _Decimals:8/little,
+		     _Rest7/binary&gt;&gt; = Rest6,
+		    
+		    This = {Table,
+			    Field,
+			    Length,
+			    get_field_datatype(Type)},
+		    get_fields(LogFun, RecvPid, [This | Res], ?MYSQL_4_1)
+	    end;
+	{error, Reason} -&gt;
+	    {error, Reason}
+    end.</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x91CC;&#x63D0;&#x4F9B;&#x4E86;&#x4E24;&#x4E2A;&#x7248;&#x672C;&#x7684;get_field,&#x6211;&#x7684;mysql&#x662F;5.5&#x6240;&#x4EE5;&#x4F1A;&#x5339;&#x914D;&#x5230;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4E0A;&#x3002;<br>get_field&#x4E00;&#x5F00;&#x59CB;&#x4ECD;&#x7136;&#x662F;do_recv&#xFF0C;&#x7528;&#x6765;&#x63D0;&#x53D6;&#x4E00;&#x4E2A;Packet&#x3002;case Packet&#x544A;&#x8BC9;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x5305;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x662F;254&#x7684;&#x65F6;&#x5019;&#x8868;&#x793A;&#x7ED3;&#x679C;&#x5DF2;&#x7ECF;&#x5168;&#x90E8;&#x544A;&#x8BC9;&#x6211;&#x4EEC;&#x4E86;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x4F1A;&#x5C06;Res&#xFF08;result&#xFF09;&#x7FFB;&#x8F6C;&#xFF0C;&#x8FD4;&#x56DE;&#x3002;<br>get_with_length&#x7528;&#x6765;&#x5C06;Packet&#x5207;&#x5272;&#xFF0C;&#x7528;&#x6765;&#x5F97;&#x5230;Table&#xFF0C; Field&#xFF0C; Length&#x7B49;&#x53C2;&#x6570;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_with_length(&lt;&lt;251:8, Rest/binary&gt;&gt;) -&gt;
+    {null, Rest};
+get_with_length(&lt;&lt;252:8, Length:16/little, Rest/binary&gt;&gt;) -&gt;
+    split_binary(Rest, Length);
+get_with_length(&lt;&lt;253:8, Length:24/little, Rest/binary&gt;&gt;) -&gt;
+    split_binary(Rest, Length);
+get_with_length(&lt;&lt;254:8, Length:64/little, Rest/binary&gt;&gt;) -&gt;
+    split_binary(Rest, Length);
+get_with_length(&lt;&lt;Length:8, Rest/binary&gt;&gt;) when Length &lt; 251 -&gt;
+    split_binary(Rest, Length).</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x610F;&#x601D;&#x5927;&#x81F4;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x6765;&#xFF0C;&#x5982;&#x679C;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x662F;251&#xFF0C;&#x5C31;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;null&#x548C;Rest&#xFF0C;&#x5982;&#x679C;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x5C0F;&#x4E8E;251&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x8868;&#x793A;&#x957F;&#x5EA6;&#xFF0C;&#x5C06;Rest&#x5206;&#x5272;&#x6210;{Value&#xFF0C; Rest2}&#xFF0C;Value&#x662F;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684;&#xFF0C;&#x5BF9;&#x5E94;&#x957F;&#x5EA6;&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x5927;&#x4E8E;251&#xFF0C;&#x5206;&#x4E0D;&#x540C;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x7684;2&#x4E2A;4&#x4E2A;&#x6216;&#x8005;8&#x4E2A;&#x5B57;&#x8282;&#x8868;&#x793A;&#x957F;&#x5EA6;&#xFF0C;&#x5C06;Rest&#x5206;&#x5272;&#x3002;&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql:fetch(mysql_game_pool, &quot;select name from player where id = 301&quot;).
+
+=INFO REPORT==== 9-Jun-2015::16:43:29 ===
+I(&lt;0.94.0&gt;:mysql_conn:426) : fetch &lt;&lt;&quot;select name from player where id = 301&quot;&gt;&gt; (id &lt;0.95.0&gt;)
+
+=INFO REPORT==== 9-Jun-2015::16:43:29 ===
+I(&lt;0.94.0&gt;:mysql_conn:726) : get_field: packet &lt;&lt;3,100,101,102,10,97,114,105,
+                                                 101,115,95,103,97,109,101,6,
+                                                 112,108,97,121,101,114,6,112,
+                                                 108,97,121,101,114,4,110,97,
+                                                 109,101,4,110,97,109,101,12,
+                                                 33,0,150,0,0,0,253,5,64,0,0,0&gt;&gt;
+
+=INFO REPORT==== 9-Jun-2015::16:43:29 ===
+I(&lt;0.94.0&gt;:mysql_conn:726) : get_field: packet &lt;&lt;254,0,0,2,0&gt;&gt;
+{data,{mysql_result,[{&lt;&lt;&quot;player&quot;&gt;&gt;,&lt;&lt;&quot;name&quot;&gt;&gt;,150,
+                      &apos;VAR_STRING&apos;}],
+                    [[&lt;&lt;&quot;aaaa&quot;&gt;&gt;]],
+                    0,[]}}
+
+=INFO REPORT==== 9-Jun-2015::16:43:29 ===
+I(&lt;0.94.0&gt;:mysql_conn:770) : get_rows: packet &lt;&lt;4,97,97,97,97&gt;&gt;
+
+=INFO REPORT==== 9-Jun-2015::16:43:29 ===
+I(&lt;0.94.0&gt;:mysql_conn:770) : get_rows: packet &lt;&lt;254,0,0,2,0&gt;&gt;
+(aries_game@192.168.1.85)2&gt; 
+=INFO REPORT==== 9-Jun-2015::16:43:29 ===
+I(&lt;0.94.0&gt;:mysql_conn:667) : data: field:[{&lt;&lt;&quot;player&quot;&gt;&gt;,&lt;&lt;&quot;name&quot;&gt;&gt;,150,
+                                           &apos;VAR_STRING&apos;}], rows:[[&lt;&lt;&quot;aaaa&quot;&gt;&gt;]]</span><br></pre></td></tr></table></figure></p>
+<p>&#x6211;&#x4EEC;&#x6267;&#x884C;&#x4E86;&#x4E00;&#x4E2A;sql&#x8BED;&#x53E5;&#xFF0C;&#x4ECE;player&#x8868;&#x4E2D;&#x9009;&#x51FA;id&#x4E3A;301&#x7684;&#x73A9;&#x5BB6;&#x7684;&#x540D;&#x5B57;&#x3002;<br>&#x7AEF;&#x53E3;&#x56DE;&#x590D;&#x7ED9;&#x6211;&#x4EEC;&#x7684;&#x662F;get_field&#x540E;&#x9762;&#x6253;&#x5370;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x4E32;&#x3002;</p>
+<ol>
+<li>&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x662F;3&#xFF0C;&#x4E0D;&#x662F;254&#x3002;&#x8D70;get_with_length&#x62C6;&#x5206;&#x3002;</li>
+<li>&#x5C06;100,101,102&#x63D0;&#x51FA;&#xFF0C;&#x4E3A;CataLog,&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x3002;</li>
+<li>10&#x8868;&#x793A;&#x63A5;&#x4E0B;&#x6765;&#x53D6;10&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x4E00;&#x76F4;&#x5230;109&#xFF0C;101.&#x4F4D;Database&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x4E0D;&#x9700;&#x8981;</li>
+<li>&#x63A5;&#x4E0B;&#x6765;6&#xFF0C;&#x8868;&#x793A;6&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&lt;<112,108,97,121,101,114>&gt;&#x63D0;&#x53D6;&#x4E3A;Table&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x7684;&#x8868;&#x540D;&#xFF0C;&#x6211;&#x4EEC;&#x5728;shell&#x4E2D;&#x6253;&#x4E00;&#x4E0B;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&lt;&lt;&quot;player&quot;&gt;&gt;&#x3002;&#x8868;&#x793A;&#x6211;&#x4EEC;&#x662F;&#x4ECE;player&#x8868;&#x53D6;&#x5F97;&#x3002;</112,108,97,121,101,114></li>
+<li>&#x63A5;&#x4E0B;&#x6765;6&#x4E2A;&#x5B57;&#x8282;&#x548C;&#x4E0A;&#x9762;&#x4E00;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x3002;</li>
+<li>&#x4E0B;&#x9762;4&#x4E2A;&#x5B57;&#x8282;&lt;<110,97,109,101>&gt;,&#x5C31;&#x662F;&lt;&lt;&quot;name&quot;&gt;&gt;,&#x8868;&#x793A;&#x5B57;&#x6BB5;&#x540D;&#x3002;</110,97,109,101></li>
+<li>&#x540E;&#x9762;4&#x4E2A;&#x5B57;&#x8282;&#x4EE5;&#x4E0A;&#x9762;&#x4E00;&#x4E0B;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x3002;</li>
+<li>&#x4ECE;12&#x5F00;&#x59CB;&#x4E00;&#x76F4;&#x5230;&#x6700;&#x540E;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&lt;<150,0,0,0>&gt;&#x8FD9;&#x56DB;&#x4E2A;&#x8868;&#x793A;&#x957F;&#x5EA6;,&#x6CE8;&#x610F;&#x662F;&#x5C0F;&#x6BB5;&#x5B58;&#x50A8;&#xFF0C;&#x5373;&#x957F;150&#xFF0C;253&#xFF0C;&#x8868;&#x793A;Type.</150,0,0,0></li>
+<li>&#x7D27;&#x7740;&#x7740;&#x7B2C;&#x4E00;&#x4E2A;packet&#x5230;&#x8FBE;&#xFF0C;&#x7531;&#x4E8E;&#x662F;254&#xFF0C;&#x544A;&#x8BC9;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x8BED;&#x53E5;&#x7ED3;&#x679C;&#x5DF2;&#x8FD4;&#x56DE;&#x3002;<br>&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x53EA;&#x77E5;&#x9053;&#x662F;player&#x8868;&#x7684;name&#x5B57;&#x6BB5;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;get_rows&#x5C06;&#x5F97;&#x5230;&#x5177;&#x4F53;&#x7ED3;&#x679C;&#x3002;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_rows(Fields, LogFun, RecvPid, Res) -&gt;
+    case do_recv(LogFun, RecvPid, undefined) of
+	{ok, Packet, _Num} -&gt;
+        ?Log2(LogFun, debug, &quot;get_rows: packet ~p&quot;, [Packet]),
+	    case Packet of
+		&lt;&lt;254:8, Rest/binary&gt;&gt; when size(Rest) &lt; 8 -&gt;
+		    {ok, lists:reverse(Res)};
+		_ -&gt;
+		    {ok, This} = get_row(Fields, Packet, []),
+		    get_rows(Fields, LogFun, RecvPid, [This | Res])
+	    end;
+	{error, Reason} -&gt;
+	    {error, Reason}
+    end.
+
+%% part of get_rows/4
+get_row([], _Data, Res) -&gt;
+    {ok, lists:reverse(Res)};
+get_row([Field | OtherFields], Data, Res) -&gt;
+    {Col, Rest} = get_with_length(Data),
+    This = case Col of
+	       null -&gt;
+		   undefined;
+	       _ -&gt;
+		   convert_type(Col, element(4, Field))
+	   end,
+    get_row(OtherFields, Rest, [This | Res]).</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x5176;&#x4E2D;Field&#x4E3A;[{&lt;&lt;&quot;player&quot;&gt;&gt;,&lt;&lt;&quot;name&quot;&gt;&gt;,150,&apos;VAR_STRING&apos;}],<br>&#x4E0E;&#x4E0A;&#x9762;get_field&#x5927;&#x81F4;&#x76F8;&#x540C;&#xFF0C;row&#x7684;&#x8FD9;&#x4E2A;packet&#x5F88;&#x7B80;&#x5355;&#xFF0C;&lt;<4,97,97,97,97>&gt;&#xFF0C;&#x540E;&#x9762;&#x7684;4&#x4E2A;&#x5B57;&#x8282;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x8981;&#x7684;&#x7ED3;&#x679C;&#x5C31;&#x662F;&lt;&lt;&quot;aaaa&quot;&gt;&gt;.&#x7136;&#x540E;convert_type&#x5C06;&#x7ED3;&#x679C;&#x8F6C;&#x4E3A;&#x5BF9;&#x5E94;&#x7684;&#x5F62;&#x5F0F;<br>convert_type&#x4E0D;&#x8D34;&#x4E86;&#xFF0C;&#xFF48;&#xFF45;&#xFF58;&#xFF4F;&#x8F6C;&#x7801;&#x4F1A;&#x6709;&#x95EE;&#x9898;&#xFF0E;<br>&#x6211;&#x4EEC;&#x7684;&#x7C7B;&#x578B;&#x662F;VAR_STRING&#xFF0C;&#x76F4;&#x63A5;&#x539F;&#x6837;&#x8FD4;&#x56DE;&#x3002;<br>&#x8FD9;&#x6837;&#x56DE;&#x5230;get_query_response&#xFF0C;&#x6211;&#x4EEC;&#x5F97;&#x5230;&#x4E86;&#x9700;&#x8981;&#x7684;&#x7ED3;&#x679C;{data, #mysql_result{}}&#x8FD9;&#x79CD;&#x5F62;&#x5F0F;&#x3002;<br>&#x5728;&#x5F80;&#x4E0A;&#x56DE;&#x5230;init&#x5904;&#xFF0C;&#x6211;&#x4EEC;&#x6267;&#x884C;&#x5B8C;&lt;&lt;&quot;use XXX(&#x6570;&#x636E;&#x5E93;&#x540D;)&quot;&gt;&gt;, &#x8FD4;&#x56DE;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x6267;&#x884C;&lt;&lt;&quot;set names utf8&quot;&gt;&gt;,<br>&#x6700;&#x540E;&#x6784;&#x9020;State<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">State = #state{mysql_version=Version,
+					   recv_pid = RecvPid,
+					   socket   = Sock,
+					   log_fun  = LogFun,
+					   pool_id  = PoolId,
+					   data     = &lt;&lt;&gt;&gt;
+					  },
+			    loop(State)</span><br></pre></td></tr></table></figure></4,97,97,97,97></p>
+<p>&#x5E76;&#x5F00;&#x59CB;loop&#x3002;&#x81F3;&#x6B64;&#x8FD9;&#x4E2A;mysql_conn&#x8FDB;&#x7A0B;&#x521B;&#x5EFA;&#x5B8C;&#x6BD5;&#x3002;</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/10/erlang_mysql_driver源码分析(三)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          erlang_mysql_driver源码分析(三)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/08/erlang_mysql_driver/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">erlang_mysql_driver 源码分析(一)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="erlang_mysql_driver源码分析(二)" data-title="erlang_mysql_driver　源码分析(二)" data-url="http://youthy.github.io/2015/06/09/erlang_mysql_driver源码分析(二)/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

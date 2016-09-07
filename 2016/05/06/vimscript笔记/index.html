@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vimscript笔记 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Remeber :help always be with you  -- albert einstein记住:help　与你同在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vimscript笔记">
+<meta property="og:url" content="http://youthy.github.io/2016/05/06/vimscript笔记/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="Remeber :help always be with you  -- albert einstein记住:help　与你同在">
+<meta property="og:updated_time" content="2016-08-18T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vimscript笔记">
+<meta name="twitter:description" content="Remeber :help always be with you  -- albert einstein记住:help　与你同在">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">youthy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap，vim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/二次元/" style="font-size: 10px;">二次元</a> <a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/情感/" style="font-size: 10px;">情感</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.win">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">youthy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">youthy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-vimscript笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/06/vimscript笔记/" class="article-date">
+  	<time datetime="2016-05-06T07:33:21.000Z" itemprop="datePublished">5月 6 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vimscript笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Remeber <code>:help</code> always be with you  -- albert einstein<br>&#x8BB0;&#x4F4F;<code>:help</code>&#x3000;&#x4E0E;&#x4F60;&#x540C;&#x5728;</p>
+</blockquote>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#first-of-all">First of all</a></li>
+<li><a href="#echo-echom-&#x6253;&#x5370;&#x4FE1;&#x606F;&#x5E2E;&#x52A9;&#x8C03;&#x8BD5;">echo echom  &#x6253;&#x5370;&#x4FE1;&#x606F;&#x5E2E;&#x52A9;&#x8C03;&#x8BD5;</a></li>
+<li><a href="#&#x6CE8;&#x91CA;">&#x6CE8;&#x91CA;</a></li>
+<li><a href="#&#x5E03;&#x5C14;&#x9009;&#x9879;">(&#x5E03;&#x5C14;)&#x9009;&#x9879;</a></li>
+<li><a href="#map-&#x6620;&#x5C04;&#x6620;&#x5C04;">map &#x6620;&#x5C04;!&#x6620;&#x5C04;!</a></li>
+<li><a href="#leader&#x6309;&#x952E;">leader&#x6309;&#x952E;</a></li>
+<li><a href="#iabbrev">iabbrev</a></li>
+<li><a href="#autocmd-&#x81EA;&#x52A8;&#x547D;&#x4EE4;">autocmd &#x81EA;&#x52A8;&#x547D;&#x4EE4;</a></li>
+<li><a href="#operator_pending">operator_pending</a></li>
+<li><a href="#normal">:normal</a></li>
+<li><a href="#execute">:execute</a></li>
+<li><a href="#set-statusline">set statusline</a></li>
+<li><a href="#let-&#x53D8;&#x91CF;">let  &#x53D8;&#x91CF;</a></li>
+<li><a href="#&#x5BC4;&#x5B58;&#x5668;">&#x5BC4;&#x5B58;&#x5668;</a></li>
+<li><a href="#&#x7BA1;&#x9053;">&#x7BA1;&#x9053;</a></li>
+<li><a href="#if">if</a><ul>
+<li><a href="#&#x6BD4;&#x8F83;">&#x6BD4;&#x8F83;</a></li>
+</ul>
+</li>
+<li><a href="#&#x51FD;&#x6570;">&#x51FD;&#x6570;</a><ul>
+<li><a href="#&#x53C2;&#x6570;">&#x53C2;&#x6570;</a></li>
+<li><a href="#&#x53EF;&#x53D8;&#x53C2;&#x6570;">&#x53EF;&#x53D8;&#x53C2;&#x6570;</a></li>
+<li><a href="#&#x547D;&#x540D;&#x7A7A;&#x95F4;">&#x547D;&#x540D;&#x7A7A;&#x95F4;</a></li>
+</ul>
+</li>
+<li><a href="#&#x5B57;&#x7B26;&#x4E32;">&#x5B57;&#x7B26;&#x4E32;</a><ul>
+<li><a href="#&#x8FDE;&#x63A5;&#x7B26;">&#x8FDE;&#x63A5;&#x7B26;</a></li>
+<li><a href="#&#x5B57;&#x7B26;&#x4E32;&#x51FD;&#x6570;">&#x5B57;&#x7B26;&#x4E32;&#x51FD;&#x6570;</a></li>
+</ul>
+</li>
+<li><a href="#&#x5217;&#x8868;">&#x5217;&#x8868;</a></li>
+<li><a href="#&#x5FAA;&#x73AF;">&#x5FAA;&#x73AF;</a><ul>
+<li><a href="#for">for</a></li>
+</ul>
+</li>
+<li><a href="#dict">dict</a></li>
+<li><a href="#&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;">&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;</a><ul>
+<li><a href="#deepcopy-&#x4E0E;copy">deepcopy &#x4E0E;copy</a></li>
+</ul>
+</li>
+<li><a href="#&#x8DEF;&#x5F84;">&#x8DEF;&#x5F84;</a></li>
+<li><a href="#regex-&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;">Regex &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</a></li>
+</ul>
+<!-- tocstop -->
+<h3 id="first-of-all">First of all</h3><p>&#x9996;&#x5148;<code>:help echo/function/....</code>&#x3000;help&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x8BCD;&#x7684;&#x5E2E;&#x52A9;.&#x9996;&#x5148;&#x8981;&#x4E60;&#x60EF;&#x4F7F;&#x7528;&#x5B83;</p>
+<h3 id="echo-echom-&#x6253;&#x5370;&#x4FE1;&#x606F;&#x5E2E;&#x52A9;&#x8C03;&#x8BD5;">echo echom  &#x6253;&#x5370;&#x4FE1;&#x606F;&#x5E2E;&#x52A9;&#x8C03;&#x8BD5;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo &quot;test&quot;
+:echo &quot;test2&quot;
+:messages</span><br></pre></td></tr></table></figure>
+<p>test2&#x5728;message&#x4E2D;&#xFF0C;&#x800C;test&#x4E0D;&#x5728;&#x3002;<br>echom &#x4E3B;&#x8981;&#x7528;&#x6765;&#x8C03;&#x8BD5;&#x3002;</p>
+<h3 id="&#x6CE8;&#x91CA;">&#x6CE8;&#x91CA;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot; &#x8FD9;&#x662F;&#x6CE8;&#x91CA;</span><br></pre></td></tr></table></figure>
+<h3 id="&#x5E03;&#x5C14;&#x9009;&#x9879;">(&#x5E03;&#x5C14;)&#x9009;&#x9879;</h3><p><code>:set</code> &#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x5185;&#x7F6E;&#x7684;&#x9009;&#x9879;&#x3002;&#x6709;&#x7684;&#x662F;&#x5E03;&#x5C14;&#x9009;&#x9879;&#xFF0C;&#x6709;&#x7684;&#x4E0D;&#x662F; see <code>:help set</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set number
+:set nonumber
+:set number!
+:set number?
+:set number numberwidth=4
+:set omnifunc=XXX#complete</span><br></pre></td></tr></table></figure></p>
+<p>number&#x662F;&#x4E00;&#x4E2A;&#x5E03;&#x5C14;&#x9009;&#x9879;&#x3002;&#x4EFB;&#x4F55;&#x5E03;&#x5C14;&#x9009;&#x9879;&#x90FD;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>set</code> ,<code>set no(Bool)</code>, &#x8BBE;&#x7F6E;&#x5F00;&#x542F;&#x5173;&#x95ED;<code>set Bool!</code>&#x5207;&#x6362;&#x5F00;&#x5173;&#x72B6;&#x6001;.<br><code>set {Option}?</code> &#x7528;&#x6765;&#x67E5;&#x770B;&#x5F53;&#x524D;&#x503C;.<br>&#x6709;&#x4E9B;&#x9009;&#x9879;&#x53EF;&#x4EE5;&#x8D4B;&#x503C;.&#x591A;&#x9009;&#x9879;&#x7528;&#x7A7A;&#x683C;&#x9694;&#x5F00;&#x4E00;&#x6B21;&#x8D4B;&#x503C;<br>number&#x662F;&#x7528;&#x6765;&#x663E;&#x793A;&#x884C;&#x53F7;&#x7684;&#x5E03;&#x5C14;&#x503C;<br>omnifunc &#x662F;&#x8865;&#x5168;&#x51FD;&#x6570;<br>&#x5728;&#x811A;&#x672C;&#x4E2D;&#x5982;&#x679C;&#x8981;&#x5F15;&#x7528;&#x67D0;&#x4E2A;&#x9009;&#x9879;&#x4F7F;&#x7528;<code>&amp;</code>, &#x6BD4;&#x5982;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if &amp;filetype == &quot;vim&quot;</span><br></pre></td></tr></table></figure></p>
+<p>&#x5224;&#x65AD;&#x5F53;&#x524D;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x662F;&#x5426;&#x662F;vimscript</p>
+<h3 id="map-&#x6620;&#x5C04;&#x6620;&#x5C04;">map &#x6620;&#x5C04;!&#x6620;&#x5C04;!</h3><p><code>:help map-commands</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:map - x  //  &#x4EFB;&#x4F55;&#x6A21;&#x5F0F;&#x4E0B;&#x5C06;&apos;-&apos;&#x6620;&#x5C04;&#x4E3A;&apos;x&apos;
+:map &lt;space&gt; x
+:map &lt;c-d&gt; x
+:nmap - x
+:vmap - x
+:imap - x
+:noremap - x
+:noremap \ -</span><br></pre></td></tr></table></figure></p>
+<p>map&#x901A;&#x7528;&#x4E8E;&#x6240;&#x6709;&#x6A21;&#x5F0F;&#x4E0B;&#x3002;nmap,vmap, imap&#x5206;&#x522B;&#x6620;&#x5C04;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x6A21;&#x5F0F;&#x4E0B;&#x3002;<br>noremap&#x4E0D;&#x5B58;&#x5728;&#x9012;&#x5F52;&#x98CE;&#x9669;&#x3002;&#x4EFB;&#x4F55;&#x65F6;&#x5019;&#x90FD;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x3002;<strong>&#x5BF9;&#xFF0C;&#x4EFB;&#x4F55;&#x65F6;&#x5019;</strong></p>
+<h3 id="leader&#x6309;&#x952E;">leader&#x6309;&#x952E;</h3><p><code>:help mapleader</code><br>&#x5F88;&#x591A;&#x63D2;&#x4EF6;&#x4E2D;&#x5B58;&#x5728;&#x5404;&#x79CD;&#x6620;&#x5C04;&#x90FD;&#x7528;&#x7684;<leader>&#x8FD9;&#x4E2A;&#x6309;&#x952E;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:let mapleader=&quot;-&quot;
+:nnoremap &lt;leader&gt;d dd
+let maplocalleader = &quot;\\&quot;
+:noremap &lt;buffer&gt; &lt;localleader&gt;d dd</span><br></pre></td></tr></table></figure></leader></p>
+<p>leader &#x9ED8;&#x8BA4;&#x4E3A;<code>\</code>, &#x5982;&#x679C;&#x4FEE;&#x6539;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>echo mapleader</code>&#x67E5;&#x770B;<br>localleader &#x53EA;&#x9488;&#x5BF9;&#x67D0;&#x4E2A;buffer</p>
+<blockquote>
+<p>&#x9664;&#x4E86;map &#x8FD8;&#x6709;&#x5404;&#x79CD;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x6307;&#x5B9A;<code>&lt;buffer&gt;</code>&#x7684;&#x8BBE;&#x7F6E;&#x3002;&#x6BD4;&#x5982;autocmd,&#x52A0;&#x4E0A;buffer&#x6BD4;&#x8F83;&#x5B89;&#x5168;&#x3002;</p>
+</blockquote>
+<p>&#x540C;&#x6837;&#x6709;&#x7684;&#x9009;&#x9879;&#x4E5F;&#x652F;&#x6301;<code>:setlocal number</code></p>
+<h3 id="iabbrev">iabbrev</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:iabbrev waht what</span><br></pre></td></tr></table></figure>
+<p>&#x81EA;&#x52A8;&#x66FF;&#x6362;&#x3002;&#x3000;&#x53EF;&#x4EE5;&#x5C06;&#xFF57;&#xFF41;&#xFF48;&#xFF54;&#x3000;&#x66FF;&#x6362;&#x4E3A;&#xFF57;&#xFF48;&#xFF41;&#xFF54;<br>iabbrev&#x662F;&#x7ED3;&#x675F;insert mode&#x65F6;&#x53D1;&#x751F;&#x7684;&#x3002; &#x5982;&#x679C;what&#x524D;&#x540E;&#x6709;&#x522B;&#x7684;&#x5219;&#x4E0D;&#x4F1A;&#x53D1;&#x751F;&#x66FF;&#x6362;.&#x8FD9;&#x70B9;&#x4E0E;<code>inoremap waht what</code>&#x4E0D;&#x540C;<br>&#x540C;&#x6837;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;<code>:iabbrev &lt;buffer&gt; XXXX</code>&#x3000;&#x53EA;&#x5BF9;&#x5F53;&#x524D;buffer&#x751F;&#x6548;</p>
+<h3 id="autocmd-&#x81EA;&#x52A8;&#x547D;&#x4EE4;">autocmd &#x81EA;&#x52A8;&#x547D;&#x4EE4;</h3><p><code>:help autocmd</code><br><code>:help Event</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:autocmd BufNewFild,BufRead *.html :normal gg=G
+         &#x4E8B;&#x4EF6;                &#x6A21;&#x5F0F;   &#x6267;&#x884C;&#x547D;&#x4EE4;</span><br></pre></td></tr></table></figure></p>
+<p><code>autocmd Event File Command</code>  &#x5BF9;File&#x6587;&#x4EF6;&#x63A5;&#x6536;&#x5230;event&#x4E8B;&#x4EF6;&#x540E;&#x3000;&#x89E6;&#x53D1;command</p>
+<p>Event&#x540E;&#x9762;&#x7684;&#x6A21;&#x5F0F;&#x6BCF;&#x4E2A;pattern&#x4E0D;&#x4E00;&#x6837;&#x3002;<br>&#x6BD4;&#x5982; <code>:autocmd FileType vim call SomeFun()</code><br><strong>&#x8FD9;&#x91CC;&#x6709;&#x4E2A;&#x5371;&#x9669;&#x7684;&#x5730;&#x65B9;</strong><br>&#x5355;&#x7EAF;&#x7684;<code>autocmd</code> &#x5E76;&#x4E0D;&#x4F1A;&#x8986;&#x76D6;&#x4E4B;&#x524D;&#x7684;&#x547D;&#x4EE4;&#x3002;&#x5982;&#x679C;&#x540C;&#x4E00;&#x4E2A;<code>autocmd</code>&#x52A0;&#x8F7D;&#x591A;&#x6B21;&#x4ED6;&#x4EEC;&#x4F1A;&#x540C;&#x65F6;&#x5B58;&#x5728;&#x4E5F;&#x5C31;&#x662F;&#x53EF;&#x80FD;&#x5BF9;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x6267;&#x884C;&#x591A;&#x6B21;<code>SomeFun()</code>.<br>&#x8FD9;&#x91CC;vim&#x6709;&#x4E00;&#x79CD;&#x81EA;&#x52A8;&#x547D;&#x4EE4;&#x7EC4;&#x7684;&#x65B9;&#x6CD5;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup
+:    autocmd BufWrite * :echom &quot;Foo&quot;
+:    autocmd BufWrite * :echom &quot;Bar&quot;
+:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>&#x4E0A;&#x9762;&#x5C06;&quot;Foo&quot;, &quot;Bar&quot;&#x4E24;&#x4E2A;&#x4E8B;&#x4EF6;&#x5F52;&#x5230;testgroup&#x7EC4;&#x4E2D;&#x3002;&#x8FD9;&#x65F6;testgroup&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x4E2A;<code>autocmd</code>&#x3000;&#x540C;&#x6837;&#x591A;&#x6B21;&#x6267;&#x884C;testgroup&#x4E5F;&#x4F1A;&#x9020;&#x6210;&#x4E0A;&#x9762;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x540C;&#x6837;&#xFF0C;&#x5982;&#x679C;&#x4E4B;&#x540E;&#x5728;&#x6267;&#x884C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup
+:    autocmd BufWrite * :echom &quot;Baz&quot;
+:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>&quot;Foo&quot;, &quot;Bar&quot;&#x5E76;&#x6CA1;&#x6709;&#x6E05;&#x9664;.&#x800C;&#x662F;&#x5C06;&quot;Baz&quot;&#x5408;&#x5E76;&#x5230;&#x4E86;testgroup&#x4E2D;.&#x8FD9;&#x6837;&#x6CA1;&#x6709;&#x89E3;&#x51B3;&#x591A;&#x6B21;&#x8BFB;&#x53D6;&#x4E8B;&#x4EF6;&#x9020;&#x6210;&#x91CD;&#x590D;&#x8C03;&#x7528;&#x7684;&#x95EE;&#x9898;&#x3002;<br>&#x89E3;&#x51B3;&#x7684;&#x529E;&#x6CD5;&#x662F;&#x5728;&#x7EC4;&#x5F00;&#x59CB;&#x7684;&#x5730;&#x65B9;&#x8C03;&#x7528; <code>autocmd!</code>&#x6765;&#x6E05;&#x9664;&#x8FD9;&#x4E2A;&#x7EC4;&#x7684;&#x4E8B;&#x4EF6;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup
+:    autocmd!
+:    autocmd BufWrite * :echom &quot;Cats&quot;
+:    autocmd XXXXX....
+:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x6837;&#x89E3;&#x51B3;&#x4E86;&#x591A;&#x6B21;&#x91CD;&#x590D;&#x8C03;&#x7528;&#x7684;&#x95EE;&#x9898;</p>
+<h3 id="operator_pending">operator_pending</h3><p><code>:onoremap p ic</code></p>
+<p>w, p, t &#x5404;&#x79CD;&#x5B9A;&#x4F4D;&#x8BCD;&#x3000;&#xFF4F;&#xFF4E;&#xFF4F;&#xFF52;&#xFF45;&#xFF4D;&#xFF41;&#xFF50;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x5B9A;&#x4F4D;&#x8BCD;&#x6620;&#x5C04;</p>
+<h3 id="normal">:normal</h3><p><code>:normal gg</code><br><code>:normal</code> &#x540E;&#x9762;&#x4F1A;&#x8DDF;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x76F8;&#x5F53;&#x4E8E;&#x5728;&#xFF4E;&#xFF4F;&#xFF52;&#xFF4D;&#xFF41;&#xFF4C;&#x6A21;&#x5F0F;&#x4E0B;&#x6309;&#x4E0B;&#x8FD9;&#x4E9B;&#x6309;&#x952E;</p>
+<p>&#x5F53;&#x7136;&#x6C38;&#x8FDC;&#x4E0D;&#x8981;&#x7528;normal &#x800C;&#x662F;&#x7528;<code>normal!</code> &#x540E;&#x8005;&#x65E0;&#x89C6;&#x6620;&#x5C04;&#x3002;&#x56E0;&#x4E3A;&#x4F60;&#x6C38;&#x8FDC;&#x4E0D;&#x77E5;&#x9053;&#x7528;&#x6237;&#x628A;&#x6309;&#x952E;&#x6620;&#x5C04;&#x6210;&#x4E86;&#x4EC0;&#x4E48;</p>
+<h3 id="execute">:execute</h3><p>`:execute &quot;:normal!  gg&quot;</p>
+<p>execute &#x540E;&#x9762;&#x8DDF;&#x811A;&#x672C;&#x3002;</p>
+<p>&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x76F4;&#x63A5;&#x7528;normal!,&#x800C;&#x662F;&#x7528;execute&#x5462;<br>&#x56E0;&#x4E3A;normal&#x4E0D;&#x80FD;&#x8BC6;&#x522B;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x3002;&#x6BD4;&#x5982;<cr>&#x56DE;&#x8F66;&#x7B26;&#x7B49;&#x6240;&#x4EE5;&#x4E00;&#x822C;&#x8981;&#x5305;&#x4E2A;execute&#x547D;&#x4EE4;&#x3002;<br>&#x6BD4;&#x5982;<code>:normal! a\&lt;cr&gt;</code> &#x6211;&#x4EEC;&#x8BBE;&#x60F3;&#x5148;&#x6309;&#x4E0B;a&#x8FDB;&#x5165;insert&#x6A21;&#x5F0F;&#x7136;&#x540E;&#x8F93;&#x51FA;&#x56DE;&#x8F66;&#x7B26;&#x6362;&#x884C;.&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x8FDB;&#x5165;&#x63D2;&#x5165;&#x6A21;&#x5F0F;&#x540E;&#xFF0C;&#x76F4;<br>&#x63A5;&#x5C06;<code>\&lt;cr&gt;</code>&#x8F93;&#x5165;&#x5230;&#x4E86;buffer&#x4E2D;.&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;`execute &quot;normal! a\<cr>&quot;&#x5B8C;&#x6210;&#x8FD9;&#x4E2A;&#x52A8;&#x4F5C;</cr></cr></p>
+<h3 id="set-statusline">set statusline</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set statusline=%f\ -\ %y
+:set statusline+=%=
+:set statusline+=%L</span><br></pre></td></tr></table></figure>
+<p>&#x4FEE;&#x6539;&#x72B6;&#x6001;&#x6761;&#x663E;&#x793A;&#x5185;&#x5BB9;&#x3002;&#x7C7B;&#x4F3C;printf %f &#x662F;&#x6587;&#x4EF6;&#x540D;%y&#x662F;&#x6587;&#x4EF6;&#x7C7B;&#x578B; %=&#x8868;&#x793A;&#x540E;&#x9762;&#x7684;&#x53F3;&#x5BF9;&#x9F50;%L&#x663E;&#x793A;&#x603B;&#x884C;&#x6570;&#x3002;</p>
+<h3 id="let-&#x53D8;&#x91CF;">let  &#x53D8;&#x91CF;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:let foo=&quot;bar&quot;
+:echo foo  //&#x663E;&#x793A;&#xFF42;&#xFF41;&#xFF52;
+:set number
+:echo &amp;number //1
+:let number = 100
+:echo number //100
+:let &amp;number=&amp;number-1
+:echo &amp;number //0&#x3000;number&#x662F;&#x662F;&#x5426;&#x663E;&#x793A;&#x884C;&#x53F7;&#x7684;&#x5E03;&#x5C14;&#x503C;</span><br></pre></td></tr></table></figure>
+<p>let &#x7528;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;,&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x53EF;&#x4EE5;&#x4E0E;&#x67D0;&#x4E2A;&#x9009;&#x9879;&#x540C;&#x540D;(set), &#x53EA;&#x4E0D;&#x8FC7;&#x9009;&#x9879;&#x7684;&#x5F15;&#x7528;&#x9700;&#x8981;&#x524D;&#x9762;&#x52A0;<code>&amp;</code><br>set &#x53EA;&#x80FD;&#x7ED9;&#x9009;&#x9879;&#x8D4B;&#x503C;&#x5E38;&#x91CF;&#x503C;<br>&#x800C;let &#x53EF;&#x4EE5;&#x7528;&#x53D8;&#x91CF;&#x7ED9;&#x53D8;&#x91CF;&#x8D4B;&#x503C;,&#x5982;&#x4E0A;&#x9762;&#x7684;<code>&amp;number</code><br><code>:let &amp;l:number = 100</code>&#x53EF;&#x4EE5;&#x7ED9;&#x672C;&#x5730;&#x53D8;&#x91CF;&#x8D4B;&#x503C;&#x800C;&#x4E0D;&#x5F71;&#x54CD;&#x5176;&#x4ED6;buffer</p>
+<h3 id="&#x5BC4;&#x5B58;&#x5668;">&#x5BC4;&#x5B58;&#x5668;</h3><p><code>:register</code> &#x67E5;&#x770B;&#x6240;&#x6709;&#x5BC4;&#x5B58;&#x5668;&#x5185;&#x5BB9;<br><code>&quot;ap</code> a&#x662F;&#x5BC4;&#x5B58;&#x5668;&#x540D;&#x5B57;. &#x8868;&#x793A;&#x5C06;a&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x7C98;&#x8D34;&#x5230;&#x6B64;&#x5904;<br><code>echo @a</code> &#x6253;&#x5370;a&#x4E2D;&#x7684;&#x5185;&#x5BB9;<br><code>let @a=&quot;test&quot;</code> &#x4FEE;&#x6539;a&#x4E2D;&#x5185;&#x5BB9;<br><code>&quot;</code>&#x5BC4;&#x5B58;&#x5668;&#x662F;&#x4E3A;&#x6307;&#x5B9A;&#x5BC4;&#x5B58;&#x5668;&#x6240;&#x6709;&#x4E3A;&#x6307;&#x5B9A;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x590D;&#x5236;&#x64CD;&#x4F5C;,&#x5185;&#x5BB9;&#x90FD;&#x4F1A;&#x5199;&#x5165;&#x8FD9;&#x91CC;</p>
+<h3 id="&#x7BA1;&#x9053;">&#x7BA1;&#x9053;</h3><p><code>:echo &quot;haha&quot; | echo &quot;heihei</code></p>
+<h3 id="if">if</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:if &quot;20haha&quot;
+:   echo &quot;true&quot;
+:endif
+
+:if &quot;haha20&quot;
+:   echo &quot;true&quot;
+:else
+:   echo &quot;false&quot;
+:endif</span><br></pre></td></tr></table></figure>
+<p>&#x7B2C;&#x4E00;&#x4E2A;&#x4F1A;&#x663E;&#x793A;&#xFF54;&#xFF52;&#xFF55;&#xFF45;&#x3000;&#x7B2C;&#x4E8C;&#x4E2A;&#x662F;&#xFF46;&#xFF41;&#xFF4C;&#xFF53;&#xFF45;&#x3000;<br>&#x56E0;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x5728;&#x5F3A;&#x5236;&#x8F6C;&#x6362;&#x65F6;&#x7B2C;&#x4E00;&#x4E2A;&#x662F;&#x6570;&#x5B57;&#x4F1A;&#x8F6C;&#x5316;&#x4E3A;&#x76F8;&#x5E94;&#x7684;&#x6570;&#x5B57;&#x3002;&#x5426;&#x5219;&#x662F;&#xFF10;</p>
+<h4 id="&#x6BD4;&#x8F83;">&#x6BD4;&#x8F83;</h4><p>&#x4E0D;&#x80FD;&#x5B8C;&#x5168;&#x4FE1;&#x4EFB;<code>==</code><br>&#x56E0;&#x4E3A;vim&#x7684;&#x5927;&#x5C0F;&#x5199;&#x654F;&#x611F;&#x65F6;&#x7528;&#x6237;&#x8BBE;&#x7F6E;&#x7684;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase
+:if &quot;foo&quot; == &quot;FOO&quot;</span><br></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x4E2A;&#x8BED;&#x53E5;&#x771F;&#x5047;&#x53D6;&#x51B3;&#x4E8E;ignorecase&#x7684;&#x8BBE;&#x7F6E;&#x3002;<br>&#x66FF;&#x4EE3;&#x54C1;<br><code>==?</code> &#x5927;&#x5C0F;&#x5199;&#x4E0D;&#x654F;&#x611F;&#x6BD4;&#x8F83;<br><code>==#</code> &#x5927;&#x5C0F;&#x5199;&#x654F;&#x611F;&#x6BD4;&#x8F83;</p>
+<h3 id="&#x51FD;&#x6570;">&#x51FD;&#x6570;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:function Test()
+:   XXXXX
+:endfunction
+:function s:testb()
+:   echom &quot;script test&quot;
+:endfunction
+:call Test()</span><br></pre></td></tr></table></figure>
+<p><strong>&#x6CA1;&#x6709;&#x9650;&#x5236;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x51FD;&#x6570;&#x5FC5;&#x987B;&#x4EE5;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#x5F00;&#x5934;</strong><br>&#x811A;&#x672C;&#x5185;&#x7684;&#x79C1;&#x6709;&#x51FD;&#x6570;&#x4EE5;<code>s:</code>&#x5F00;&#x5934;<br>&#x51FD;&#x6570;&#x6CA1;&#x6709;&#x663E;&#x793A;&#x6307;&#x5B9A;<code>return XX</code>&#x5219;&#x9ED8;&#x8BA4;&#x8FD4;&#x56DE;0</p>
+<h4 id="&#x53C2;&#x6570;">&#x53C2;&#x6570;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:function EchoTest(name)
+:   echo a:name
+:endfunction</span><br></pre></td></tr></table></figure>
+<p>&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x603B;&#x8981;&#x52A0;a&#x8FD9;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x5426;&#x5219;&#x4F1A;&#x63D0;&#x793A;&#x627E;&#x4E0D;&#x5230;</p>
+<h4 id="&#x53EF;&#x53D8;&#x53C2;&#x6570;">&#x53EF;&#x53D8;&#x53C2;&#x6570;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:function Test(...)  // &#x5047;&#x5982; call Test(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)
+:   echo a:0         // 3 &#x53C2;&#x6570;&#x4E2A;&#x6570;
+:   echo a:1         // &quot;a&quot;
+:   echo a:000       // [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;] 000&#x6307;&#x53C2;&#x6570;&#x5217;&#x8868;.&#x4E0D;&#x80FD;&#x7528;echom&#x8F93;&#x51FA;&#x53EA;&#x80FD;&#x7528;echo
+:endfunction</span><br></pre></td></tr></table></figure>
+<p><code>:call Test(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code><br>a:0 &#x6307;&#x7684;&#x662F;&#x53C2;&#x6570;&#x6570;&#x91CF;&#x3002; a:1 &#x662F; &quot;a&quot;.&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;</p>
+<h4 id="&#x547D;&#x540D;&#x7A7A;&#x95F4;">&#x547D;&#x540D;&#x7A7A;&#x95F4;</h4><blockquote>
+<p>|buffer-variable|    b:      Local to the current buffer.<br>|window-variable|    w:      Local to the current window.<br>|tabpage-variable|   t:      Local to the current tab page.<br>|global-variable|    g:      Global.<br>|local-variable|     l:      Local to a function.<br>|script-variable|    s:      Local to a |:source|&apos;ed Vim script.<br>|function-argument|  a:      Function argument (only inside a function).<br>|vim-variable|         v:      Global, predefined by Vim.</p>
+</blockquote>
+<p>&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x53EF;&#x4EE5;&#x5F53;&#x505A;dict&#x4F7F;&#x7528;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for k in keys(b:)
+    unlet b:[k]
+endfor</span><br></pre></td></tr></table></figure></p>
+<p>&#x53EF;&#x4EE5;&#x6DF7;&#x5408;&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x548C;&#x56FA;&#x5B9A;&#x53C2;&#x6570;<br><code>:function Test(a, ...)</code></p>
+<p>&#x4E0D;&#x80FD;&#x5BF9;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x6539;&#x53D8;&#x8D4B;&#x503C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:function Test(foo)
+:   let a:foo=&quot;change&quot; //&#x8FD9;&#x6837;&#x505A;&#x4F1A;&#x62A5;&#x9519;
+:   let tmp=a:foo      // &#x8FD9;&#x6837;&#x624D;&#x53EF;&#x4EE5;
+:   let tmp=&quot;change&quot;
+:endfunction</span><br></pre></td></tr></table></figure></p>
+<h3 id="&#x5B57;&#x7B26;&#x4E32;">&#x5B57;&#x7B26;&#x4E32;</h3><h4 id="&#x8FDE;&#x63A5;&#x7B26;">&#x8FDE;&#x63A5;&#x7B26;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo &quot;haha&quot;.&quot;heihei&quot;</span><br></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x9762;&#x8F93;&#x51FA;&quot;hahaheihei&quot;</p>
+<h4 id="&#x5B57;&#x7B26;&#x4E32;&#x51FD;&#x6570;">&#x5B57;&#x7B26;&#x4E32;&#x51FD;&#x6570;</h4><p><code>:help function-list</code> &#x67E5;&#x770B;&#x6240;&#x6709;&#x51FD;&#x6570;&#x5206;&#x7C7B;&#x5217;&#x8868;</p>
+<p><code>strlen(&quot;string&quot;)</code><br><code>len(&quot;string&quot;)</code><br><code>echo split(&quot;one two&quot;)</code><br><code>echo split(&quot;one,two&quot;,&quot;,&quot;)</code><br><code>echo join([&quot;one&quot;,&quot;two&quot;], &quot;,&quot;)</code><br><code>echo tolower(&quot;BIG&quot;)</code><br><code>echo toupper(&quot;low&quot;)</code></p>
+<h3 id="&#x5217;&#x8868;">&#x5217;&#x8868;</h3><ol>
+<li>&#x6709;&#x5E8F;&#xFF0C;&#x5F02;&#x8D28;</li>
+<li><p>&#x7D22;&#x5F15;&#x4ECE;0&#x5F00;&#x59CB; </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo [1,2,3][0] // 1
+:echo [1,2,3][-1] //3
+:echo &quot;abc&quot;[1] // b
+:echo &quot;abc&quot;[-1] // &#x65E0;&#x6548;&#x3002;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x5207;&#x5272;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo [1,2,3][:1] // [1,2]
+:echo [1,2,3][1:] // [2,3]
+:echo [1,2,3][:1000] // [1,2,3] &#x53EF;&#x4EE5;&#x8D8A;&#x754C;
+:echo [1,2,3,4][-2:-1] //[3,4]
+:echo [1,2,3,4][-2:1] // []
+:echo &quot;abc&quot;[-2:-1] // bc&#x3002;&#x4E0A;&#x9762;&#x7684;&#x8D1F;&#x6570;&#x7D22;&#x5F15;&#x65E0;&#x6548;&#x3002;&#x5207;&#x5272;&#x5374;&#x6709;&#x6548;&#x3002;&#x3002;&#x3002;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.&#x8FDE;&#x63A5;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo [&apos;a&apos;,&apos;b&apos;] + [&apos;c&apos;] // [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]
+:echo [1,2] + [3]//[1,2,3]
+:echo [a,b] + [c] // &#x9519;&#x8BEF;&#x3002;
+:echo &quot;ab&quot;.&quot;c&quot; //&quot;abc&quot;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>&#x5217;&#x8868;&#x51FD;&#x6570;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo add([1,2],3) // [1,2,3]
+:echo get([1,2,3], 0, &apos;default&apos;) // 1
+:echo get([1,2,3], 4, &apos;default&apos;) // default
+:echo index([1,2,3], 1) // 0
+:echo index([1,2,3], 4) // -1 &#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;-1
+:echo join([1,2], &quot;-&quot;) // 1-2
+:echo reverse([1,2]) //[2,1]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x66F4;&#x591A;&#x9605;&#x8BFB;<code>:help List</code> <code>:help functions</code></p>
+<h3 id="&#x5FAA;&#x73AF;">&#x5FAA;&#x73AF;</h3><h4 id="for">for</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:for i in [1,2,3,4]
+:   let c += i
+:endfor</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:let c=1
+:while c &lt; 3
+: let t += c
+: let c += 1
+:endwhile</span><br></pre></td></tr></table></figure>
+<h3 id="dict">dict</h3><p><code>{&apos;a&apos;:1, 2:&quot;two&quot;,}</code> &#x5B57;&#x5178;&#x7684;key&#x603B;&#x662F;&#x4F1A;&#x81EA;&#x52A8;&#x8F6C;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;.  &#x5E94;&#x8BE5;&#x603B;&#x662F;&#x7ED3;&#x5C3E;&#x7559;&#x4E00;&#x4E2A;<code>,</code> (&#x4E2A;&#x4EBA;&#x5F88;&#x8BA8;&#x538C;&#x8FD9;&#x79CD;&#x8BED;&#x6CD5;)<br>&#x7D22;&#x5F15;&#x53EF;&#x4EE5;&#x7528;.&#x6765;&#x7D22;&#x5F15;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo {&apos;a&apos;:1, 2:&quot;two&quot;,}[&apos;a&apos;] // 1
+:echo {&apos;a&apos;:1, 2:&quot;two&quot;,}[2] // two
+:echo {&apos;a&apos;:1, 2:&quot;two&quot;,}.a // 1</span><br></pre></td></tr></table></figure></p>
+<p>&#x589E;&#x52A0;&#x952E;&#x503C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:let dic={&apos;a&apos;:1,}
+:let dic.b=2
+:echo dic // {&apos;a&apos;:1, &apos;b&apos;:2}</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:let tmp=remove(dic, &apos;a&apos;) //&#x79FB;&#x9664;dic&#x4E2D;a&#xFF0C;&#x4F46;&#x662F;&#x628A;a&#x7684;&#x503C;&#x8D4B;&#x503C;&#x7ED9;tmp
+:unlet dic.b //&#x79FB;&#x9664;b&#x3002;&#x4F46;&#x662F;&#x4E0D;&#x8FD4;&#x56DE;&#x503C;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo has_key({&apos;a&apos;:1}, &apos;a&apos;) // 1
+:echo has_key({&apos;a&apos;:1}, &apos;b&apos;) //0
+:echo items({&apos;a&apos;:1, &apos;b&apos;:2}) // [[&apos;a&apos;,1],[&apos;b&apos;,2]] items&#x8FD4;&#x56DE;&#x662F;&#x65E0;&#x5E8F;&#x7684;&#x3002;&#x56E0;&#x4E3A;dict&#x672C;&#x8EAB;&#x662F;&#x65E0;&#x5E8F;&#x7684;
+:echo keys({&apos;a&apos;:1, &apos;b&apos;:2}) // [&apos;a&apos;, &apos;b&apos;]
+:echo values({&apos;a&apos;:1, &apos;b&apos;:2}) //[1,2]</span><br></pre></td></tr></table></figure>
+<p>list&#x4E2D;&#x7684;get&#x51FD;&#x6570;&#x540C;&#x6837;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;dict</p>
+<h3 id="&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;">&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;</h3><ol>
+<li>&#x5728;&#x51FD;&#x6570;&#x5185;&#x90E8;&#x8D4B;&#x503C;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x3002;&#x5DF2;&#x8FBE;&#x5230;&#x4E0D;&#x5F71;&#x54CD;&#x5916;&#x90E8;&#x53D8;&#x91CF;&#x3002;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function! Reversed(l)
+    let new_list = deepcopy(a:l)
+    call reverse(new_list)
+    return new_list
+endfunction</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="deepcopy-&#x4E0E;copy">deepcopy &#x4E0E;copy</h4><p> &#x533A;&#x522B;&#x5982;&#x4E0B;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let a=[1,2]
+let b=[a,3,4] // [[1,2],3,4]
+let c=copy(b) // [[1,2],3,4]
+let d=deepcopy(b) //[[1,2],3,4]
+let b[0][0]=5
+let b[1]=6
+echo a  //[5,2]
+echo b  //[[5,2],6,4]
+echo c  //[[5,2],3,4]
+echo d  //[[1,2],3,4]</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>&#x5C06;&#x51FD;&#x6570;&#x8D4B;&#x503C;&#x7ED9;&#x53D8;&#x91CF;&#x3002;&#x53D8;&#x91CF;&#x540D;&#x5B57;&#x9996;&#x5B57;&#x6BCD;&#x5927;&#x5199;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:let Myfunc = function(&quot;add&quot;)
+:echo Myfunc([1,2],3) // [1,2,3]
+:let funclist=[function(&quot;add&quot;), function(&quot;reverse&quot;)]
+:echo funclist[0]([1,2],3) // [1,2,3]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="&#x8DEF;&#x5F84;">&#x8DEF;&#x5F84;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo expand(&apos;%&apos;) // filename  &#x76F8;&#x5BF9;&#x8DEF;&#x5F84;
+:echo expand(&apos;%:p&apos;) // /home/.../filename &#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;
+:echo fnamemodify(&apos;test.erl&apos;, &apos;:p&apos;) // /home/youthy/.../test.erl &#x65E0;&#x8BBA;&#x6587;&#x4EF6;test&#x662F;&#x5426;&#x5B58;&#x5728;
+:echo globpath(&apos;.&apos;, &apos;*.erl&apos;) // &#x663E;&#x793A;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;&#x6240;&#x6709;erl&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;
+:echo split(globpath(&apos;.&apos;,&apos;*.erl&apos;), &apos;\n&apos;) //&#x5C06;&#x4E0A;&#x8FF0;&#x7ED3;&#x679C;&#x5206;&#x5272;&#x6210;&#x5217;&#x8868;</span><br></pre></td></tr></table></figure>
+<p><code>:set runtimepath=/XX/XXX</code> &#x4FEE;&#x6539;&#x8FD0;&#x884C;&#x65F6;&#x8DEF;&#x5F84;&#x3002;</p>
+<h3 id="regex-&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;">Regex &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</h3><p>for starters <code>:help user_27</code></p>
+<p>&#x6240;&#x6709;&#x7684;search &#x53D7;&#x5927;&#x5C0F;&#x5199;&#x8BBE;&#x7F6E;&#x7684;&#x5F71;&#x54CD;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase // &#x5FFD;&#x7565;
+:set noignorecase // &#x4E0D;&#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;
+:set ingorecase smartcase //&#x667A;&#x80FD;&#x6A21;&#x5F0F;&#x3002; &#x5C0F;&#x5199;&#x65F6;match&#x6240;&#x6709;&#x3002;&#x6709;&#x4E00;&#x4E2A;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#x65F6;&#x7CBE;&#x786E;&#x5339;&#x914D;&#x3002;</span><br></pre></td></tr></table></figure></p>
+<p><code>\c</code>, <code>\C</code> &#x65E0;&#x89C6;ignorecase&#x8BBE;&#x7F6E;&#x3002;&#x7528;&#x4E8E;&#x81EA;&#x5DF1;&#x67D0;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x5339;&#x914D;&#x3002;&#x524D;&#x8005; &#x8868;&#x793A;ignorecase &#x540E;&#x8005;&#x662F;noignorecase</p>
+<blockquote>
+<p>   pattern            matches    ~<br>    \Cword            word<br>    \CWord            Word<br>    \cword            word, Word, WORD, WoRd, etc.<br>    \cWord            word, Word, WORD, WoRd, etc.</p>
+</blockquote>
+<p><code>*</code> 0&#x81F3;&#x591A;&#x4E2A;<br><code>\+</code> 1&#x81F3;&#x591A;&#x4E2A;<br><code>\=</code> 0&#x81F3;1&#x4E2A;<br><code>&apos;\{n, m}&apos;</code> &#x91CD;&#x590D;n&#x81F3;m&#x6B21;<br><code>&apos;\\|&apos;</code> &#x6216;&#x8005;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;ab*&apos;   // a, ab, abb, abbb...
+&apos;c\(ab\)*&apos; // c, cab, cabab, cababab...  &#x9700;&#x7528;&#x62EC;&#x53F7;&#x62EC;&#x8D77;&#xFF0C;&#x4F46;&#x662F;&#x9700;&#x8981;&#x8F6C;&#x4E49;
+&apos;c\(ab\)\{2, 3}&apos; // cabab, cababab
+&apos;ab\+&apos; // ab, abb, abbb...
+&apos;ab\=&apos; // a, ab</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>   item    matches            equivalent ~<br>    \d    digit            [0-9]<br>    \D    non-digit        [^0-9]<br>    \x    hex digit        [0-9a-fA-F]<br>    \X    non-hex digit        [^0-9a-fA-F]<br>    \s    white space        [     ]     (<tab> and <space>)<br>    \S    non-white characters    [^     ]     (not <tab> and <space>)<br>    \l    lowercase alpha        [a-z]<br>    \L    non-lowercase alpha    [^a-z]<br>    \u    uppercase alpha        [A-Z]<br>    \U    non-uppercase alpha    [^A-Z]<br>    \h [A-Za-z<em>]<br>    \w [A-Za-z0-9</em>]</space></tab></space></tab></p>
+</blockquote>
+<p>&#x4EE5;&#x4E0A;&#x4E0D;&#x80FD;&#x7528;&#x4E8E;<code>[]</code>&#x91CC;&#x9762;</p>
+<p>&#x6CE8;&#x610F;&#x3000;<code>&apos;</code>, <code>&quot;</code>&#x7684;&#x5F71;&#x54CD;&#x3002;<code>&quot;</code>&#x4F1A;&#x8F6C;&#x4E49;<code>\</code>, &#x5BFC;&#x81F4;<code>&apos;\w\+&apos;</code>&#x8FD9;&#x79CD;&#x53D8;&#x6210;<code>&quot;\\w\\+&quot;</code></p>
+<p><a href="http://learnvimscriptthehardway.onefloweroneworld.com/" target="_blank" rel="external">&#x7B28;&#x65B9;&#x6CD5;&#x5B66;vimscript</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/06/Regex-正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Regex 正则表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/04/ssh登陆远程主机/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ssh登陆远程主机</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="vimscript笔记" data-title="vimscript笔记" data-url="http://youthy.github.io/2016/05/06/vimscript笔记/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

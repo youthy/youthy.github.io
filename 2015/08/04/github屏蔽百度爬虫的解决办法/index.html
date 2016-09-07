@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>github屏蔽百度爬虫的解决办法 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="google上可以搜到github博客的内容，但是百度是搜不到的。用百度的站长工具抓取也总是抓取失败。是因为github把百度爬虫给屏蔽了，而且将会长期下去。导致百度是无法收录自己的网站。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github屏蔽百度爬虫的解决办法">
+<meta property="og:url" content="http://youthy.github.io/2015/08/04/github屏蔽百度爬虫的解决办法/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="google上可以搜到github博客的内容，但是百度是搜不到的。用百度的站长工具抓取也总是抓取失败。是因为github把百度爬虫给屏蔽了，而且将会长期下去。导致百度是无法收录自己的网站。">
+<meta property="og:image" content="http://youthy.github.io/img/gitcafe1.png">
+<meta property="og:image" content="http://youthy.github.io/img/gitcafe2.png">
+<meta property="og:image" content="http://youthy.github.io/img/gitcafe3.png">
+<meta property="og:image" content="http://youthy.github.io/img/gitcafe4.png">
+<meta property="og:image" content="http://youthy.github.io/img/gitcafe5.png">
+<meta property="og:image" content="http://youthy.github.io/img/gitcafe6.png">
+<meta property="og:updated_time" content="2016-08-18T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="github屏蔽百度爬虫的解决办法">
+<meta name="twitter:description" content="google上可以搜到github博客的内容，但是百度是搜不到的。用百度的站长工具抓取也总是抓取失败。是因为github把百度爬虫给屏蔽了，而且将会长期下去。导致百度是无法收录自己的网站。">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">youthy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap，vim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/二次元/" style="font-size: 10px;">二次元</a> <a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/情感/" style="font-size: 10px;">情感</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.win">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">youthy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">youthy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-github屏蔽百度爬虫的解决办法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/04/github屏蔽百度爬虫的解决办法/" class="article-date">
+  	<time datetime="2015-08-04T06:57:55.000Z" itemprop="datePublished">8月 4 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      github屏蔽百度爬虫的解决办法
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>google&#x4E0A;&#x53EF;&#x4EE5;&#x641C;&#x5230;github&#x535A;&#x5BA2;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4F46;&#x662F;&#x767E;&#x5EA6;&#x662F;&#x641C;&#x4E0D;&#x5230;&#x7684;&#x3002;&#x7528;&#x767E;&#x5EA6;&#x7684;&#x7AD9;&#x957F;&#x5DE5;&#x5177;&#x6293;&#x53D6;&#x4E5F;&#x603B;&#x662F;&#x6293;&#x53D6;&#x5931;&#x8D25;&#x3002;&#x662F;&#x56E0;&#x4E3A;github&#x628A;&#x767E;&#x5EA6;&#x722C;&#x866B;&#x7ED9;&#x5C4F;&#x853D;&#x4E86;&#xFF0C;&#x800C;&#x4E14;&#x5C06;&#x4F1A;&#x957F;&#x671F;&#x4E0B;&#x53BB;&#x3002;&#x5BFC;&#x81F4;&#x767E;&#x5EA6;&#x662F;&#x65E0;&#x6CD5;&#x6536;&#x5F55;&#x81EA;&#x5DF1;&#x7684;&#x7F51;&#x7AD9;&#x3002;<br><a id="more"></a><br><a href="http://www.zhihu.com/question/30898326" target="_blank" rel="external">&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x767E;&#x5EA6;&#x722C;&#x866B;&#x65E0;&#x6CD5;&#x722C;&#x53D6;&#x642D;&#x5EFA;&#x5728;Github&#x4E0A;&#x7684;&#x4E2A;&#x4EBA;&#x535A;&#x5BA2;&#x7684;&#x95EE;&#x9898;--&#x77E5;&#x4E4E;</a><br>google&#x4E0B;github + &#x767E;&#x5EA6;&#x722C;&#x866B;&#x4E5F;&#x6709;&#x5F88;&#x591A;&#x6587;&#x7AE0;&#x3002;<br>&#x6709;&#x51E0;&#x79CD;&#x65B9;&#x6848; </p>
+<ul>
+<li>&#x901A;&#x8FC7;CDN&#x52A0;&#x901F;&#xFF0C;&#x5F0A;&#x7AEF;&#x662F;&#x7531;&#x4E8E;&#x7F13;&#x5B58;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x7ECF;&#x5E38;&#x51FA;&#x73B0;404&#x7684;&#x9519;&#x8BEF;</li>
+<li>&#x7528;gitcafe&#x955C;&#x50CF;</li>
+<li>&#x7528;vps&#xFF0C;&#x8BA9;&#x767E;&#x5EA6;&#x4ECE;&#x81EA;&#x5DF1;&#x7684;vps&#x722C;&#x866B;&#x3002;</li>
+</ul>
+<p>&#x867D;&#x7136;&#x81EA;&#x5DF1;&#x6709;vps&#xFF0C;&#x4F46;&#x662F;&#x5176;&#x5B9E;&#x76EE;&#x524D;&#x5BF9;&#x6211;&#x6765;&#x8BF4;&#x64CD;&#x4F5C;&#x8D77;&#x6765;&#x6700;&#x7B80;&#x5355;&#x7684;&#x8FD8;&#x662F;&#x7528;gitcafe&#x505A;&#x955C;&#x50CF;&#x3002;&#x6211;&#x53EA;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x4E0B;hexo&#x7684;config&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;deploy&#x7684;&#x5BF9;&#x8C61;&#x5C31;&#x53EF;&#x4EE5;&#x5C06;&#x535A;&#x5BA2;&#x90E8;&#x7F72;&#x5230;gitcafe&#x548C;github&#x4E24;&#x4E2A;&#x5730;&#x65B9;&#xFF0C;&#x7136;&#x540E;&#x5728;dnspod&#x4E0A;&#x6DFB;&#x52A0;&#x4E00;&#x6761;&#x57DF;&#x540D;&#x89E3;&#x6790;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
+<h2 id="&#x521B;&#x5EFA;gitcafe&#x8D26;&#x53F7;&#x5E76;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;repo&#x540D;&#x5B57;&#x8981;&#x548C;&#x7528;&#x6237;&#x540D;&#x4E00;&#x81F4;">&#x521B;&#x5EFA;gitcafe&#x8D26;&#x53F7;&#x5E76;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;repo&#xFF0C;&#x540D;&#x5B57;&#x8981;&#x548C;&#x7528;&#x6237;&#x540D;&#x4E00;&#x81F4;</h2><p><img src="/img/gitcafe1.png" alt=""></p>
+<p>&#x9ED8;&#x8BA4;&#x5206;&#x652F;&#x8FD9;&#x65F6;&#x5019;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5148;&#x4E0D;&#x7528;&#x7BA1;&#x3002;&#x7B49;&#x5230;&#x4E4B;&#x540E;&#x5728;hexo&#x7684;_config&#x91CC;&#x9762;&#x76F4;&#x63A5;&#x52A0;&#x5C31;&#x597D;&#x4E86;&#xFF0C;&#x4E4B;&#x540E;&#x518D;&#x56DE;&#x6765;&#x4FEE;&#x6539;&#x5B83;&#x4E3A;gitcafe-pages</p>
+<p><img src="/img/gitcafe2.png" alt=""></p>
+<p>&#x5728;ssh&#x516C;&#x94A5;&#x7BA1;&#x7406;&#x91CC;&#x9762;&#x6DFB;&#x52A0;&#x548C;github&#x4E00;&#x6837;&#x7684;&#x5185;&#x5BB9;&#x5C31;&#x597D;&#x4E86;&#xFF0C;&#x6211;&#x7684;&#x5728;~/.ssh/rsa_pub&#x6587;&#x4EF6;&#x91CC;&#x3002;<br>&#x7136;&#x540E;&#x5728;<br><img src="/img/gitcafe3.png" alt=""><br>&#x5728;hexo&#x7684;_config.yml&#x91CC;&#x9762;&#x52A0;&#x5165;gitcafe&#x7684;&#x5730;&#x5740;&#x3002;&#x5E76;&#x6539;&#x6210;&#x5982;&#x4E0A;&#x5F62;&#x5F0F;&#x3002;&#x4E4B;&#x540E;hexo d&#x5C31;&#x53EF;&#x4EE5;&#x90E8;&#x7F72;&#x5230;github&#x548C;gitcafe&#x4E0A;&#x4E86;&#x3002;</p>
+<h2 id="&#x5230;dnspod&#x4FEE;&#x6539;&#x57DF;&#x540D;&#x89E3;&#x6790;">&#x5230;dnspod&#x4FEE;&#x6539;&#x57DF;&#x540D;&#x89E3;&#x6790;&#x3002;</h2><p><img src="/img/gitcafe4.png" alt=""></p>
+<p>&#x5728;dnspod&#x91CC;&#x9762;&#x8BA9;&#x767E;&#x5EA6;&#x8D70;gitcafe&#xFF0C;&#x5176;&#x4ED6;&#x4EBA;&#x8FD8;&#x662F;&#x8D70;github&#x3002; &#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x7EC6;&#x5316;&#x8BA9;&#x56FD;&#x5185;&#x4E5F;&#x8D70;gitcafe&#xFF0C;&#x56FD;&#x5916;&#x8D70;github&#x3002;</p>
+<p>&#x4E4B;&#x540E;&#x7528;&#x767E;&#x5EA6;&#x7AD9;&#x957F;&#x5DE5;&#x5177;&#x770B;&#x5230;&#x767E;&#x5EA6;&#x53EF;&#x4EE5;&#x6210;&#x529F;&#x6293;&#x53D6;&#x4E86;<br><img src="/img/gitcafe5.png" alt=""></p>
+<p>&#xFF08;&#x65E0;&#x8BBA;&#x5728;github&#x8FD8;&#x662F;gitcafe&#x79FB;&#x52A8;UA&#x90FD;&#x662F;&#x53EF;&#x4EE5;&#x6210;&#x529F;&#x6293;&#x53D6;&#x7684;&#xFF09;&#x3002;</p>
+<h2 id="&#x5173;&#x4E8E;404-not-found">&#x5173;&#x4E8E;404 not found</h2><p>&#x8981;&#x786E;&#x4FDD;</p>
+<ul>
+<li>gitcafe&#x7684;&#x9879;&#x76EE;&#x540D;&#x4E00;&#x5B9A;&#x8981;&#x548C;&#x7528;&#x6237;&#x540D;&#x4E00;&#x81F4;&#xFF0C;&#x5E76;&#x4E14;branch&#x662F;gitcafe-pages&#xFF0C;&#x4E14;&#x4E3A;&#x9ED8;&#x8BA4;branch</li>
+<li>&#x5982;&#x679C;&#x7ED1;&#x5B9A;&#x4E86;&#x57DF;&#x540D;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x8BBE;&#x7F6E;&#x91CC;&#x52A0;&#x5165;&#x57DF;&#x540D;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x7684;<br><img src="/img/gitcafe6.png" alt=""></li>
+</ul>
+<p>&#x4EE5;&#x4E0A;&#x4EFB;&#x610F;&#x4E00;&#x9879;&#x4E0D;&#x8DB3;&#x90FD;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;404 not found&#x3002;</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/19/gitnote/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          gitnote
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/31/erlang-question-gen-server-and-init/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[erlang_question]gen_server and init</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="github屏蔽百度爬虫的解决办法" data-title="github屏蔽百度爬虫的解决办法" data-url="http://youthy.github.io/2015/08/04/github屏蔽百度爬虫的解决办法/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

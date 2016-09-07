@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ranch笔记 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="任何使用ranch的程序第一步需要启动ranch_app
+start ranch application入口ranch_app:1start(_, _) -&amp;#62;&amp;#10;&amp;#9;_ = consider_profiling(), %% &amp;#26159;&amp;#21542;&amp;#21551;&amp;#21160;eprof&amp;#10;&amp;#9;ranch_sup:start_link().">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ranch笔记">
+<meta property="og:url" content="http://youthy.github.io/2015/09/28/ranch笔记/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="任何使用ranch的程序第一步需要启动ranch_app
+start ranch application入口ranch_app:1start(_, _) -&amp;#62;&amp;#10;&amp;#9;_ = consider_profiling(), %% &amp;#26159;&amp;#21542;&amp;#21551;&amp;#21160;eprof&amp;#10;&amp;#9;ranch_sup:start_link().">
+<meta property="og:image" content="http://youthy.github.io/img/ranch_1.png">
+<meta property="og:image" content="http://youthy.github.io/img/ranch_2.png">
+<meta property="og:image" content="http://youthy.github.io/img/ranch_3.png">
+<meta property="og:updated_time" content="2016-08-18T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ranch笔记">
+<meta name="twitter:description" content="任何使用ranch的程序第一步需要启动ranch_app
+start ranch application入口ranch_app:1start(_, _) -&amp;#62;&amp;#10;&amp;#9;_ = consider_profiling(), %% &amp;#26159;&amp;#21542;&amp;#21551;&amp;#21160;eprof&amp;#10;&amp;#9;ranch_sup:start_link().">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">youthy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap，vim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/二次元/" style="font-size: 10px;">二次元</a> <a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/情感/" style="font-size: 10px;">情感</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.win">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">youthy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">youthy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-ranch笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/28/ranch笔记/" class="article-date">
+  	<time datetime="2015-09-28T03:58:51.000Z" itemprop="datePublished">9月 28 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ranch笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/">erlang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ranch/">ranch</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&#x4EFB;&#x4F55;&#x4F7F;&#x7528;ranch&#x7684;&#x7A0B;&#x5E8F;&#x7B2C;&#x4E00;&#x6B65;&#x9700;&#x8981;&#x542F;&#x52A8;ranch_app</p>
+<h2 id="start-ranch-application">start ranch application</h2><p>&#x5165;&#x53E3;<br><code>ranch_app:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start(_, _) -&gt;
+	_ = consider_profiling(), %% &#x662F;&#x5426;&#x542F;&#x52A8;eprof
+	ranch_sup:start_link().</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p><code>ranch_sup:</code><br>&#x6574;&#x4E2A;&#x5E94;&#x7528;&#x7684;&#x6700;&#x9876;&#x7EA7;sup&#xFF0C; &#x5B83;&#x5EFA;&#x7ACB;ranch_server ets,&#x5E76;&#x542F;&#x52A8;ranch_server&#x8FD9;&#x4E2A;gen_server,&#x5C06;ranch_server&#x8FD9;&#x4E2A;ets&#x5F52;&#x5C5E;&#x4E8E;ranch_sup&#x63D0;&#x9AD8;&#x5BB9;&#x9519;.&#x9632;&#x6B62;&#x6570;&#x636E;&#x4E22;&#x5931;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_link() -&gt;
+	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+
+init([]) -&gt;
+	ranch_server = ets:new(ranch_server, [
+		ordered_set, public, named_table]),
+	Procs = [
+		{ranch_server, {ranch_server, start_link, []},
+			permanent, 5000, worker, [ranch_server]}
+	],
+	{ok, {{one_for_one, 10, 10}, Procs}}.</span><br></pre></td></tr></table></figure></p>
+<p><code>ranch_server:</code><br>&#x662F;&#x4E00;&#x4E2A;gen_server,init&#x4E2D;&#x4ECE;ranch_server ets&#x4E2D;&#x6062;&#x590D;&#x6570;&#x636E;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init([]) -&gt;
+	Monitors = [{{erlang:monitor(process, Pid), Pid}, Ref} ||
+		[Ref, Pid] &lt;- ets:match(?TAB, {{conns_sup, &apos;$1&apos;}, &apos;$2&apos;})],
+	{ok, #state{monitors=Monitors}}.</span><br></pre></td></tr></table></figure></p>
+<p><strong>ranch&#x521D;&#x59CB;&#x5316;&#x5B8C;&#x6210;</strong></p>
+<h2 id=""><img src="/img/ranch_1.png" alt=""></h2><p>&#x81F3;&#x6B64;ranch&#x5B9E;&#x9645;&#x4E0A;&#x6CA1;&#x6709;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#xFF0C;&#x5B83;&#x5E76;&#x6CA1;&#x6709;&#x76D1;&#x542C;&#x4EFB;&#x4F55;&#x7AEF;&#x53E3;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x8005;&#x5728;&#x81EA;&#x5DF1;&#x7684;app&#x4E2D;&#x663E;&#x793A;&#x7684;&#x8C03;&#x7528;ranch:start_listener&#x6765;&#x542F;&#x52A8;acceptor_pool.</p>
+<p>&#x5728;&#x4F5C;&#x8005;&#x7684;demo&#x4E2D;&#x662F;&#x8FD9;&#x6837;&#xFF1A;</p>
+<h3 id="tcp_echo_app">tcp_echo_app:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start(_Type, _Args) -&gt;
+	{ok, _} = ranch:start_listener(tcp_echo, 1,
+		ranch_tcp, [{port, 5555}], echo_protocol, []),
+	tcp_echo_sup:start_link().</span><br></pre></td></tr></table></figure>
+<p><code>ranch:start_listner</code>&#x63A5;&#x53D7;6&#x4E2A;&#x53C2;&#x6570; </p>
+<ol>
+<li>&#x540D;&#x5B57;: tcp_echo,</li>
+<li>acceptor&#x6570;&#x91CF;: 1<br><strong>&#x6B64;&#x5904;&#x4E0D;&#x662F;connection&#x7684;&#x6570;&#x91CF;!! wiki&#x8BF4;:</strong><blockquote>
+<p>First of all, it should not be confused with the maximum number of connections. Acceptor processes are only used for accepting and have nothing else in common with connection processes. Therefore there is nothing to be gained from setting this number too high, in fact it can slow everything else down.</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>Second, this number should be high enough to allow Ranch to accept connections concurrently. But the number of cores available doesn&#x2019;t seem to be the only factor for choosing this number, as we can observe faster accepts if we have more acceptors than cores. It might be entirely dependent on the protocol, however.</p>
+</blockquote>
+<p>&#x603B;&#x4E4B;&#x5C31;&#x662F;&#x592A;&#x5C11;&#x592A;&#x591A;&#x90FD;&#x4E0D;&#x597D;&#xFF0C;&#x4ED6;&#x4EEC;&#x7684;&#x89C2;&#x6D4B;&#x5F97;&#x5230;100&#x8F83;&#x4E3A;&#x5408;&#x9002;</p>
+<ol>
+<li>transport&#x7684;&#x65B9;&#x5F0F;: ranch_tcp</li>
+<li>transport options: [{port, 5555}],<br><code>ranch_tcp:</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen(Opts) -&gt;
+	Opts2 = ranch:set_option_default(Opts, backlog, 1024),
+	Opts3 = ranch:set_option_default(Opts2, nodelay, true),
+	Opts4 = ranch:set_option_default(Opts3, send_timeout, 30000),
+	Opts5 = ranch:set_option_default(Opts4, send_timeout_close, true),
+	gen_tcp:listen(0, ranch:filter_options(Opts5, listen_options(),
+		[binary, {active, false}, {packet, raw}, {reuseaddr, true}])).</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x51FA;ranch_tcp&#x4EE3;&#x7801;&#x4E2D;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;binary, {active,false}, &#x7B49;&#x8BBE;&#x7F6E;&#xFF0C;&#x6240;&#x4EE5;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;options&#x66F4;&#x6539;&#x3002;&#x53EF;&#x4EE5;&#x5728;start_listener&#x4E4B;&#x540E;&#x7684;&#x901A;&#x8FC7;Transport:setopts/2&#x66F4;&#x6539;.<br>&#x4F46;&#x662F;backlog, nodelay&#x7B49;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;Opts&#x5728;start&#x7684;&#x65F6;&#x5019;&#x5C31;&#x8BBE;&#x7F6E;&#x597D;.<br><strong>port</strong>:&#x672A;&#x6307;&#x5B9A;&#x7684;&#x8BDD;&#xFF0C;&#x5219;&#x4F1A;&#x968F;&#x610F;&#x4E00;&#x4E2A;&#x7AEF;&#x53E3;.&#x8FD8;&#x6709;&#xFF0C;&#x4E0D;&#x8981;&#x8BBE;&#x7F6E;1024&#x4EE5;&#x4E0A;&#x7684;&#x3002;&#x539F;&#x56E0;&#x5982;&#x4E0B;</p>
+<blockquote>
+<p>Some systems limit access to ports below 1024 for security reasons.The methods for listening on privileged ports vary between systems, please refer to your system&#x2019;s documentation for more information.</p>
+</blockquote>
+<p><strong>max_connections</strong>: {max_connections, Number|infinity}Number&#x9ED8;&#x8BA4;&#x662F;1024.&#x5C3D;&#x91CF;&#x4E0D;&#x8981;infinity&#x3002;<br>&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>ranch:set_max_connections</code>&#x8BBE;&#x7F6E;.&#x6709;&#x65F6;&#x6709;&#x4E2A;&#x522B;&#x8FDB;&#x7A0B;&#x662F;&#x957F;&#x94FE;&#x63A5;&#xFF0C;&#x4E0D;&#x5E0C;&#x671B;&#x5B83;&#x8BA1;&#x5165;connections&#x7684;&#x8BA1;&#x6570;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>ranch:remove_conections/1</code>&#x79FB;&#x9664;1.</p>
+<ol>
+<li>protocol_handler mod: echo_protocol</li>
+<li>protocol options: []</li>
+</ol>
+<h3 id="ranch">ranch:</h3><p>listener&#x7684;&#x5B9E;&#x73B0;:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_listener(tcp_echo, 1, ranch_tcp, [{port, 5555}], echo_protocol, []) -&gt;
+    ...
+	ChildSpec = {{ranch_listener_sup, tcp_echo}, {ranch_listener_sup, start_link, [
+		tcp_echo, 1, ranch_tcp, [{port, 5555}], echo_protocol, [] 
+	]}, permanent, infinity, supervisor, [ranch_listener_sup]}.
+	Res = supervisor:start_child(ranch_sup, ChildSpec),
+	Socket = proplists:get_value(socket, [{port, 5555}]),
+	case Res of
+		{ok, Pid} when Socket =/= undefined -&gt;
+		    %% &#x6B64;&#x5904;&#x66F4;&#x6539;socket&#x7684;&#x62E5;&#x6709;&#x8005;,&#x6682;&#x4E0D;&#x7BA1;
+		  	Children = supervisor:which_children(Pid),
+		  	{_, AcceptorsSup, _, _}
+		  		= lists:keyfind(ranch_acceptors_sup, 1, Children),
+		   catch Transport:controlling_process(Socket, AcceptorsSup);
+		_ -&gt;
+			ok
+	end,
+	Res
+	...</span><br></pre></td></tr></table></figure></p>
+<p>&#x5728;&#x672A;&#x6307;&#x5B9A;socket&#x7684;&#x60C5;&#x51B5;&#xFF0C;start_listener&#x901A;&#x8FC7;<code>supervisor:start_child/2</code>&#x542F;&#x52A8;&#x4E86;<code>ranch_listener_sup</code></p>
+<h3 id="ranch_listener_sup">ranch_listener_sup:</h3><p>listener_sup &#x4ECD;&#x7136;&#x662F;&#x4E2A;supervisor&#xFF0C;&#x5B83;&#x5F97;&#x5230;&#x4E00;&#x4E2A;max_connections(&#x9ED8;&#x8BA4;1024&#xFF09;, &#x901A;&#x77E5;ranch_server&#x50A8;&#x5B58;max_connection,&#x548C;Opts&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_link(Ref, NbAcceptors, Transport, TransOpts, Protocol, ProtoOpts) -&gt;
+	MaxConns = proplists:get_value(max_connections, TransOpts, 1024),
+	ranch_server:set_new_listener_opts(Ref, MaxConns, ProtoOpts),
+	%% &#x6CE8;&#x610F;&#x6B64;&#x5904;&#x6CA1;&#x6709;&#x6CE8;&#x518C;&#x540D;&#x5B57;
+	supervisor:start_link(?MODULE, {
+		Ref, NbAcceptors, Transport, TransOpts, Protocol
+	}).</span><br></pre></td></tr></table></figure></p>
+<p><code>ranch_server:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handle_call({set_new_listener_opts, Ref, MaxConns, Opts}, _, State) -&gt;
+    %% &#x5C06;&#x6570;&#x636E;&#x5B58;&#x5165;rank_server ets.
+	ets:insert(rank_server, {{max_conns, Ref}, MaxConns}),
+	ets:insert(rank_server, {{opts, Ref}, Opts}),
+	{reply, ok, State};</span><br></pre></td></tr></table></figure></p>
+<p><code>ranch_listener_sup:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init({tcp_echo, 1, ranch_tcp, [{port, 5555}], echo_protocol}) -&gt;
+	AckTimeout = proplists:get_value(ack_timeout, TransOpts, 5000),
+	ConnType = proplists:get_value(connection_type, TransOpts, worker),
+	Shutdown = proplists:get_value(shutdown, TransOpts, 5000),
+	ChildSpecs = [
+		{ranch_conns_sup, {ranch_conns_sup, start_link,
+				[Ref, ConnType, Shutdown, Transport, AckTimeout, Protocol]},
+			permanent, infinity, supervisor, [ranch_conns_sup]},
+		{ranch_acceptors_sup, {ranch_acceptors_sup, start_link,
+				[Ref, NbAcceptors, Transport, TransOpts]},
+			permanent, infinity, supervisor, [ranch_acceptors_sup]}
+	],
+	{ok, {{rest_for_one, 10, 10}, ChildSpecs}}.</span><br></pre></td></tr></table></figure></p>
+<p>listener_sup &#x542F;&#x52A8; conns_sup&#x548C;acceptors_sup,&#x8FD9;&#x4E24;&#x4E2A;&#x90FD;&#x662F;supervisor &#x6240;&#x4EE5;shutdown&#x90FD;&#x8BBE;&#x7F6E;&#x6210;infinity<br>&#x4F46;&#x662F;&#x5176;&#x4E2D;conns_sup&#x662F;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x7684;supervisor&#xFF0C;&#x4F5C;&#x8005;&#x89E3;&#x91CA;&#x662F;&#x4E3A;&#x4E86;&#x4F18;&#x5316;create&#x548C;accept connection&#x3002;</p>
+<blockquote>
+<p>Ranch uses a custom supervisor for managing connections. This supervisor keeps track of the number of connections and handles connection limits directly. While it is heavily optimized to perform the task of creating connection processes for accepted connections, it is still following the OTP principles and the usual sys and supervisor calls will work on it as expected.</p>
+</blockquote>
+<h3 id="ranch_conns_sup">Ranch_conns_sup:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_link(Ref, ConnType, Shutdown, Transport, AckTimeout, Protocol) -&gt;
+	proc_lib:start_link(?MODULE, init,
+	[self(), Ref, ConnType, Shutdown, Transport, AckTimeout, Protocol]).
+	
+init(Parent, Ref, ConnType, Shutdown, Transport, AckTimeout, Protocol) -&gt;
+	process_flag(trap_exit, true),
+	ok = ranch_server:set_connections_sup(Ref, self()),
+	MaxConns = ranch_server:get_max_connections(Ref),
+	Opts = ranch_server:get_protocol_options(Ref),
+	ok = proc_lib:init_ack(Parent, {ok, self()}),
+	loop(#state{parent=Parent, ref=Ref, conn_type=ConnType,
+		shutdown=Shutdown, transport=Transport, protocol=Protocol,
+		opts=Opts, ack_timeout=AckTimeout, max_conns=MaxConns}, 0, 0, []).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14&gt; rp(sys:get_status(ConnsSup)).
+{status,&lt;0.43.0&gt;,
+        {module,ranch_conns_sup},
+        [[{&apos;$ancestors&apos;,[&lt;0.42.0&gt;,ranch_sup,&lt;0.34.0&gt;]},
+          {&apos;$initial_call&apos;,{ranch_conns_sup,init,7}}],
+         running,&lt;0.42.0&gt;,[],
+         {{state,&lt;0.42.0&gt;,tcp_echo,worker,5000,ranch_tcp,
+                 echo_protocol,[],5000,1024},
+          0,0,[]}]}</span><br></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x9762;&#x4F7F;&#x7528;<code>sys:get_status(Name|Pid)</code>&#x5F97;&#x5230;ranch_conns_sup&#x7684;#state{}&#x3002;</p>
+<h3 id="ranch_acceptor_sup">Ranch_acceptor_sup:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_link(Ref, NbAcceptors, Transport, TransOpts) -&gt;
+	supervisor:start_link(?MODULE, [Ref, NbAcceptors, Transport, TransOpts]).
+
+init([Ref, NbAcceptors, Transport, TransOpts]) -&gt;
+	ConnsSup = ranch_server:get_connections_sup(Ref),
+	LSocket = case proplists:get_value(socket, TransOpts) of
+		undefined -&gt;
+			TransOpts2 = proplists:delete(ack_timeout,
+				proplists:delete(connection_type,
+				proplists:delete(max_connections,
+				proplists:delete(shutdown,
+				proplists:delete(socket, TransOpts))))),
+			case Transport:listen(TransOpts2) of
+				{ok, Socket} -&gt; Socket;
+				{error, Reason} -&gt; listen_error(Ref, Transport, TransOpts2, Reason)
+			end;
+		Socket -&gt;
+			Socket
+	end,
+	{ok, Addr} = Transport:sockname(LSocket),
+	ranch_server:set_addr(Ref, Addr),
+	Procs = [
+		{{acceptor, self(), N}, {ranch_acceptor, start_link, [
+			LSocket, Transport, ConnsSup
+		]}, permanent, brutal_kill, worker, []}
+			|| N &lt;- lists:seq(1, NbAcceptors)],
+	{ok, {{one_for_one, 10, 10}, Procs}}.</span><br></pre></td></tr></table></figure>
+<p>acceptor_sup&#x5B8C;&#x6210;&#x4E86;&#x5F97;&#x5230;&#x4E00;&#x4E2A;ListenSocket, &#x7136;&#x540E;&#x542F;&#x52A8;N&#x4E2A;acceptor&#x8FDB;&#x7A0B;&#xFF0C;&#x8FD9;&#x4E9B;acceptor&#x7684;loop&#x7B49;&#x5F85;<code>gen_tcp:accept</code> | <code>ssl:transport_accept</code><br><code>Transport:listen</code>&#x7684;&#x672C;&#x8D28;&#x5C31;&#x662F;<code>gen_tcp:listen</code>&#x6216;&#x8005;<code>ssl:listen</code> &#x5B83;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;ListenSocket<br><code>Transport:sockname</code> :: <code>inet:sockname</code> | <code>ssl:sockname</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13&gt; sys:get_status(AccepterSup).
+{status,&lt;0.44.0&gt;,
+        {module,gen_server},
+        [[{&apos;$ancestors&apos;,[&lt;0.42.0&gt;,ranch_sup,&lt;0.34.0&gt;]},
+          {&apos;$initial_call&apos;,{supervisor,ranch_acceptors_sup,1}}],
+         running,&lt;0.42.0&gt;,[],
+         [{header,&quot;Status for generic server &lt;0.44.0&gt;&quot;},
+          {data,[{&quot;Status&quot;,running},
+                 {&quot;Parent&quot;,&lt;0.42.0&gt;},
+                 {&quot;Logged events&quot;,[]}]},
+          {data,[{&quot;State&quot;,
+                  {state,{&lt;0.44.0&gt;,ranch_acceptors_sup},
+                         one_for_one,
+                         [{child,&lt;0.45.0&gt;,
+                                 {acceptor,&lt;0.44.0&gt;,1},
+                                 {ranch_acceptor,start_link,
+                                                 [#Port&lt;0.917&gt;,ranch_tcp,&lt;0.43.0&gt;]},
+                                 permanent,brutal_kill,worker,[]}],
+                         undefined,10,10,[],ranch_acceptors_sup,
+                         [tcp_echo,1,ranch_tcp,[{port,5555}]]}}]}]]}</span><br></pre></td></tr></table></figure></p>
+<p>demo&#x4E2D;&#x53EA;&#x542F;&#x52A8;&#x4E86;&#x4E00;&#x4E2A;acceptor<br>&#x81F3;&#x6B64;&#x5B8C;&#x4E86;&#x4E86;&#x6240;&#x6709;&#x8FDB;&#x7A0B;&#x7684;&#x542F;&#x52A8;&#x3002;&#x7B49;&#x5F85;connection&#x8FDB;&#x6765;&#x3002;<br><img src="/img/ranch_2.png" alt=""></p>
+<h3 id="acceptor">Acceptor:</h3><p>acceptor&#x7684;&#x4F5C;&#x7528;&#x662F;<code>accept(ListenSocket) -&gt; Socket.</code> &#x901A;&#x8FC7;<code>Transport:controlling_process</code>,&#x5C06;&#x7AEF;&#x53E3;&#x63A7;&#x5236;&#x4EA4;&#x7ED9;<code>conns_sup</code>, &#x7136;&#x540E;&#x5411;conns_sup&#x53D1;&#x9001;<code>{ranch_conns_sup, start_protocol, AcceptorPid, Socket}</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_link(LSocket, Transport, ConnsSup) -&gt;
+	Pid = spawn_link(?MODULE, loop, [LSocket, Transport, ConnsSup]),
+	{ok, Pid}.
+
+-spec loop(inet:socket(), module(), pid()) -&gt; no_return().
+loop(LSocket, Transport, ConnsSup) -&gt;
+	_ = case Transport:accept(LSocket, infinity) of
+		{ok, CSocket} -&gt;
+			case Transport:controlling_process(CSocket, ConnsSup) of
+				ok -&gt;
+					ranch_conns_sup:start_protocol(ConnsSup, CSocket);
+				{error, _} -&gt;
+					Transport:close(CSocket)
+			end;
+		{error, emfile} -&gt;
+			receive after 100 -&gt; ok end;
+		{error, Reason} when Reason =/= closed -&gt;
+			ok
+	end,
+	flush(),
+	?MODULE:loop(LSocket, Transport, ConnsSup).</span><br></pre></td></tr></table></figure>
+<p><code>ranch_conns_sup</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_protocol(SupPid, Socket) -&gt;
+	SupPid ! {?MODULE, start_protocol, self(), Socket},
+	receive SupPid -&gt; ok end.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{?MODULE, start_protocol, To, Socket} -&gt;
+	try Protocol:start_link(Ref, Socket, Transport, Opts) of
+		{ok, Pid} -&gt;
+			shoot(State, CurConns, NbChildren, Sleepers, To, Socket, Pid, Pid);
+		{ok, SupPid, ProtocolPid} when ConnType =:= supervisor -&gt;
+			shoot(State, CurConns, NbChildren, Sleepers, To, Socket, SupPid, ProtocolPid);
+		Ret -&gt;
+			To ! self(),
+			error_logger:error_msg(
+				&quot;Ranch listener ~p connection process start failure; &quot;
+				&quot;~p:start_link/4 returned: ~999999p~n&quot;,
+				[Ref, Protocol, Ret]),
+			Transport:close(Socket),
+			loop(State, CurConns, NbChildren, Sleepers)
+			......</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shoot(State=#state{ref=Ref, transport=Transport, ack_timeout=AckTimeout, max_conns=MaxConns},
+		CurConns, NbChildren, Sleepers, To, Socket, SupPid, ProtocolPid) -&gt;
+	case Transport:controlling_process(Socket, ProtocolPid) of
+		ok -&gt;
+		    %% &#x901A;&#x77E5;echo_protocol&#x8FDB;&#x7A0B;&#x63A7;&#x5236;&#x6743;&#x5DF2;&#x8F6C;&#x79FB;&#x3002;
+			ProtocolPid ! {shoot, Ref, Transport, Socket, AckTimeout},
+			put(SupPid, true),
+			CurConns2 = CurConns + 1,
+			if CurConns2 &lt; MaxConns -&gt;
+					To ! self(),
+					loop(State, CurConns2, NbChildren + 1, Sleepers);
+				true -&gt;
+					loop(State, CurConns2, NbChildren + 1, [To|Sleepers])
+			end;
+		{error, _} -&gt;
+			Transport:close(Socket),
+			%% Only kill the supervised pid, because the connection&apos;s pid,
+			%% when different, is supposed to be sitting under it and linked.
+			exit(SupPid, kill),
+			loop(State, CurConns, NbChildren, Sleepers)
+	end.</span><br></pre></td></tr></table></figure>
+<h3 id="ranch_protocol">ranch_protocol:</h3><p>conns_sup&#x5728;&#x5B8C;&#x6210;<code>controlling_process</code>&#x540E;&#x8981;&#x901A;&#x77E5;protocol&#x8FDB;&#x7A0B;&#x5B8C;&#x6210;&#x4E86;&#x8F6C;&#x79FB;&#x3002;&#x56E0;&#x4E3A;&#x6B64;&#x65F6;protocol&#x7684;init&#x8FD8;&#x6CA1;&#x6709;&#x6267;&#x884C;&#x7ED3;&#x675F;&#xFF0C;&#x4E00;&#x76F4;&#x5728;&#x7B49;&#x7740;&#x63A7;&#x5236;&#x6743;&#x8F6C;&#x79FB;&#x3002;&#x56E0;&#x4E3A;&#x63A7;&#x5236;&#x6743;&#x6CA1;&#x8F6C;&#x79FB;&#x662F;&#x4E0D;&#x80FD;&#x8FDB;&#x5165;loop&#x7684;.spawn_link&#x53CA;&#x65F6;&#x5C06;&#x81EA;&#x5DF1;&#x7684;pid&#x544A;&#x8BC9;&#x4E86;conns_sup.&#x5982;&#x679C;&#x662F;gen_server&#x7B49;&#x9700;&#x8981;init&#x7ED3;&#x675F;&#x624D;&#x8FD4;&#x56DE;&#x7684;&#x8FDB;&#x7A0B;&#x9700;&#x8981;&#x7279;&#x6B8A;&#x5904;&#x7406;, &#x5728;&#x4E0B;&#x9762;&#x5206;&#x6790;.&#x540C;&#x65F6;&#x5B8C;&#x6210;&#x8F6C;&#x79FB;&#x540E;conns_sup&#x8FD8;&#x7ED9;acceptor&#x53D1;&#x9001;&#x4E00;&#x6761;&#x81EA;&#x5DF1;&#x7684;pid&#xFF0C;&#x544A;&#x8BC9;acceptor&#x8F6C;&#x79FB;&#x5B8C;&#x6210;&#x3002;&#x56E0;&#x4E3A;&#x8FD9;&#x4E4B;&#x524D;acceptor&#x4E00;&#x76F4;&#x5904;&#x5728;receive&#x72B6;&#x6001;&#xFF0C;&#x7B49;&#x5F85;conns_sup&#x5B8C;&#x6210;&#x5DE5;&#x4F5C;&#x3002;&#x4E0D;&#x5B8C;&#x6210;&#x4ED6;&#x4E0D;&#x4F1A;&#x518D;&#x6B21;&#x53C2;&#x4E0E;accept&#x64CD;&#x4F5C;.<br><code>echo_protocol:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_link(Ref, Socket, Transport, Opts) -&gt;
+	Pid = spawn_link(?MODULE, init, [Ref, Socket, Transport, Opts]),
+	{ok, Pid}.
+
+init(Ref, Socket, Transport, _Opts = []) -&gt;
+  %% &#x5FC5;&#x987B;&#x8C03;&#x7528; accept_ack&#xFF0C;&#x786E;&#x4FDD;socket&#x63A7;&#x5236;&#x6743;
+	ok = ranch:accept_ack(Ref),
+	loop(Socket, Transport).</span><br></pre></td></tr></table></figure></p>
+<p><code>ranch:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">accept_ack(Ref) -&gt;
+	receive {shoot, Ref, Transport, Socket, AckTimeout} -&gt;
+		Transport:accept_ack(Socket, AckTimeout)
+	end.</span><br></pre></td></tr></table></figure></p>
+<p>&#x94FE;&#x63A5;&#x5957;&#x63A5;&#x5B57;&#x7684;&#x903B;&#x8F91;&#x8FDB;&#x7A0B;&#x90FD;&#x8981;&#x6709;</p>
+<ol>
+<li>-behavior(ranch_protocol). &#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;start_link/4 callback&#x800C;&#x5DF2;&#x3002;</li>
+<li>&#x5728;&#x4EFB;&#x4F55;&#x5BF9;&#x7AEF;&#x53E3;&#x7684;&#x64CD;&#x4F5C;&#x4E4B;&#x524D;&#x4E00;&#x5B9A;&#x8981;&#x786E;&#x4FDD;&#x6267;&#x884C;&#x8FC7;ranch:accept_ack(Ref)(&#x786E;&#x4FDD;&#x7AEF;&#x53E3;&#x63A7;&#x5236;&#x6743;&#x4EA4;&#x7ED9;&#x81EA;&#x5DF1;).&#x5728;&#x6B64;&#x4E4B;&#x540E;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;ranch_tcp|ranch_ssl:setopts(Opt)&#x5B8C;&#x6210;&#x81EA;&#x5B9A;&#x4E49;&#x5BF9;&#x7AEF;&#x53E3;&#x7684;&#x8BBE;&#x7F6E;<br>&#x5982;&#x679C;&#x540C;&#x65F6;&#x4ED6;&#x662F;&#x4E2A;gen_server,gen_fsm&#x7B49;&#x6709;&#x81EA;&#x5DF1;&#x7684;start_link, &#x4F1A;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x4E3A;init&#x4E2D;&#x653E;&#x5165;ranch:accept_ack/1&#x4F1A;&#x5F62;&#x6210;&#x6B7B;&#x9501;&#x3002;(&#x89C1;&#x4E0A;&#x9762;&#xFF0C;&#x5373;<code>conns_sup</code> &#x5728;&#x7B49;&#x5F85;<code>ranch_protocol</code>&#x8FDB;&#x7A0B;&#x7684;pid&#x8FD4;&#x56DE;&#x3002;&#x800C;<code>ranch_protocol</code>&#x5728;&#x7B49;&#x5F85;<code>conns_sup</code>&#x5C06;&#x7AEF;&#x53E3;&#x63A7;&#x5236;&#x4EA4;&#x7ED9;&#x81EA;&#x5DF1;)&#x89C1;&#x95EE;&#x9898;&#x8BF4;&#x660E;<br><a href="https://github.com/ninenines/ranch/blob/master/doc/src/guide/protocols.asciidoc" target="_blank" rel="external">ranch_protocol_doc</a>.<br>&#x4F5C;&#x8005;&#x518D;&#x4E0A;&#x9762;&#x7ED9;&#x51FA;&#x4E86;&#x4E24;&#x79CD;&#x89E3;&#x51B3;&#x529E;&#x6CD5;:</li>
+<li>&#x5728;start_link &#x4E2D;&#x7528;proc_lib:start_link&#x4EE3;&#x66FF;gen_server:start_link,&#x7136;&#x540E;&#x5728;init&#x4E2D;&#x4E3B;&#x52A8;&#x8C03;&#x7528;proc_lib&#xFF1A;init_ack&#x901A;&#x77E5;&#x7236;&#x8FDB;&#x7A0B;&#x521D;&#x59CB;&#x5316;&#x5B8C;&#x6BD5;&#xFF0C;&#x7136;&#x540E;&#x8C03;&#x7528;ranch:accept_ack&#xFF0C;&#x518D;&#x4E4B;&#x540E;&#x624B;&#x52A8;&#x7528;gen_server:enter_loop&#x8FDB;&#x5165;&#x5FAA;&#x73AF;&#x3002;&#x5728;&#x4E4B;&#x524D;&#x8FD9;&#x91CC;&#x5206;&#x6790;&#x8FC7;gen_server&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#x3002;<br><a href="/2015/07/31/erlang-question-gen-server-and-init/">gen_server&#x548C;init</a></li>
+<li>&#x4F5C;&#x8005;&#x5728;init&#x4E2D;&#x8FD4;&#x56DE;timeout&#x4E3A;0&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;handle_info(timeout...)&#x8C03;&#x7528;ranch:accept_ack&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x6700;&#x597D;&#x4E0D;&#x8981;&#x8FD9;&#x4E48;&#x7528;&#xFF0C;&#x539F;&#x56E0;&#x8FD8;&#x662F;&#x89C1;&#x4E0A;&#x9762;&#x7684;&#x6587;&#x7AE0;&#x3002;&#x5177;&#x4F53;&#x5256;&#x6790;&#x8FC7;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x80FD;&#x8FD9;&#x4E48;&#x7528;&#x3002;&#x8FD8;&#x662F;&#x7528; self()!timeout&#x66FF;&#x4EE3;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x5427;&#x3002;<br><img src="/img/ranch_3.png" alt=""></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/29/makefile笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          makefile笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/19/gitnote/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">gitnote</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ranch笔记" data-title="ranch笔记" data-url="http://youthy.github.io/2015/09/28/ranch笔记/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
