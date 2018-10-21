@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://youthyblog.disqus.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            ranch笔记 | 
+        
+        youthy的流水账
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="任何使用ranch的程序第一步需要启动ranch_app
+start ranch application入口ranch_app:123start(_, _) -&amp;gt;	_ = consider_profiling(), %% 是否启动eprof	ranch_sup:start_link().">
+    <meta name="keywords" content="erlang, golang,erlang">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body {
+        background-color: ;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="youthy的流水账">
+    <meta name="msapplication-starturl" content="http://youthyblog.com/2015/09/28/ranch笔记/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="youthy的流水账">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="luyN6dELjQn-N4acL35Kyqd_3xEjr8gA3TqpaSV23kk" />
+    <meta name="baidu-site-verification" content="BA4RKG2m6D" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://youthyblog.com/2015/09/28/ranch笔记/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="ranch笔记 | youthy的流水账">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="任何使用ranch的程序第一步需要启动ranch_app
+start ranch application入口ranch_app:123start(_, _) -&amp;gt;	_ = consider_profiling(), %% 是否启动eprof	ranch_sup:start_link().">
+    <meta property="og:article:tag" content="erlang"> 
+
+    
+        <meta property="article:published_time" content="Mon Sep 28 2015 11:58:51 GMT+0800">
+        <meta property="article:modified_time" content="Wed Oct 17 2018 16:46:23 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://youthyblog.com/2015/09/28/ranch笔记/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://youthyblog.com/2015/09/28/ranch笔记/index.html",
+    "headline": "ranch笔记",
+    "datePublished": "Mon Sep 28 2015 11:58:51 GMT+0800",
+    "dateModified": "Wed Oct 17 2018 16:46:23 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Youthy",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "youthy的流水账",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",erlangerlang, golang",
+    "description": "任何使用ranch的程序第一步需要启动ranch_app
+start ranch application入口ranch_app:123start(_, _) -&amp;gt;	_ = consider_profiling(), %% 是否启动eprof	ranch_sup:start_link().",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-127668650-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?d4026e5060b2e4c5254eaeca317f90bd';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#start-ranch-application"><span class="post-toc-number">1.</span> <span class="post-toc-text">start ranch application</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#"><span class="post-toc-number">2.</span> <span class="post-toc-text"></span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tcp-echo-app"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">tcp_echo_app:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ranch"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">ranch:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ranch-listener-sup"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">ranch_listener_sup:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ranch-conns-sup"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Ranch_conns_sup:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ranch-acceptor-sup"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">Ranch_acceptor_sup:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Acceptor"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">Acceptor:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ranch-protocol"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">ranch_protocol:</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                ranch笔记
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Youthy</strong>
+        <span>9月 28, 2015</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/erlang/">erlang</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ranch笔记&url=http://youthyblog.com/2015/09/28/ranch笔记/index.html&pic=http://youthyblog.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=ranch笔记&url=http://youthyblog.com/2015/09/28/ranch笔记/index.html&via=Youthy" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://youthyblog.com/2015/09/28/ranch笔记/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://youthyblog.com/2015/09/28/ranch笔记/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>任何使用ranch的程序第一步需要启动ranch_app</p>
+<h2 id="start-ranch-application"><a href="#start-ranch-application" class="headerlink" title="start ranch application"></a>start ranch application</h2><p>入口<br><code>ranch_app:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start(_, _) -&gt;</span><br><span class="line">	_ = consider_profiling(), %% 是否启动eprof</span><br><span class="line">	ranch_sup:start_link().</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p><code>ranch_sup:</code><br>整个应用的最顶级sup， 它建立ranch_server ets,并启动ranch_server这个gen_server,将ranch_server这个ets归属于ranch_sup提高容错.防止数据丢失。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">start_link() -&gt;</span><br><span class="line">	supervisor:start_link(&#123;local, ?MODULE&#125;, ?MODULE, []).</span><br><span class="line"></span><br><span class="line">init([]) -&gt;</span><br><span class="line">	ranch_server = ets:new(ranch_server, [</span><br><span class="line">		ordered_set, public, named_table]),</span><br><span class="line">	Procs = [</span><br><span class="line">		&#123;ranch_server, &#123;ranch_server, start_link, []&#125;,</span><br><span class="line">			permanent, 5000, worker, [ranch_server]&#125;</span><br><span class="line">	],</span><br><span class="line">	&#123;ok, &#123;&#123;one_for_one, 10, 10&#125;, Procs&#125;&#125;.</span><br></pre></td></tr></table></figure></p>
+<p><code>ranch_server:</code><br>是一个gen_server,init中从ranch_server ets中恢复数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">init([]) -&gt;</span><br><span class="line">	Monitors = [&#123;&#123;erlang:monitor(process, Pid), Pid&#125;, Ref&#125; ||</span><br><span class="line">		[Ref, Pid] &lt;- ets:match(?TAB, &#123;&#123;conns_sup, &apos;$1&apos;&#125;, &apos;$2&apos;&#125;)],</span><br><span class="line">	&#123;ok, #state&#123;monitors=Monitors&#125;&#125;.</span><br></pre></td></tr></table></figure></p>
+<p><strong>ranch初始化完成</strong></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/img/ranch_1.png" alt=""></h2><p>至此ranch实际上没有做任何事情，它并没有监听任何端口，需要使用者在自己的app中显示的调用ranch:start_listener来启动acceptor_pool.</p>
+<p>在作者的demo中是这样：</p>
+<h3 id="tcp-echo-app"><a href="#tcp-echo-app" class="headerlink" title="tcp_echo_app:"></a>tcp_echo_app:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">start(_Type, _Args) -&gt;</span><br><span class="line">	&#123;ok, _&#125; = ranch:start_listener(tcp_echo, 1,</span><br><span class="line">		ranch_tcp, [&#123;port, 5555&#125;], echo_protocol, []),</span><br><span class="line">	tcp_echo_sup:start_link().</span><br></pre></td></tr></table></figure>
+<p><code>ranch:start_listner</code>接受6个参数 </p>
+<ol>
+<li>名字: tcp_echo,</li>
+<li>acceptor数量: 1<br><strong>此处不是connection的数量!! wiki说:</strong><blockquote>
+<p>First of all, it should not be confused with the maximum number of connections. Acceptor processes are only used for accepting and have nothing else in common with connection processes. Therefore there is nothing to be gained from setting this number too high, in fact it can slow everything else down.</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>Second, this number should be high enough to allow Ranch to accept connections concurrently. But the number of cores available doesn’t seem to be the only factor for choosing this number, as we can observe faster accepts if we have more acceptors than cores. It might be entirely dependent on the protocol, however.</p>
+</blockquote>
+<p>总之就是太少太多都不好，他们的观测得到100较为合适</p>
+<ol start="3">
+<li>transport的方式: ranch_tcp</li>
+<li>transport options: [{port, 5555}],<br><code>ranch_tcp:</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">listen(Opts) -&gt;</span><br><span class="line">	Opts2 = ranch:set_option_default(Opts, backlog, 1024),</span><br><span class="line">	Opts3 = ranch:set_option_default(Opts2, nodelay, true),</span><br><span class="line">	Opts4 = ranch:set_option_default(Opts3, send_timeout, 30000),</span><br><span class="line">	Opts5 = ranch:set_option_default(Opts4, send_timeout_close, true),</span><br><span class="line">	gen_tcp:listen(0, ranch:filter_options(Opts5, listen_options(),</span><br><span class="line">		[binary, &#123;active, false&#125;, &#123;packet, raw&#125;, &#123;reuseaddr, true&#125;])).</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以看出ranch_tcp代码中默认使用binary, {active,false}, 等设置，所以无法通过options更改。可以在start_listener之后的通过Transport:setopts/2更改.<br>但是backlog, nodelay等可以通过Opts在start的时候就设置好.<br><strong>port</strong>:未指定的话，则会随意一个端口.还有，不要设置1024以上的。原因如下</p>
+<blockquote>
+<p>Some systems limit access to ports below 1024 for security reasons.The methods for listening on privileged ports vary between systems, please refer to your system’s documentation for more information.</p>
+</blockquote>
+<p><strong>max_connections</strong>: {max_connections, Number|infinity}Number默认是1024.尽量不要infinity。<br>还可以通过<code>ranch:set_max_connections</code>设置.有时有个别进程是长链接，不希望它计入connections的计数。可以通过<code>ranch:remove_conections/1</code>移除1.</p>
+<ol start="5">
+<li>protocol_handler mod: echo_protocol</li>
+<li>protocol options: []</li>
+</ol>
+<h3 id="ranch"><a href="#ranch" class="headerlink" title="ranch:"></a>ranch:</h3><p>listener的实现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">start_listener(tcp_echo, 1, ranch_tcp, [&#123;port, 5555&#125;], echo_protocol, []) -&gt;</span><br><span class="line">    ...</span><br><span class="line">	ChildSpec = &#123;&#123;ranch_listener_sup, tcp_echo&#125;, &#123;ranch_listener_sup, start_link, [</span><br><span class="line">		tcp_echo, 1, ranch_tcp, [&#123;port, 5555&#125;], echo_protocol, [] </span><br><span class="line">	]&#125;, permanent, infinity, supervisor, [ranch_listener_sup]&#125;.</span><br><span class="line">	Res = supervisor:start_child(ranch_sup, ChildSpec),</span><br><span class="line">	Socket = proplists:get_value(socket, [&#123;port, 5555&#125;]),</span><br><span class="line">	case Res of</span><br><span class="line">		&#123;ok, Pid&#125; when Socket =/= undefined -&gt;</span><br><span class="line">		    %% 此处更改socket的拥有者,暂不管</span><br><span class="line">		  	Children = supervisor:which_children(Pid),</span><br><span class="line">		  	&#123;_, AcceptorsSup, _, _&#125;</span><br><span class="line">		  		= lists:keyfind(ranch_acceptors_sup, 1, Children),</span><br><span class="line">		   catch Transport:controlling_process(Socket, AcceptorsSup);</span><br><span class="line">		_ -&gt;</span><br><span class="line">			ok</span><br><span class="line">	end,</span><br><span class="line">	Res</span><br><span class="line">	...</span><br></pre></td></tr></table></figure></p>
+<p>在未指定socket的情况，start_listener通过<code>supervisor:start_child/2</code>启动了<code>ranch_listener_sup</code></p>
+<h3 id="ranch-listener-sup"><a href="#ranch-listener-sup" class="headerlink" title="ranch_listener_sup:"></a>ranch_listener_sup:</h3><p>listener_sup 仍然是个supervisor，它得到一个max_connections(默认1024）, 通知ranch_server储存max_connection,和Opts。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">start_link(Ref, NbAcceptors, Transport, TransOpts, Protocol, ProtoOpts) -&gt;</span><br><span class="line">	MaxConns = proplists:get_value(max_connections, TransOpts, 1024),</span><br><span class="line">	ranch_server:set_new_listener_opts(Ref, MaxConns, ProtoOpts),</span><br><span class="line">	%% 注意此处没有注册名字</span><br><span class="line">	supervisor:start_link(?MODULE, &#123;</span><br><span class="line">		Ref, NbAcceptors, Transport, TransOpts, Protocol</span><br><span class="line">	&#125;).</span><br></pre></td></tr></table></figure></p>
+<p><code>ranch_server:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">handle_call(&#123;set_new_listener_opts, Ref, MaxConns, Opts&#125;, _, State) -&gt;</span><br><span class="line">    %% 将数据存入rank_server ets.</span><br><span class="line">	ets:insert(rank_server, &#123;&#123;max_conns, Ref&#125;, MaxConns&#125;),</span><br><span class="line">	ets:insert(rank_server, &#123;&#123;opts, Ref&#125;, Opts&#125;),</span><br><span class="line">	&#123;reply, ok, State&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><code>ranch_listener_sup:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">init(&#123;tcp_echo, 1, ranch_tcp, [&#123;port, 5555&#125;], echo_protocol&#125;) -&gt;</span><br><span class="line">	AckTimeout = proplists:get_value(ack_timeout, TransOpts, 5000),</span><br><span class="line">	ConnType = proplists:get_value(connection_type, TransOpts, worker),</span><br><span class="line">	Shutdown = proplists:get_value(shutdown, TransOpts, 5000),</span><br><span class="line">	ChildSpecs = [</span><br><span class="line">		&#123;ranch_conns_sup, &#123;ranch_conns_sup, start_link,</span><br><span class="line">				[Ref, ConnType, Shutdown, Transport, AckTimeout, Protocol]&#125;,</span><br><span class="line">			permanent, infinity, supervisor, [ranch_conns_sup]&#125;,</span><br><span class="line">		&#123;ranch_acceptors_sup, &#123;ranch_acceptors_sup, start_link,</span><br><span class="line">				[Ref, NbAcceptors, Transport, TransOpts]&#125;,</span><br><span class="line">			permanent, infinity, supervisor, [ranch_acceptors_sup]&#125;</span><br><span class="line">	],</span><br><span class="line">	&#123;ok, &#123;&#123;rest_for_one, 10, 10&#125;, ChildSpecs&#125;&#125;.</span><br></pre></td></tr></table></figure></p>
+<p>listener_sup 启动 conns_sup和acceptors_sup,这两个都是supervisor 所以shutdown都设置成infinity<br>但是其中conns_sup是个自定义的supervisor，作者解释是为了优化create和accept connection。</p>
+<blockquote>
+<p>Ranch uses a custom supervisor for managing connections. This supervisor keeps track of the number of connections and handles connection limits directly. While it is heavily optimized to perform the task of creating connection processes for accepted connections, it is still following the OTP principles and the usual sys and supervisor calls will work on it as expected.</p>
+</blockquote>
+<h3 id="Ranch-conns-sup"><a href="#Ranch-conns-sup" class="headerlink" title="Ranch_conns_sup:"></a>Ranch_conns_sup:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">start_link(Ref, ConnType, Shutdown, Transport, AckTimeout, Protocol) -&gt;</span><br><span class="line">	proc_lib:start_link(?MODULE, init,</span><br><span class="line">	[self(), Ref, ConnType, Shutdown, Transport, AckTimeout, Protocol]).</span><br><span class="line">	</span><br><span class="line">init(Parent, Ref, ConnType, Shutdown, Transport, AckTimeout, Protocol) -&gt;</span><br><span class="line">	process_flag(trap_exit, true),</span><br><span class="line">	ok = ranch_server:set_connections_sup(Ref, self()),</span><br><span class="line">	MaxConns = ranch_server:get_max_connections(Ref),</span><br><span class="line">	Opts = ranch_server:get_protocol_options(Ref),</span><br><span class="line">	ok = proc_lib:init_ack(Parent, &#123;ok, self()&#125;),</span><br><span class="line">	loop(#state&#123;parent=Parent, ref=Ref, conn_type=ConnType,</span><br><span class="line">		shutdown=Shutdown, transport=Transport, protocol=Protocol,</span><br><span class="line">		opts=Opts, ack_timeout=AckTimeout, max_conns=MaxConns&#125;, 0, 0, []).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">14&gt; rp(sys:get_status(ConnsSup)).</span><br><span class="line">&#123;status,&lt;0.43.0&gt;,</span><br><span class="line">        &#123;module,ranch_conns_sup&#125;,</span><br><span class="line">        [[&#123;&apos;$ancestors&apos;,[&lt;0.42.0&gt;,ranch_sup,&lt;0.34.0&gt;]&#125;,</span><br><span class="line">          &#123;&apos;$initial_call&apos;,&#123;ranch_conns_sup,init,7&#125;&#125;],</span><br><span class="line">         running,&lt;0.42.0&gt;,[],</span><br><span class="line">         &#123;&#123;state,&lt;0.42.0&gt;,tcp_echo,worker,5000,ranch_tcp,</span><br><span class="line">                 echo_protocol,[],5000,1024&#125;,</span><br><span class="line">          0,0,[]&#125;]&#125;</span><br></pre></td></tr></table></figure>
+<p>上面使用<code>sys:get_status(Name|Pid)</code>得到ranch_conns_sup的#state{}。</p>
+<h3 id="Ranch-acceptor-sup"><a href="#Ranch-acceptor-sup" class="headerlink" title="Ranch_acceptor_sup:"></a>Ranch_acceptor_sup:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">start_link(Ref, NbAcceptors, Transport, TransOpts) -&gt;</span><br><span class="line">	supervisor:start_link(?MODULE, [Ref, NbAcceptors, Transport, TransOpts]).</span><br><span class="line"></span><br><span class="line">init([Ref, NbAcceptors, Transport, TransOpts]) -&gt;</span><br><span class="line">	ConnsSup = ranch_server:get_connections_sup(Ref),</span><br><span class="line">	LSocket = case proplists:get_value(socket, TransOpts) of</span><br><span class="line">		undefined -&gt;</span><br><span class="line">			TransOpts2 = proplists:delete(ack_timeout,</span><br><span class="line">				proplists:delete(connection_type,</span><br><span class="line">				proplists:delete(max_connections,</span><br><span class="line">				proplists:delete(shutdown,</span><br><span class="line">				proplists:delete(socket, TransOpts))))),</span><br><span class="line">			case Transport:listen(TransOpts2) of</span><br><span class="line">				&#123;ok, Socket&#125; -&gt; Socket;</span><br><span class="line">				&#123;error, Reason&#125; -&gt; listen_error(Ref, Transport, TransOpts2, Reason)</span><br><span class="line">			end;</span><br><span class="line">		Socket -&gt;</span><br><span class="line">			Socket</span><br><span class="line">	end,</span><br><span class="line">	&#123;ok, Addr&#125; = Transport:sockname(LSocket),</span><br><span class="line">	ranch_server:set_addr(Ref, Addr),</span><br><span class="line">	Procs = [</span><br><span class="line">		&#123;&#123;acceptor, self(), N&#125;, &#123;ranch_acceptor, start_link, [</span><br><span class="line">			LSocket, Transport, ConnsSup</span><br><span class="line">		]&#125;, permanent, brutal_kill, worker, []&#125;</span><br><span class="line">			|| N &lt;- lists:seq(1, NbAcceptors)],</span><br><span class="line">	&#123;ok, &#123;&#123;one_for_one, 10, 10&#125;, Procs&#125;&#125;.</span><br></pre></td></tr></table></figure>
+<p>acceptor_sup完成了得到一个ListenSocket, 然后启动N个acceptor进程，这些acceptor的loop等待<code>gen_tcp:accept</code> | <code>ssl:transport_accept</code><br><code>Transport:listen</code>的本质就是<code>gen_tcp:listen</code>或者<code>ssl:listen</code> 它返回一个ListenSocket<br><code>Transport:sockname</code> :: <code>inet:sockname</code> | <code>ssl:sockname</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">13&gt; sys:get_status(AccepterSup).</span><br><span class="line">&#123;status,&lt;0.44.0&gt;,</span><br><span class="line">        &#123;module,gen_server&#125;,</span><br><span class="line">        [[&#123;&apos;$ancestors&apos;,[&lt;0.42.0&gt;,ranch_sup,&lt;0.34.0&gt;]&#125;,</span><br><span class="line">          &#123;&apos;$initial_call&apos;,&#123;supervisor,ranch_acceptors_sup,1&#125;&#125;],</span><br><span class="line">         running,&lt;0.42.0&gt;,[],</span><br><span class="line">         [&#123;header,&quot;Status for generic server &lt;0.44.0&gt;&quot;&#125;,</span><br><span class="line">          &#123;data,[&#123;&quot;Status&quot;,running&#125;,</span><br><span class="line">                 &#123;&quot;Parent&quot;,&lt;0.42.0&gt;&#125;,</span><br><span class="line">                 &#123;&quot;Logged events&quot;,[]&#125;]&#125;,</span><br><span class="line">          &#123;data,[&#123;&quot;State&quot;,</span><br><span class="line">                  &#123;state,&#123;&lt;0.44.0&gt;,ranch_acceptors_sup&#125;,</span><br><span class="line">                         one_for_one,</span><br><span class="line">                         [&#123;child,&lt;0.45.0&gt;,</span><br><span class="line">                                 &#123;acceptor,&lt;0.44.0&gt;,1&#125;,</span><br><span class="line">                                 &#123;ranch_acceptor,start_link,</span><br><span class="line">                                                 [#Port&lt;0.917&gt;,ranch_tcp,&lt;0.43.0&gt;]&#125;,</span><br><span class="line">                                 permanent,brutal_kill,worker,[]&#125;],</span><br><span class="line">                         undefined,10,10,[],ranch_acceptors_sup,</span><br><span class="line">                         [tcp_echo,1,ranch_tcp,[&#123;port,5555&#125;]]&#125;&#125;]&#125;]]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>demo中只启动了一个acceptor<br>至此完了了所有进程的启动。等待connection进来。<br><img src="/img/ranch_2.png" alt=""></p>
+<h3 id="Acceptor"><a href="#Acceptor" class="headerlink" title="Acceptor:"></a>Acceptor:</h3><p>acceptor的作用是<code>accept(ListenSocket) -&gt; Socket.</code> 通过<code>Transport:controlling_process</code>,将端口控制交给<code>conns_sup</code>, 然后向conns_sup发送<code>{ranch_conns_sup, start_protocol, AcceptorPid, Socket}</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">start_link(LSocket, Transport, ConnsSup) -&gt;</span><br><span class="line">	Pid = spawn_link(?MODULE, loop, [LSocket, Transport, ConnsSup]),</span><br><span class="line">	&#123;ok, Pid&#125;.</span><br><span class="line"></span><br><span class="line">-spec loop(inet:socket(), module(), pid()) -&gt; no_return().</span><br><span class="line">loop(LSocket, Transport, ConnsSup) -&gt;</span><br><span class="line">	_ = case Transport:accept(LSocket, infinity) of</span><br><span class="line">		&#123;ok, CSocket&#125; -&gt;</span><br><span class="line">			case Transport:controlling_process(CSocket, ConnsSup) of</span><br><span class="line">				ok -&gt;</span><br><span class="line">					ranch_conns_sup:start_protocol(ConnsSup, CSocket);</span><br><span class="line">				&#123;error, _&#125; -&gt;</span><br><span class="line">					Transport:close(CSocket)</span><br><span class="line">			end;</span><br><span class="line">		&#123;error, emfile&#125; -&gt;</span><br><span class="line">			receive after 100 -&gt; ok end;</span><br><span class="line">		&#123;error, Reason&#125; when Reason =/= closed -&gt;</span><br><span class="line">			ok</span><br><span class="line">	end,</span><br><span class="line">	flush(),</span><br><span class="line">	?MODULE:loop(LSocket, Transport, ConnsSup).</span><br></pre></td></tr></table></figure>
+<p><code>ranch_conns_sup</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start_protocol(SupPid, Socket) -&gt;</span><br><span class="line">	SupPid ! &#123;?MODULE, start_protocol, self(), Socket&#125;,</span><br><span class="line">	receive SupPid -&gt; ok end.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;?MODULE, start_protocol, To, Socket&#125; -&gt;</span><br><span class="line">	try Protocol:start_link(Ref, Socket, Transport, Opts) of</span><br><span class="line">		&#123;ok, Pid&#125; -&gt;</span><br><span class="line">			shoot(State, CurConns, NbChildren, Sleepers, To, Socket, Pid, Pid);</span><br><span class="line">		&#123;ok, SupPid, ProtocolPid&#125; when ConnType =:= supervisor -&gt;</span><br><span class="line">			shoot(State, CurConns, NbChildren, Sleepers, To, Socket, SupPid, ProtocolPid);</span><br><span class="line">		Ret -&gt;</span><br><span class="line">			To ! self(),</span><br><span class="line">			error_logger:error_msg(</span><br><span class="line">				&quot;Ranch listener ~p connection process start failure; &quot;</span><br><span class="line">				&quot;~p:start_link/4 returned: ~999999p~n&quot;,</span><br><span class="line">				[Ref, Protocol, Ret]),</span><br><span class="line">			Transport:close(Socket),</span><br><span class="line">			loop(State, CurConns, NbChildren, Sleepers)</span><br><span class="line">			......</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">shoot(State=#state&#123;ref=Ref, transport=Transport, ack_timeout=AckTimeout, max_conns=MaxConns&#125;,</span><br><span class="line">		CurConns, NbChildren, Sleepers, To, Socket, SupPid, ProtocolPid) -&gt;</span><br><span class="line">	case Transport:controlling_process(Socket, ProtocolPid) of</span><br><span class="line">		ok -&gt;</span><br><span class="line">		    %% 通知echo_protocol进程控制权已转移。</span><br><span class="line">			ProtocolPid ! &#123;shoot, Ref, Transport, Socket, AckTimeout&#125;,</span><br><span class="line">			put(SupPid, true),</span><br><span class="line">			CurConns2 = CurConns + 1,</span><br><span class="line">			if CurConns2 &lt; MaxConns -&gt;</span><br><span class="line">					To ! self(),</span><br><span class="line">					loop(State, CurConns2, NbChildren + 1, Sleepers);</span><br><span class="line">				true -&gt;</span><br><span class="line">					loop(State, CurConns2, NbChildren + 1, [To|Sleepers])</span><br><span class="line">			end;</span><br><span class="line">		&#123;error, _&#125; -&gt;</span><br><span class="line">			Transport:close(Socket),</span><br><span class="line">			%% Only kill the supervised pid, because the connection&apos;s pid,</span><br><span class="line">			%% when different, is supposed to be sitting under it and linked.</span><br><span class="line">			exit(SupPid, kill),</span><br><span class="line">			loop(State, CurConns, NbChildren, Sleepers)</span><br><span class="line">	end.</span><br></pre></td></tr></table></figure>
+<h3 id="ranch-protocol"><a href="#ranch-protocol" class="headerlink" title="ranch_protocol:"></a>ranch_protocol:</h3><p>conns_sup在完成<code>controlling_process</code>后要通知protocol进程完成了转移。因为此时protocol的init还没有执行结束，一直在等着控制权转移。因为控制权没转移是不能进入loop的.spawn_link及时将自己的pid告诉了conns_sup.如果是gen_server等需要init结束才返回的进程需要特殊处理, 在下面分析.同时完成转移后conns_sup还给acceptor发送一条自己的pid，告诉acceptor转移完成。因为这之前acceptor一直处在receive状态，等待conns_sup完成工作。不完成他不会再次参与accept操作.<br><code>echo_protocol:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">start_link(Ref, Socket, Transport, Opts) -&gt;</span><br><span class="line">	Pid = spawn_link(?MODULE, init, [Ref, Socket, Transport, Opts]),</span><br><span class="line">	&#123;ok, Pid&#125;.</span><br><span class="line"></span><br><span class="line">init(Ref, Socket, Transport, _Opts = []) -&gt;</span><br><span class="line">  %% 必须调用 accept_ack，确保socket控制权</span><br><span class="line">	ok = ranch:accept_ack(Ref),</span><br><span class="line">	loop(Socket, Transport).</span><br></pre></td></tr></table></figure></p>
+<p><code>ranch:</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">accept_ack(Ref) -&gt;</span><br><span class="line">	receive &#123;shoot, Ref, Transport, Socket, AckTimeout&#125; -&gt;</span><br><span class="line">		Transport:accept_ack(Socket, AckTimeout)</span><br><span class="line">	end.</span><br></pre></td></tr></table></figure></p>
+<p>链接套接字的逻辑进程都要有</p>
+<ol>
+<li>-behavior(ranch_protocol). 定义了一个start_link/4 callback而已。</li>
+<li>在任何对端口的操作之前一定要确保执行过ranch:accept_ack(Ref)(确保端口控制权交给自己).在此之后可以运行ranch_tcp|ranch_ssl:setopts(Opt)完成自定义对端口的设置<br>如果同时他是个gen_server,gen_fsm等有自己的start_link, 会产生一个问题，因为init中放入ranch:accept_ack/1会形成死锁。(见上面，即<code>conns_sup</code> 在等待<code>ranch_protocol</code>进程的pid返回。而<code>ranch_protocol</code>在等待<code>conns_sup</code>将端口控制交给自己)见问题说明<br><a href="https://github.com/ninenines/ranch/blob/master/doc/src/guide/protocols.asciidoc" target="_blank" rel="noopener">ranch_protocol_doc</a>.<br>作者再上面给出了两种解决办法:</li>
+<li>在start_link 中用proc_lib:start_link代替gen_server:start_link,然后在init中主动调用proc_lib：init_ack通知父进程初始化完毕，然后调用ranch:accept_ack，再之后手动用gen_server:enter_loop进入循环。在之前这里分析过gen_server的初始化过程。<br><a href="/2015/07/31/erlang-question-gen-server-and-init/">gen_server和init</a></li>
+<li>作者在init中返回timeout为0，然后通过handle_info(timeout…)调用ranch:accept_ack。实际上最好不要这么用，原因还是见上面的文章。具体剖析过为什么不能这么用。还是用 self()!timeout替代这种方法吧。<br><img src="/img/ranch_3.png" alt=""></li>
+</ol>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://youthyblog.com/2015/09/28/ranch笔记/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://youthyblog.com/2015/09/28/ranch笔记/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//youthyblog.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2015/09/29/makefile笔记/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2015/09/19/gitnote/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Youthy's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        Contact
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://weibo.com/u/1592381215" target="_blank" title="Weibo me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">person_add</i>
+                        
+                        Weibo me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/10/">十月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/09/">九月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">八月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">七月 2014<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/06/">六月 2014<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/ACG/">ACG<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/erlang/">erlang<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/随笔/">随笔<span class="sidebar_archives-count">4</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="links" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/shizixiuluo" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/1592381215" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+        <a href="https://www.zhihu.com/people/yu-you-qi-46/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
+                <span class="visuallyhidden">Zhihu</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;youthy的流水账
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//youthyblog.disqus.com/count.js" async></script>
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2014;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

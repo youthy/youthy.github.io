@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://youthyblog.disqus.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            vimscript笔记 | 
+        
+        youthy的流水账
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="
+Remeber :help always be with you  – albert einstein记住:help　与你同在
+">
+    <meta name="keywords" content="erlang, golang,vim">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body {
+        background-color: ;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="youthy的流水账">
+    <meta name="msapplication-starturl" content="http://youthyblog.com/2016/05/06/vimscript笔记/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="youthy的流水账">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="luyN6dELjQn-N4acL35Kyqd_3xEjr8gA3TqpaSV23kk" />
+    <meta name="baidu-site-verification" content="BA4RKG2m6D" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://youthyblog.com/2016/05/06/vimscript笔记/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="vimscript笔记 | youthy的流水账">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="
+Remeber :help always be with you  – albert einstein记住:help　与你同在
+">
+    <meta property="og:article:tag" content="vim"> 
+
+    
+        <meta property="article:published_time" content="Fri May 06 2016 15:33:21 GMT+0800">
+        <meta property="article:modified_time" content="Wed Oct 17 2018 16:46:23 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://youthyblog.com/2016/05/06/vimscript笔记/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://youthyblog.com/2016/05/06/vimscript笔记/index.html",
+    "headline": "vimscript笔记",
+    "datePublished": "Fri May 06 2016 15:33:21 GMT+0800",
+    "dateModified": "Wed Oct 17 2018 16:46:23 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Youthy",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "youthy的流水账",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",vimerlang, golang",
+    "description": "
+Remeber :help always be with you  – albert einstein记住:help　与你同在
+",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-127668650-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?d4026e5060b2e4c5254eaeca317f90bd';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#First-of-all"><span class="post-toc-number">1.</span> <span class="post-toc-text">First of all</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#echo-echom-打印信息帮助调试"><span class="post-toc-number">2.</span> <span class="post-toc-text">echo echom  打印信息帮助调试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注释"><span class="post-toc-number">3.</span> <span class="post-toc-text">注释</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#布尔-选项"><span class="post-toc-number">4.</span> <span class="post-toc-text">(布尔)选项</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#map-映射-映射"><span class="post-toc-number">5.</span> <span class="post-toc-text">map 映射!映射!</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#leader按键"><span class="post-toc-number">6.</span> <span class="post-toc-text">leader按键</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#iabbrev"><span class="post-toc-number">7.</span> <span class="post-toc-text">iabbrev</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#autocmd-自动命令"><span class="post-toc-number">8.</span> <span class="post-toc-text">autocmd 自动命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#operator-pending"><span class="post-toc-number">9.</span> <span class="post-toc-text">operator_pending</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#normal"><span class="post-toc-number">10.</span> <span class="post-toc-text">:normal</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#execute"><span class="post-toc-number">11.</span> <span class="post-toc-text">:execute</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#set-statusline"><span class="post-toc-number">12.</span> <span class="post-toc-text">set statusline</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#let-变量"><span class="post-toc-number">13.</span> <span class="post-toc-text">let  变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#寄存器"><span class="post-toc-number">14.</span> <span class="post-toc-text">寄存器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#管道"><span class="post-toc-number">15.</span> <span class="post-toc-text">管道</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#if"><span class="post-toc-number">16.</span> <span class="post-toc-text">if</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#比较"><span class="post-toc-number">16.1.</span> <span class="post-toc-text">比较</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#函数"><span class="post-toc-number">17.</span> <span class="post-toc-text">函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#参数"><span class="post-toc-number">17.1.</span> <span class="post-toc-text">参数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#可变参数"><span class="post-toc-number">17.2.</span> <span class="post-toc-text">可变参数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#命名空间"><span class="post-toc-number">17.3.</span> <span class="post-toc-text">命名空间</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串"><span class="post-toc-number">18.</span> <span class="post-toc-text">字符串</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#连接符"><span class="post-toc-number">18.1.</span> <span class="post-toc-text">连接符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#字符串函数"><span class="post-toc-number">18.2.</span> <span class="post-toc-text">字符串函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#列表"><span class="post-toc-number">19.</span> <span class="post-toc-text">列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环"><span class="post-toc-number">20.</span> <span class="post-toc-text">循环</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#for"><span class="post-toc-number">20.1.</span> <span class="post-toc-text">for</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dict"><span class="post-toc-number">21.</span> <span class="post-toc-text">dict</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#函数式编程"><span class="post-toc-number">22.</span> <span class="post-toc-text">函数式编程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#deepcopy-与copy"><span class="post-toc-number">22.1.</span> <span class="post-toc-text">deepcopy 与copy</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径"><span class="post-toc-number">23.</span> <span class="post-toc-text">路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Regex-正则表达式"><span class="post-toc-number">24.</span> <span class="post-toc-text">Regex 正则表达式</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                vimscript笔记
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Youthy</strong>
+        <span>5月 06, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/vim/">vim</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=vimscript笔记&url=http://youthyblog.com/2016/05/06/vimscript笔记/index.html&pic=http://youthyblog.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=vimscript笔记&url=http://youthyblog.com/2016/05/06/vimscript笔记/index.html&via=Youthy" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://youthyblog.com/2016/05/06/vimscript笔记/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://youthyblog.com/2016/05/06/vimscript笔记/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <blockquote>
+<p>Remeber <code>:help</code> always be with you  – albert einstein<br>记住<code>:help</code>　与你同在</p>
+</blockquote>
+<a id="more"></a>
+<!-- toc -->
+<h3 id="First-of-all"><a href="#First-of-all" class="headerlink" title="First of all"></a>First of all</h3><p>首先<code>:help echo/function/....</code>　help可以查看一个关键词的帮助.首先要习惯使用它</p>
+<h3 id="echo-echom-打印信息帮助调试"><a href="#echo-echom-打印信息帮助调试" class="headerlink" title="echo echom  打印信息帮助调试"></a>echo echom  打印信息帮助调试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:echo &quot;test&quot;</span><br><span class="line">:echo &quot;test2&quot;</span><br><span class="line">:messages</span><br></pre></td></tr></table></figure>
+<p>test2在message中，而test不在。<br>echom 主要用来调试。</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot; 这是注释</span><br></pre></td></tr></table></figure>
+<h3 id="布尔-选项"><a href="#布尔-选项" class="headerlink" title="(布尔)选项"></a>(布尔)选项</h3><p><code>:set</code> 用于设置内置的选项。有的是布尔选项，有的不是 see <code>:help set</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:set number</span><br><span class="line">:set nonumber</span><br><span class="line">:set number!</span><br><span class="line">:set number?</span><br><span class="line">:set number numberwidth=4</span><br><span class="line">:set omnifunc=XXX#complete</span><br></pre></td></tr></table></figure></p>
+<p>number是一个布尔选项。任何布尔选项都可以通过<code>set</code> ,<code>set no(Bool)</code>, 设置开启关闭<code>set Bool!</code>切换开关状态.<br><code>set {Option}?</code> 用来查看当前值.<br>有些选项可以赋值.多选项用空格隔开一次赋值<br>number是用来显示行号的布尔值<br>omnifunc 是补全函数<br>在脚本中如果要引用某个选项使用<code>&amp;</code>, 比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if &amp;filetype == &quot;vim&quot;</span><br></pre></td></tr></table></figure></p>
+<p>判断当前文件类型是否是vimscript</p>
+<h3 id="map-映射-映射"><a href="#map-映射-映射" class="headerlink" title="map 映射!映射!"></a>map 映射!映射!</h3><p><code>:help map-commands</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">:map - x  //  任何模式下将&apos;-&apos;映射为&apos;x&apos;</span><br><span class="line">:map &lt;space&gt; x</span><br><span class="line">:map &lt;c-d&gt; x</span><br><span class="line">:nmap - x</span><br><span class="line">:vmap - x</span><br><span class="line">:imap - x</span><br><span class="line">:noremap - x</span><br><span class="line">:noremap \ -</span><br></pre></td></tr></table></figure></p>
+<p>map通用于所有模式下。nmap,vmap, imap分别映射在不同的模式下。<br>noremap不存在递归风险。任何时候都应该使用这种方式。<strong>对，任何时候</strong></p>
+<h3 id="leader按键"><a href="#leader按键" class="headerlink" title="leader按键"></a>leader按键</h3><p><code>:help mapleader</code><br>很多插件中存在各种映射都用的<leader>这个按键<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:let mapleader=&quot;-&quot;</span><br><span class="line">:nnoremap &lt;leader&gt;d dd</span><br><span class="line">let maplocalleader = &quot;\\&quot;</span><br><span class="line">:noremap &lt;buffer&gt; &lt;localleader&gt;d dd</span><br></pre></td></tr></table></figure></leader></p>
+<p>leader 默认为<code>\</code>, 如果修改可以通过<code>echo mapleader</code>查看<br>localleader 只针对某个buffer</p>
+<blockquote>
+<p>除了map 还有各种其他地方指定<code>&lt;buffer&gt;</code>的设置。比如autocmd,加上buffer比较安全。</p>
+</blockquote>
+<p>同样有的选项也支持<code>:setlocal number</code></p>
+<h3 id="iabbrev"><a href="#iabbrev" class="headerlink" title="iabbrev"></a>iabbrev</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:iabbrev waht what</span><br></pre></td></tr></table></figure>
+<p>自动替换。　可以将ｗａｈｔ　替换为ｗｈａｔ<br>iabbrev是结束insert mode时发生的。 如果what前后有别的则不会发生替换.这点与<code>inoremap waht what</code>不同<br>同样可以接受<code>:iabbrev &lt;buffer&gt; XXXX</code>　只对当前buffer生效</p>
+<h3 id="autocmd-自动命令"><a href="#autocmd-自动命令" class="headerlink" title="autocmd 自动命令"></a>autocmd 自动命令</h3><p><code>:help autocmd</code><br><code>:help Event</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:autocmd BufNewFild,BufRead *.html :normal gg=G</span><br><span class="line">         事件                模式   执行命令</span><br></pre></td></tr></table></figure></p>
+<p><code>autocmd Event File Command</code>  对File文件接收到event事件后　触发command</p>
+<p>Event后面的模式每个pattern不一样。<br>比如 <code>:autocmd FileType vim call SomeFun()</code><br><strong>这里有个危险的地方</strong><br>单纯的<code>autocmd</code> 并不会覆盖之前的命令。如果同一个<code>autocmd</code>加载多次他们会同时存在也就是可能对于同一个事件执行多次<code>SomeFun()</code>.<br>这里vim有一种自动命令组的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup</span><br><span class="line">:    autocmd BufWrite * :echom &quot;Foo&quot;</span><br><span class="line">:    autocmd BufWrite * :echom &quot;Bar&quot;</span><br><span class="line">:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>上面将”Foo”, “Bar”两个事件归到testgroup组中。这时testgroup相当于一个<code>autocmd</code>　同样多次执行testgroup也会造成上面的情况。同样，如果之后在执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup</span><br><span class="line">:    autocmd BufWrite * :echom &quot;Baz&quot;</span><br><span class="line">:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>“Foo”, “Bar”并没有清除.而是将”Baz”合并到了testgroup中.这样没有解决多次读取事件造成重复调用的问题。<br>解决的办法是在组开始的地方调用 <code>autocmd!</code>来清除这个组的事件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup</span><br><span class="line">:    autocmd!</span><br><span class="line">:    autocmd BufWrite * :echom &quot;Cats&quot;</span><br><span class="line">:    autocmd XXXXX....</span><br><span class="line">:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>这样解决了多次重复调用的问题</p>
+<h3 id="operator-pending"><a href="#operator-pending" class="headerlink" title="operator_pending"></a>operator_pending</h3><p><code>:onoremap p ic</code></p>
+<p>w, p, t 各种定位词　ｏｎｏｒｅｍａｐ可以修改定位词映射</p>
+<h3 id="normal"><a href="#normal" class="headerlink" title=":normal"></a>:normal</h3><p><code>:normal gg</code><br><code>:normal</code> 后面会跟一个字符串。相当于在ｎｏｒｍａｌ模式下按下这些按键</p>
+<p>当然永远不要用normal 而是用<code>normal!</code> 后者无视映射。因为你永远不知道用户把按键映射成了什么</p>
+<h3 id="execute"><a href="#execute" class="headerlink" title=":execute"></a>:execute</h3><p>`:execute “:normal!  gg”</p>
+<p>execute 后面跟脚本。</p>
+<p>为什么不直接用normal!,而是用execute呢<br>因为normal不能识别特殊字符。比如<cr>回车符等所以一般要包个execute命令。<br>比如<code>:normal! a\&lt;cr&gt;</code> 我们设想先按下a进入insert模式然后输出回车符换行.但是实际上这个命令进入插入模式后，直<br>接将<code>\&lt;cr&gt;</code>输入到了buffer中.我们可以用`execute “normal! a\<cr>“完成这个动作</cr></cr></p>
+<h3 id="set-statusline"><a href="#set-statusline" class="headerlink" title="set statusline"></a>set statusline</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set statusline=%f\ -\ %y</span><br><span class="line">:set statusline+=%=</span><br><span class="line">:set statusline+=%L</span><br></pre></td></tr></table></figure>
+<p>修改状态条显示内容。类似printf %f 是文件名%y是文件类型 %=表示后面的右对齐%L显示总行数。</p>
+<h3 id="let-变量"><a href="#let-变量" class="headerlink" title="let  变量"></a>let  变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">:let foo=&quot;bar&quot;</span><br><span class="line">:echo foo  //显示ｂａｒ</span><br><span class="line">:set number</span><br><span class="line">:echo &amp;number //1</span><br><span class="line">:let number = 100</span><br><span class="line">:echo number //100</span><br><span class="line">:let &amp;number=&amp;number-1</span><br><span class="line">:echo &amp;number //0　number是是否显示行号的布尔值</span><br></pre></td></tr></table></figure>
+<p>let 用来定义一个变量,这个变量可以与某个选项同名(set), 只不过选项的引用需要前面加<code>&amp;</code><br>set 只能给选项赋值常量值<br>而let 可以用变量给变量赋值,如上面的<code>&amp;number</code><br><code>:let &amp;l:number = 100</code>可以给本地变量赋值而不影响其他buffer</p>
+<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p><code>:register</code> 查看所有寄存器内容<br><code>&quot;ap</code> a是寄存器名字. 表示将a中的内容粘贴到此处<br><code>echo @a</code> 打印a中的内容<br><code>let @a=&quot;test&quot;</code> 修改a中内容<br><code>&quot;</code>寄存器是为指定寄存器所有为指定寄存器的复制操作,内容都会写入这里</p>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p><code>:echo &quot;haha&quot; | echo &quot;heihei</code></p>
+<h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">:if &quot;20haha&quot;</span><br><span class="line">:   echo &quot;true&quot;</span><br><span class="line">:endif</span><br><span class="line"></span><br><span class="line">:if &quot;haha20&quot;</span><br><span class="line">:   echo &quot;true&quot;</span><br><span class="line">:else</span><br><span class="line">:   echo &quot;false&quot;</span><br><span class="line">:endif</span><br></pre></td></tr></table></figure>
+<p>第一个会显示ｔｒｕｅ　第二个是ｆａｌｓｅ　<br>因为字符串在强制转换时第一个是数字会转化为相应的数字。否则是０</p>
+<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>不能完全信任<code>==</code><br>因为vim的大小写敏感时用户设置的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase</span><br><span class="line">:if &quot;foo&quot; == &quot;FOO&quot;</span><br></pre></td></tr></table></figure></p>
+<p>这个语句真假取决于ignorecase的设置。<br>替代品<br><code>==?</code> 大小写不敏感比较<br><code>==#</code> 大小写敏感比较</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">:function Test()</span><br><span class="line">:   XXXXX</span><br><span class="line">:endfunction</span><br><span class="line">:function s:testb()</span><br><span class="line">:   echom &quot;script test&quot;</span><br><span class="line">:endfunction</span><br><span class="line">:call Test()</span><br></pre></td></tr></table></figure>
+<p><strong>没有限制作用域的函数必须以大写字母开头</strong><br>脚本内的私有函数以<code>s:</code>开头<br>函数没有显示指定<code>return XX</code>则默认返回0</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:function EchoTest(name)</span><br><span class="line">:   echo a:name</span><br><span class="line">:endfunction</span><br></pre></td></tr></table></figure>
+<p>函数的参数总要加a这个作用域否则会提示找不到</p>
+<h4 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:function Test(...)  // 假如 call Test(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</span><br><span class="line">:   echo a:0         // 3 参数个数</span><br><span class="line">:   echo a:1         // &quot;a&quot;</span><br><span class="line">:   echo a:000       // [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;] 000指参数列表.不能用echom输出只能用echo</span><br><span class="line">:endfunction</span><br></pre></td></tr></table></figure>
+<p><code>:call Test(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code><br>a:0 指的是参数数量。 a:1 是 “a”.以此类推</p>
+<h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4><blockquote>
+<p>|buffer-variable|    b:      Local to the current buffer.<br>|window-variable|    w:      Local to the current window.<br>|tabpage-variable|   t:      Local to the current tab page.<br>|global-variable|    g:      Global.<br>|local-variable|     l:      Local to a function.<br>|script-variable|    s:      Local to a |:source|’ed Vim script.<br>|function-argument|  a:      Function argument (only inside a function).<br>|vim-variable|         v:      Global, predefined by Vim.</p>
+</blockquote>
+<p>命名空间可以当做dict使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for k in keys(b:)</span><br><span class="line">    unlet b:[k]</span><br><span class="line">endfor</span><br></pre></td></tr></table></figure></p>
+<p>可以混合可变参数和固定参数<br><code>:function Test(a, ...)</code></p>
+<p>不能对函数的参数改变赋值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:function Test(foo)</span><br><span class="line">:   let a:foo=&quot;change&quot; //这样做会报错</span><br><span class="line">:   let tmp=a:foo      // 这样才可以</span><br><span class="line">:   let tmp=&quot;change&quot;</span><br><span class="line">:endfunction</span><br></pre></td></tr></table></figure></p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><h4 id="连接符"><a href="#连接符" class="headerlink" title="连接符"></a>连接符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo &quot;haha&quot;.&quot;heihei&quot;</span><br></pre></td></tr></table></figure>
+<p>上面输出”hahaheihei”</p>
+<h4 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h4><p><code>:help function-list</code> 查看所有函数分类列表</p>
+<p><code>strlen(&quot;string&quot;)</code><br><code>len(&quot;string&quot;)</code><br><code>echo split(&quot;one two&quot;)</code><br><code>echo split(&quot;one,two&quot;,&quot;,&quot;)</code><br><code>echo join([&quot;one&quot;,&quot;two&quot;], &quot;,&quot;)</code><br><code>echo tolower(&quot;BIG&quot;)</code><br><code>echo toupper(&quot;low&quot;)</code></p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ol>
+<li>有序，异质</li>
+<li><p>索引从0开始 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:echo [1,2,3][0] // 1</span><br><span class="line">:echo [1,2,3][-1] //3</span><br><span class="line">:echo &quot;abc&quot;[1] // b</span><br><span class="line">:echo &quot;abc&quot;[-1] // 无效。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切割</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:echo [1,2,3][:1] // [1,2]</span><br><span class="line">:echo [1,2,3][1:] // [2,3]</span><br><span class="line">:echo [1,2,3][:1000] // [1,2,3] 可以越界</span><br><span class="line">:echo [1,2,3,4][-2:-1] //[3,4]</span><br><span class="line">:echo [1,2,3,4][-2:1] // []</span><br><span class="line">:echo &quot;abc&quot;[-2:-1] // bc。上面的负数索引无效。切割却有效。。。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:echo [&apos;a&apos;,&apos;b&apos;] + [&apos;c&apos;] // [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]</span><br><span class="line">:echo [1,2] + [3]//[1,2,3]</span><br><span class="line">:echo [a,b] + [c] // 错误。</span><br><span class="line">:echo &quot;ab&quot;.&quot;c&quot; //&quot;abc&quot;</span><br></pre></td></tr></table></figure></p>
+<ol start="5">
+<li>列表函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">:echo add([1,2],3) // [1,2,3]</span><br><span class="line">:echo get([1,2,3], 0, &apos;default&apos;) // 1</span><br><span class="line">:echo get([1,2,3], 4, &apos;default&apos;) // default</span><br><span class="line">:echo index([1,2,3], 1) // 0</span><br><span class="line">:echo index([1,2,3], 4) // -1 不存在返回-1</span><br><span class="line">:echo join([1,2], &quot;-&quot;) // 1-2</span><br><span class="line">:echo reverse([1,2]) //[2,1]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>更多阅读<code>:help List</code> <code>:help functions</code></p>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><h4 id="for"><a href="#for" class="headerlink" title="for"></a>for</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:for i in [1,2,3,4]</span><br><span class="line">:   let c += i</span><br><span class="line">:endfor</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:let c=1</span><br><span class="line">:while c &lt; 3</span><br><span class="line">: let t += c</span><br><span class="line">: let c += 1</span><br><span class="line">:endwhile</span><br></pre></td></tr></table></figure>
+<h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><p><code>{&#39;a&#39;:1, 2:&quot;two&quot;,}</code> 字典的key总是会自动转为字符串.  应该总是结尾留一个<code>,</code> (个人很讨厌这种语法)<br>索引可以用.来索引<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:echo &#123;&apos;a&apos;:1, 2:&quot;two&quot;,&#125;[&apos;a&apos;] // 1</span><br><span class="line">:echo &#123;&apos;a&apos;:1, 2:&quot;two&quot;,&#125;[2] // two</span><br><span class="line">:echo &#123;&apos;a&apos;:1, 2:&quot;two&quot;,&#125;.a // 1</span><br></pre></td></tr></table></figure></p>
+<p>增加键值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:let dic=&#123;&apos;a&apos;:1,&#125;</span><br><span class="line">:let dic.b=2</span><br><span class="line">:echo dic // &#123;&apos;a&apos;:1, &apos;b&apos;:2&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:let tmp=remove(dic, &apos;a&apos;) //移除dic中a，但是把a的值赋值给tmp</span><br><span class="line">:unlet dic.b //移除b。但是不返回值</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:echo has_key(&#123;&apos;a&apos;:1&#125;, &apos;a&apos;) // 1</span><br><span class="line">:echo has_key(&#123;&apos;a&apos;:1&#125;, &apos;b&apos;) //0</span><br><span class="line">:echo items(&#123;&apos;a&apos;:1, &apos;b&apos;:2&#125;) // [[&apos;a&apos;,1],[&apos;b&apos;,2]] items返回是无序的。因为dict本身是无序的</span><br><span class="line">:echo keys(&#123;&apos;a&apos;:1, &apos;b&apos;:2&#125;) // [&apos;a&apos;, &apos;b&apos;]</span><br><span class="line">:echo values(&#123;&apos;a&apos;:1, &apos;b&apos;:2&#125;) //[1,2]</span><br></pre></td></tr></table></figure>
+<p>list中的get函数同样可以用于dict</p>
+<h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><ol>
+<li>在函数内部赋值传入的参数。已达到不影响外部变量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function! Reversed(l)</span><br><span class="line">    let new_list = deepcopy(a:l)</span><br><span class="line">    call reverse(new_list)</span><br><span class="line">    return new_list</span><br><span class="line">endfunction</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="deepcopy-与copy"><a href="#deepcopy-与copy" class="headerlink" title="deepcopy 与copy"></a>deepcopy 与copy</h4><p> 区别如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let a=[1,2]</span><br><span class="line">let b=[a,3,4] // [[1,2],3,4]</span><br><span class="line">let c=copy(b) // [[1,2],3,4]</span><br><span class="line">let d=deepcopy(b) //[[1,2],3,4]</span><br><span class="line">let b[0][0]=5</span><br><span class="line">let b[1]=6</span><br><span class="line">echo a  //[5,2]</span><br><span class="line">echo b  //[[5,2],6,4]</span><br><span class="line">echo c  //[[5,2],3,4]</span><br><span class="line">echo d  //[[1,2],3,4]</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>将函数赋值给变量。变量名字首字母大写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:let Myfunc = function(&quot;add&quot;)</span><br><span class="line">:echo Myfunc([1,2],3) // [1,2,3]</span><br><span class="line">:let funclist=[function(&quot;add&quot;), function(&quot;reverse&quot;)]</span><br><span class="line">:echo funclist[0]([1,2],3) // [1,2,3]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:echo expand(&apos;%&apos;) // filename  相对路径</span><br><span class="line">:echo expand(&apos;%:p&apos;) // /home/.../filename 绝对路径</span><br><span class="line">:echo fnamemodify(&apos;test.erl&apos;, &apos;:p&apos;) // /home/youthy/.../test.erl 无论文件test是否存在</span><br><span class="line">:echo globpath(&apos;.&apos;, &apos;*.erl&apos;) // 显示当前目录下所有erl文件的路径</span><br><span class="line">:echo split(globpath(&apos;.&apos;,&apos;*.erl&apos;), &apos;\n&apos;) //将上述结果分割成列表</span><br></pre></td></tr></table></figure>
+<p><code>:set runtimepath=/XX/XXX</code> 修改运行时路径。</p>
+<h3 id="Regex-正则表达式"><a href="#Regex-正则表达式" class="headerlink" title="Regex 正则表达式"></a>Regex 正则表达式</h3><p>for starters <code>:help user_27</code></p>
+<p>所有的search 受大小写设置的影响<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase // 忽略</span><br><span class="line">:set noignorecase // 不忽略大小写</span><br><span class="line">:set ingorecase smartcase //智能模式。 小写时match所有。有一个大写字母时精确匹配。</span><br></pre></td></tr></table></figure></p>
+<p><code>\c</code>, <code>\C</code> 无视ignorecase设置。用于自己某个特殊的匹配。前者 表示ignorecase 后者是noignorecase</p>
+<blockquote>
+<p>   pattern            matches    ~<br>    \Cword            word<br>    \CWord            Word<br>    \cword            word, Word, WORD, WoRd, etc.<br>    \cWord            word, Word, WORD, WoRd, etc.</p>
+</blockquote>
+<p><code>*</code> 0至多个<br><code>\+</code> 1至多个<br><code>\=</code> 0至1个<br><code>&#39;\{n, m}&#39;</code> 重复n至m次<br><code>&#39;\\|&#39;</code> 或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&apos;ab*&apos;   // a, ab, abb, abbb...</span><br><span class="line">&apos;c\(ab\)*&apos; // c, cab, cabab, cababab...  需用括号括起，但是需要转义</span><br><span class="line">&apos;c\(ab\)\&#123;2, 3&#125;&apos; // cabab, cababab</span><br><span class="line">&apos;ab\+&apos; // ab, abb, abbb...</span><br><span class="line">&apos;ab\=&apos; // a, ab</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>   item    matches            equivalent ~<br>    \d    digit            [0-9]<br>    \D    non-digit        [^0-9]<br>    \x    hex digit        [0-9a-fA-F]<br>    \X    non-hex digit        [^0-9a-fA-F]<br>    \s    white space        [     ]     (<tab> and <space>)<br>    \S    non-white characters    [^     ]     (not <tab> and <space>)<br>    \l    lowercase alpha        [a-z]<br>    \L    non-lowercase alpha    [^a-z]<br>    \u    uppercase alpha        [A-Z]<br>    \U    non-uppercase alpha    [^A-Z]<br>    \h [A-Za-z_]<br>    \w [A-Za-z0-9_]</space></tab></space></tab></p>
+</blockquote>
+<p>以上不能用于<code>[]</code>里面</p>
+<p>注意　<code>&#39;</code>, <code>&quot;</code>的影响。<code>&quot;</code>会转义<code>\</code>, 导致<code>&#39;\w\+&#39;</code>这种变成<code>&quot;\\w\\+&quot;</code></p>
+<p><a href="http://learnvimscriptthehardway.onefloweroneworld.com/" target="_blank" rel="noopener">笨方法学vimscript</a></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://youthyblog.com/2016/05/06/vimscript笔记/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://youthyblog.com/2016/05/06/vimscript笔记/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//youthyblog.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/05/06/Regex-正则表达式/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2015/11/04/ssh登陆远程主机/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Youthy's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        Contact
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://weibo.com/u/1592381215" target="_blank" title="Weibo me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">person_add</i>
+                        
+                        Weibo me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/10/">十月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/09/">九月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">八月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">七月 2014<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/06/">六月 2014<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/ACG/">ACG<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/erlang/">erlang<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/随笔/">随笔<span class="sidebar_archives-count">4</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="links" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/shizixiuluo" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/1592381215" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+        <a href="https://www.zhihu.com/people/yu-you-qi-46/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
+                <span class="visuallyhidden">Zhihu</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;youthy的流水账
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//youthyblog.disqus.com/count.js" async></script>
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2014;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

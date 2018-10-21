@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://youthyblog.disqus.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Erlang存储模块之ETS | 
+        
+        youthy的流水账
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="">
+    <meta name="keywords" content="erlang, golang,erlang">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body {
+        background-color: ;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="youthy的流水账">
+    <meta name="msapplication-starturl" content="http://youthyblog.com/2014/10/25/Erlang-ETS/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="youthy的流水账">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="luyN6dELjQn-N4acL35Kyqd_3xEjr8gA3TqpaSV23kk" />
+    <meta name="baidu-site-verification" content="BA4RKG2m6D" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://youthyblog.com/2014/10/25/Erlang-ETS/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Erlang存储模块之ETS | youthy的流水账">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="erlang"> 
+
+    
+        <meta property="article:published_time" content="Sat Oct 25 2014 18:31:33 GMT+0800">
+        <meta property="article:modified_time" content="Wed Oct 17 2018 16:46:23 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://youthyblog.com/2014/10/25/Erlang-ETS/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://youthyblog.com/2014/10/25/Erlang-ETS/index.html",
+    "headline": "Erlang存储模块之ETS",
+    "datePublished": "Sat Oct 25 2014 18:31:33 GMT+0800",
+    "dateModified": "Wed Oct 17 2018 16:46:23 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Youthy",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "youthy的流水账",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",erlangerlang, golang",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-127668650-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?d4026e5060b2e4c5254eaeca317f90bd';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建"><span class="post-toc-number">1.</span> <span class="post-toc-text">创建:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#new-2"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">new/2</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对表的操作"><span class="post-toc-number">2.</span> <span class="post-toc-text">对表的操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一-插入"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">一.插入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#insert-2"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">insert/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#insert-new-2"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">insert_new/2</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二-查询"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">二.查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#lookup-2"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">lookup/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#lookup-element-3"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">lookup_element/3</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三-删除"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">三.删除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#delete-1"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">delete/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#delete-2"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">delete/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#delete-all-objects-1"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">delete_all_objects/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#delete-object-2"><span class="post-toc-number">2.3.4.</span> <span class="post-toc-text">delete_object/2</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三-其他"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">三.其他</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#tab2list-1"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">tab2list/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#all-1"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">all/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#tab2file-2"><span class="post-toc-number">2.4.3.</span> <span class="post-toc-text">tab2file/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#tab2file-3"><span class="post-toc-number">2.4.4.</span> <span class="post-toc-text">tab2file/3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#file2tab-1"><span class="post-toc-number">2.4.5.</span> <span class="post-toc-text">file2tab/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#file2tab-2"><span class="post-toc-number">2.4.6.</span> <span class="post-toc-text">file2tab/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#first-1"><span class="post-toc-number">2.4.7.</span> <span class="post-toc-text">first/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#last-1"><span class="post-toc-number">2.4.8.</span> <span class="post-toc-text">last/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#next-2"><span class="post-toc-number">2.4.9.</span> <span class="post-toc-text">next/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#prev-2"><span class="post-toc-number">2.4.10.</span> <span class="post-toc-text">prev/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#foldl-3"><span class="post-toc-number">2.4.11.</span> <span class="post-toc-text">foldl/3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#foldr-3"><span class="post-toc-number">2.4.12.</span> <span class="post-toc-text">foldr/3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#give-away-3"><span class="post-toc-number">2.4.13.</span> <span class="post-toc-text">give_away/3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#i-0-i-1"><span class="post-toc-number">2.4.14.</span> <span class="post-toc-text">i/0 i/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#info-1-info-2"><span class="post-toc-number">2.4.15.</span> <span class="post-toc-text">info/1 info/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#match-2-match-3-match-1"><span class="post-toc-number">2.4.16.</span> <span class="post-toc-text">match/2 match/3 match/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#match-object-2-match-object-3"><span class="post-toc-number">2.4.17.</span> <span class="post-toc-text">match_object/2 match_object/3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#init-table-2"><span class="post-toc-number">2.4.18.</span> <span class="post-toc-text">init_table/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#member-2"><span class="post-toc-number">2.4.19.</span> <span class="post-toc-text">member/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rename-2"><span class="post-toc-number">2.4.20.</span> <span class="post-toc-text">rename/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#safe-fixtable-2"><span class="post-toc-number">2.4.21.</span> <span class="post-toc-text">safe_fixtable/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#setopts-2"><span class="post-toc-number">2.4.22.</span> <span class="post-toc-text">setopts/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#update-counter-3"><span class="post-toc-number">2.4.23.</span> <span class="post-toc-text">update_counter/3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#update-element-3"><span class="post-toc-number">2.4.24.</span> <span class="post-toc-text">update_element/3</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#所有关于match-specification"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">所有关于match specification</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#fun2ms-1"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">fun2ms/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#select-1-2-3"><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text">select/1/2/3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#select-count-2"><span class="post-toc-number">2.5.3.</span> <span class="post-toc-text">select_count/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#select-delete-2"><span class="post-toc-number">2.5.4.</span> <span class="post-toc-text">select_delete/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#select-reverse-1-2-3"><span class="post-toc-number">2.5.5.</span> <span class="post-toc-text">select_reverse/1/2/3</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#match-spec-compile-1"><span class="post-toc-number">2.5.6.</span> <span class="post-toc-text">match_spec_compile/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#match-spec-run-2"><span class="post-toc-number">2.5.7.</span> <span class="post-toc-text">match_spec_run/2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#is-compiled-ms-1"><span class="post-toc-number">2.5.8.</span> <span class="post-toc-text">is_compiled_ms/1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#repair-continuation-2"><span class="post-toc-number">2.5.9.</span> <span class="post-toc-text">repair_continuation/2</span></a></li></ol></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Erlang存储模块之ETS
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Youthy</strong>
+        <span>10月 25, 2014</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/erlang/">erlang</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Erlang存储模块之ETS&url=http://youthyblog.com/2014/10/25/Erlang-ETS/index.html&pic=http://youthyblog.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Erlang存储模块之ETS&url=http://youthyblog.com/2014/10/25/Erlang-ETS/index.html&via=Youthy" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://youthyblog.com/2014/10/25/Erlang-ETS/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://youthyblog.com/2014/10/25/Erlang-ETS/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <hr>
+<a id="more"></a>
+<!-- toc -->
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建:"></a>创建:</h2><h4 id="new-2"><a href="#new-2" class="headerlink" title="new/2"></a>new/2</h4><blockquote>
+<p>new(Name, Options) -&gt; tid() | atom()</p>
+</blockquote>
+<p>Name = atom()<br>Options = [Option]<br> Option = Type | Access | named_table | {keypos,Pos} | {heir,pid(),HeirData} | {heir,none} | Tweaks<br>  Type = set | ordered_set | bag | duplicate_bag<br>  Access = public | protected | private<br>  Tweaks = {write_concurrency,boolean()} | {read_concurrency,boolean()} | compressed<br>  Pos = integer()<br>  HeirData = term()</p>
+<p>首先ets中保存的是元组(tuple),元组的第一个元素为key</p>
+<p><strong>Type</strong><br>即类型,set是异键表,表示这个ets中的key是唯一的,不能相同,bag表示的是同键表,它允许多个元素有相同的key,但是key之后的元素不能相同,即不能有完全相同的tuple.order_set是set的变种,表示按key排序的ets表,duplicate_bag表示key之外的元素也可以相同,即可以存在完全相同的tuple.<br>set: {playerid1, &lt;&lt;”yuyouqi”&gt;&gt;, 1},{playerid2, &lt;&lt;”youthy”&gt;&gt;, 0}. —default type<br>bag: {playerid1, &lt;&lt;”yuyouqi”&gt;&gt;, 1}, {playerid1, lvl90}.<br>duplicate_bag: {playerid1, hello}, {playerid1, hello}….{playerid1, hello}</p>
+<p>还需要注意的是orderd_set 里面判断key是否相同用的是==而不是=:=,也就意味着1和1.0是相同的key,而其他类型的ets则不是.<br><strong>Access</strong><br>public是任何进程都可读写这个ets<br>protected是只有创建者进程可以改写ets,其他进程只能读取,这个是默认选项<br>private是只有创建者进程可以读写.<br><strong>{keypos, Pos}</strong><br>用来指定Pos位置为key.</p>
+<blockquote>
+<p>在不指定任何Option的时候,默认是以上三个[set, protected, {keypos, 1}]</p>
+</blockquote>
+<p><strong>其他</strong><br>named_table 指定可以通过Name访问这个ets.<br><strong>{heir,Pid,HeirData} | {heir,none}</strong>这个用来控制继承,在创建一个ets时,如果声明了这个,表示这个ets的owner死掉之后,将发送{‘ETS-TRANSFER’,tid(),FromPid,HeirData}这个消息给Pid这个进程,其中tid()是ets的table id.看以下的例子<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>&gt; HeirPid = spawn(<span class="keyword">fun</span>() -&gt; <span class="keyword">receive</span> &#123;'ETS-TRANSFER', Tid, FromPid, HeirData&#125; -&gt; ets:insert(Tid, HeirData), timer:sleep(<span class="number">100000</span>) <span class="keyword">end</span> <span class="keyword">end</span>).</span><br><span class="line"><span class="comment">%% 创建用于继承的进程</span></span><br><span class="line">&lt;<span class="number">0.34</span>.<span class="number">0</span>&gt;</span><br><span class="line"><span class="number">2</span>&gt; OwnerPid = spawn(<span class="keyword">fun</span>() -&gt; ets:new(person, [named_table, &#123;heir, HeirPid, &#123;<span class="number">1</span>, youthy&#125;&#125;]), <span class="keyword">receive</span> die -&gt; ok <span class="keyword">end</span> <span class="keyword">end</span>).</span><br><span class="line">&lt;<span class="number">0.36</span>.<span class="number">0</span>&gt;</span><br><span class="line"><span class="comment">%% 创建用于初始化ets的进程,声明heir参数.</span></span><br><span class="line"><span class="number">3</span>&gt; observer:start().</span><br><span class="line">ok</span><br><span class="line"><span class="comment">%% 启动观察器</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="../../../../img/选区_045.png" alt=""><br>此时我们可以看到person这个表的owner是&lt;0.36.0&gt;<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span>&gt; ets:tab2list(person).</span><br><span class="line">[]</span><br><span class="line"><span class="comment">%% person中没有任何数据</span></span><br><span class="line"><span class="number">5</span>&gt; OwnerPid ! die.</span><br><span class="line">die</span><br><span class="line"><span class="comment">%% 让OwnerPid死亡</span></span><br><span class="line"><span class="number">6</span>&gt; observer:start(). </span><br><span class="line">ok</span><br><span class="line"><span class="number">7</span>&gt; ets:tab2list(person).</span><br><span class="line">[&#123;<span class="number">1</span>,youthy&#125;]</span><br></pre></td></tr></table></figure></p>
+<p><img src="../../../../img/选区_046.png" alt=""><br>再次观察可以看到person这个表已经继承给了HeirPid,并且里面有了数据.数据是我主动插入的HeirData.</p>
+<p>{write_concurrency,boolean()}/{read_concurrency,boolean()}/compressed<br>write,read默认都是false,当分别指定为true时,编译器会优化,会使write更快,read更快,但是在读写之间的切换会很慢,只适合于单纯的写表或读表.<br>compressed会压缩ets节省空间,但是对ets的操作尤其,match,select等遍历所有元素的操作会慢很多,慎用.</p>
+<hr>
+<h2 id="对表的操作"><a href="#对表的操作" class="headerlink" title="对表的操作"></a>对表的操作</h2><p>上面完成了对ets的创建,接下来自然就是对ets的操作.</p>
+<h3 id="一-插入"><a href="#一-插入" class="headerlink" title="一.插入"></a>一.插入</h3><h4 id="insert-2"><a href="#insert-2" class="headerlink" title="insert/2"></a>insert/2</h4><blockquote>
+<p> insert(Tab, ObjectOrObjects) -&gt; true<br>Types:<br>Tab = tid() | atom()<br>ObjectOrObjects = tuple() | [tuple()]</p>
+</blockquote>
+<p>Tab为ets的TableId, 如果声明为named_table可以为对应的名字.<br>1.<strong>insert是原子操作,BIF,不管object是多个tuple组成的list还是单独一个tuple</strong><br>2.<strong>如果像set表中插入具有相同key的多个元素,则只有一个能被插入,而且不知道具体哪个会被插入,如果是order_set要记住此时key相同的原则不是靠=:=而是==,也就是match(模式匹配)和equal(相等)的区别</strong></p>
+<h4 id="insert-new-2"><a href="#insert-new-2" class="headerlink" title="insert_new/2"></a>insert_new/2</h4><blockquote>
+<p>insert_new(Tab, ObjectOrObjects) -&gt; boolean()<br>Types:<br>Tab = tid() | atom()<br>ObjectOrObjects = tuple() | [tuple()]</p>
+</blockquote>
+<p>大体与insert相同,只不过这个insert直插入ets中不存在键值,当发现key在ets表中已经存在,则返回false.也是原子操作,也就是就算是insert_new一个list的东西,只要有一个key存在了,这个插入就是失败的</p>
+<h3 id="二-查询"><a href="#二-查询" class="headerlink" title="二.查询"></a>二.查询</h3><h4 id="lookup-2"><a href="#lookup-2" class="headerlink" title="lookup/2"></a>lookup/2</h4><blockquote>
+<p>lookup(Tab, Key) -&gt; [Object]<br>Types:<br>Tab = tid() | atom()<br>Key = term()<br>Object = tuple()</p>
+</blockquote>
+<p>注意结果返回是list.同样order_set是特别的,1.0与1是相同的key.</p>
+<h4 id="lookup-element-3"><a href="#lookup-element-3" class="headerlink" title="lookup_element/3"></a>lookup_element/3</h4><blockquote>
+<p>lookup_element(Tab, Key, Pos) -&gt; Elem<br>Types:<br>Tab = tid() | atom()<br>Key = term()<br>Pos = integer()<br>Elem = term() | [term()]</p>
+</blockquote>
+<p>这个返回的是key的tuple里面pos位置的元素.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1&gt; ets:new(person, [named_table, set]).</span><br><span class="line">person</span><br><span class="line">2&gt; ets:insert(person, &#123;player1, man, sword&#125;).</span><br><span class="line">true</span><br><span class="line">3&gt; ets:lookup_element(person, player1, 3).</span><br><span class="line">sword</span><br></pre></td></tr></table></figure></p>
+<p>如果pos处不存在元素则会报bagarg错误</p>
+<h3 id="三-删除"><a href="#三-删除" class="headerlink" title="三.删除"></a>三.删除</h3><h4 id="delete-1"><a href="#delete-1" class="headerlink" title="delete/1"></a>delete/1</h4><blockquote>
+<p>delete(Tab) -&gt; true<br>Types:<br>Tab = tid() | atom()</p>
+</blockquote>
+<h4 id="delete-2"><a href="#delete-2" class="headerlink" title="delete/2"></a>delete/2</h4><p>删除整个ets</p>
+<blockquote>
+<p>delete(Tab, Key) -&gt; true<br>Types:<br>Tab = tid() | atom()<br>Key = term()</p>
+</blockquote>
+<h4 id="delete-all-objects-1"><a href="#delete-all-objects-1" class="headerlink" title="delete_all_objects/1"></a>delete_all_objects/1</h4><p>删除key所对应的键值</p>
+<blockquote>
+<p>delete_all_objects(Tab) -&gt; true<br>Types:<br>Tab = tid() | atom()</p>
+</blockquote>
+<h4 id="delete-object-2"><a href="#delete-object-2" class="headerlink" title="delete_object/2"></a>delete_object/2</h4><p>删除Tab里面所有的值,与delete不同的是不会删掉这个ets</p>
+<blockquote>
+<p>delete_object(Tab,Object) -&gt; true<br>Types:<br>Tab = tid() | atom()<br>Object = tuple()</p>
+</blockquote>
+<p>删除object,主要用于bag型,因为bag是key对应多个object,只删除这个object,而保留key对应其他的object.<br>example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1&gt; ets:new(ingredients, [set, named_table]).</span><br><span class="line">ingredients</span><br><span class="line">2&gt; ets:insert(ingredients, &#123;bacon, great&#125;).</span><br><span class="line">true</span><br><span class="line">3&gt; ets:lookup(ingredients, bacon).</span><br><span class="line">[&#123;bacon,great&#125;]</span><br><span class="line">4&gt; ets:insert(ingredients, [&#123;bacon, awesome&#125;, &#123;cabbage, alright&#125;]).</span><br><span class="line">true</span><br><span class="line">5&gt; ets:lookup(ingredients, bacon).</span><br><span class="line">[&#123;bacon,awesome&#125;]</span><br><span class="line">6&gt; ets:lookup(ingredients, cabbage).</span><br><span class="line">[&#123;cabbage,alright&#125;]</span><br><span class="line">7&gt; ets:delete(ingredients, cabbage).</span><br><span class="line">true</span><br><span class="line">8&gt; ets:lookup(ingredients, cabbage).</span><br><span class="line">[]</span><br></pre></td></tr></table></figure></p>
+<h3 id="三-其他"><a href="#三-其他" class="headerlink" title="三.其他"></a>三.其他</h3><h4 id="tab2list-1"><a href="#tab2list-1" class="headerlink" title="tab2list/1"></a>tab2list/1</h4><blockquote>
+<p>tab2list(Tab) -&gt; [Object]<br>Types:<br>Tab = tab()<br>Object = tuple()<br>Returns a list of all objects in the table Tab.</p>
+</blockquote>
+<p>列出Tab中所有元素</p>
+<h4 id="all-1"><a href="#all-1" class="headerlink" title="all/1"></a>all/1</h4><blockquote>
+<p>all() -&gt; [Tab]<br>Types:<br>Tab = tid() | atom()</p>
+</blockquote>
+<p>列出当前节点所有的ets</p>
+<h4 id="tab2file-2"><a href="#tab2file-2" class="headerlink" title="tab2file/2"></a>tab2file/2</h4><blockquote>
+<p>tab2file(Tab, Filename) -&gt; ok | {error, Reason}<br>Types:<br>Tab = tab()<br>Filename = file:name()<br>Reason = term()<br>Dumps the table Tab to the file Filename.</p>
+</blockquote>
+<h4 id="tab2file-3"><a href="#tab2file-3" class="headerlink" title="tab2file/3"></a>tab2file/3</h4><blockquote>
+<p>tab2file(Tab, Filename, Options) -&gt; ok | {error, Reason}<br>Types:<br>Tab = tab()<br>Filename = file:name()<br>Options = [Option]<br>Option = {extended_info, [ExtInfo]}<br>ExtInfo = md5sum | object_count<br>Reason = term()</p>
+</blockquote>
+<p>将ets储存到文件,<br>extended_info 选项参数指定什么额外信息要在转储过程中一同被写进，参数选项有以下值：<br>object_count：被标记在文件尾后的实际被写进文件的对象数量。<br>md5sum：在文件里的文件头数据和对象数据都会用内置的 MD5 函数来效验。所有对象数据的 MD5 校验值会被卸载文件尾，因此读取数据的验证将检测在文件数据里的校验值。<br>不管参数 extended_info 是否使用，在 stdlib-1.15.1 之前的 ets 版本该参数无效。反之可以将文件中的ets读入.</p>
+<h4 id="file2tab-1"><a href="#file2tab-1" class="headerlink" title="file2tab/1"></a>file2tab/1</h4><blockquote>
+<p>file2tab(Filename) -&gt; {ok, Tab} | {error, Reason}<br>Types:<br>Filename = file:name()<br>Tab = tab()<br>Reason = term()</p>
+</blockquote>
+<h4 id="file2tab-2"><a href="#file2tab-2" class="headerlink" title="file2tab/2"></a>file2tab/2</h4><blockquote>
+<p>file2tab(Filename, Options) -&gt; {ok, Tab} | {error, Reason}<br>Types:<br>Filename = file:name()<br>Tab = tab()<br>Options = [Option]<br>Option = {verify, boolean()}<br>Reason = term()</p>
+</blockquote>
+<p>file2tab    的option是[{verify, true|false}], 默认是false,即是否验证.当指定为true时,如果tab2file时没有指定{extended_info},则写入内存时比较大小是否一致,在ets为public或者该ets在写入的时候同时更新了数据,很容易在读入时出错,所以一般需要指定{extended_info, [object_count]},写入实际写入的大小.如果指定为{extended_info, [md5sum]},则会消耗更多的时间与cpu资源来读入.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; </span><br><span class="line">1&gt; ets:new(person, [named_table]).</span><br><span class="line">person</span><br><span class="line">2&gt; ets:insert(person, &#123;name, sex, career&#125;).</span><br><span class="line">true</span><br><span class="line">3&gt; ets:all().</span><br><span class="line">[person,8207,4110,13,file_io_servers,inet_hosts_file_byaddr,</span><br><span class="line"> inet_hosts_file_byname,inet_hosts_byaddr,inet_hosts_byname,</span><br><span class="line"> inet_cache,inet_db,global_pid_ids,global_pid_names,</span><br><span class="line"> global_names_ext,global_names,global_locks,ac_tab]</span><br><span class="line">4&gt; ets:tab2file(person, &quot;person.ets&quot;).</span><br><span class="line">ok</span><br><span class="line">5&gt; ets:delete(person).</span><br><span class="line">true</span><br><span class="line">6&gt; ets:all().</span><br><span class="line">[disk_log_pids,disk_log_names,8207,4110,13,file_io_servers,</span><br><span class="line"> inet_hosts_file_byaddr,inet_hosts_file_byname,</span><br><span class="line"> inet_hosts_byaddr,inet_hosts_byname,inet_cache,inet_db,</span><br><span class="line"> global_pid_ids,global_pid_names,global_names_ext,</span><br><span class="line"> global_names,global_locks,ac_tab]</span><br><span class="line">7&gt; ets:file2tab(&quot;person.ets&quot;).</span><br><span class="line">&#123;ok,person&#125;</span><br><span class="line">8&gt; ets:all().</span><br><span class="line">[disk_log_pids,disk_log_names,person,8207,4110,13,</span><br><span class="line"> file_io_servers,inet_hosts_file_byaddr,</span><br><span class="line"> inet_hosts_file_byname,inet_hosts_byaddr,inet_hosts_byname,</span><br><span class="line"> inet_cache,inet_db,global_pid_ids,global_pid_names,</span><br><span class="line"> global_names_ext,global_names,global_locks,ac_tab]</span><br><span class="line">9&gt; ets:tab2list(person).</span><br><span class="line">[&#123;name,sex,career&#125;]</span><br><span class="line">10&gt; ets:tab2file(person, &quot;person.ets&quot;, [&#123;extended_info, [object_count]&#125;]).</span><br><span class="line">ok</span><br><span class="line">11&gt; ets:delete(person).</span><br><span class="line">true</span><br><span class="line">12&gt; ets:file2tab(&quot;person.ets&quot;,[&#123;verify, true&#125;]).</span><br><span class="line">&#123;ok,person&#125;</span><br><span class="line">13&gt; ets:tab2list(person).</span><br><span class="line">[&#123;name,sex,career&#125;]</span><br></pre></td></tr></table></figure>
+<h4 id="first-1"><a href="#first-1" class="headerlink" title="first/1"></a>first/1</h4><blockquote>
+<p>first(Tab) -&gt; Key | ‘$end_of_table’<br>Types:<br>Tab = tid() | atom()<br>Key = term()</p>
+</blockquote>
+<h4 id="last-1"><a href="#last-1" class="headerlink" title="last/1"></a>last/1</h4><blockquote>
+<p>last(Tab) -&gt; Key | ‘$end_of_table’</p>
+</blockquote>
+<h4 id="next-2"><a href="#next-2" class="headerlink" title="next/2"></a>next/2</h4><blockquote>
+<p>next(Tab, Key1) -&gt; Key2 | ‘$end_of_table’<br>Types:<br>Tab = tid() | atom()<br>Key1 = Key2 = term()</p>
+</blockquote>
+<h4 id="prev-2"><a href="#prev-2" class="headerlink" title="prev/2"></a>prev/2</h4><blockquote>
+<p>prev(Tab, Key1) -&gt; Key2 | ‘$end_of_table’</p>
+</blockquote>
+<p>first返回ets第一个key,last返回最后一个key, 如果没有内容则返回end_of_table, 可以用next返回下一个key,prev返回上一个key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">31&gt; ets:tab2list(person).</span><br><span class="line">[&#123;4,ok&#125;,&#123;1,23&#125;,&#123;2,34&#125;]</span><br><span class="line">32&gt; ets:first(person).</span><br><span class="line">2</span><br><span class="line">33&gt; ets:next(person, 2).</span><br><span class="line">1</span><br><span class="line">34&gt; ets:next(person, 1).</span><br><span class="line">4</span><br><span class="line">35&gt; ets:next(person, 4).</span><br><span class="line">&apos;$end_of_table&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="foldl-3"><a href="#foldl-3" class="headerlink" title="foldl/3"></a>foldl/3</h4><blockquote>
+<p>foldl(Function, Acc0, Tab) -&gt; Acc1<br>Types:<br>Function = fun((Element :: term(), AccIn) -&gt; AccOut)<br>Tab = tab()<br>Acc0 = Acc1 = AccIn = AccOut = term()</p>
+</blockquote>
+<p>内部实际调用的还是lists:foldl,根据看源码发现,首先通过ets:first找到第一个key,然后调用ets:lookup(Table, Key),找到第一个元素,此时返回的元素在一个list里面,然后对这个列表用lists:foldl,Function本身是对ets每个元素执行的,包括key.例子如下.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1&gt; ets:new(double, [named_table]).</span><br><span class="line">double</span><br><span class="line">2&gt; ets:insert(double, [&#123;1, 14&#125;,&#123;2, 12&#125;, &#123;3, 23&#125;]).</span><br><span class="line">true</span><br><span class="line">3&gt; ets:tab2list(double).</span><br><span class="line">[&#123;1,14&#125;,&#123;2,12&#125;,&#123;3,23&#125;]</span><br><span class="line">4&gt; ets:foldl(fun(&#123;K, V&#125;, Acc) -&gt; [&#123;K, V * 2&#125;|Acc] end, [], double).</span><br><span class="line">[&#123;1,28&#125;,&#123;2,24&#125;,&#123;3,46&#125;]</span><br></pre></td></tr></table></figure></p>
+<h4 id="foldr-3"><a href="#foldr-3" class="headerlink" title="foldr/3"></a>foldr/3</h4><blockquote>
+<p>foldr(Function, Acc0, Tab) -&gt; Acc1<br>Types:<br>Function = fun((Element :: term(), AccIn) -&gt; AccOut)<br>Tab = tab()<br>Acc0 = Acc1 = AccIn = AccOut = term()</p>
+</blockquote>
+<p>同foldl.</p>
+<h4 id="give-away-3"><a href="#give-away-3" class="headerlink" title="give_away/3"></a>give_away/3</h4><p>give_away(Tab, Pid, GiftData) -&gt; true<br>Types:<br>Tab = tid() | atom()<br>Pid = pid()<br>GiftData = term()<br>类似于new的heir继承,在ets的owner进程调用,将Tab这个ets穿给Pid这个进程,传送的消息为{‘ETS-TRANSFER’,Tab,FromPid,GiftData},Pid可以receive这个消息做不同的事情.</p>
+<h4 id="i-0-i-1"><a href="#i-0-i-1" class="headerlink" title="i/0 i/1"></a>i/0 i/1</h4><blockquote>
+<p>i() -&gt; ok<br>i(Tab) -&gt; ok</p>
+</blockquote>
+<p>用于查看ets信息</p>
+<h4 id="info-1-info-2"><a href="#info-1-info-2" class="headerlink" title="info/1 info/2"></a>info/1 info/2</h4><blockquote>
+<p>info(Tab) -&gt; [{Item, Value}] | undefined<br>Types:<br>Tab = tid() | atom()<br>Item = atom(), see below<br>Value = term(), see below<br>info(Tab, Item) -&gt; Value | undefined<br>Types:<br>Tab = tid() | atom()<br>Item, Value - see below</p>
+</blockquote>
+<p>当Tab是个TableId,但是这个ets已经不存在的时候会返回undefined</p>
+<h4 id="match-2-match-3-match-1"><a href="#match-2-match-3-match-1" class="headerlink" title="match/2 match/3 match/1"></a>match/2 match/3 match/1</h4><blockquote>
+<p>match(Tab, Pattern) -&gt; [Match]<br>Types:<br>Tab = tid() | atom()<br>Pattern = tuple()<br>Match = [term()]</p>
+</blockquote>
+<blockquote>
+<p>match(Tab, Pattern, Limit) -&gt; {[Match],Continuation} | ‘$end_of_table’<br>Types:<br>Tab = tid() | atom()<br>Pattern = tuple()<br>Match = [term()]<br>Continuation = term()</p>
+</blockquote>
+<blockquote>
+<p>match(Continuation) -&gt; {[Match],Continuation} | ‘$end_of_table’<br>Types:<br>Match = [term()]<br>Continuation = term()</p>
+</blockquote>
+<p>说白了就是模式匹配,lookup只能通过key查找,而实际上面对bag类型,同样的key对应很多值,我们需要额外的添加筛选条件,所以就有了match.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">3&gt; ets:new(player, [bag, named_table]).</span><br><span class="line">player</span><br><span class="line">4&gt; ets:insert(player,[&#123;player1, career1, goodsbag1&#125;,&#123;player1, career2, goodsbag2&#125;, &#123;player1, career3, goodsbag3&#125;]).</span><br><span class="line">true</span><br><span class="line">5&gt; ets:tab2list(player).</span><br><span class="line">[&#123;player1,career1,goodsbag1&#125;,</span><br><span class="line"> &#123;player1,career2,goodsbag2&#125;,</span><br><span class="line"> &#123;player1,career3,goodsbag3&#125;]</span><br><span class="line">6&gt; ets:match(player, &#123;player1, &apos;$1&apos;, goodsbag2&#125;).</span><br><span class="line">[[career2]]</span><br><span class="line">7&gt; ets:match(player, &#123;player1, &apos;$1&apos;, &apos;_&apos;&#125;).      </span><br><span class="line">[[career1],[career2],[career3]]</span><br><span class="line">8&gt; ets:match(player, &#123;&apos;_&apos;, &apos;$1&apos;, &apos;goodsbag3&apos;&#125;).</span><br><span class="line">[[career3]]</span><br></pre></td></tr></table></figure></p>
+<p>$后面加数字用来表示想要得到的变量,’_’表示要忽略的变量.值得注意的是如果key指定的match是搞笑的,如果不指定key则需要遍历整个表,如果ets很大,则会很耗时.</p>
+<h4 id="match-object-2-match-object-3"><a href="#match-object-2-match-object-3" class="headerlink" title="match_object/2 match_object/3"></a>match_object/2 match_object/3</h4><blockquote>
+<p>match_object(Tab, Pattern) -&gt; [Object]<br>Types:<br>Tab = tid() | atom()<br>Pattern = Object = tuple()</p>
+</blockquote>
+<blockquote>
+<p>match_object(Tab, Pattern, Limit) -&gt; {[Match],Continuation} | ‘$end_of_table’<br>Types:<br>Tab = tid() | atom()<br>Pattern = tuple()<br>Match = [term()]<br>Continuation = term()</p>
+</blockquote>
+<blockquote>
+<p>match_object(Continuation) -&gt; {[Match],Continuation} | ‘$end_of_table’<br>Types:<br>Match = [term()]<br>Continuation = term()</p>
+</blockquote>
+<p>与match一样,只不过这个返回的是整个object,而不是$所指定的值</p>
+<h4 id="init-table-2"><a href="#init-table-2" class="headerlink" title="init_table/2"></a>init_table/2</h4><blockquote>
+<p>init_table(Tab, InitFun) -&gt; true<br>Types:<br>Tab = tab()<br>InitFun = fun((Arg) -&gt; Res)<br>Arg = read | close<br>Res = end_of_input | {Objects :: [term()], InitFun} | term()</p>
+</blockquote>
+<p> 官方doc上面说</p>
+<blockquote>
+<p>This function is provided for compatibility with the dets module, it is not more efficient than filling a table by using ets:insert/2</p>
+</blockquote>
+<p>我们可以看出这个是为了和dets兼容才提供了这个接口,其实效率不比insert高,<br>InitFun是个fun函数,这个函数接受read和close这两个传入值, 返回结果如Res所示,如 fun(read) -&gt; end_of_input end. 其实这个函数的文档写的有些语焉不详,我们还是可以通过官方代码直到具体什么意思.<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> init_table<span class="params">(Tab, InitFun)</span> -&gt; 'true' when</span><br><span class="line">      Tab :: tab<span class="params">()</span>,</span><br><span class="line">      InitFun :: fun<span class="params">((Arg)</span> -&gt; Res),</span><br><span class="line">      Arg :: 'read' | 'close',</span><br><span class="line">      Res :: 'end_of_input' | &#123;Objects :: [term<span class="params">()</span>], InitFun&#125; | term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">init_table</span><span class="params">(Table, Fun)</span> -&gt;</span></span><br><span class="line">    ets:delete_all_objects(Table),</span><br><span class="line">    init_table_continue(Table, Fun(read)).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">init_table_continue</span><span class="params">(_Table, end_of_input)</span> -&gt;</span></span><br><span class="line">    <span class="literal">true</span>;</span><br><span class="line"><span class="function"><span class="title">init_table_continue</span><span class="params">(Table, &#123;List, Fun&#125;)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(List)</span>, <span class="title">is_function</span><span class="params">(Fun)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">case</span> (<span class="keyword">catch</span> init_table_sub(Table, List)) <span class="keyword">of</span></span><br><span class="line">	&#123;'EXIT', Reason&#125; -&gt;</span><br><span class="line">	    (<span class="keyword">catch</span> Fun(close)),</span><br><span class="line">	    exit(Reason);</span><br><span class="line">	<span class="literal">true</span> -&gt;</span><br><span class="line">	    init_table_continue(Table, Fun(read))</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line"><span class="function"><span class="title">init_table_continue</span><span class="params">(_Table, Error)</span> -&gt;</span></span><br><span class="line">    exit(Error).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">init_table_sub</span><span class="params">(_Table, [])</span> -&gt;</span></span><br><span class="line">    <span class="literal">true</span>;</span><br><span class="line"><span class="function"><span class="title">init_table_sub</span><span class="params">(Table, [H|T])</span> -&gt;</span></span><br><span class="line">    ets:insert(Table, H),</span><br><span class="line">    init_table_sub(Table, T).</span><br></pre></td></tr></table></figure></p>
+<p>可以看出首先用delete_all_objects删掉了之前ets的数据,之后在init_table_sub中分别插入List中的元素,在调用List,之后的initfun,遇到end_of_input为止. j<br>举个简单的例子<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">21</span>&gt; ets:new(test, [named_table]).</span><br><span class="line">test</span><br><span class="line"><span class="number">22</span>&gt; ets:insert(test, &#123;test1, result1&#125;).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">23</span>&gt; ets:tab2list(test).</span><br><span class="line">[&#123;test1,result1&#125;]</span><br><span class="line"><span class="number">24</span>&gt; ets:init_table(test, <span class="keyword">fun</span>(read) -&gt; &#123;[&#123;test2, result2&#125;,&#123;test3, result3&#125;], <span class="keyword">fun</span>(read) -&gt; <span class="keyword">end</span>_of_input end&#125; <span class="keyword">end</span>).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">25</span>&gt; ets:tab2list(test).</span><br><span class="line">[&#123;test3,result3&#125;,&#123;test2,result2&#125;]</span><br></pre></td></tr></table></figure></p>
+<h4 id="member-2"><a href="#member-2" class="headerlink" title="member/2"></a>member/2</h4><blockquote>
+<p>member(Tab, Key) -&gt; true | false</p>
+</blockquote>
+<p>如果key在Tab中有值则返回true,否则false</p>
+<h4 id="rename-2"><a href="#rename-2" class="headerlink" title="rename/2"></a>rename/2</h4><blockquote>
+<p>rename(Tab, Name) -&gt; Name</p>
+</blockquote>
+<p>重命名一个table,只对有名字的table有效</p>
+<h4 id="safe-fixtable-2"><a href="#safe-fixtable-2" class="headerlink" title="safe_fixtable/2"></a>safe_fixtable/2</h4><blockquote>
+<p>safe_fixtable(Tab, true|false) -&gt; true</p>
+</blockquote>
+<p>当一个进程对某个ets用了safe_fixtable(Tab, true)后,这个进程对这个ets的first和next操作的key只返回没有返回过的key,也就是说ets表中的每个key只返回一次,为什么这么说呢.我们知道ordered_set中的key是排好序的,只要不停的next,肯定会得到更大的key,加入删除了之前一个较小的key,那么再次插入时,也不过next到这个key,但是set,bag表不是,有可能在next的过程中,如果有别的进程删除了你之前遍历过的key,之后在插入,将有可能再次next到这个key,safe_fixtable的作用就是对每个结果只返回一次,这个在游戏中对线上玩家列表的操作有一定作用,ets的官方文档中的foldl等也用到了.</p>
+<blockquote>
+<p>Note that no deleted objects are actually removed from a fixed table until it has been released. If a process fixes a table but never releases it, the memory used by the deleted objects will never be freed. The performance of operations on the table will also degrade significantly.</p>
+</blockquote>
+<p>值得注意的是在有进程对ets fixtable的情况对ets中数据的删除并没有真正的删除,直到这个进程死掉或者释放掉safe_fixtable为止,此时对ets的操作效率将显著降低, 所以尽量少用ets:foldl.<br>可参考:<a href="http://stackoverflow.com/questions/20327171/etsfoldl-vs-deleted-elements/20338795#20338795" target="_blank" rel="noopener">http://stackoverflow.com/questions/20327171/etsfoldl-vs-deleted-elements/20338795#20338795</a></p>
+<h4 id="setopts-2"><a href="#setopts-2" class="headerlink" title="setopts/2"></a>setopts/2</h4><blockquote>
+<p>setopts(Tab, Opts) -&gt; true</p>
+</blockquote>
+<p>opts只能是[{heir,pid(),HeirData} | {heir,none}],用于在table创建后修改继承选项,只能由table的owner调用</p>
+<h4 id="update-counter-3"><a href="#update-counter-3" class="headerlink" title="update_counter/3"></a>update_counter/3</h4><blockquote>
+<p>update_counter(Tab, Key, UpdateOp) -&gt; Result<br>update_counter(Tab, Key, [UpdateOp]) -&gt; [Result]<br>update_counter(Tab, Key, Incr) -&gt; Result<br>Types:<br>Tab = tid() | atom()<br>Key = term()<br>UpdateOp = {Pos,Incr} | {Pos,Incr,Threshold,SetValue}<br>Pos = Incr = Threshold = SetValue = Result = integer()</p>
+</blockquote>
+<p>更新ets中的数据,省去从ets去数据,相加在存入这个流程, Threshold是阈值,根据incr的正负,当结果大于或小于阈值时,将值设为SetValue.<br><strong><em>只能用于set和ordered_set</em></strong><br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>&gt; ets:new(test, [named_table]).</span><br><span class="line">test</span><br><span class="line"><span class="number">4</span>&gt; </span><br><span class="line"><span class="number">4</span>&gt; ets:insert(test,[&#123;one, <span class="number">1</span>&#125;,&#123;two, <span class="number">2</span>&#125;,&#123;three, <span class="number">3</span>&#125;,&#123;four, <span class="number">4</span>&#125;]).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">5</span>&gt; ets:update_counter(test, one, <span class="number">1</span>). </span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">6</span>&gt; ets:tab2list(test).</span><br><span class="line">[&#123;two,<span class="number">2</span>&#125;,&#123;three,<span class="number">3</span>&#125;,&#123;one,<span class="number">2</span>&#125;,&#123;four,<span class="number">4</span>&#125;]</span><br><span class="line"><span class="number">7</span>&gt; ets:insert(test,&#123;five, haha, <span class="number">5</span>&#125;).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">8</span>&gt; ets:update_counter(test, five, &#123;<span class="number">3</span>, <span class="number">1</span>&#125;).</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">9</span>&gt; ets:tab2list(test).</span><br><span class="line">[&#123;two,<span class="number">2</span>&#125;,&#123;five,haha,<span class="number">6</span>&#125;,&#123;three,<span class="number">3</span>&#125;,&#123;one,<span class="number">2</span>&#125;,&#123;four,<span class="number">4</span>&#125;]</span><br><span class="line"><span class="number">10</span>&gt; ets:update_counter(test, five, &#123;<span class="number">3</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">5</span>&#125;).</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">11</span>&gt; ets:tab2list(test).</span><br><span class="line">[&#123;two,<span class="number">2</span>&#125;,&#123;five,haha,<span class="number">5</span>&#125;,&#123;three,<span class="number">3</span>&#125;,&#123;one,<span class="number">2</span>&#125;,&#123;four,<span class="number">4</span>&#125;]</span><br></pre></td></tr></table></figure></p>
+<h4 id="update-element-3"><a href="#update-element-3" class="headerlink" title="update_element/3"></a>update_element/3</h4><blockquote>
+<p>update_element(Tab, Key, {Pos,Value}) -&gt; true | false<br>update_element(Tab, Key, [{Pos,Value}]) -&gt; true | false<br>Types:<br>Tab = tid() | atom()<br>Key = Value = term()<br>Pos = integer()</p>
+</blockquote>
+<p>大致跟上面一样,未找到Key会返回false.</p>
+<h3 id="所有关于match-specification"><a href="#所有关于match-specification" class="headerlink" title="所有关于match specification"></a>所有关于match specification</h3><p>下面的函数都有用到MatchSpec这个数据类型，<br>定义见: [doc]: (<a href="http://www.erlang.org/doc/apps/erts/match_spec.html)" target="_blank" rel="noopener">http://www.erlang.org/doc/apps/erts/match_spec.html)</a>.<br>match specification用于更为复杂的匹配情况,可以用于ets和erlang:trace_pattern中,一个ms的具体例子可能如下</p>
+<p><img src="../../../../img/ets1.png" alt=""></p>
+<p>乍看之下是非常难懂的,抽象一下大致是这个样子<br>[{InitialPattern1, Guards1, ReturnedValue1},<br>{InitialPattern2, Guards2, ReturnedValue2}].<br>上面的{‘$1’,’$2’,&lt;<1>&gt;,’$3’,’$4’}是InitialPattern, [{‘andalso’,{‘&gt;’,’$4’,150},{‘&lt;’,’$4’,500}},<br>{‘orelse’,{‘==’,’$2’,meat},{‘==’,’$2’,dairy}}]和[{‘&lt;’,’$3’,4.0},{is_float,’$3’}]是Guards1和Guards2,[‘$1’]是returnedvalue.</1></p>
+<p>InitialPattern是将变量绑定到具体的$数字上,然后通过guard,得到returnvalue.<br>Guard的语序是{FunctionOrOperator, Arg1, …, ArgN},’andalso’ ‘orelse’和’&lt;’等属于FunctionorOperator,后面的是参数.<br>{‘andalso’,{‘&gt;’,’$4’,150},{‘&lt;’,’$4’,500}}翻译过来就是 when $4 &gt; 150 andalso $4 &lt; 500.<br>如果满足这个Guard就返回$1.</p>
+<p>当然让我们去写这样一个match是很不符合人类的发展的,所以我们要用到下面的函数</p>
+<h4 id="fun2ms-1"><a href="#fun2ms-1" class="headerlink" title="fun2ms/1"></a>fun2ms/1</h4><blockquote>
+<p>fun2ms(LiteralFun) -&gt; MatchSpec<br>Types:<br>LiteralFun = function()<br>MatchSpec = match_spec()<br>这个函数将我们熟悉的fun函数转换成match specification的形式,这个转换过程由ms_transform完成,<br>需要在模块开头加上<br><strong><em>-include_lib(“stdlib/include/ms_transform.hrl”).</em></strong><br>需要注意的是fun的参数只有一个,只能是一个变量或者一个tuple不能使list等,不能使bit流.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1&gt; ets:fun2ms(fun(X) when X &gt; 10 -&gt; X end).   </span><br><span class="line">[&#123;&apos;$1&apos;,[&#123;&apos;&gt;&apos;,&apos;$1&apos;,10&#125;],[&apos;$1&apos;]&#125;]</span><br><span class="line">2&gt; ets:fun2ms(fun(&#123;X, Y&#125;) when X &gt; 10, Y &lt; 20 -&gt; X * Y end).</span><br><span class="line">[&#123;&#123;&apos;$1&apos;,&apos;$2&apos;&#125;,</span><br><span class="line">  [&#123;&apos;&gt;&apos;,&apos;$1&apos;,10&#125;,&#123;&apos;&lt;&apos;,&apos;$2&apos;,20&#125;],</span><br><span class="line">  [&#123;&apos;*&apos;,&apos;$1&apos;,&apos;$2&apos;&#125;]&#125;]</span><br></pre></td></tr></table></figure>
+<p>ms的在ets中的主要作用是用在select语句中,达到类似于mysql中select的效果</p>
+<h4 id="select-1-2-3"><a href="#select-1-2-3" class="headerlink" title="select/1/2/3"></a>select/1/2/3</h4><blockquote>
+<p>select(Tab, MatchSpec) -&gt; [Match]<br>select(Tab, MatchSpec, Limit) -&gt; {[Match],Continuation} | ‘$end_of_table’<br>select(Continuation) -&gt; {[Match],Continuation} | ‘$end_of_table’<br>Types:<br>Tab = tid() | atom()<br>Match = term()<br>MatchSpec = match_spec()<br>Continuation = term()</p>
+</blockquote>
+<p>select/2将所有符合MatchSpec的结果返回，select/3制定了limit。返回的Continuation可以用在select/1中。为何这么做？官方说明是</p>
+<blockquote>
+<p>This is a space efficient way to work on objects in a table which is still faster than traversing the table object by object using ets:first/1 and ets:next/1.</p>
+</blockquote>
+<p>这样节省空间，同时比用first，next更加快。<br>下面的例子是在player表中有两个#player结构的数据。一个返回的是10010这个id的玩家，之后调用select(C)将第二个10011玩家玩家返回同时返回end of table。如果将end of table传入select会直接返回end of table。</p>
+<p><img src="../../../../img/ets2.png" alt=""></p>
+<p>learn you some erlang书中的例子，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">11&gt; rd(food, &#123;name, calories, price, group&#125;).</span><br><span class="line">food</span><br><span class="line">12&gt; ets:new(food, [ordered_set, &#123;keypos,#food.name&#125;, named_table]).</span><br><span class="line">food</span><br><span class="line">13&gt; ets:insert(food, [#food&#123;name=salmon, calories=88, price=4.00, group=meat&#125;,</span><br><span class="line">13&gt; #food&#123;name=cereals, calories=178, price=2.79, group=bread&#125;,</span><br><span class="line">13&gt; #food&#123;name=milk, calories=150, price=3.23, group=dairy&#125;,</span><br><span class="line">13&gt; #food&#123;name=cake, calories=650, price=7.21, group=delicious&#125;,</span><br><span class="line">13&gt; #food&#123;name=bacon, calories=800, price=6.32, group=meat&#125;,</span><br><span class="line">13&gt; #food&#123;name=sandwich, calories=550, price=5.78, group=whatever&#125;]).</span><br><span class="line">true</span><br><span class="line">14&gt; ets:select(food, ets:fun2ms(fun(N = #food&#123;calories=C&#125;) when C &lt; 600 -&gt; N end)).</span><br><span class="line">[#food&#123;name = cereals,calories = 178,price = 2.79,group = bread&#125;,</span><br><span class="line">#food&#123;name = milk,calories = 150,price = 3.23,group = dairy&#125;,</span><br><span class="line">#food&#123;name = salmon,calories = 88,price = 4.0,group = meat&#125;,</span><br><span class="line">#food&#123;name = sandwich,calories = 550,price = 5.78,group = whatever&#125;]</span><br><span class="line">15&gt; ets:select_reverse(food, ets:fun2ms(fun(N = #food&#123;calories=C&#125;) when C &lt; 600 -&gt; N end)).</span><br><span class="line">[#food&#123;name = sandwich,calories = 550,price = 5.78,group = whatever&#125;,</span><br><span class="line">#food&#123;name = salmon,calories = 88,price = 4.0,group = meat&#125;,</span><br><span class="line">#food&#123;name = milk,calories = 150,price = 3.23,group = dairy&#125;,</span><br><span class="line">#food&#123;name = cereals,calories = 178,price = 2.79,group = bread&#125;]</span><br></pre></td></tr></table></figure></p>
+<p> 同时在官方doc的ms_transform中有个多个子句的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ets:select(emp_tab, ets:fun2ms(</span><br><span class="line">                     fun(#emp&#123;empno = E, surname = &quot;Smith&quot; &#125;) -&gt;</span><br><span class="line">                             &#123;guru,E&#125;;</span><br><span class="line">                        (#emp&#123;empno = E, empyear = Y&#125;) when Y &lt; 1997  -&gt;</span><br><span class="line">                             &#123;inventory, E&#125;;</span><br><span class="line">                        (#emp&#123;empno = E, empyear = Y&#125;) when Y &gt; 2001  -&gt;</span><br><span class="line">                             &#123;newbie, E&#125;;</span><br><span class="line">                        (#emp&#123;empno = E, empyear = Y&#125;) -&gt; % 1997 -- 2001</span><br><span class="line">                             &#123;rookie, E&#125;</span><br><span class="line">                     end)).</span><br></pre></td></tr></table></figure>
+<h4 id="select-count-2"><a href="#select-count-2" class="headerlink" title="select_count/2"></a>select_count/2</h4><blockquote>
+<p>select_count(Tab, MatchSpec) -&gt; NumMatched<br>Types:<br>Tab = tid() | atom()<br>Object = tuple()<br>MatchSpec = match_spec()<br>NumMatched = integer()<br>对MS返回为true的会计数。如下，得出player表中id大于0的玩家数。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> ets:select_count(player, ets:fun2ms(fun(#player&#123;id = ID&#125;) -&gt; ID &gt; 0  end)).    </span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h4 id="select-delete-2"><a href="#select-delete-2" class="headerlink" title="select_delete/2"></a>select_delete/2</h4><blockquote>
+<p>select_delete(Tab, MatchSpec) -&gt; NumDeleted<br>Types:<br>Tab = tid() | atom()<br>Object = tuple()<br>MatchSpec = match_spec()<br>NumDeleted = integer()</p>
+</blockquote>
+<p>大致同count，将返回true的object从表中删掉。</p>
+<h4 id="select-reverse-1-2-3"><a href="#select-reverse-1-2-3" class="headerlink" title="select_reverse/1/2/3"></a>select_reverse/1/2/3</h4><blockquote>
+<p>select_reverse(Tab, MatchSpec) -&gt; [Match]<br>Types:<br>Tab = tid() | atom()<br>Match = term()<br>MatchSpec = match_spec()<br>select_reverse(Tab, MatchSpec, Limit) -&gt; {[Match],Continuation} | ‘$end_of_table’<br>Types:<br>Tab = tid() | atom()<br>Match = term()<br>MatchSpec = match_spec()<br>Continuation = term()<br>select_reverse(Tab, MatchSpec) -&gt; [Match]<br>Types:<br>Tab = tid() | atom()<br>Match = term()<br>MatchSpec = match_spec()</p>
+</blockquote>
+<p>与只不过将select的结果反序，对order_set表有效，其他类型的表与select返回结果一致。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1&gt; T = ets:new(x,[ordered_set]).</span><br><span class="line">2&gt; [ ets:insert(T,&#123;N&#125;) || N &lt;- lists:seq(1,10) ].</span><br><span class="line">...</span><br><span class="line">3&gt; &#123;R0,C0&#125; = ets:select_reverse(T,[&#123;&apos;_&apos;,[],[&apos;$_&apos;]&#125;],4).</span><br><span class="line">...</span><br><span class="line">4&gt; R0.</span><br><span class="line">[&#123;10&#125;,&#123;9&#125;,&#123;8&#125;,&#123;7&#125;]</span><br><span class="line">5&gt; &#123;R1,C1&#125; = ets:select_reverse(C0).</span><br><span class="line">...</span><br><span class="line">6&gt; R1.</span><br><span class="line">[&#123;6&#125;,&#123;5&#125;,&#123;4&#125;,&#123;3&#125;]</span><br><span class="line">7&gt; &#123;R2,C2&#125; = ets:select_reverse(C1).</span><br><span class="line">...</span><br><span class="line">8&gt; R2.</span><br><span class="line">[&#123;2&#125;,&#123;1&#125;]</span><br><span class="line">9&gt; &apos;$end_of_table&apos; = ets:select_reverse(C2).</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h4 id="match-spec-compile-1"><a href="#match-spec-compile-1" class="headerlink" title="match_spec_compile/1"></a>match_spec_compile/1</h4><h4 id="match-spec-run-2"><a href="#match-spec-run-2" class="headerlink" title="match_spec_run/2"></a>match_spec_run/2</h4><h4 id="is-compiled-ms-1"><a href="#is-compiled-ms-1" class="headerlink" title="is_compiled_ms/1"></a>is_compiled_ms/1</h4><blockquote>
+<p>match_spec_compile(MatchSpec) -&gt; CompiledMatchSpec<br>Types:<br>MatchSpec = match_spec()<br>CompiledMatchSpec = comp_match_spec()<br>match_spec_run(List,CompiledMatchSpec) -&gt; list()<br>Types:<br>List = [ tuple() ]<br>CompiledMatchSpec = comp_match_spec()<br>is_compiled_ms(Term) -&gt; boolean()<br>Types:<br>Term = term()</p>
+</blockquote>
+<p>match_spec_compile将一个MS编译成一个不可见的内部形式供match_spec_run调用，is_compile_ms用来判断这个编译结果是否是个正确的编译，因为编译后的内部形式不能再节点间传递也不能储存在硬盘上。<br>比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ets:is_compiled_ms(ets:match_spec_compile([&#123;&apos;_&apos;,[],[true]&#125;])).</span><br></pre></td></tr></table></figure></p>
+<p>返回的是true<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MS = ets:match_spec_compile([&#123;&apos;_&apos;,[],[true]&#125;]),</span><br><span class="line">Broken = binary_to_term(term_to_binary(MS)),</span><br><span class="line">ets:is_compiled_ms(Broken).</span><br></pre></td></tr></table></figure></p>
+<p>返回的是false，因为不接受外部的转化。会使其失去原有的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MatchSpec = ets:fun2ms(fun(&#123;M, N&#125;) when N &gt; 3 -&gt; M end),</span><br><span class="line">CompiledMatchSpec = ets:match_spec_compile(MatchSpec),</span><br><span class="line">List = [&#123;1, 2&#125;, &#123;3, 4&#125;, &#123;5, 6&#125;],</span><br><span class="line">ets:match_spec_run(List, CompiledMatchSpec).</span><br></pre></td></tr></table></figure></p>
+<p>如果MatchSpec不是个合格的Ms会抛badarg的错误。</p>
+<h4 id="repair-continuation-2"><a href="#repair-continuation-2" class="headerlink" title="repair_continuation/2"></a>repair_continuation/2</h4><blockquote>
+<p>repair_continuation(Continuation, MatchSpec) -&gt; Continuation<br>Types:<br>Continuation = continuation()<br>MatchSpec = match_spec()</p>
+</blockquote>
+<p>用来修复select/3返回的continuation，如果continuation在被转化为外部形势（用来在节点间传递)，会失效，但是使用repair_continuation可以恢复。<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">%% 无效</span><br><span class="line">T=ets:new(x,[]),</span><br><span class="line">&#123;_,C&#125; = ets:select(T,ets:fun2ms(fun(&#123;N,_&#125;=A)</span><br><span class="line">when (N rem 10) =:= 0 -&gt;</span><br><span class="line">A</span><br><span class="line">end),10),</span><br><span class="line">Broken = binary_to_term(term_to_binary(C)),</span><br><span class="line">ets:select(Broken).</span><br><span class="line"></span><br><span class="line">%% 有效</span><br><span class="line">T=ets:new(x,[]),</span><br><span class="line">MS = ets:fun2ms(fun(&#123;N,_&#125;=A)</span><br><span class="line">when (N rem 10) =:= 0 -&gt;</span><br><span class="line">A</span><br><span class="line">end),</span><br><span class="line">&#123;_,C&#125; = ets:select(T,MS,10),</span><br><span class="line">Broken = binary_to_term(term_to_binary(C)),</span><br><span class="line">ets:select(ets:repair_continuation(Broken,MS)).</span><br></pre></td></tr></table></figure></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://youthyblog.com/2014/10/25/Erlang-ETS/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://youthyblog.com/2014/10/25/Erlang-ETS/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//youthyblog.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2015/06/08/erlang_mysql_driver/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2014/10/13/工作五个月后/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Youthy's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        Contact
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://weibo.com/u/1592381215" target="_blank" title="Weibo me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">person_add</i>
+                        
+                        Weibo me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/10/">十月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/09/">九月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">八月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">七月 2014<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/06/">六月 2014<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/ACG/">ACG<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/erlang/">erlang<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/随笔/">随笔<span class="sidebar_archives-count">4</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="links" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/shizixiuluo" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/1592381215" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+        <a href="https://www.zhihu.com/people/yu-you-qi-46/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
+                <span class="visuallyhidden">Zhihu</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;youthy的流水账
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//youthyblog.disqus.com/count.js" async></script>
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2014;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

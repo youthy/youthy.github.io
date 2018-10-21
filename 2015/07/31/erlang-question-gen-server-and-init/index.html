@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://youthyblog.disqus.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            [erlang_question]gen_server and init | 
+        
+        youthy的流水账
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="">
+    <meta name="keywords" content="erlang, golang,erlang">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body {
+        background-color: ;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="youthy的流水账">
+    <meta name="msapplication-starturl" content="http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="youthy的流水账">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="luyN6dELjQn-N4acL35Kyqd_3xEjr8gA3TqpaSV23kk" />
+    <meta name="baidu-site-verification" content="BA4RKG2m6D" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="[erlang_question]gen_server and init | youthy的流水账">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="erlang"> 
+
+    
+        <meta property="article:published_time" content="Fri Jul 31 2015 16:11:50 GMT+0800">
+        <meta property="article:modified_time" content="Wed Oct 17 2018 16:46:23 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/index.html",
+    "headline": "[erlang_question]gen_server and init",
+    "datePublished": "Fri Jul 31 2015 16:11:50 GMT+0800",
+    "dateModified": "Wed Oct 17 2018 16:46:23 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Youthy",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "youthy的流水账",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",erlangerlang, golang",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-127668650-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?d4026e5060b2e4c5254eaeca317f90bd';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#小技巧"><span class="post-toc-number">1.</span> <span class="post-toc-text">小技巧?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Question"><span class="post-toc-number">2.</span> <span class="post-toc-text">Question</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Answers"><span class="post-toc-number">3.</span> <span class="post-toc-text">Answers:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Sergej-Jurecko"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Sergej Jurečko:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Loic-Hoguin-cowboy-作者）"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Loïc Hoguin(cowboy 作者）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Max-Lapshin"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Max Lapshin</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Loic-Hoguin"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">Loïc Hoguin</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Test"><span class="post-toc-number">4.</span> <span class="post-toc-text">Test</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gen-server的创建过程"><span class="post-toc-number">5.</span> <span class="post-toc-text">gen_server的创建过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#gen-server"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">gen_server:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#gen"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">gen:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#proc-lib"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">proc_lib:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#gen-1"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">gen</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#gen-server-1"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">gen_server:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#proc-lib-1"><span class="post-toc-number">5.6.</span> <span class="post-toc-text">proc_lib</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#where-is-the-point"><span class="post-toc-number">6.</span> <span class="post-toc-text">where is the point?</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                [erlang_question]gen_server and init
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Youthy</strong>
+        <span>7月 31, 2015</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/erlang/">erlang</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=[erlang_question]gen_server and init&url=http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/index.html&pic=http://youthyblog.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=[erlang_question]gen_server and init&url=http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/index.html&via=Youthy" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <!-- toc -->
+<a id="more"></a>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧?"></a>小技巧?</h2><p>这两天复习了一下<a href="http://zh.scribd.com/doc/87376094/Erlang-and-OTP-in-Action#scribd" target="_blank" rel="noopener">Erlang and OTP in action</a><br>其中讲到gen_server的时候，作者用了个小技巧。如下。<br><img src="http://storage4.static.itmages.com/i/15/0731/h_1438311976_3257184_46c6e8b7c0.png" alt=""></p>
+<p><img src="http://storage1.static.itmages.com/i/15/0731/h_1438312022_8979746_d612eb6d7f.png" alt=""></p>
+<p><img src="http://storage4.static.itmages.com/i/15/0731/h_1438311785_2601988_b290e0c784.png" alt=""></p>
+<blockquote>
+<p>第三章图片的引用里handle_call应该是handle_info,此处有错误</p>
+</blockquote>
+<p>作者的意思时如果在init的返回中设置了timeout参数为0，会在init结束后会立即向自己发送一个timeout参数。并且由handle_info(timeout…)处理。意思是可以让一些耗时高的初始化操作在handle_info(timeout。。）里面处理，而让init尽快返回。<br><strong>本以为是个不错的小技巧，结果却有些隐患</strong></p>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>这两天的mailist正好有人遇到了这个问题。<br><a href="http://erlang.org/pipermail/erlang-questions/2015-July/085314.html" target="_blank" rel="noopener">[erlang_question]gen_server and init</a><br>问题如下：</p>
+<blockquote>
+<p><strong><em>Matthew Evans</em></strong>:<br>Hi,<br>We have used this pattern in gen_servers for a long time now:<br>init(_) -&gt;   %% Some stuff   {ok, #state{}, 0}.<br>%%%%%%<br>handle_info(timeout, State) -&gt;    %% Init stuff    {noreply,State}<br>Basically the idea is to prevent init from blocking and to have init/1 return with a timeout of 0 causing an immediate timeout message to be invoked in the handle_info.<br>Here’s what’s odd. Sometimes this timeout does not fire. It doesn’t appear that any message is getting sent, but I would imagine that since it’s a registered gen_server there is no way that can happen.<br>Does anyone have any ideas?<br>We are running vsn 17.1, and ntp is enabled on the host (Linux).<br>Thanks                           </p>
+</blockquote>
+<p>提问者与作者的思路一样，想要在timeout里面做些初始化操作。然而却没想到timeout并没有触发。<br>以下摘取一些回答。</p>
+<h2 id="Answers"><a href="#Answers" class="headerlink" title="Answers:"></a>Answers:</h2><h3 id="Sergej-Jurecko"><a href="#Sergej-Jurecko" class="headerlink" title="Sergej Jurečko:"></a><strong><em>Sergej Jurečko</em></strong>:</h3><blockquote>
+<p>If something is in the message queue before init is done executing, that timeout will never get called. Timeout means execute only if nothing else happens during. You should be using self() ! timeout<br>如果在init没有完成之前消息队列里面存在消息，timeout将永远不会调用。应该使用self()!timeout这种方式</p>
+</blockquote>
+<h3 id="Loic-Hoguin-cowboy-作者）"><a href="#Loic-Hoguin-cowboy-作者）" class="headerlink" title="Loïc Hoguin(cowboy 作者）"></a><strong><em>Loïc Hoguin</em></strong>(cowboy 作者）</h3><blockquote>
+<p>This and sending yourself a message is a bad idea. It will usually work,<br>until it doesn’t, and you will have a very hard time figuring out why.<br>Instead, start the process using proc_lib:spawn_link or<br>proc_lib:start_link (depending on whether it needs to be synchronous or<br>not), then perform your initialization (calling proc_lib:init_ack where<br>appropriate), and finally calling gen_server:enter_loop.<br>What this gives you is pretty much the ability to customize the<br>initialization of your gen_server process.<br>This is the correct way to do it. Your solution can fail if you receive<br>a message. Sending yourself a message is subject to race conditions<br>where you receive a message before you could init.<br>大体意思说这个方式是bad idea。应该使用proc_lib:spawn_link, proc_lib:start_link, proc_lib:init_ack, gen_server:enter_loop等。</p>
+</blockquote>
+<h3 id="Max-Lapshin"><a href="#Max-Lapshin" class="headerlink" title="Max Lapshin"></a><strong><em>Max Lapshin</em></strong></h3><blockquote>
+<p>Loic is right, but you should understand that you can receive message<br>before your  “self() ! init” message only if you explicitly tell your pid<br>someone in init()  because before the end of init your pid is unknown to<br>others.<br>Loic是对的～但是你应该明白除非你在init的过程中将自己的pid告诉其他进程才会在init返回之前接到消息，因为init没有完成之前，pid对其他是未知的。</p>
+</blockquote>
+<h3 id="Loic-Hoguin"><a href="#Loic-Hoguin" class="headerlink" title="Loïc Hoguin"></a><strong><em>Loïc Hoguin</em></strong></h3><blockquote>
+<p>(Had problems pasting so hope it’s all OK!)</p>
+</blockquote>
+<blockquote>
+<p>I’m not sure what you wrote there but I can give you two scenarios where<br>it can fail off the top of my head. The first is very unlikely and can<br>only fail if you use the 0 timeout, while the second is actually much<br>easier to observe and can fail with both methods:</p>
+</blockquote>
+<blockquote>
+<p>P1 calls start_link<br>P2 init (returns 0 timeout)<br>P2 yields before calling receive<br>P1 returns from start_link and sends P2 a message<br>P2 receives message</p>
+</blockquote>
+<blockquote>
+<p>And:</p>
+</blockquote>
+<blockquote>
+<p>P1 calls start_link<br>P2 in init subscribes to some kind of pubsub PS<br>PS sends P2 message(s)<br>P2 returns from init and receive those messages</p>
+</blockquote>
+<blockquote>
+<p>I’m not sure why your tool doesn’t catch the first case, Concuerror<br><em>definitely does</em>, and without needing to write all this weird code too. :-)</p>
+</blockquote>
+<blockquote>
+<p>Here is the module:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">-module(z).</span><br><span class="line">-behaviour(gen_server).</span><br><span class="line"></span><br><span class="line">-export([start_link/0]).</span><br><span class="line"></span><br><span class="line">%% Operational API</span><br><span class="line">-export([read/0]).</span><br><span class="line"></span><br><span class="line">%% gen_server API</span><br><span class="line">-export([</span><br><span class="line">          init/1,</span><br><span class="line">          handle_cast/2,</span><br><span class="line">          handle_call/3,</span><br><span class="line">          terminate/2,</span><br><span class="line">          code_change/3,</span><br><span class="line">          handle_info/2,</span><br><span class="line">		 test/0</span><br><span class="line">]).</span><br><span class="line"></span><br><span class="line">test() -&gt;</span><br><span class="line">	start_link(),</span><br><span class="line">	ready = read(),</span><br><span class="line">	stop().</span><br><span class="line"></span><br><span class="line">%% API</span><br><span class="line">start_link() -&gt;</span><br><span class="line">     gen_server:start(&#123;local, ?MODULE&#125;, ?MODULE, [], []).</span><br><span class="line"></span><br><span class="line">read() -&gt;</span><br><span class="line">     gen_server:call(?MODULE, read).</span><br><span class="line"></span><br><span class="line">stop() -&gt;</span><br><span class="line">	gen_server:call(?MODULE, stop).</span><br><span class="line"></span><br><span class="line">%% Callbacks</span><br><span class="line">init([]) -&gt;</span><br><span class="line">     &#123;ok, initializing, 0&#125;.</span><br><span class="line"></span><br><span class="line">handle_call(read, _From, State) -&gt;</span><br><span class="line">     &#123;reply, State, State&#125;;</span><br><span class="line">handle_call(stop, _, State) -&gt;</span><br><span class="line">	&#123;stop, normal, ok, stop&#125;.</span><br><span class="line"></span><br><span class="line">handle_cast(_M, State) -&gt;</span><br><span class="line">     &#123;noreply, State&#125;.</span><br><span class="line"></span><br><span class="line">handle_info(timeout, _State) -&gt;</span><br><span class="line">     &#123;noreply, ready&#125;.</span><br><span class="line"></span><br><span class="line">terminate(_How, _State) -&gt;</span><br><span class="line">     ok.</span><br><span class="line"></span><br><span class="line">code_change(_OldVsn, State, _Extra) -&gt;</span><br><span class="line">     &#123;ok, State&#125;.</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>（注：handle_call(stop, _, State)的State应该是_State, 否则编译不过).</p>
+<h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h2><p>Loic给出了一个module，用concuerror进行了测试，这个模块的init中指定timeout为0，然后handle_info(timeout。。。）并没有触发。<br>concuerror是一个用来测试erlang中一些看起来没有问题的程序，但是在并行情况下可能发生的问题的工具。<br>参考<br><a href="http://concuerror.com/" target="_blank" rel="noopener">官网</a><br><a href="http://concuerror.com/tutorials/poolboy-example/" target="_blank" rel="noopener">concuerror tutorial</a><br><a href="https://github.com/parapluu/Concuerror" target="_blank" rel="noopener">github</a><br>以下是我运行的结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~/code/Concuerror$ ./concuerror -f &quot;../etest/z.erl&quot; -m z -t test --after_timeout 1000 </span><br><span class="line">concuerror: WARNING: file ../etest/z.erl shadows the default ./z.beam</span><br><span class="line">Concuerror started at 31 Jul 2015 07:21:55</span><br><span class="line">Writing results in concuerror_report.txt</span><br><span class="line"></span><br><span class="line">Info: Instrumented z</span><br><span class="line">Info: Instrumented io_lib</span><br><span class="line">Info: Instrumented gen_server</span><br><span class="line">Info: Instrumented gen</span><br><span class="line">Info: Instrumented proc_lib</span><br><span class="line">Info: Instrumented erlang</span><br><span class="line">Info: Instrumented init</span><br><span class="line">Info: Instrumented sys</span><br><span class="line">Info: You can see pairs of racing instructions (in the report and --graph) with &apos;--show_races true&apos;</span><br><span class="line">Error: Stop testing on first error. (Check &apos;-h keep_going&apos;).</span><br><span class="line"></span><br><span class="line">Done! (Exit status: warning)</span><br><span class="line">  Summary: 1 errors, 4/4 interleavings explored</span><br><span class="line">youthy@youthy:~/code/Concuerror$ vim concuerror_report.txt</span><br></pre></td></tr></table></figure></p>
+<p>concuerror_report.txt:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">Erroneous interleaving 1:</span><br><span class="line">* At step 23 process P exited abnormally</span><br><span class="line">    Reason:</span><br><span class="line">      &#123;&#123;badmatch,initializing&#125;,</span><br><span class="line">       [&#123;z,test,0,[&#123;file,&quot;../etest/z.erl&quot;&#125;,&#123;line,22&#125;]&#125;]&#125;</span><br><span class="line">    Stacktrace:</span><br><span class="line">      [&#123;z,test,0,[&#123;file,&quot;../etest/z.erl&quot;&#125;,&#123;line,22&#125;]&#125;]</span><br><span class="line">* Blocked at a &apos;receive&apos; (when all other processes have exited):</span><br><span class="line">    P.1 in gen_server.erl line 348</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Interleaving info:</span><br><span class="line">   1: P: undefined = erlang:whereis(z)</span><br><span class="line">    in gen.erl line 277</span><br><span class="line">   2: P: [] = erlang:process_info(P, registered_name)</span><br><span class="line">    in proc_lib.erl line 648</span><br><span class="line">   3: P: P.1 = erlang:spawn_opt(&#123;proc_lib,init_p,[P,[],gen,init_it,[gen_server,P,self,&#123;local,z&#125;,z,[],[]]],[]&#125;)</span><br><span class="line">    in erlang.erl line 249</span><br><span class="line">   4: P.1: undefined = erlang:put(&apos;$ancestors&apos;, [P])</span><br><span class="line">    in proc_lib.erl line 221</span><br><span class="line">   5: P.1: undefined = erlang:put(&apos;$initial_call&apos;, &#123;z,init,1&#125;)</span><br><span class="line">    in proc_lib.erl line 222</span><br><span class="line">   6: P.1: true = erlang:register(z, P.1)</span><br><span class="line">    in gen.erl line 280</span><br><span class="line">   7: P.1: &#123;P.1,&#123;get_argument,generic_debug&#125;&#125; = init ! &#123;P.1,&#123;get_argument,generic_debug&#125;&#125;</span><br><span class="line">    in init.erl line 145</span><br><span class="line">   8: Message (&#123;P.1,&#123;get_argument,generic_debug&#125;&#125;) from P.1 reaches init</span><br><span class="line">   9: Message (&#123;init,error&#125;) from init reaches P.1</span><br><span class="line">  10: P.1: receives message (&#123;init,error&#125;)</span><br><span class="line">    in init.erl line 146</span><br><span class="line">  11: P.1: &#123;ack,P.1,&#123;ok,P.1&#125;&#125; = P ! &#123;ack,P.1,&#123;ok,P.1&#125;&#125;</span><br><span class="line">    in proc_lib.erl line 348</span><br><span class="line">  12: Message (&#123;ack,P.1,&#123;ok,P.1&#125;&#125;) from P.1 reaches P</span><br><span class="line">  13: P: receives message (&#123;ack,P.1,&#123;ok,P.1&#125;&#125;)</span><br><span class="line">    in proc_lib.erl line 321</span><br><span class="line">  14: P: P.1 = erlang:whereis(z)</span><br><span class="line">    in gen.erl line 154</span><br><span class="line">  15: P: #Ref&lt;0.0.0.176&gt; = erlang:monitor(process, P.1)</span><br><span class="line">    in gen.erl line 204</span><br><span class="line">  16: P: &#123;&apos;$gen_call&apos;,&#123;P,#Ref&lt;0.0.0.176&gt;&#125;,read&#125; = erlang:send(P.1, &#123;&apos;$gen_call&apos;,&#123;P,#Ref&lt;0.0.0.176&gt;&#125;,read&#125;, [noconnect])</span><br><span class="line">    in gen.erl line 215</span><br><span class="line">  17: Message (&#123;&apos;$gen_call&apos;,&#123;P,#Ref&lt;0.0.0.176&gt;&#125;,read&#125;) from P reaches P.1</span><br><span class="line">  18: P.1: receives message (&#123;&apos;$gen_call&apos;,&#123;P,#Ref&lt;0.0.0.176&gt;&#125;,read&#125;)</span><br><span class="line">    in gen_server.erl line 348</span><br><span class="line">  19: P.1: &#123;#Ref&lt;0.0.0.176&gt;,initializing&#125; = P ! &#123;#Ref&lt;0.0.0.176&gt;,initializing&#125;</span><br><span class="line">    in gen_server.erl line 214</span><br><span class="line">  20: Message (&#123;#Ref&lt;0.0.0.176&gt;,initializing&#125;) from P.1 reaches P</span><br><span class="line">  21: P: receives message (&#123;#Ref&lt;0.0.0.176&gt;,initializing&#125;)</span><br><span class="line">    in gen.erl line 217</span><br><span class="line">  22: P: true = erlang:demonitor(#Ref&lt;0.0.0.176&gt;, [flush])</span><br><span class="line">    in gen.erl line 219</span><br><span class="line">  23: P: exits abnormally (&#123;&#123;badmatch,initializing&#125;,[&#123;z,test,0,[&#123;file,[46,46,47,101,116,101,115,116,47|...]&#125;,&#123;line,22&#125;]&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>报告显示P进程（父进程)在第23步的时候崩溃了，错误原因时badmatch，z.erl的22行，即<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ready = read(),</span><br></pre></td></tr></table></figure></p>
+<p>此处read()返回的不是ready而是intiallizing，也就是handle_info(timeout…)并没有执行。<br>上面的１～２３步显示了gen_server的创建过程.以及消息传递过程。十分详细。不过需要挖掘下gen_server的源码才能看懂。</p>
+<h2 id="gen-server的创建过程"><a href="#gen-server的创建过程" class="headerlink" title="gen_server的创建过程"></a>gen_server的创建过程</h2><p>下面分析下gen_server的创建过程。假设我们创建一个{local, test}的进程，并传入Args作为初始化参数，Opts为进程的设置参数.</p>
+<h3 id="gen-server"><a href="#gen-server" class="headerlink" title="gen_server:"></a>gen_server:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start_link(&#123;local, test&#125;, test, Args, Opts) -&gt;</span><br><span class="line">   gen:start(gen_server,  link, &#123;local, test&#125;, test, Args, Opts).</span><br></pre></td></tr></table></figure>
+<h3 id="gen"><a href="#gen" class="headerlink" title="gen:"></a>gen:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">start(gen_server, link, &#123;local, test&#125;, test, Args, Opts) -&gt;</span><br><span class="line">     case where(&#123;local, test&#125;) of %检测名字是否注册</span><br><span class="line">       undefined -&gt;</span><br><span class="line">          do_spawn(gen_server, link, &#123;local, test&#125;, test, Args, Opts);</span><br><span class="line">        Pid -&gt;</span><br><span class="line">           &#123;error, &#123;already_started, Pid&#125;&#125;</span><br><span class="line">      end.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">do_spawn(gen_server, link, &#123;local, test&#125;, test, Args, Opts) -&gt;</span><br><span class="line">        Time = somefun(Opts) % 提取出Opt中的timeout参数, </span><br><span class="line">        proc_lib:start_link(gen, init_it, </span><br><span class="line">        [gen_server, self(), self(), &#123;local, test&#125;, test, Args, Opts], Time, spawn_opts(Opts)).</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此处spawn_opts的作用时查找Opts中有没有spawn_opt这个选项，否则为[].</p>
+</blockquote>
+<h3 id="proc-lib"><a href="#proc-lib" class="headerlink" title="proc_lib:"></a>proc_lib:</h3><p>上面self()一般情况下为supervisor的Pid。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start_link(gen, init_it, [gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts], Timeout, Opts|[]) -&gt;</span><br><span class="line">  Pid = proc_lib:spawn_opt(gen, init_it, [gen_server, SelfPid, SelfPid, &#123;local, test&#125;, test, Args, Opts|[]], ensure_link(Opts|[])), %ensure_link尝试将link加入Opts</span><br><span class="line">  sync_wait(Pid, Timeout).</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spawn_opt(gen, init_it, [gen_server, selfPid, SelfPid, &#123;local, test&#125;, test, Args, Opts], [link]|[link, Opts]) -&gt;</span><br><span class="line">   Parent = ......%获取当前进程registername为父进程</span><br><span class="line">   Ancestors = ....% 获取进程字典中的$ancestors的值</span><br><span class="line">   check_for_monitor([link]|[link,Opts])....% 检测monitor这个参数在不在其中，在的话直接抛出错误。 </span><br><span class="line">   erlang:spawn_opt(proc_lib, init_p, [Parent, Ancestors, gen, init_it, [gen_server, SelfPid....Opts],[link]|[link, Opts]).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sync_wait(Pid, TimeOut) -&gt;</span><br><span class="line">  receive </span><br><span class="line">  &#123;ack, Pid, Return&#125; -&gt;</span><br><span class="line">    Return;</span><br><span class="line">  &#123;&apos;EXIT&apos;, Pid, Reason&#125; -&gt;</span><br><span class="line">    &#123;error, Reason&#125;</span><br><span class="line">  after TimeOut -&gt;</span><br><span class="line">    unlink(Pid),</span><br><span class="line">    exit(Pid, kill),</span><br><span class="line">    flush(Pid),</span><br><span class="line">    &#123;error, timeout&#125;</span><br><span class="line">   end.</span><br></pre></td></tr></table></figure>
+<p>erlang:spawn_opt与spawn类似，只不过支持一些option。所以调用的还是proc_lib的init_p。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">init_p(Parent, Ancestors, gen, init_it, [gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]], [link|[link, Opts]) -&gt;</span><br><span class="line">  put(&apos;ancestors&apos;, [Parent|Ancestors]),</span><br><span class="line">  put(&apos;initial_call&apos;, trans_init(gen, init_it, [gen_server, Sup.....])),</span><br><span class="line">  init_p_do_apply(gen, init_it, [gen_server, Sup, Sup....]).</span><br></pre></td></tr></table></figure></p>
+<p>其中trans_init的结果返回为{Module, init, 1} 即 {test, init, 1}.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">init_p_do_apply(gen, init_it, [gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]]) -&gt;</span><br><span class="line">    try</span><br><span class="line">	apply(gen, init_it, [gen_server, Sup... Opts]) </span><br><span class="line">    catch</span><br><span class="line">	Class:Reason -&gt;</span><br><span class="line">	    exit_p(Class, Reason)</span><br><span class="line">    end.</span><br></pre></td></tr></table></figure></p>
+<p>exit_p里面格式化一些错误信息，并用error_logger输出</p>
+<h3 id="gen-1"><a href="#gen-1" class="headerlink" title="gen"></a>gen</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">init_it(gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]) -&gt;</span><br><span class="line">    case name_register(&#123;local, test&#125;) of</span><br><span class="line">	true -&gt;</span><br><span class="line">	    init_it2(gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]);</span><br><span class="line">	&#123;false, Pid&#125; -&gt;</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;error, &#123;already_started, Pid&#125;&#125;)</span><br><span class="line">    end.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name_register(&#123;local, Name&#125; = LN) -&gt;</span><br><span class="line">    try register(Name, self()) of</span><br><span class="line">	true -&gt; true</span><br><span class="line">    catch</span><br><span class="line">	error:_ -&gt;</span><br><span class="line">	    &#123;false, where(LN)&#125;</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init_it2(gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]) -&gt;</span><br><span class="line">   gen_server:init_it(Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]).</span><br></pre></td></tr></table></figure>
+<h3 id="gen-server-1"><a href="#gen-server-1" class="headerlink" title="gen_server:"></a>gen_server:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">init_it(Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]) -&gt;</span><br><span class="line">    test = name(&#123;local, test&#125;),</span><br><span class="line">    Debug = debug_options(Name, Opts|[]),</span><br><span class="line">    case catch test:init(Args) of</span><br><span class="line">	&#123;ok, State&#125; -&gt;</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;ok, self()&#125;), 	    </span><br><span class="line">	    loop(Sup, test, State, test, infinity, Debug);</span><br><span class="line">	&#123;ok, State, Timeout&#125; -&gt;</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;ok, self()&#125;), 	    </span><br><span class="line">	    loop(Sup, test, State, test, Timeout, Debug);</span><br><span class="line">	&#123;stop, Reason&#125; -&gt;</span><br><span class="line">	    unregister_name(test),</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;error, Reason&#125;),</span><br><span class="line">	    exit(Reason);</span><br><span class="line">	ignore -&gt;</span><br><span class="line">	    unregister_name(test),</span><br><span class="line">	    proc_lib:init_ack(Sup, ignore),</span><br><span class="line">	    exit(normal);</span><br><span class="line">	&#123;&apos;EXIT&apos;, Reason&#125; -&gt;</span><br><span class="line">	    unregister_name(test),</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;error, Reason&#125;),</span><br><span class="line">	    exit(Reason);</span><br><span class="line">	Else -&gt;</span><br><span class="line">	    Error = &#123;bad_return_value, Else&#125;,</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;error, Error&#125;),</span><br><span class="line">	    exit(Error)</span><br><span class="line">    end.</span><br></pre></td></tr></table></figure>
+<h3 id="proc-lib-1"><a href="#proc-lib-1" class="headerlink" title="proc_lib"></a>proc_lib</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">init_ack(Sup, &#123;ok, Pid&#125;|&#123;error, already_exited&#125;) -&gt;</span><br><span class="line">    Parent ! &#123;ack, self(), &#123;ok, Pid&#125;&#125;|&#123;error, already_exited&#125;&#125;,</span><br><span class="line">    ok.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">loop(Sup, test, State, test, Timeout, Debug) -&gt;</span><br><span class="line">    Msg = receive</span><br><span class="line">	      Input -&gt;</span><br><span class="line">		    Input</span><br><span class="line">	  after Time -&gt;</span><br><span class="line">		  timeout</span><br><span class="line">	  end,</span><br><span class="line">    decode_msg(Msg, Parent, Name, State, Mod, Time, Debug, false).</span><br></pre></td></tr></table></figure>
+<p>至此gen_server初始化完成。<br>。<br>由此得知。gen_server再调用test：init之前，主要做了</p>
+<ol>
+<li>判断名字是否被占用，否则报{error, already_exited}</li>
+<li>写入ancestors和initial call</li>
+</ol>
+<p>Opts中的timeout参数主要用来衡量创建进程的time，超时回结束进程并返回。而{ok， State， Timeout}的timeout参数用来参与loop循环，在进程创建后timeout时间内没有接到消息，就会像自己发送timeout这个消息。 而且这个参数在之后的handle_call, handle_cast,handle_info等回调中，使可以修改timeout的数值。参考源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">handle_msg(&#123;&apos;$gen_call&apos;, From, Msg&#125;, Parent, Name, State, Mod, Debug) -&gt;</span><br><span class="line">    case catch Mod:handle_call(Msg, From, State) of</span><br><span class="line">	&#123;reply, Reply, NState&#125; -&gt;</span><br><span class="line">	    Debug1 = reply(Name, From, Reply, NState, Debug),</span><br><span class="line">	    loop(Parent, Name, NState, Mod, infinity, Debug1);</span><br><span class="line">	&#123;reply, Reply, NState, Time1&#125; -&gt;</span><br><span class="line">	    Debug1 = reply(Name, From, Reply, NState, Debug),</span><br><span class="line">	    loop(Parent, Name, NState, Mod, Time1, Debug1);</span><br><span class="line">	&#123;noreply, NState&#125; -&gt;</span><br><span class="line">	    Debug1 = sys:handle_debug(Debug, fun print_event/3, Name,</span><br><span class="line">				      &#123;noreply, NState&#125;),</span><br><span class="line">	    loop(Parent, Name, NState, Mod, infinity, Debug1);</span><br><span class="line">	&#123;noreply, NState, Time1&#125; -&gt;</span><br><span class="line">	    Debug1 = sys:handle_debug(Debug, fun print_event/3, Name,</span><br><span class="line">				      &#123;noreply, NState&#125;),</span><br><span class="line">	    loop(Parent, Name, NState, Mod, Time1, Debug1);</span><br><span class="line">	&#123;stop, Reason, Reply, NState&#125; -&gt;</span><br><span class="line">	    &#123;&apos;EXIT&apos;, R&#125; = </span><br><span class="line">		(catch terminate(Reason, Name, Msg, Mod, NState, Debug)),</span><br><span class="line">	    reply(Name, From, Reply, NState, Debug),</span><br><span class="line">	    exit(R);</span><br><span class="line">	Other -&gt;</span><br><span class="line">	    handle_common_reply(Other, Parent, Name, Msg, Mod, State, Debug)</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure></p>
+<p>可见handle_call的返回值如果包含Time1，就会修改loop的Timeout参数。</p>
+<h2 id="where-is-the-point"><a href="#where-is-the-point" class="headerlink" title="where is the point?"></a>where is the point?</h2><p>问题出现在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;ok, State, Timeout&#125; -&gt;</span><br><span class="line">    proc_lib:init_ack(Sup, &#123;ok, self()&#125;), 	    </span><br><span class="line">    loop(Sup, test, State, test, Timeout, Debug);</span><br></pre></td></tr></table></figure></p>
+<p>Ｐ进程创建Ｐ.1进程，然后进入receive，期待一个{ack, Pid, Return}的回复。在init结束返回{ok, State, Timeout}后，proc_lib:init_ack完成了向P发送{ack, Pid, Return}的任务。然后进入ｌｏｏｐ循环。但这时Ｐ进程接到消息后立刻发送了read.导致timeout并没有发送出去。造成badmatch的结果。</p>
+<p>在一种情况，其实在name_register的时候名字和Ｐｉｄ就已经注册好了。但此时甚至没有进入ｉｎｉｔ函数，如果有其他进程朝test名字的ｓｅｒｖｅｒ发送消息，自然会导致ｔｉｍｅｏｕｔ的失效。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://youthyblog.com/2015/07/31/erlang-question-gen-server-and-init/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//youthyblog.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2015/08/04/github屏蔽百度爬虫的解决办法/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2015/07/31/ubuntu-LAMP搭建/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Youthy's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        Contact
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://weibo.com/u/1592381215" target="_blank" title="Weibo me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">person_add</i>
+                        
+                        Weibo me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/10/">十月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/09/">九月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">八月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">七月 2014<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/06/">六月 2014<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/ACG/">ACG<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/erlang/">erlang<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/随笔/">随笔<span class="sidebar_archives-count">4</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="links" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/shizixiuluo" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/1592381215" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+        <a href="https://www.zhihu.com/people/yu-you-qi-46/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
+                <span class="visuallyhidden">Zhihu</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;youthy的流水账
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//youthyblog.disqus.com/count.js" async></script>
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2014;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

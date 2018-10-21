@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://youthyblog.disqus.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            erl命令和参数 | 
+        
+        youthy的流水账
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="Startup先拿mochiweb生成的一个例子说起，这是start-dev.sh脚本中的内容。启动一个mochiweb应用调用的就是这个1234567#!/bin/shexec erl \    -pa ebin deps/*/ebin \    -boot start_sasl \    -sname helloworld_dev \    -s helloworld \    -s reloader">
+    <meta name="keywords" content="erlang, golang,erlang">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body {
+        background-color: ;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="youthy的流水账">
+    <meta name="msapplication-starturl" content="http://youthyblog.com/2015/07/22/erl命令和参数/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="youthy的流水账">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="luyN6dELjQn-N4acL35Kyqd_3xEjr8gA3TqpaSV23kk" />
+    <meta name="baidu-site-verification" content="BA4RKG2m6D" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://youthyblog.com/2015/07/22/erl命令和参数/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="erl命令和参数 | youthy的流水账">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="Startup先拿mochiweb生成的一个例子说起，这是start-dev.sh脚本中的内容。启动一个mochiweb应用调用的就是这个1234567#!/bin/shexec erl \    -pa ebin deps/*/ebin \    -boot start_sasl \    -sname helloworld_dev \    -s helloworld \    -s reloader">
+    <meta property="og:article:tag" content="erlang"> 
+
+    
+        <meta property="article:published_time" content="Wed Jul 22 2015 10:11:37 GMT+0800">
+        <meta property="article:modified_time" content="Wed Oct 17 2018 16:46:23 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://youthyblog.com/2015/07/22/erl命令和参数/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://youthyblog.com/2015/07/22/erl命令和参数/index.html",
+    "headline": "erl命令和参数",
+    "datePublished": "Wed Jul 22 2015 10:11:37 GMT+0800",
+    "dateModified": "Wed Oct 17 2018 16:46:23 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Youthy",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "youthy的流水账",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",erlangerlang, golang",
+    "description": "Startup先拿mochiweb生成的一个例子说起，这是start-dev.sh脚本中的内容。启动一个mochiweb应用调用的就是这个1234567#!/bin/shexec erl \    -pa ebin deps/*/ebin \    -boot start_sasl \    -sname helloworld_dev \    -s helloworld \    -s reloader",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-127668650-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?d4026e5060b2e4c5254eaeca317f90bd';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Startup"><span class="post-toc-number">1.</span> <span class="post-toc-text">Startup</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Init-Flags"><span class="post-toc-number">2.</span> <span class="post-toc-text">Init Flags</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#–-两个横杠"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">–(两个横杠)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#extra"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">-extra</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#code-path-choice-Choice-strict-relexed"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">-code_path_choice Choice::strict|relexed</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#eval-Expr"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">-eval Expr</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#run-Mod-Func-Arg1-Arg2…-ArgN"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">-run Mod Func Arg1 Arg2….ArgN</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#s-Mod-Func-Arg1-Arg2-…-ArgN"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">-s Mod Func Arg1 Arg2 … ArgN</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ApplicationName-Par-Val"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">-ApplicationName Par Val</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#args-file-FileName"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">-args_file FileName</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#async-shell-start"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">-async_shell_start</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#boot-File"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">-boot File</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#boot-var-Var-Dir"><span class="post-toc-number">2.11.</span> <span class="post-toc-text">-boot_var Var Dir</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#code-path-cache"><span class="post-toc-number">2.12.</span> <span class="post-toc-text">-code_path_cache</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#compile-Mod1-Mod2-…"><span class="post-toc-number">2.13.</span> <span class="post-toc-text">-compile Mod1 Mod2 …</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#connect-all-true-false"><span class="post-toc-number">2.14.</span> <span class="post-toc-text">connect_all true|false</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#config-Config"><span class="post-toc-number">2.15.</span> <span class="post-toc-text">-config Config</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cookie-Cookie"><span class="post-toc-number">2.16.</span> <span class="post-toc-text">-cookie Cookie</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#setcookie-Cookie"><span class="post-toc-number">2.17.</span> <span class="post-toc-text">-setcookie Cookie</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#detached"><span class="post-toc-number">2.18.</span> <span class="post-toc-text">-detached</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#emu-args"><span class="post-toc-number">2.19.</span> <span class="post-toc-text">-emu_args</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#env-Variable-Value"><span class="post-toc-number">2.20.</span> <span class="post-toc-text">-env Variable Value</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#heart"><span class="post-toc-number">2.21.</span> <span class="post-toc-text">-heart</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hidden"><span class="post-toc-number">2.22.</span> <span class="post-toc-text">-hidden</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#init-debug"><span class="post-toc-number">2.23.</span> <span class="post-toc-text">-init_debug</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#make"><span class="post-toc-number">2.24.</span> <span class="post-toc-text">-make</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#man-Module"><span class="post-toc-number">2.25.</span> <span class="post-toc-text">-man Module</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mode-interactive-embedded"><span class="post-toc-number">2.26.</span> <span class="post-toc-text">-mode interactive|embedded</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#name-sname-NAME"><span class="post-toc-number">2.27.</span> <span class="post-toc-text">-name/sname NAME</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#noinput"><span class="post-toc-number">2.28.</span> <span class="post-toc-text">-noinput</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#noshell"><span class="post-toc-number">2.29.</span> <span class="post-toc-text">-noshell</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pa-pz"><span class="post-toc-number">2.30.</span> <span class="post-toc-text">-pa/-pz</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#remsh-Node"><span class="post-toc-number">2.31.</span> <span class="post-toc-text">-remsh Node</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#rsh-Program"><span class="post-toc-number">2.32.</span> <span class="post-toc-text">-rsh Program</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#set-cookie-Cookie"><span class="post-toc-number">2.33.</span> <span class="post-toc-text">-set_cookie Cookie</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#shutdown-time-Time"><span class="post-toc-number">2.34.</span> <span class="post-toc-text">-shutdown_time Time</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#smp-enable-auto-disable"><span class="post-toc-number">2.35.</span> <span class="post-toc-text">-smp enable/auto/disable</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#version"><span class="post-toc-number">2.36.</span> <span class="post-toc-text">-version</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                erl命令和参数
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Youthy</strong>
+        <span>7月 22, 2015</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/erlang/">erlang</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=erl命令和参数&url=http://youthyblog.com/2015/07/22/erl命令和参数/index.html&pic=http://youthyblog.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=erl命令和参数&url=http://youthyblog.com/2015/07/22/erl命令和参数/index.html&via=Youthy" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://youthyblog.com/2015/07/22/erl命令和参数/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://youthyblog.com/2015/07/22/erl命令和参数/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="Startup"><a href="#Startup" class="headerlink" title="Startup"></a>Startup</h2><p>先拿mochiweb生成的一个例子说起，这是start-dev.sh脚本中的内容。启动一个mochiweb应用调用的就是这个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">exec erl \</span><br><span class="line">    -pa ebin deps/*/ebin \</span><br><span class="line">    -boot start_sasl \</span><br><span class="line">    -sname helloworld_dev \</span><br><span class="line">    -s helloworld \</span><br><span class="line">    -s reloader</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>通用形式就是</p>
+<blockquote>
+<p>erl -a b –sth -c d +f g -extra abc</p>
+</blockquote>
+<p>erl后面的都是参数arguments<br>arguments可以分为<strong>emulator flags</strong>，<strong>flags</strong>，<strong>plain arguments</strong></p>
+<pre><code>* 任何已+开始的参数会被解释为emulator flags
+* 任何以-开始的参数会被解释为flags，并传入交给了init模块。
+* 在--之后到任何-或者+符号之间的所有flags以及-extra之后所有的flags都是plain arguments，这些参数不会发生解释行为，只不过被储存起来。同样交给init模块。
+</code></pre><p>init:boot(Args)函数接受上面的flags和plain arguments。</p>
+<blockquote>
+<p><strong>boot(BootArgs) -&gt; no_return()<br>Types:<br>BootArgs = [binary()]</strong><br>Starts the Erlang runtime system. This function is called when the emulator is started and coordinates system start-up.<br>BootArgs are all command line arguments except the emulator flags, that is, flags and plain arguments. See erl(1).<br>init itself interprets some of the flags, see Command Line Flags below. The remaining flags (“user flags”) and plain arguments are passed to the init loop and can be retrieved by callingget_arguments/0 and get_plain_arguments/0, respectively.</p>
+</blockquote>
+<p>flags会被boot函数分为 init flags和user flags。user flags可以通过init:get_arguments()得到，plain arguments通过init:get_plain_arguments()得到。值得注意的是一小部分的“-”后面的flags现在是属于emulator flags。后面提到。</p>
+<!-- toc -->
+<h2 id="Init-Flags"><a href="#Init-Flags" class="headerlink" title="Init Flags"></a>Init Flags</h2><h3 id="–-两个横杠"><a href="#–-两个横杠" class="headerlink" title="–(两个横杠)"></a>–(两个横杠)</h3><p>任何在–到下一个-或者+之间的都是plain arguments，可以通过init:get_plain_arguments()取到.</p>
+<h3 id="extra"><a href="#extra" class="headerlink" title="-extra"></a>-extra</h3><p>和–的作用一样，extra后面的flags都是plain arguments</p>
+<h3 id="code-path-choice-Choice-strict-relexed"><a href="#code-path-choice-Choice-strict-relexed" class="headerlink" title="-code_path_choice Choice::strict|relexed"></a>-code_path_choice Choice::strict|relexed</h3><blockquote>
+<p>When the choice of directories in the code path is strict, the directory that ends up in the code path will be exactly the stated one. This means that if for example the directory \$OTPROOT/lib/mnesia-4.4.7/ebin is explicitly added to the code path, the code server will not load files from $OTPROOT/lib/mnesia-4.4.7.ez/mnesia-4.4.7/ebin and vice versa.</p>
+</blockquote>
+<blockquote>
+<p>This behavior can be controlled via the command line flag -code_path_choice Choice. If the flag is set to relaxed, the code server will instead choose a suitable directory depending on the actual file structure. If there exists a regular application ebin directory,situation it will be chosen. But if it does not exist, the ebin directory in the archive is chosen if it exists. If neither of them exists the original directory will be chosen.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;/home/yuyouqi/Erlang/lib/snmp-5.1.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/sasl-2.4.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/runtime_tools-1.8.15/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/reltool-0.6.6/ebin&quot;,</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &quot;/home/yuyouqi/Erlang/lib/ssh-3.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/snmp-5.1.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/sasl-2.4.1.ez/sasl-2.4.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/runtime_tools-1.8.15/ebin&quot;,</span><br><span class="line"> 3&gt; code:lib_dir(sasl, ebin).</span><br><span class="line">&quot;/home/yuyouqi/Erlang/lib/sasl-2.4.1.ez/sasl-2.4.1/ebin&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="eval-Expr"><a href="#eval-Expr" class="headerlink" title="-eval Expr"></a>-eval Expr</h3><p>Expr是个函数，在erl初始化时按顺序执行，如果fail的，则初始化失败。例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">erl -eval &apos;&#123;X,Y,Z&#125; = now(), random:seed(X,Y,Z).&apos;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>官方文档Z}旁边多了‘符号，需要去掉</p>
+</blockquote>
+<h3 id="run-Mod-Func-Arg1-Arg2…-ArgN"><a href="#run-Mod-Func-Arg1-Arg2…-ArgN" class="headerlink" title="-run Mod Func Arg1 Arg2….ArgN"></a>-run Mod Func Arg1 Arg2….ArgN</h3><p>调用Mod:Func([“Arg1”, “Arg2”, …”ArgN”]),<br>所有参数都是以string方式传入的。同样按顺序执行，前一个执行完才会执行下一个。但是貌似并不会阻塞shell。</p>
+<h3 id="s-Mod-Func-Arg1-Arg2-…-ArgN"><a href="#s-Mod-Func-Arg1-Arg2-…-ArgN" class="headerlink" title="-s Mod Func Arg1 Arg2 … ArgN"></a>-s Mod Func Arg1 Arg2 … ArgN</h3><p>与run完成同样的功能，但是Arg都是atom的形式传入，值得注意的是数字也会变成atom,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">erl -s test time 5000 atom</span><br></pre></td></tr></table></figure></p>
+<p>就是test:time([‘5000’, atom]).<br>一般数字需要atom_to_list, list_to_integer转换。</p>
+<p>##User flags</p>
+<h3 id="ApplicationName-Par-Val"><a href="#ApplicationName-Par-Val" class="headerlink" title="-ApplicationName Par Val"></a>-ApplicationName Par Val</h3><p>指定应用的名字，属性名称和值，可以将应用的某个参数设置成Val。<br>比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> erl -pa ./ebin -s helloworld -helloworld par haha</span><br><span class="line"> 1&gt; application:get_all_key(helloworld).</span><br><span class="line">&#123;ok,[&#123;description,&quot;helloworld&quot;&#125;,</span><br><span class="line">     &#123;id,[]&#125;,</span><br><span class="line">     &#123;vsn,&quot;0.1&quot;&#125;,</span><br><span class="line">     &#123;modules,[helloworld,helloworld_app,helloworld_deps,</span><br><span class="line">               helloworld_dtl,helloworld_sup,helloworld_web]&#125;,</span><br><span class="line">     &#123;maxP,infinity&#125;,</span><br><span class="line">     &#123;maxT,infinity&#125;,</span><br><span class="line">     &#123;registered,[]&#125;,</span><br><span class="line">     &#123;included_applications,[]&#125;,</span><br><span class="line">     &#123;applications,[kernel,stdlib,crypto]&#125;,</span><br><span class="line">     &#123;env,[&#123;par,haha&#125;,&#123;included_applications,[]&#125;]&#125;,</span><br><span class="line">     &#123;mod,&#123;helloworld_app,[]&#125;&#125;,</span><br><span class="line">     &#123;start_phases,undefined&#125;]&#125;</span><br><span class="line">2&gt; application:get_all_env(helloworld).</span><br><span class="line">[&#123;par,haha&#125;,&#123;included_applications,[]&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>启动了一个helloworld应用，并将par参数设置成haha。</p>
+<h3 id="args-file-FileName"><a href="#args-file-FileName" class="headerlink" title="-args_file FileName"></a>-args_file FileName</h3><p>直接从FileName读取erl所用的参数。例如在agrsfile的文件中写入如下</p>
+<blockquote>
+<p>-eval ‘io:format(“read from file~n”)’ -extra hello -pa ./ebin</p>
+</blockquote>
+<p>实际结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">erl -args_file argsfile</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; read from file</span><br><span class="line">1&gt; init:get_arguments().</span><br><span class="line">[&#123;root,[&quot;/usr/local/lib/erlang&quot;]&#125;,</span><br><span class="line"> &#123;progname,[&quot;erl&quot;]&#125;,</span><br><span class="line"> &#123;home,[&quot;/home/yuyouqi&quot;]&#125;]</span><br><span class="line">2&gt; init:get_plain_arguments().</span><br><span class="line">[&quot;hello&quot;,&quot;-pa&quot;,&quot;./ebin&quot;]</span><br></pre></td></tr></table></figure></p>
+<p>可以看到启动的时候执行了io:format函数，但是-extra这个参数是特殊的，正常情况下-extra到下一个-或者+之间的参数才会被认为是plain arguments，可是如果写在文件中就变成-extra后面所有的参数，都会当成plain arguments.只有这点不同。</p>
+<h3 id="async-shell-start"><a href="#async-shell-start" class="headerlink" title="-async_shell_start"></a>-async_shell_start</h3><p>名字上来说是异步启动shell</p>
+<h3 id="boot-File"><a href="#boot-File" class="headerlink" title="-boot File"></a>-boot File</h3><p>试用File.boot启动erl系统,除非File是个绝对路径，否则在当前文件夹和$ROOT/bin下面找（我的:/usr/local/lib/erlang/bin,  $ROOT可以通过code:root_dir()查看),<br>默认情况下是-boot start<br><a href="http://www.erlang.org/doc/man/script.html" target="_blank" rel="noopener">script</a></p>
+<blockquote>
+<p>The command erl -boot Name starts the system with a boot file called Name.boot, which is generated from the Name.script file, using systools:script2boot/1.<br>The .script file is generated by systools from a .rel file and .app files.</p>
+</blockquote>
+<p>.boot文件是用systools产生的，打开后是乱码.<br>文件的生成顺序 .rel -&gt; .script -&gt; .boot<br><a href="http://erlang.org/doc/man/systools.html" target="_blank" rel="noopener">systools</a><br>systools里面提供了生成rel,script, boot等方法。可以在<code>/usr/local/lib/erlang/releases/R15B</code>下找到几个官方的rel，script，boot<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu@desktop:/usr/local/lib/erlang/releases/R15B$ ls</span><br><span class="line">start_all_example.rel  start_clean.boot  start_clean.script  start_sasl.rel     start.script</span><br><span class="line">start.boot             start_clean.rel   start_sasl.boot     start_sasl.script</span><br></pre></td></tr></table></figure></p>
+<p>打开start_sasl.rel<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%注释....</span><br><span class="line">&#123;release, &#123;&quot;OTP  APN 181 01&quot;,&quot;R15B&quot;&#125;, &#123;erts, &quot;5.9&quot;&#125;,</span><br><span class="line"> [&#123;kernel,&quot;2.15&quot;&#125;,</span><br><span class="line">  &#123;stdlib,&quot;1.18&quot;&#125;,</span><br><span class="line">  &#123;sasl, &quot;2.2&quot;&#125;]&#125;.</span><br></pre></td></tr></table></figure></p>
+<p>具体格式在上面的systools链接中有说明<br>仿照它这个样子写一个test<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;release, &#123;&quot;test_rel&quot;,&quot;0.1&quot;&#125;, &#123;erts, &quot;5.9&quot;&#125;,</span><br><span class="line"> [&#123;kernel,&quot;2.15&quot;&#125;,</span><br><span class="line">  &#123;stdlib,&quot;1.18&quot;&#125;,</span><br><span class="line">  &#123;sasl, &quot;2.2&quot;&#125;,</span><br><span class="line">  &#123;crypto, &quot;2.1&quot;&#125;,</span><br><span class="line">  &#123;helloworld,&quot;0.1&quot;&#125;]&#125;.</span><br></pre></td></tr></table></figure></p>
+<p>helloworld使用mochiweb生成的简单框架,用到了crypto，所以讲crypto加入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; systools:make_script(&quot;test&quot;).       </span><br><span class="line">helloworld: File not found: &quot;helloworld.app&quot;</span><br><span class="line"></span><br><span class="line">error</span><br><span class="line">2&gt; systools:make_script(&quot;test&quot;, [&#123;path, [&quot;ebin&quot;]&#125;]).</span><br><span class="line">ok</span><br></pre></td></tr></table></figure></p>
+<p>由于helloworld不在默认的ebin下，所以下加上当前路径中的ebin。否则找不到helloworld.app<br>如果是使用systools的make_script命令省的script会自动生成.boot。打开test.script<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">%% script generated at &#123;2015,7,1&#125; &#123;12,5,26&#125;</span><br><span class="line">&#123;script,</span><br><span class="line">    &#123;&quot;test_rel&quot;,&quot;0.1&quot;&#125;,</span><br><span class="line">    [&#123;preLoaded,</span><br><span class="line">         [erl_prim_loader,erlang,init,otp_ring0,prim_file,prim_inet,prim_zip,</span><br><span class="line">          zlib]&#125;,</span><br><span class="line">     &#123;progress,preloaded&#125;,</span><br><span class="line">     &#123;path,[&quot;$ROOT/lib/kernel-2.15/ebin&quot;,&quot;$ROOT/lib/stdlib-1.18/ebin&quot;]&#125;,</span><br><span class="line">     &#123;primLoad,[error_handler]&#125;,</span><br><span class="line">     &#123;kernel_load_completed&#125;,</span><br><span class="line">     &#123;progress,kernel_load_completed&#125;,</span><br><span class="line">     &#123;path,[&quot;$ROOT/lib/kernel-2.15/ebin&quot;]&#125;,</span><br><span class="line">     &#123;primLoad,</span><br><span class="line">         [application,application_controller,application_master,</span><br><span class="line">          application_starter,auth,code,code_server,disk_log,disk_log_1,</span><br><span class="line">          disk_log_server,disk_log_sup,dist_ac,dist_util,erl_boot_server,</span><br><span class="line">          erl_ddll,erl_distribution,erl_epmd,erl_reply,error_logger,</span><br><span class="line">          erts_debug,file,file_io_server,file_server,gen_sctp,gen_tcp,gen_udp,</span><br><span class="line">          global,global_group,global_search,group,heart,hipe_unified_loader,</span><br><span class="line">          inet,inet6_sctp,inet6_tcp,inet6_tcp_dist,inet6_udp,inet_config,</span><br><span class="line">          inet_db,inet_dns,inet_gethost_native,inet_hosts,inet_parse,inet_res,</span><br><span class="line">          inet_sctp,inet_tcp,inet_tcp_dist,inet_udp,kernel,kernel_config,net,</span><br><span class="line">          net_adm,net_kernel,os,packages,pg2,ram_file,rpc,seq_trace,</span><br><span class="line">          standard_error,user,user_drv,user_sup,wrap_log_reader]&#125;,</span><br><span class="line">     &#123;path,[&quot;$ROOT/lib/stdlib-1.18/ebin&quot;]&#125;,</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>有了.boot文件后就可以使用了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/helloworld$ erl -pa ebin deps/*/ebin -boot test</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,sasl_safe_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.35.0&gt;&#125;,</span><br><span class="line">                       &#123;name,alarm_handler&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;alarm_handler,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,2000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,sasl_safe_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.36.0&gt;&#125;,</span><br><span class="line">                       &#123;name,overload&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;overload,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,2000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,sasl_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.34.0&gt;&#125;,</span><br><span class="line">                       &#123;name,sasl_safe_sup&#125;,</span><br><span class="line">                       &#123;mfargs,</span><br><span class="line">                           &#123;supervisor,start_link,</span><br><span class="line">                               [&#123;local,sasl_safe_sup&#125;,sasl,safe]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,infinity&#125;,</span><br><span class="line">                       &#123;child_type,supervisor&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,sasl_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.37.0&gt;&#125;,</span><br><span class="line">                       &#123;name,release_handler&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;release_handler,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,2000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">         application: sasl</span><br><span class="line">          started_at: nonode@nohost</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,crypto_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.43.0&gt;&#125;,</span><br><span class="line">                       &#123;name,crypto_server&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;crypto_server,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,2000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">         application: crypto</span><br><span class="line">          started_at: nonode@nohost</span><br><span class="line">** Found 0 name clashes in code paths </span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,helloworld_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.48.0&gt;&#125;,</span><br><span class="line">                       &#123;name,helloworld_web&#125;,</span><br><span class="line">                       &#123;mfargs,</span><br><span class="line">                           &#123;helloworld_web,start,</span><br><span class="line">                               [[&#123;ip,&#123;0,0,0,0&#125;&#125;,</span><br><span class="line">                                 &#123;port,8080&#125;,</span><br><span class="line">                                 &#123;docroot,</span><br><span class="line">                                     &quot;/home/yuyouqi/Erlang/helloworld/priv/www&quot;&#125;]]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,5000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">         application: helloworld</span><br><span class="line">          started_at: nonode@nohost</span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="boot-var-Var-Dir"><a href="#boot-var-Var-Dir" class="headerlink" title="-boot_var Var Dir"></a>-boot_var Var Dir</h3><p>指定一个变量Var的路径为Dir，主要用于systools:make_script的{variables, [{“Var”, “Prefix”}]},<br>因为默认的script路径都是在$ROOT/lib下寻找，当在make_script中加入variables选项时，</p>
+<h3 id="code-path-cache"><a href="#code-path-cache" class="headerlink" title="-code_path_cache"></a>-code_path_cache</h3><p>使用codepath的缓存，这样做的好处是加载模块更快，而且可以在常数时间找到模块，如果没加则需要search这个codepath才能找到对应模块，在模块数量很多时，可以使用。</p>
+<h3 id="compile-Mod1-Mod2-…"><a href="#compile-Mod1-Mod2-…" class="headerlink" title="-compile Mod1 Mod2 …"></a>-compile Mod1 Mod2 …</h3><p>编译Mod1 Mod2 … 如果失败会返回非零的错误码 默认同时使用了-noinput参数.<strong>不推荐使用，推荐erlc</strong></p>
+<h3 id="connect-all-true-false"><a href="#connect-all-true-false" class="headerlink" title="connect_all true|false"></a>connect_all true|false</h3><p>是否全联通（N1-N2， N2-N3 -&gt; N1-N2-N3），如果是false那么global模块的注册名字的相关机制无法使用</p>
+<h3 id="config-Config"><a href="#config-Config" class="headerlink" title="-config Config"></a>-config Config</h3><p>读取Config文件，名字为AppName.config.<br>格式</p>
+<blockquote>
+<p>[{AppName, [{Key1, Value1}…]}, {AppName2, […]}].</p>
+</blockquote>
+<p>见<a href="http://www.erlang.org/doc/man/config.html" target="_blank" rel="noopener">config file</a>.<br>例如新建helloworld.config<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;helloworld, [&#123;key1, val1&#125;, &#123;key2, val2&#125;]&#125;].</span><br></pre></td></tr></table></figure></p>
+<p>并在start脚本中加入-config helloworld.config<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">exec erl \</span><br><span class="line">    -pa ebin deps/*/ebin \</span><br><span class="line">    -boot start_sasl \</span><br><span class="line">    -sname helloworld_dev \</span><br><span class="line">    -s helloworld \</span><br><span class="line">    -s reloader \</span><br><span class="line">    -config helloworld.config</span><br></pre></td></tr></table></figure></p>
+<p>如下看到在env中多了写入的config值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(helloworld_dev@Ubuntu-desktop)1&gt; application:get_all_key(helloworld).</span><br><span class="line">&#123;ok,[&#123;description,&quot;helloworld&quot;&#125;,</span><br><span class="line">     &#123;id,[]&#125;,</span><br><span class="line">     &#123;vsn,&quot;0.1&quot;&#125;,</span><br><span class="line">     &#123;modules,[helloworld,helloworld_app,helloworld_deps,</span><br><span class="line">               helloworld_dtl,helloworld_sup,helloworld_web]&#125;,</span><br><span class="line">     &#123;maxP,infinity&#125;,</span><br><span class="line">     &#123;maxT,infinity&#125;,</span><br><span class="line">     &#123;registered,[]&#125;,</span><br><span class="line">     &#123;included_applications,[]&#125;,</span><br><span class="line">     &#123;applications,[kernel,stdlib,crypto]&#125;,</span><br><span class="line">     &#123;env,[&#123;included_applications,[]&#125;,&#123;key2,val2&#125;,&#123;key1,val1&#125;]&#125;,</span><br><span class="line">     &#123;mod,&#123;helloworld_app,[]&#125;&#125;,</span><br><span class="line">     &#123;start_phases,undefined&#125;]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="cookie-Cookie"><a href="#cookie-Cookie" class="headerlink" title="-cookie Cookie"></a>-cookie Cookie</h3><p>过时的没有任何效果的标志，是setcookie的错误拼写，用setcookie代替。</p>
+<h3 id="setcookie-Cookie"><a href="#setcookie-Cookie" class="headerlink" title="-setcookie Cookie"></a>-setcookie Cookie</h3><p>和erlang:set_cookie(Node, Cookie)的效果一样。给本地结点设置需要给本地结点起个名字-name/sname</p>
+<h3 id="detached"><a href="#detached" class="headerlink" title="-detached"></a>-detached</h3><p>以background的形式运行erl，与当前shell分离开，但是需要知道如何停止这个系统<br><a href="http://stackoverflow.com/questions/15464606/erlang-kill-all-processes-running-in-background" target="_blank" rel="noopener">How to stop</a>.</p>
+<h3 id="emu-args"><a href="#emu-args" class="headerlink" title="-emu_args"></a>-emu_args</h3><p>打印传给emulator的参数，比如在start-dev.sh脚本中加入它，可以看到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ./start-dev.sh </span><br><span class="line">Executing: /usr/local/lib/erlang/erts-5.9/bin/beam.smp /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -pa ebin deps/erlydtl/ebin deps/eunit_formatters/ebin deps/merl/ebin deps/mochiweb/ebin -boot start_sasl -sname helloworld_dev -s helloworld -s reloader</span><br><span class="line"></span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br></pre></td></tr></table></figure></p>
+<h3 id="env-Variable-Value"><a href="#env-Variable-Value" class="headerlink" title="-env Variable Value"></a>-env Variable Value</h3><p>设置OS模块的环境变量Variable为Value.<br>通过os:getenv/0 getenv/1可以得到</p>
+<h3 id="heart"><a href="#heart" class="headerlink" title="-heart"></a>-heart</h3><p>开启心跳检测，尽管erlang有各种supervisor监管机制，但是如果emulator down掉了就完了，-heart会开启一个heart进程监控整个emulator，在规定时间内如果没有收到心跳，这个进程就会执行HEART_COMMAND参数，如果这个参数没有设定，那么只会弹出警告，而不会重启。一般HEART_COMMAND就是重启emulator。麻烦的是如果设定了heart，但是没有用-sname，是无法回到这个erlang shell的，也就是无法调用init：stop()来终止heart的监控策略。</p>
+<p>在没有开启任何erl shell的情况下调用<code>ps -ef|grep erl</code>看到跟erl有关的进程如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef |grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3329  2862  0 10:58 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>启动一个erl emulator,然后Ctrl + z放到挂起<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl </span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; </span><br><span class="line">[1]+  已停止               erl</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef |grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3333  2862  0 11:01 pts/2    00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi --</span><br><span class="line">yuyouqi   3346  2862  0 11:01 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>可以看到3333这个进程后面的命令是开启一个erl emulator的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ kill -9 3333</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef | grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3366  2862  0 11:04 pts/2    00:00:00 grep --color=auto erl</span><br><span class="line">[1]+  已杀死               erl</span><br></pre></td></tr></table></figure></p>
+<p>可以看到将他kill掉是没问题的<br>下面启动一个-heart erl shell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test1 -heart -env HEART_COMMAND &quot;erl -sname test1 -heart&quot;</span><br><span class="line">heart_beat_kill_pid = 3369</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test1@yuyouqi-desktop)1&gt; </span><br><span class="line">[1]+  已停止               erl -sname test1 -heart -env HEART_COMMAND &quot;erl -sname test1 -heart&quot;</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef | grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3369  2862  1 11:05 pts/2    00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3376  2219  0 11:05 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3387  2862  0 11:06 pts/2    00:00:00 grep --color=auto erl</span><br><span class="line"></span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ heart: Fri Jul  3 11:06:57 2015: heart-beat time-out.</span><br><span class="line">heart_beat_kill_pid = 3390</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef | grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3376  2219  0 11:05 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3389  3383  0 11:06 ?        00:00:00 sh -c erl -sname test1 -heart</span><br><span class="line">yuyouqi   3390  3389  0 11:06 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3410  2862  0 11:07 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>上面命令是我用-heart启动一个erl shell，可以看到多了3369 和3376这两个进程，把erl shell挂起，一段时间后，由于heart进程没有接收到“心跳”，重启了erl shell,pid变为3390。而且多出了一个3389这个进程，而3390这个erl shell是3389的子进程。可以看到3389就是执行我们的HEART_COMMAND<br>如果不指定HEART_COMMAND<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test2 -heart</span><br><span class="line">heart_beat_kill_pid = 3685</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test2@yuyouqi-desktop)1&gt; </span><br><span class="line">[1]+  已停止               erl -sname test2 -heart</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef|grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3376  2219  0 11:05 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3389  3383  0 11:06 ?        00:00:00 sh -c erl -sname test1 -heart</span><br><span class="line">yuyouqi   3390  3389  0 11:06 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3685  2862  2 12:15 pts/2    00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test2 -heart</span><br><span class="line">yuyouqi   3703  2862  0 12:15 pts/2    00:00:00 grep --color=auto erl</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ jobs</span><br><span class="line">[1]+  已停止               erl -sname test2 -heart</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ fg</span><br><span class="line">erl -sname test2 -heart</span><br><span class="line"></span><br><span class="line">(test2@yuyouqi-desktop)1&gt; </span><br><span class="line">User switch command</span><br><span class="line"> --&gt; q</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ heart: Fri Jul  3 12:16:10 2015: Erlang has closed.</span><br><span class="line">heart: Fri Jul  3 12:16:10 2015: Would reboot. Terminating.</span><br><span class="line"></span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef|grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3376  2219  0 11:05 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3389  3383  0 11:06 ?        00:00:00 sh -c erl -sname test1 -heart</span><br><span class="line">yuyouqi   3390  3389  0 11:06 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3705  2862  0 12:16 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>新建一个test2 shell，不设置HEART_COMMAND，<br>可以看到如果没有设置HEART_COMMAND 使用ctrl g退出后不会重启，但是test1是会重启的。<br>而且新建节点后发现-daemon进程并没有增加，我猜测-daemon有可能是heart监控进程。<br>但是无论怎样kill都是无效的，依然会重启<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ kill -9 3376 3389 3390</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ heart: Fri Jul  3 12:21:15 2015: Executed &quot;erl -sname test1 -heart&quot;. Terminating.</span><br><span class="line">heart: Fri Jul  3 12:21:15 2015: Erlang has closed.</span><br><span class="line">heart_beat_kill_pid = 3716</span><br><span class="line"></span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef|grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3715  3404  0 12:21 ?        00:00:00 sh -c erl -sname test1 -heart</span><br><span class="line">yuyouqi   3716  3715  3 12:21 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3723  2219  0 12:21 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3734  2862  0 12:21 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>这时就需要进入test1，调用init:stop()来结束<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test2</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test2@yuyouqi-desktop)1&gt; </span><br><span class="line">User switch command</span><br><span class="line"> --&gt; r &apos;test1@yuyouqi-desktop&apos;</span><br><span class="line"> --&gt; c</span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test1@yuyouqi-desktop)1&gt; init:stop().</span><br><span class="line">*** ERROR: Shell process terminated! (^G to start new job) ***</span><br><span class="line">heart: Fri Jul  3 12:23:40 2015: Executed &quot;erl -sname test1 -heart&quot;. Terminating.</span><br><span class="line"></span><br><span class="line">User switch command</span><br><span class="line"> --&gt; j</span><br><span class="line">   1  &#123;shell,start,[init]&#125;</span><br><span class="line"> --&gt; c 1</span><br><span class="line"></span><br><span class="line">(test2@yuyouqi-desktop)1&gt;        </span><br><span class="line">User switch command</span><br><span class="line"> --&gt; q</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef|grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3723  2219  0 12:21 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3760  2862  0 12:24 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>这样才能将heart监控的shell关闭(或者使用rpc)<br>参考<a href="http://stackoverflow.com/questions/7217892/is-there-a-way-to-kill-the-erlang-vm-when-it-is-running-with-heart" target="_blank" rel="noopener">Is there a way to kill the erlang vm when it is running with -heart</a></p>
+<h3 id="hidden"><a href="#hidden" class="headerlink" title="-hidden"></a>-hidden</h3><p>已hidden启动的结点在于其他结点连接时，他的连接时隐藏的，不会再nodes()中得到自己的名字。只有与自己同属于一个<a href="http://www.erlang.org/doc/man/global_group.html#type-group_name" target="_blank" rel="noopener">global_group</a>的其他结点才能知道自己。<br>比如建立一个kernel.config,定义一个global_group<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;kernel, [&#123;global_groups, [&#123;test, [&apos;test1@yuyouqi-desktop&apos;, &apos;test2@yuyouqi-desktop&apos;]&#125;]&#125;]&#125;].</span><br></pre></td></tr></table></figure></p>
+<p>然后启动3个结点test1，test2，test3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test1 -config kernel.config </span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test1@yuyouqi-desktop)1&gt; global_group:global_groups().</span><br><span class="line">&#123;test,[]&#125;</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test2 -hidden -config kernel.config </span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test2@yuyouqi-desktop)1&gt; global_group:global_groups().</span><br><span class="line">&#123;test,[]&#125;</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test3 -config kernel.config </span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test3@yuyouqi-desktop)1&gt; global_group:global_groups().</span><br><span class="line">&#123;no_name,[test]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中test2已hidden形式启动，test3不在global_group中，可以看到test1和test2返回自己的global_group为test。<br>用<code>net_kernel:connect</code>将它们互联。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(test2@yuyouqi-desktop)2&gt; net_kernel:connect(&apos;test1@yuyouqi-desktop&apos;).</span><br><span class="line">true</span><br><span class="line">(test2@yuyouqi-desktop)3&gt; nodes().</span><br><span class="line">[&apos;test1@yuyouqi-desktop&apos;]</span><br><span class="line">(test2@yuyouqi-desktop)5&gt; net_kernel:connect(&apos;test3@yuyouqi-desktop&apos;).</span><br><span class="line">true</span><br><span class="line">(test2@yuyouqi-desktop)6&gt; nodes().</span><br><span class="line">[&apos;test1@yuyouqi-desktop&apos;]</span><br><span class="line">(test1@yuyouqi-desktop)2&gt; nodes().</span><br><span class="line">[&apos;test2@yuyouqi-desktop&apos;]</span><br><span class="line">(test3@yuyouqi-desktop)2&gt; nodes().</span><br><span class="line">[]</span><br></pre></td></tr></table></figure></p>
+<p>test1和test2是可以互相看到的，而test3的nodes()返回的是空</p>
+<h3 id="init-debug"><a href="#init-debug" class="headerlink" title="-init_debug"></a>-init_debug</h3><p>启动的时候打印调试参数。可以尝试下<code>erl -init_debug</code> 然后对照着<code>/usr/local/lib/erlang/releases/RXXB/start.script</code></p>
+<h3 id="make"><a href="#make" class="headerlink" title="-make"></a>-make</h3><p>相当于make:all(),见<br><a href="http://www.erlang.org/doc/man/make.html" target="_blank" rel="noopener">make</a></p>
+<h3 id="man-Module"><a href="#man-Module" class="headerlink" title="-man Module"></a>-man Module</h3><p>查询某个模块的手册，首先需要去官网下载相应的手册</p>
+<h3 id="mode-interactive-embedded"><a href="#mode-interactive-embedded" class="headerlink" title="-mode interactive|embedded"></a>-mode interactive|embedded</h3><p>erlang system载入代码的方式，interactive模式下，系统只载入一部分代码，当使用为载入的代码时，会尝试自动载入这个模块。如果是embeded模式，实在系统初始化时，根据启动的script文件载入所有代码，如果文件上没有提到，不会载入，如果调用为载入模块的函数，会报exception error</p>
+<h3 id="name-sname-NAME"><a href="#name-sname-NAME" class="headerlink" title="-name/sname NAME"></a>-name/sname NAME</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">erl -sname test1</span><br><span class="line">erl -name test2@192.168.1.10</span><br></pre></td></tr></table></figure>
+<p>sname 与name之间的结点不能通信，必须命名方式相同才可以。 sname只能用于同一子网内的机器。</p>
+<h3 id="noinput"><a href="#noinput" class="headerlink" title="-noinput"></a>-noinput</h3><p>erl不读入任何参数</p>
+<h3 id="noshell"><a href="#noshell" class="headerlink" title="-noshell"></a>-noshell</h3><p>常用，不显示erl shell。一般都是执行一系列的-eval，-s，-ran，然后init:stop().</p>
+<h3 id="pa-pz"><a href="#pa-pz" class="headerlink" title="-pa/-pz"></a>-pa/-pz</h3><p>添加code路径，没什么可说的同code:addpathsa/addpathsz</p>
+<h3 id="remsh-Node"><a href="#remsh-Node" class="headerlink" title="-remsh Node"></a>-remsh Node</h3><p>远程链接一个节点。例如在shell1中启动一个mochiweb例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~/code/helloworld$ ./start-dev.sh </span><br><span class="line">...=PROGRESS REPORT==== 17-Jul-2015::12:20:43 ===</span><br><span class="line">          supervisor: &#123;local,kernel_safe_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.74.0&gt;&#125;,</span><br><span class="line">                       &#123;id,timer_server&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;timer,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,1000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">(helloworld_dev@youthy)1&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后在shell2中链接这个节点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~$ erl -sname test2 -remsh helloworld_dev@youthy</span><br><span class="line">Erlang R15B (erts-5.9) [source] [64-bit] [smp:4:4] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V7.0  (abort with ^G)</span><br><span class="line">(helloworld_dev@youthy)1&gt; helloworld_web:</span><br><span class="line">loop/2         module_info/0  module_info/1  start/1        stop/0         </span><br><span class="line"></span><br><span class="line">(helloworld_dev@youthy)1&gt; helloworld_web:module_info().</span><br><span class="line">[&#123;module,helloworld_web&#125;,</span><br><span class="line"> &#123;exports,[&#123;start,1&#125;,</span><br><span class="line">           &#123;stop,0&#125;,</span><br><span class="line">           &#123;loop,2&#125;,</span><br><span class="line">           &#123;module_info,0&#125;,</span><br><span class="line">           &#123;module_info,1&#125;]&#125;,</span><br><span class="line"> &#123;attributes,[&#123;vsn,[243820355007545606700617893262330487884]&#125;,</span><br><span class="line">              &#123;author,&quot;Mochi Media &lt;dev@mochimedia.com&gt;&quot;&#125;]&#125;,</span><br><span class="line"> &#123;compile,[&#123;options,[&#123;outdir,&quot;ebin&quot;&#125;,</span><br><span class="line">                     debug_info,debug_info,</span><br><span class="line">                     &#123;i,&quot;include&quot;&#125;]&#125;,</span><br><span class="line">           &#123;version,&quot;6.0&quot;&#125;,</span><br><span class="line">           &#123;time,&#123;2015,7,17,4,17,8&#125;&#125;,</span><br><span class="line">           &#123;source,&quot;/home/youthy/code/helloworld/src/helloworld_web.erl&quot;&#125;]&#125;,</span><br><span class="line"> &#123;native,false&#125;,</span><br><span class="line"> &#123;md5,&lt;&lt;183,110,23,159,102,166,62,91,144,171,107,229,135,</span><br><span class="line">        128,228,76&gt;&gt;&#125;]</span><br><span class="line">(helloworld_dev@youthy)2&gt; </span><br><span class="line">User switch command</span><br><span class="line"> --&gt; q</span><br><span class="line">youthy@youthy:~$</span><br></pre></td></tr></table></figure></p>
+<p>值得注意的是1 必须给节点一个名字且命名方式需要一致。2退出时，不要用q()之类的，否则退出的时对面的节点。需要用ctrl+G然后q的方式。</p>
+<h3 id="rsh-Program"><a href="#rsh-Program" class="headerlink" title="-rsh Program"></a>-rsh Program</h3><p>一般用来启用slave节点时用到。下面例子一开始我们进程中没有erl shell先启动一个master节点。然后在master节点里调用slave:start_link(Host, Name, Args)的方式。启动一个slave节点。这时我们看到进程里面有了两个erl shell。其中一个是已-noshell, noinput等方式启动的。这个就是slave启动的奴隶节点。我们可以用rpc调用一个功能，然后结果会返回给master节点。<br>因为我只有一台机器，如果不用”-rsh ssh”也是可以成功的。但是如果真是在其他机器上还是要加上ssh。两台节点环境，erl版本需一致。master节点退出后，不管时start_link启动还是start启动的slave节点都会退出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~$ ps -ef | grep erl</span><br><span class="line">youthy   13884  2086  0 14:47 ?        00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/epmd -daemon</span><br><span class="line">youthy   23280 13177  0 15:19 pts/0    00:00:00 grep --color=auto erl</span><br><span class="line">youthy@youthy:~$ erl -sname master</span><br><span class="line">Erlang R15B (erts-5.9) [source] [64-bit] [smp:4:4] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(master@youthy)1&gt; </span><br><span class="line">[1]+  已停止               erl -sname master</span><br><span class="line">youthy@youthy:~$ ps -ef | grep erl</span><br><span class="line">youthy   13884  2086  0 14:47 ?        00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/epmd -daemon</span><br><span class="line">youthy   23299 13177  1 15:19 pts/0    00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/beam.smp -- -root /home/youthy/erls/R15B -progname erl -- -home /home/youthy -- -sname master</span><br><span class="line">youthy   23336 13177  0 15:19 pts/0    00:00:00 grep --color=auto erl</span><br><span class="line">youthy@youthy:~$ fg</span><br><span class="line">erl -sname master</span><br><span class="line"></span><br><span class="line">(master@youthy)1&gt; slave:start_link(&apos;youthy&apos;, &apos;slave&apos;, &quot;-rsh ssh&quot;).</span><br><span class="line">&#123;ok,slave@youthy&#125;</span><br><span class="line">(master@youthy)2&gt; </span><br><span class="line">[1]+  已停止               erl -sname master</span><br><span class="line">youthy@youthy:~$ ps -ef | grep erl</span><br><span class="line">youthy   13884  2086  0 14:47 ?        00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/epmd -daemon</span><br><span class="line">youthy   23299 13177  0 15:19 pts/0    00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/beam.smp -- -root /home/youthy/erls/R15B -progname erl -- -home /home/youthy -- -sname master</span><br><span class="line">youthy   23546  2086  0 15:20 ?        00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/beam.smp -- -root /home/youthy/erls/R15B -progname erl -- -home /home/youthy -- -noshell -noinput -noshell -noinput -master master@youthy -sname slave@youthy -s slave slave_start master@youthy slave_waiter_0 -rsh ssh</span><br><span class="line">youthy   23587 13177  0 15:20 pts/0    00:00:00 grep --color=auto erl</span><br><span class="line">youthy@youthy:~$ fg</span><br><span class="line">erl -sname master</span><br><span class="line"></span><br><span class="line">(master@youthy)2&gt; rpc:call(&apos;slave@youthy&apos;, lists, sum, [[2,3,4]]).</span><br><span class="line">9</span><br><span class="line">(master@youthy)3&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="set-cookie-Cookie"><a href="#set-cookie-Cookie" class="headerlink" title="-set_cookie Cookie"></a>-set_cookie Cookie</h3><p>等同于erlang:set_cookie/2</p>
+<h3 id="shutdown-time-Time"><a href="#shutdown-time-Time" class="headerlink" title="-shutdown_time Time"></a>-shutdown_time Time</h3><p>Time是ms毫秒。设置关闭erl节点的时间，如果时间到了还没有结束完，就强制结束掉还存在的进程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~$ erl -shutdown_time 1000</span><br><span class="line">Erlang R15B (erts-5.9) [source] [64-bit] [smp:4:4] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; q().</span><br><span class="line">ok</span><br><span class="line">2&gt; &#123;init,shutdown_timeout&#125;</span><br><span class="line">youthy@youthy:~$ </span><br><span class="line">youthy@youthy:~$ erl -shutdown_time 4000</span><br><span class="line">Erlang R15B (erts-5.9) [source] [64-bit] [smp:4:4] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; q().</span><br><span class="line">ok</span><br><span class="line">2&gt; youthy@youthy:~$</span><br></pre></td></tr></table></figure></p>
+<p>如上，1秒的时间看来时不够用的。</p>
+<h3 id="smp-enable-auto-disable"><a href="#smp-enable-auto-disable" class="headerlink" title="-smp enable/auto/disable"></a>-smp enable/auto/disable</h3><p>是否启用smp，默认时auto。auto自动检测。如果符合会自动开启smp。<br><a href="http://www.cnblogs.com/me-sa/archive/2012/02/01/erlang0035.html" target="_blank" rel="noopener">关于smp</a>.</p>
+<h3 id="version"><a href="#version" class="headerlink" title="-version"></a>-version</h3><p>打印version信息。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://youthyblog.com/2015/07/22/erl命令和参数/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://youthyblog.com/2015/07/22/erl命令和参数/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//youthyblog.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2015/07/31/ubuntu-LAMP搭建/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2015/06/15/关于hexo的toc/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Youthy's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        Contact
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://weibo.com/u/1592381215" target="_blank" title="Weibo me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">person_add</i>
+                        
+                        Weibo me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/10/">十月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/09/">九月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">八月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">七月 2014<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/06/">六月 2014<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/ACG/">ACG<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/erlang/">erlang<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/随笔/">随笔<span class="sidebar_archives-count">4</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="links" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/shizixiuluo" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/1592381215" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+        <a href="https://www.zhihu.com/people/yu-you-qi-46/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
+                <span class="visuallyhidden">Zhihu</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;youthy的流水账
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//youthyblog.disqus.com/count.js" async></script>
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2014;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

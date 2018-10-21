@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://youthyblog.disqus.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Erlang中的lists模块 | 
+        
+        youthy的流水账
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="
+个人感觉erlang里面lists模块用的地方非常多,因为erlang中没有for循环,很多函数功能多是靠lists的map,filter或者列表解析完成的,所以lists里面的函数非常重要
+">
+    <meta name="keywords" content="erlang, golang,erlang">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body {
+        background-color: ;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="youthy的流水账">
+    <meta name="msapplication-starturl" content="http://youthyblog.com/2014/07/11/Erlang中的lists模块/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="youthy的流水账">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="luyN6dELjQn-N4acL35Kyqd_3xEjr8gA3TqpaSV23kk" />
+    <meta name="baidu-site-verification" content="BA4RKG2m6D" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://youthyblog.com/2014/07/11/Erlang中的lists模块/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Erlang中的lists模块 | youthy的流水账">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="
+个人感觉erlang里面lists模块用的地方非常多,因为erlang中没有for循环,很多函数功能多是靠lists的map,filter或者列表解析完成的,所以lists里面的函数非常重要
+">
+    <meta property="og:article:tag" content="erlang"> 
+
+    
+        <meta property="article:published_time" content="Fri Jul 11 2014 21:13:31 GMT+0800">
+        <meta property="article:modified_time" content="Wed Oct 17 2018 16:46:23 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://youthyblog.com/2014/07/11/Erlang中的lists模块/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://youthyblog.com/2014/07/11/Erlang中的lists模块/index.html",
+    "headline": "Erlang中的lists模块",
+    "datePublished": "Fri Jul 11 2014 21:13:31 GMT+0800",
+    "dateModified": "Wed Oct 17 2018 16:46:23 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Youthy",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "youthy的流水账",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",erlangerlang, golang",
+    "description": "
+个人感觉erlang里面lists模块用的地方非常多,因为erlang中没有for循环,很多函数功能多是靠lists的map,filter或者列表解析完成的,所以lists里面的函数非常重要
+",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-127668650-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?d4026e5060b2e4c5254eaeca317f90bd';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#all-2"><span class="post-toc-number">1.</span> <span class="post-toc-text">all/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#any-2"><span class="post-toc-number">2.</span> <span class="post-toc-text">any/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#append-1"><span class="post-toc-number">3.</span> <span class="post-toc-text">append/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#append-2"><span class="post-toc-number">4.</span> <span class="post-toc-text">append/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#concat-1"><span class="post-toc-number">5.</span> <span class="post-toc-text">concat/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#delete-2"><span class="post-toc-number">6.</span> <span class="post-toc-text">delete/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dropwhile-2"><span class="post-toc-number">7.</span> <span class="post-toc-text">dropwhile/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#duplicate-2"><span class="post-toc-number">8.</span> <span class="post-toc-text">duplicate/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#filter-2"><span class="post-toc-number">9.</span> <span class="post-toc-text">filter/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#flatlength-1"><span class="post-toc-number">10.</span> <span class="post-toc-text">flatlength/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#flatten-1"><span class="post-toc-number">11.</span> <span class="post-toc-text">flatten/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#flatten-2"><span class="post-toc-number">12.</span> <span class="post-toc-text">flatten/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#flatmap-2"><span class="post-toc-number">13.</span> <span class="post-toc-text">flatmap/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#foldl-3"><span class="post-toc-number">14.</span> <span class="post-toc-text">foldl/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#foldr-3"><span class="post-toc-number">15.</span> <span class="post-toc-text">foldr/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#map-2"><span class="post-toc-number">16.</span> <span class="post-toc-text">map/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#foreach-2"><span class="post-toc-number">17.</span> <span class="post-toc-text">foreach/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keydelete-3"><span class="post-toc-number">18.</span> <span class="post-toc-text">keydelete/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keyfind-3"><span class="post-toc-number">19.</span> <span class="post-toc-text">keyfind/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keyserach-3"><span class="post-toc-number">20.</span> <span class="post-toc-text">keyserach/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keymember-3"><span class="post-toc-number">21.</span> <span class="post-toc-text">keymember/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keymap-3"><span class="post-toc-number">22.</span> <span class="post-toc-text">keymap/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keymerge-3"><span class="post-toc-number">23.</span> <span class="post-toc-text">keymerge/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keyreplace-4"><span class="post-toc-number">24.</span> <span class="post-toc-text">keyreplace/4</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keysort-2"><span class="post-toc-number">25.</span> <span class="post-toc-text">keysort/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keystore-4"><span class="post-toc-number">26.</span> <span class="post-toc-text">keystore/4</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keytake-3"><span class="post-toc-number">27.</span> <span class="post-toc-text">keytake/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#last-1"><span class="post-toc-number">28.</span> <span class="post-toc-text">last/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mapfoldl-3"><span class="post-toc-number">29.</span> <span class="post-toc-text">mapfoldl/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mapfoldr-3"><span class="post-toc-number">30.</span> <span class="post-toc-text">mapfoldr/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#max-1"><span class="post-toc-number">31.</span> <span class="post-toc-text">max/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#member-2"><span class="post-toc-number">32.</span> <span class="post-toc-text">member/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#merge-1-2-3以及merge3-3"><span class="post-toc-number">33.</span> <span class="post-toc-text">merge/1/2/3以及merge3/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#min-1"><span class="post-toc-number">34.</span> <span class="post-toc-text">min/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#nth-2"><span class="post-toc-number">35.</span> <span class="post-toc-text">nth/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#nthtail-2"><span class="post-toc-number">36.</span> <span class="post-toc-text">nthtail/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#partition-2"><span class="post-toc-number">37.</span> <span class="post-toc-text">partition/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#prefix-2"><span class="post-toc-number">38.</span> <span class="post-toc-text">prefix/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reverse-1-2"><span class="post-toc-number">39.</span> <span class="post-toc-text">reverse/1/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#seq-2-3"><span class="post-toc-number">40.</span> <span class="post-toc-text">seq/2/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sort-1-2"><span class="post-toc-number">41.</span> <span class="post-toc-text">sort/1/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#split-2"><span class="post-toc-number">42.</span> <span class="post-toc-text">split/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#splitwith-2"><span class="post-toc-number">43.</span> <span class="post-toc-text">splitwith/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sublist-2-3"><span class="post-toc-number">44.</span> <span class="post-toc-text">sublist/2/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#subtract-2"><span class="post-toc-number">45.</span> <span class="post-toc-text">subtract/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#suffix-2"><span class="post-toc-number">46.</span> <span class="post-toc-text">suffix/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sum-1"><span class="post-toc-number">47.</span> <span class="post-toc-text">sum/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#takewhile-2"><span class="post-toc-number">48.</span> <span class="post-toc-text">takewhile/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ukeymerge-3"><span class="post-toc-number">49.</span> <span class="post-toc-text">ukeymerge/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ukeysort-2"><span class="post-toc-number">50.</span> <span class="post-toc-text">ukeysort/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#umerge-1-2-3以及-umerge3-3"><span class="post-toc-number">51.</span> <span class="post-toc-text">umerge/1/2/3以及 umerge3/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#uzip-1以及uzip3-1"><span class="post-toc-number">52.</span> <span class="post-toc-text">uzip/1以及uzip3/1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#zip-2以及zip3-3"><span class="post-toc-number">53.</span> <span class="post-toc-text">zip/2以及zip3/3</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#usort-1和usort-2"><span class="post-toc-number">54.</span> <span class="post-toc-text">usort/1和usort/2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#zipwith-3以及zipwith3-4"><span class="post-toc-number">55.</span> <span class="post-toc-text">zipwith/3以及zipwith3/4</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Erlang中的lists模块
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Youthy</strong>
+        <span>7月 11, 2014</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/erlang/">erlang</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Erlang中的lists模块&url=http://youthyblog.com/2014/07/11/Erlang中的lists模块/index.html&pic=http://youthyblog.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Erlang中的lists模块&url=http://youthyblog.com/2014/07/11/Erlang中的lists模块/index.html&via=Youthy" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://youthyblog.com/2014/07/11/Erlang中的lists模块/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://youthyblog.com/2014/07/11/Erlang中的lists模块/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <blockquote>
+<p>个人感觉erlang里面lists模块用的地方非常多,因为erlang中没有for循环,很多函数功能多是靠lists的map,filter或者列表解析完成的,所以lists里面的函数非常重要</p>
+</blockquote>
+<a id="more"></a>
+<!-- toc -->
+<h3 id="all-2"><a href="#all-2" class="headerlink" title="all/2"></a>all/2</h3><blockquote>
+<p>all(Func, List) -&gt; boolean()</p>
+</blockquote>
+<p>如果全员执行Func都返回true,则这个表达式返回true,否则返回false.</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>&gt; lists:all(<span class="keyword">fun</span>(X) -&gt; is_integer(X) <span class="keyword">end</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">3</span>&gt; lists:all(<span class="keyword">fun</span>(X) -&gt; is_integer(X) <span class="keyword">end</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="string">"haha"</span>,<span class="number">4</span>]).</span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="any-2"><a href="#any-2" class="headerlink" title="any/2"></a>any/2</h3><blockquote>
+<p>any(Pred, List) -&gt; boolean()</p>
+</blockquote>
+<p>与all大致相同,如果有任意一个List中的元素返回true,则any返回true.</p>
+<h3 id="append-1"><a href="#append-1" class="headerlink" title="append/1"></a>append/1</h3><blockquote>
+<p>append(ListOfLists) -&gt; List1</p>
+</blockquote>
+<p>用于合并子列表,列表中元素最起码要有一层深度,而且append只能去掉一层的深度,如果子元素没有深度,就会抛错<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>&gt; lists:append([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">1</span>],[<span class="number">2</span>]]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="number">7</span>&gt; lists:append([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">1</span>],[[<span class="number">1</span>,[<span class="number">3</span>,<span class="number">2</span>]],<span class="number">2</span>]]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,[<span class="number">1</span>,[<span class="number">3</span>,<span class="number">2</span>]],<span class="number">2</span>]</span><br><span class="line"><span class="number">8</span>&gt; lists:append([<span class="number">1</span>,[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>]]).</span><br><span class="line">** exception error: bad argument</span><br><span class="line">     in operator  ++/<span class="number">2</span></span><br><span class="line">        called as <span class="number">1</span> ++ [<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">     in call from lists:append/<span class="number">1</span> (lists.erl, line <span class="number">74</span>)</span><br></pre></td></tr></table></figure></p>
+<p>因为在append的源码是:</p>
+<blockquote>
+<p>73 append([E]) -&gt; E;<br>  74 append([H|T]) -&gt; H ++ append(T);<br>  75 append([]) -&gt; []. </p>
+</blockquote>
+<p>所以上面说 <code>++</code>附近出错,因为1不是列表.</p>
+<h3 id="append-2"><a href="#append-2" class="headerlink" title="append/2"></a>append/2</h3><blockquote>
+<p>append(List1, List2) -&gt; List3</p>
+</blockquote>
+<p>源码</p>
+<blockquote>
+<p> append(L1, L2) -&gt; L1 ++ L2.</p>
+</blockquote>
+<p>用于合并两个列表,其实append实质就是++,所以需要注意效率,因为++是将左边的列表都一遍,因此在递归中要始终保持左边的列表要是最短的那个.<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">9</span>&gt; lists:append(<span class="string">"haha"</span>,<span class="string">"heihei"</span>).</span><br><span class="line"><span class="string">"hahaheihei"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="concat-1"><a href="#concat-1" class="headerlink" title="concat/1"></a>concat/1</h3><blockquote>
+<p>concat([Things]) -&gt; string()</p>
+</blockquote>
+<p>Things可以使integer,float,atom,string, concat将他们转换成一个字符串,如果Things中含有list,可能会整体装换成list.<br>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">10&gt; lists:concat([&quot;haha&quot;,[1],3,3.14,atom]).</span><br><span class="line">[104,97,104,97,1,51,51,46,49,52,48,48,48,48,48,48,48,48,48,</span><br><span class="line"> 48,48,48,48,49,50,52,51,52,101|...]</span><br><span class="line">11&gt; lists:concat([&quot;haha&quot;,3,3.14,atom]).    </span><br><span class="line">&quot;haha33.14000000000000012434e+00atom&quot;</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">concat</span><span class="params">(List)</span> -&gt;</span></span><br><span class="line">    flatmap(fun thing_to_list/1, List).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">thing_to_list</span><span class="params">(X)</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(X)</span> -&gt;</span> integer_to_list(X);</span><br><span class="line"><span class="function"><span class="title">thing_to_list</span><span class="params">(X)</span> <span class="title">when</span> <span class="title">is_float</span><span class="params">(X)</span>   -&gt;</span> float_to_list(X);</span><br><span class="line"><span class="function"><span class="title">thing_to_list</span><span class="params">(X)</span> <span class="title">when</span> <span class="title">is_atom</span><span class="params">(X)</span>    -&gt;</span> atom_to_list(X);</span><br><span class="line"><span class="function"><span class="title">thing_to_list</span><span class="params">(X)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(X)</span>    -&gt;</span> X.	<span class="comment">%Assumed to be a string</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="delete-2"><a href="#delete-2" class="headerlink" title="delete/2"></a>delete/2</h3><blockquote>
+<p>delete(Elem, List) -&gt; List1</p>
+</blockquote>
+<p>删除List中第一个等于Elem的元素,返回一个新的list<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">12&gt; lists:delete(1,[1,2,1,3,4]).</span><br><span class="line">[2,1,3,4]</span><br></pre></td></tr></table></figure></p>
+<h3 id="dropwhile-2"><a href="#dropwhile-2" class="headerlink" title="dropwhile/2"></a>dropwhile/2</h3><blockquote>
+<p>dropwhile(Func, List) -&gt; List1</p>
+</blockquote>
+<p>从左边开始去掉List中Func返回值为true的元素,遇到第一个返回false的元素时终止,并返回剩下列表.<br>例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">16&gt; lists:dropwhile(fun(X) -&gt; X rem 2 =:= 0  end, [2,4,3,5,6]).  </span><br><span class="line">[3,5,6]</span><br></pre></td></tr></table></figure></p>
+<p>源码实现:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">dropwhile</span><span class="params">(Pred, [Hd|Tail]=Rest)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">case</span> Pred(Hd) <span class="keyword">of</span></span><br><span class="line">	<span class="literal">true</span> -&gt; dropwhile(Pred, Tail);</span><br><span class="line">	<span class="literal">false</span> -&gt; Rest</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line"><span class="function"><span class="title">dropwhile</span><span class="params">(Pred, [])</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(Pred, <span class="number">1</span>)</span> -&gt;</span> [].</span><br></pre></td></tr></table></figure></p>
+<h3 id="duplicate-2"><a href="#duplicate-2" class="headerlink" title="duplicate/2"></a>duplicate/2</h3><blockquote>
+<p>duplicate(N, Elem) -&gt; List.</p>
+</blockquote>
+<p>生成N个Elem的列表.N不能使负数.原因可以看源码<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> duplicate<span class="params">(N, Elem)</span> -&gt; List when</span><br><span class="line">      N :: non_neg_integer<span class="params">()</span>,</span><br><span class="line">      Elem :: T,</span><br><span class="line">      List :: [T],</span><br><span class="line">      T :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">duplicate</span><span class="params">(N, X)</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(N)</span>, N &gt;= 0 -&gt;</span> duplicate(N, X, []).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">duplicate</span><span class="params">(<span class="number">0</span>, _, L)</span> -&gt;</span> L;</span><br><span class="line"><span class="function"><span class="title">duplicate</span><span class="params">(N, X, L)</span> -&gt;</span> duplicate(N-<span class="number">1</span>, X, [X|L]).</span><br></pre></td></tr></table></figure></p>
+<p>原理就是用列表构造,没添加一个H,N就-1,终止条件就是直到N=0,如果是负数则无法终止,所以不能为负<br>例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">17&gt; lists:duplicate(3,&quot;haha&quot;).</span><br><span class="line">[&quot;haha&quot;,&quot;haha&quot;,&quot;haha&quot;]</span><br></pre></td></tr></table></figure></p>
+<h3 id="filter-2"><a href="#filter-2" class="headerlink" title="filter/2"></a>filter/2</h3><blockquote>
+<p>filter(Func, List) -&gt; List1</p>
+</blockquote>
+<p>过滤器,返回列表,元素是List中所有Func返回值为true的元素.这个在工程中经常用.<br>源码<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> filter<span class="params">(Pred, List1)</span> -&gt; List2 when</span><br><span class="line">      Pred :: fun<span class="params">((Elem :: T)</span> -&gt; boolean<span class="params">()</span>),</span><br><span class="line">      List1 :: [T],</span><br><span class="line">      List2 :: [T],</span><br><span class="line">      T :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">filter</span><span class="params">(Pred, List)</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(Pred, <span class="number">1</span>)</span> -&gt;</span></span><br><span class="line">    [ E || E &lt;- List, Pred(E) ].</span><br></pre></td></tr></table></figure></p>
+<p>可以看到,filter内部其实就是用列表解析实现的.<br>例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">19&gt; lists:filter(fun(X) -&gt; X rem 2 =:= 0 end, [2,4,3,5,6]).</span><br><span class="line">[2,4,6]</span><br></pre></td></tr></table></figure></p>
+<h3 id="flatlength-1"><a href="#flatlength-1" class="headerlink" title="flatlength/1"></a>flatlength/1</h3><blockquote>
+<p>flatlength(DeepList) -&gt; integer</p>
+</blockquote>
+<p>该函数返回一个深度列表的长度,如果是深度为1的列表可以直接用length(List)返回长度,<br>官方doc这么说的</p>
+<blockquote>
+<p>Equivalent to length(flatten(DeepList)), but more efficient.</p>
+</blockquote>
+<p>等同于深度列表扁平化后在length,但是这个做更搞笑,原因很简单,这个函数只不过计算长度,并没有将列表扁平化<br>源码<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> flatlength<span class="params">(DeepList)</span> -&gt; non_neg_integer<span class="params">()</span> when</span><br><span class="line">      DeepList :: [term<span class="params">()</span> | DeepList].</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">flatlength</span><span class="params">(List)</span> -&gt;</span></span><br><span class="line">    flatlength(List, <span class="number">0</span>).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">flatlength</span><span class="params">([H|T], L)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(H)</span> -&gt;</span></span><br><span class="line">    flatlength(H, flatlength(T, L));</span><br><span class="line"><span class="function"><span class="title">flatlength</span><span class="params">([_|T], L)</span> -&gt;</span></span><br><span class="line">    flatlength(T, L + <span class="number">1</span>);</span><br><span class="line"><span class="function"><span class="title">flatlength</span><span class="params">([], L)</span> -&gt;</span> L.</span><br></pre></td></tr></table></figure></p>
+<p>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; lists:flatlength([<span class="number">1</span>,[<span class="number">2</span>,[<span class="number">3</span>],<span class="number">4</span>,[<span class="number">5</span>],<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>]]).</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="flatten-1"><a href="#flatten-1" class="headerlink" title="flatten/1"></a>flatten/1</h3><blockquote>
+<p>flatten(Deeplist) -&gt; List</p>
+</blockquote>
+<p>上面提到的flatten函数,用于扁平化一个深度列表,尽量少用,代价很高,甚至比++操作代价还高<br>源码<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> flatten<span class="params">(DeepList)</span> -&gt; List when</span><br><span class="line">      DeepList :: [term<span class="params">()</span> | DeepList],</span><br><span class="line">      List :: [term<span class="params">()</span>].</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">flatten</span><span class="params">(List)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(List)</span> -&gt;</span></span><br><span class="line">    do_flatten(List, []).</span><br><span class="line"></span><br><span class="line"><span class="keyword">-spec</span> flatten<span class="params">(DeepList, Tail)</span> -&gt; List when</span><br><span class="line">      DeepList :: [term<span class="params">()</span> | DeepList],</span><br><span class="line">      Tail :: [term<span class="params">()</span>],</span><br><span class="line">      List :: [term<span class="params">()</span>].</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">flatten</span><span class="params">(List, Tail)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(List)</span>, <span class="title">is_list</span><span class="params">(Tail)</span> -&gt;</span></span><br><span class="line">    do_flatten(List, Tail).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">do_flatten</span><span class="params">([H|T], Tail)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(H)</span> -&gt;</span></span><br><span class="line">    do_flatten(H, do_flatten(T, Tail));</span><br><span class="line"><span class="function"><span class="title">do_flatten</span><span class="params">([H|T], Tail)</span> -&gt;</span></span><br><span class="line">    [H|do_flatten(T, Tail)];</span><br><span class="line"><span class="function"><span class="title">do_flatten</span><span class="params">([], Tail)</span> -&gt;</span></span><br><span class="line">    Tail.</span><br></pre></td></tr></table></figure></p>
+<p>在递归中为了伪递归,如果第一个元素是list就递归调用do_flatten,如果不是就用构造器放在新列表的头,剩下的部分继续调用do_flatten.<br><strong>关于flatten的效率问题</strong><br>在官方doc的efficiency guide中有专门一块Deep and flat lists,<br>原文这么说</p>
+<blockquote>
+<p>lists:flatten/1 builds an entirely new list. Therefore, it is expensive, and even more expensive than the ++ (which copies its left argument, but not its right argument).<br>In the following situations, you can easily avoid calling lists:flatten/1:</p>
+<ol>
+<li>When sending data to a port. Ports understand deep lists so there is no reason to flatten the list before sending it to the port.</li>
+<li>When calling BIFs that accept deep lists, such as list_to_binary/1 or iolist_to_binary/1.</li>
+<li>When you know that your list is only one level deep, you can can use lists:append/1.</li>
+</ol>
+</blockquote>
+<p>因为flatten是完全重建一个列表,甚至比++(复制左边,而右边保留)更为低效,但是有3种情况可以不适用flatten</p>
+<ol>
+<li>往端口发送数据时,因为端口懂得深度列表</li>
+<li><p>诸如<code>list_to_binary</code>和<code>iolist_to_binary</code>的BIF,不需要扁平化</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; list_to_binary([<span class="number">1</span>,[<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]],<span class="number">5</span>]).</span><br><span class="line">&lt;&lt;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&gt;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果我们知道列表深度只有一层,要用append代替flatten</p>
+</li>
+</ol>
+<h3 id="flatten-2"><a href="#flatten-2" class="headerlink" title="flatten/2"></a>flatten/2</h3><blockquote>
+<p>flatten(DeepList, Tail) -&gt; List.</p>
+</blockquote>
+<p>就是上面flatten/1调用的子函数,flatten(DeepList) 就是flatten(DeepList, []).<br>函数在DeepList扁平化后append了一下Tail.<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">27</span>&gt; lists:flatten([<span class="number">1</span>,[<span class="number">3</span>,[<span class="number">4</span>,<span class="number">5</span>],<span class="number">2</span>]],[<span class="number">1</span>,[<span class="number">2</span>,[<span class="number">3</span>]]]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">1</span>,[<span class="number">2</span>,[<span class="number">3</span>]]]</span><br></pre></td></tr></table></figure></p>
+<h3 id="flatmap-2"><a href="#flatmap-2" class="headerlink" title="flatmap/2"></a>flatmap/2</h3><blockquote>
+<p>flatmap(Func, List1) -&gt; List2</p>
+</blockquote>
+<p>官方的说法是</p>
+<blockquote>
+<p>That is, flatmap behaves as if it had been defined as follows:<br>flatmap(Fun, List1) -&gt;<br>    append(map(Fun, List1)).</p>
+</blockquote>
+<p>就是List1中每个元素执行Fun,一般Fun返回一个列表,最后将这些列表append一下.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">26</span>&gt; lists:flatmap(<span class="keyword">fun</span>(X) -&gt; [X, X+<span class="number">1</span>] <span class="keyword">end</span>, [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> flatmap<span class="params">(Fun, List1)</span> -&gt; List2 when</span><br><span class="line">      Fun :: fun<span class="params">((A)</span> -&gt; [B]),</span><br><span class="line">      List1 :: [A],</span><br><span class="line">      List2 :: [B],</span><br><span class="line">      A :: term<span class="params">()</span>,</span><br><span class="line">      B :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">flatmap</span><span class="params">(F, [Hd|Tail])</span> -&gt;</span></span><br><span class="line">    F(Hd) ++ flatmap(F, Tail);</span><br><span class="line"><span class="function"><span class="title">flatmap</span><span class="params">(F, [])</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(F, <span class="number">1</span>)</span> -&gt;</span> [].</span><br></pre></td></tr></table></figure></p>
+<h3 id="foldl-3"><a href="#foldl-3" class="headerlink" title="foldl/3"></a>foldl/3</h3><blockquote>
+<p>foldl(Fun, Acc0, List) -&gt; Acc1</p>
+</blockquote>
+<p>这个函数用的非常多,Fun是一个可接受2个参数的函数,例如fun(X, Sum) -&gt; X + Sum end.那么List中的第一个元素带入X,然后Acc0带入Sum,执行得结果Acc1,然后将List中第二个元素带入X,将Acc1带入Sum,以此类推,每回fun的第二个参数是上把的结果,第一个元素是List中的元素.下面例子是一个累加函数<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">28</span>&gt; lists:foldl(<span class="keyword">fun</span>(X, Sum) -&gt; X + Sum <span class="keyword">end</span>, <span class="number">0</span>, [<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>]).</span><br><span class="line"><span class="number">30</span></span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> foldl<span class="params">(Fun, Acc0, List)</span> -&gt; Acc1 when</span><br><span class="line">      Fun :: fun<span class="params">((Elem :: T, AccIn)</span> -&gt; AccOut),</span><br><span class="line">      Acc0 :: term<span class="params">()</span>,</span><br><span class="line">      Acc1 :: term<span class="params">()</span>,</span><br><span class="line">      AccIn :: term<span class="params">()</span>,</span><br><span class="line">      AccOut :: term<span class="params">()</span>,</span><br><span class="line">      List :: [T],</span><br><span class="line">      T :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">foldl</span><span class="params">(F, Accu, [Hd|Tail])</span> -&gt;</span></span><br><span class="line">    foldl(F, F(Hd, Accu), Tail);</span><br><span class="line"><span class="function"><span class="title">foldl</span><span class="params">(F, Accu, [])</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(F, <span class="number">2</span>)</span> -&gt;</span> Accu.</span><br></pre></td></tr></table></figure></p>
+<p>上面可以看到foldl的第二个参数就是F(Hd, Accu)的返回结果.</p>
+<h3 id="foldr-3"><a href="#foldr-3" class="headerlink" title="foldr/3"></a>foldr/3</h3><p>不说了,跟上面一样,只不过是从右边开始带入.</p>
+<h3 id="map-2"><a href="#map-2" class="headerlink" title="map/2"></a>map/2</h3><blockquote>
+<p>map(Fun, List1) -&gt; List2</p>
+</blockquote>
+<p>返回List1中每个元素执行Fun后的结果列表,官方doc上说执行顺序是运行时决定,这个和下面说的foreach不一样.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">34</span>&gt; lists:map(<span class="keyword">fun</span>(X) -&gt; X*<span class="number">2</span> <span class="keyword">end</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]).            </span><br><span class="line">[<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">map</span><span class="params">(F, [H|T])</span> -&gt;</span></span><br><span class="line">    [F(H)|map(F, T)];</span><br><span class="line"><span class="function"><span class="title">map</span><span class="params">(F, [])</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(F, <span class="number">1</span>)</span> -&gt;</span> [].</span><br></pre></td></tr></table></figure></p>
+<h3 id="foreach-2"><a href="#foreach-2" class="headerlink" title="foreach/2"></a>foreach/2</h3><blockquote>
+<p>foreach(Fun, List1) -&gt; ok.</p>
+</blockquote>
+<p>该函数和map很像,区别就是foreach只执行Fun函数却不保存结果,最后返回ok.<br>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">foreach</span><span class="params">(F, [Hd|Tail])</span> -&gt;</span></span><br><span class="line">    F(Hd),</span><br><span class="line">    foreach(F, Tail);</span><br><span class="line"><span class="function"><span class="title">foreach</span><span class="params">(F, [])</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(F, <span class="number">1</span>)</span> -&gt;</span> ok.</span><br></pre></td></tr></table></figure></p>
+<p>这里和map不同的是foreach的递归在执行完前一个元素的Fun函数后才会继续执行一下个元素的Fun函数,这里的执行顺序就是列表的顺序,官方doc上说:<code>this function is used for its side effects</code><br>我不是很理解具体有什么用…</p>
+<h3 id="keydelete-3"><a href="#keydelete-3" class="headerlink" title="keydelete/3"></a>keydelete/3</h3><blockquote>
+<p>keydelete(Key, N, TupleList) -&gt; TupleList1</p>
+</blockquote>
+<p>主要用于由{}tuple 组成的列表,删除Tuplelist中第一个第N个位置的值等于Key的tuple,N是tuple中key应该匹配的位置.这个也经常用,比如一个地图中存了{PlayerId, name, str, magic…}之类的tuplelist,如果玩家离开地图,可以让Key为PlayerId,然后keydelete这个玩家的信息,因为PlayerId一般都是唯一的.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">37</span>&gt; lists:keydelete(<span class="number">2010211108</span>, <span class="number">1</span>, [&#123;<span class="number">2010211105</span>, sice, <span class="number">5</span>&#125;,&#123;<span class="number">2010211106</span>, sice, <span class="number">6</span>&#125;,&#123;<span class="number">2010211107</span>, sice, <span class="number">7</span>&#125;,&#123;<span class="number">2010211108</span>, <span class="number">8</span>&#125;]).</span><br><span class="line">[&#123;<span class="number">2010211105</span>,sice,<span class="number">5</span>&#125;,</span><br><span class="line"> &#123;<span class="number">2010211106</span>,sice,<span class="number">6</span>&#125;,</span><br><span class="line"> &#123;<span class="number">2010211107</span>,sice,<span class="number">7</span>&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">keydelete</span><span class="params">(K, N, L)</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(N)</span>, N &gt; 0 -&gt;</span></span><br><span class="line">    keydelete3(K, N, L).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">keydelete3</span><span class="params">(Key, N, [H|T])</span> <span class="title">when</span> <span class="title">element</span><span class="params">(N, H)</span> == K<span class="title">ey</span> -&gt;</span> T;</span><br><span class="line"><span class="function"><span class="title">keydelete3</span><span class="params">(Key, N, [H|T])</span> -&gt;</span></span><br><span class="line">    [H|keydelete3(Key, N, T)];</span><br><span class="line"><span class="function"><span class="title">keydelete3</span><span class="params">(_, _, [])</span> -&gt;</span> [].</span><br></pre></td></tr></table></figure></p>
+<h3 id="keyfind-3"><a href="#keyfind-3" class="headerlink" title="keyfind/3"></a>keyfind/3</h3><blockquote>
+<p>keyfind(Key, N, TupleList) -&gt; Tuple | false</p>
+</blockquote>
+<p>大致同上,如字面意思,只不过不delete掉,没找到会返回false,不过这个是BIF,也就是说用c写的,在lists模块看不到实现方法,BIF的效率一般都很高.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">38</span>&gt; lists:keyfind(<span class="number">2010211108</span>, <span class="number">1</span>, [&#123;<span class="number">2010211105</span>, sice, <span class="number">5</span>&#125;,&#123;<span class="number">2010211106</span>, sice, <span class="number">6</span>&#125;,&#123;<span class="number">2010211107</span>, sice, <span class="number">7</span>&#125;]). </span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="number">39</span>&gt; lists:keyfind(<span class="number">2010211106</span>, <span class="number">1</span>, [&#123;<span class="number">2010211105</span>, sice, <span class="number">5</span>&#125;,&#123;<span class="number">2010211106</span>, sice, <span class="number">6</span>&#125;,&#123;<span class="number">2010211107</span>, sice, <span class="number">7</span>&#125;]).</span><br><span class="line">&#123;<span class="number">2010211106</span>,sice,<span class="number">6</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>BIF的源码可以把github上的<a href="https://github.com/erlang/otp" target="_blank" rel="noopener">erlang/otp</a>clone下来<br>然后在otp/erts/emulator/beam里面可以找到BIF的c代码,lists里面的BIF写在erl_bif_lists.c中<br>以下是keyfind的源码,以后的BIF代码就不贴了,感兴趣可以自己去找,不是那么好懂.</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">keyfind(<span class="keyword">int</span> Bif, Process* p, Eterm Key, Eterm Pos, Eterm List)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> max_iter = <span class="number">10</span> * CONTEXT_REDS;</span><br><span class="line">    Sint pos;</span><br><span class="line">    Eterm term;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!is_small(Pos) || (pos = signed_val(Pos)) &lt; <span class="number">1</span>) &#123;</span><br><span class="line">	BIF_ERROR(p, BADARG);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (is_small(Key)) &#123;</span><br><span class="line">	<span class="keyword">double</span> float_key = (<span class="keyword">double</span>) signed_val(Key);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (is_list(List)) &#123;</span><br><span class="line">	    <span class="keyword">if</span> (--max_iter &lt; <span class="number">0</span>) &#123;</span><br><span class="line">		BUMP_ALL_REDS(p);</span><br><span class="line">		BIF_TRAP3(bif_export[Bif], p, Key, Pos, List);</span><br><span class="line">	    &#125;</span><br><span class="line">	    term = CAR(list_val(List));</span><br><span class="line">	    List = CDR(list_val(List));</span><br><span class="line">	    <span class="keyword">if</span> (is_tuple(term)) &#123;</span><br><span class="line">		Eterm *tuple_ptr = tuple_val(term);</span><br><span class="line">		<span class="keyword">if</span> (pos &lt;= arityval(*tuple_ptr)) &#123;</span><br><span class="line">		    Eterm element = tuple_ptr[pos];</span><br><span class="line">		    <span class="keyword">if</span> (Key == element) &#123;</span><br><span class="line">			<span class="keyword">return</span> term;</span><br><span class="line">		    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (is_float(element)) &#123;</span><br><span class="line">			FloatDef f;</span><br><span class="line"></span><br><span class="line">			GET_DOUBLE(element, f);</span><br><span class="line">			<span class="keyword">if</span> (f.fd == float_key) &#123;</span><br><span class="line">			    <span class="keyword">return</span> term;</span><br><span class="line">			&#125;</span><br><span class="line">		    &#125;</span><br><span class="line">		&#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (is_immed(Key)) &#123;</span><br><span class="line">	<span class="keyword">while</span> (is_list(List)) &#123;</span><br><span class="line">	    <span class="keyword">if</span> (--max_iter &lt; <span class="number">0</span>) &#123;</span><br><span class="line">		BUMP_ALL_REDS(p);</span><br><span class="line">		BIF_TRAP3(bif_export[Bif], p, Key, Pos, List);</span><br><span class="line">	    &#125;</span><br><span class="line">	    term = CAR(list_val(List));</span><br><span class="line">	    List = CDR(list_val(List));</span><br><span class="line">	    <span class="keyword">if</span> (is_tuple(term)) &#123;</span><br><span class="line">		Eterm *tuple_ptr = tuple_val(term);</span><br><span class="line">		<span class="keyword">if</span> (pos &lt;= arityval(*tuple_ptr)) &#123;</span><br><span class="line">		    Eterm element = tuple_ptr[pos];</span><br><span class="line">		    <span class="keyword">if</span> (Key == element) &#123;</span><br><span class="line">			<span class="keyword">return</span> term;</span><br><span class="line">		    &#125;</span><br><span class="line">		&#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">while</span> (is_list(List)) &#123;</span><br><span class="line">	    <span class="keyword">if</span> (--max_iter &lt; <span class="number">0</span>) &#123;</span><br><span class="line">		BUMP_ALL_REDS(p);</span><br><span class="line">		BIF_TRAP3(bif_export[Bif], p, Key, Pos, List);</span><br><span class="line">	    &#125;</span><br><span class="line">	    term = CAR(list_val(List));</span><br><span class="line">	    List = CDR(list_val(List));</span><br><span class="line">	    <span class="keyword">if</span> (is_tuple(term)) &#123;</span><br><span class="line">		Eterm *tuple_ptr = tuple_val(term);</span><br><span class="line">		<span class="keyword">if</span> (pos &lt;= arityval(*tuple_ptr)) &#123;</span><br><span class="line">		    Eterm element = tuple_ptr[pos];</span><br><span class="line">		    <span class="keyword">if</span> (CMP(Key, element) == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> term;</span><br><span class="line">		    &#125;</span><br><span class="line">		&#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (is_not_nil(List))  &#123;</span><br><span class="line">	BIF_ERROR(p, BADARG);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> am_false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>哎,跟这c代码比,还是erlang看起来舒服,简单.</p>
+<h3 id="keyserach-3"><a href="#keyserach-3" class="headerlink" title="keyserach/3"></a>keyserach/3</h3><blockquote>
+<p>keysearch(Key, N, TupleList) -&gt; {value, Tuple} | false</p>
+</blockquote>
+<p>与keyfind的功能相同,只不过返回值多了个value的标签,同样是BIF,lists.erl中没有源码,这个函数存在是为了向后兼容,keyfind用的更多些,但是keyfind是在R13B版本引入的,较老的版本用的是keysearch.</p>
+<h3 id="keymember-3"><a href="#keymember-3" class="headerlink" title="keymember/3"></a>keymember/3</h3><blockquote>
+<p>keymember(Key, N, Tuplelist) -&gt; boolean()</p>
+</blockquote>
+<p>功能和以上大致一样,也是BIF,只不过返回是true或false.</p>
+<h3 id="keymap-3"><a href="#keymap-3" class="headerlink" title="keymap/3"></a>keymap/3</h3><blockquote>
+<p>keymap(Fun, N, Tuplelist) -&gt; Tuplelist2</p>
+</blockquote>
+<p>用于将每个tuple的第N个元素替换为Fun(第N个元素)的执行结果.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">40</span>&gt; lists:keymap(<span class="keyword">fun</span>(X) -&gt; atom_to_list(X) <span class="keyword">end</span>, <span class="number">2</span>, [&#123;<span class="number">1</span>, john, boy&#125;,&#123;<span class="number">2</span>, aya, girl&#125;, &#123;<span class="number">3</span>, cameron, robot&#125;]).</span><br><span class="line">[&#123;<span class="number">1</span>,<span class="string">"john"</span>,boy&#125;,&#123;<span class="number">2</span>,<span class="string">"aya"</span>,girl&#125;,&#123;<span class="number">3</span>,<span class="string">"cameron"</span>,robot&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">keymap</span><span class="params">(Fun, Index, [Tup|Tail])</span> -&gt;</span></span><br><span class="line">   [setelement(Index, Tup, Fun(element(Index, Tup)))|keymap(Fun, Index, Tail)];</span><br><span class="line"><span class="function"><span class="title">keymap</span><span class="params">(Fun, Index, [])</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(Index)</span>, I<span class="title">ndex</span> &gt;= 1, </span></span><br><span class="line"><span class="function">                            <span class="title">is_function</span><span class="params">(Fun, <span class="number">1</span>)</span> -&gt;</span> [].</span><br></pre></td></tr></table></figure></p>
+<p>setelement从字面就可以看出是将Tup的 Index内容替换为Fun(element(Index, Tup)). 而,element就是返回Tup中第Index的值,这些东西都浓缩到一句代码实现,所以说erlang很有意思.</p>
+<h3 id="keymerge-3"><a href="#keymerge-3" class="headerlink" title="keymerge/3"></a>keymerge/3</h3><blockquote>
+<p>keymerge(N, TupleList1, TupleList2) -&gt; TupleList3</p>
+</blockquote>
+<p>将TupleList1和TupleList2合并并排序,其中N用来制定用Tuple中的第N元素为依据排序,注意,tuplelist1和tuplelist2在执行keymerge前需要是已经按N排好序,否则顺序可能不正确,如果tuplelist1有和tuplelist2中有第N元素相同的tuple,则Tuplelist1的在前面.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">42</span>&gt; lists:keymerge(<span class="number">2</span>, [&#123;a,<span class="number">1</span>&#125;,&#123;c,<span class="number">3</span>&#125;],[&#123;b,<span class="number">2</span>&#125;,&#123;d,<span class="number">4</span>&#125;]).</span><br><span class="line">[&#123;a,<span class="number">1</span>&#125;,&#123;b,<span class="number">2</span>&#125;,&#123;c,<span class="number">3</span>&#125;,&#123;d,<span class="number">4</span>&#125;]</span><br><span class="line"><span class="comment">%顺序出错</span></span><br><span class="line"><span class="number">43</span>&gt; lists:keymerge(<span class="number">2</span>, [&#123;a,<span class="number">1</span>&#125;,&#123;c,<span class="number">3</span>&#125;],[&#123;d,<span class="number">4</span>&#125;,&#123;b,<span class="number">2</span>&#125;]).     </span><br><span class="line">[&#123;a,<span class="number">1</span>&#125;,&#123;c,<span class="number">3</span>&#125;,&#123;d,<span class="number">4</span>&#125;,&#123;b,<span class="number">2</span>&#125;]  </span><br><span class="line"><span class="comment">%tuplelist1的在前面</span></span><br><span class="line"><span class="number">44</span>&gt; lists:keymerge(<span class="number">2</span>, [&#123;a,<span class="number">1</span>&#125;,&#123;c,<span class="number">3</span>&#125;],[&#123;e,<span class="number">3</span>&#125;,&#123;d,<span class="number">4</span>&#125;]).</span><br><span class="line">[&#123;a,<span class="number">1</span>&#125;,&#123;c,<span class="number">3</span>&#125;,&#123;e,<span class="number">3</span>&#125;,&#123;d,<span class="number">4</span>&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>源码不放了,这个比较复杂,太长了,感兴趣的自己去找吧.</p>
+<h3 id="keyreplace-4"><a href="#keyreplace-4" class="headerlink" title="keyreplace/4"></a>keyreplace/4</h3><blockquote>
+<p>keyreplace(Key, N, TupleList1, NewTuple) -&gt; TupleList2</p>
+</blockquote>
+<p>如字面意思,用于替换,将TupleList1中第N个值等于Key的tuple替换为NewTuple.只替换第一个.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">46</span>&gt; lists:keyreplace(name2, <span class="number">2</span>, [&#123;player1, name1, career1&#125;,&#123;player2, name2, career2&#125;,&#123;player3, name3, career3&#125;], &#123;player4, name4, career4&#125;).</span><br><span class="line">[&#123;player1,name1,career1&#125;,</span><br><span class="line"> &#123;player4,name4,career4&#125;,</span><br><span class="line"> &#123;player3,name3,career3&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">keyreplace</span><span class="params">(K, N, L, New)</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(N)</span>, N &gt; 0, <span class="title">is_tuple</span><span class="params">(New)</span> -&gt;</span></span><br><span class="line">    keyreplace3(K, N, L, New).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">keyreplace3</span><span class="params">(Key, Pos, [Tup|Tail], New)</span> <span class="title">when</span> <span class="title">element</span><span class="params">(Pos, Tup)</span> == K<span class="title">ey</span> -&gt;</span></span><br><span class="line">    [New|Tail];</span><br><span class="line"><span class="function"><span class="title">keyreplace3</span><span class="params">(Key, Pos, [H|T], New)</span> -&gt;</span></span><br><span class="line">    [H|keyreplace3(Key, Pos, T, New)];</span><br><span class="line"><span class="function"><span class="title">keyreplace3</span><span class="params">(_, _, [], _)</span> -&gt;</span> [].</span><br></pre></td></tr></table></figure></p>
+<h3 id="keysort-2"><a href="#keysort-2" class="headerlink" title="keysort/2"></a>keysort/2</h3><blockquote>
+<p>keysort(N, TupleList1) -&gt; TupleList2.</p>
+</blockquote>
+<p>example:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">47</span>&gt; lists:keysort(<span class="number">1</span>,[&#123;<span class="number">3</span>,name3&#125;,&#123;<span class="number">2</span>, name2&#125;, &#123;<span class="number">4</span>,name4&#125;,&#123;<span class="number">1</span>,name1&#125;]).</span><br><span class="line">[&#123;<span class="number">1</span>,name1&#125;,&#123;<span class="number">2</span>,name2&#125;,&#123;<span class="number">3</span>,name3&#125;,&#123;<span class="number">4</span>,name4&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>源码不贴了,这个函数的源码很长.</p>
+<h3 id="keystore-4"><a href="#keystore-4" class="headerlink" title="keystore/4"></a>keystore/4</h3><blockquote>
+<p>keystore(Key, N, TupleList1, NewTuple) -&gt; TupleList2.</p>
+</blockquote>
+<p>功能和keyreplace差不多,只不过当TupleList1中没有与Key相同的Tuple时,keyreplace返回的是原来的TupleList,而keystore是将NewTuple append在原TupleList上.<br>例子;<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">48</span>&gt; lists:keyreplace(name5, <span class="number">2</span>, [&#123;player1, name1, career1&#125;,&#123;player2, name2, career2&#125;,&#123;player3, name3, career3&#125;], &#123;player4, name4, career4&#125;).</span><br><span class="line">[&#123;player1,name1,career1&#125;,</span><br><span class="line"> &#123;player2,name2,career2&#125;,</span><br><span class="line"> &#123;player3,name3,career3&#125;]</span><br><span class="line"><span class="number">49</span>&gt; lists:keystore(name5, <span class="number">2</span>, [&#123;player1, name1, career1&#125;,&#123;player2, name2, career2&#125;,&#123;player3, name3, career3&#125;], &#123;player4, name4, career4&#125;).  </span><br><span class="line">[&#123;player1,name1,career1&#125;,</span><br><span class="line"> &#123;player2,name2,career2&#125;,</span><br><span class="line"> &#123;player3,name3,career3&#125;,</span><br><span class="line"> &#123;player4,name4,career4&#125;]</span><br></pre></td></tr></table></figure></p>
+<h3 id="keytake-3"><a href="#keytake-3" class="headerlink" title="keytake/3"></a>keytake/3</h3><blockquote>
+<p>keytake(Key, N, TupleList1) -&gt; {value, Tuple, TupleList2} | false</p>
+</blockquote>
+<p>与大多数key打头的函数相同,字面意思是从TupleList中拿出第N个值和Key相等的Tuple,如果有的话,返回{value, Tuple, TupleList2},Tuple是想的Tuple,TupleList2是去掉Tuple后的新的TupleList.如果没找到则返回false.<br>example:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">50</span>&gt; lists:keytake(name2, <span class="number">2</span>, [&#123;player1, name1, career1&#125;,&#123;player2, name2, career2&#125;,&#123;player3, name3, career3&#125;]).                            </span><br><span class="line">&#123;value,&#123;player2,name2,career2&#125;,</span><br><span class="line">       [&#123;player1,name1,career1&#125;,&#123;player3,name3,career3&#125;]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">keytake</span><span class="params">(Key, N, L)</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(N)</span>, N &gt; 0 -&gt;</span></span><br><span class="line">    keytake(Key, N, L, []).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">keytake</span><span class="params">(Key, N, [H|T], L)</span> <span class="title">when</span> <span class="title">element</span><span class="params">(N, H)</span> == K<span class="title">ey</span> -&gt;</span></span><br><span class="line">    &#123;value, H, lists:reverse(L, T)&#125;;</span><br><span class="line"><span class="function"><span class="title">keytake</span><span class="params">(Key, N, [H|T], L)</span> -&gt;</span></span><br><span class="line">    keytake(Key, N, T, [H|L]);</span><br><span class="line"><span class="function"><span class="title">keytake</span><span class="params">(_K, _N, [], _L)</span> -&gt;</span> <span class="literal">false</span>.</span><br></pre></td></tr></table></figure></p>
+<h3 id="last-1"><a href="#last-1" class="headerlink" title="last/1"></a>last/1</h3><blockquote>
+<p>last(List) -&gt; Last</p>
+</blockquote>
+<p>返回List中最后一个元素.<br>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">last</span><span class="params">([E|Es])</span> -&gt;</span> last(E, Es).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">last</span><span class="params">(_, [E|Es])</span> -&gt;</span> last(E, Es);</span><br><span class="line"><span class="function"><span class="title">last</span><span class="params">(E, [])</span> -&gt;</span> E.</span><br></pre></td></tr></table></figure></p>
+<h3 id="mapfoldl-3"><a href="#mapfoldl-3" class="headerlink" title="mapfoldl/3"></a>mapfoldl/3</h3><blockquote>
+<p>mapfoldl(Fun, Acc0, List1) -&gt; {List2, Acc1}.</p>
+</blockquote>
+<p>官方的解释就是同时具有map和foldl的功能.直白点就是map完成List1-&gt;List2的变化,foldl完成 Acc0 -&gt; Acc1的变化.<br>因为foldl只能返回一个由List1得到的记过Acc1,而不能多List1本身得到新的List2,而map不能得到Acc1,却能完成List1到List2的变化.所以mapfoldl完成了两者的功能.看源码会比较清晰的理解下.<br>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> mapfoldl<span class="params">(Fun, Acc0, List1)</span> -&gt; &#123;List2, Acc1&#125; when</span><br><span class="line">      Fun :: fun<span class="params">((A, AccIn)</span> -&gt; &#123;B, AccOut&#125;),</span><br><span class="line">      Acc0 :: term<span class="params">()</span>,</span><br><span class="line">      Acc1 :: term<span class="params">()</span>,</span><br><span class="line">      AccIn :: term<span class="params">()</span>,</span><br><span class="line">      AccOut :: term<span class="params">()</span>,</span><br><span class="line">      List1 :: [A],</span><br><span class="line">      List2 :: [B],</span><br><span class="line">      A :: term<span class="params">()</span>,</span><br><span class="line">      B :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">mapfoldl</span><span class="params">(F, Accu0, [Hd|Tail])</span> -&gt;</span></span><br><span class="line">    &#123;R,Accu1&#125; = F(Hd, Accu0),</span><br><span class="line">    &#123;Rs,Accu2&#125; = mapfoldl(F, Accu1, Tail),</span><br><span class="line">    &#123;[R|Rs],Accu2&#125;;</span><br><span class="line"><span class="function"><span class="title">mapfoldl</span><span class="params">(F, Accu, [])</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(F, <span class="number">2</span>)</span> -&gt;</span> &#123;[],Accu&#125;.</span><br></pre></td></tr></table></figure></p>
+<p>注意,这里面的Fun返回的是{B, AccOut}的形式,而foldl的Fun是<code>Fun :: fun((Elem :: T, AccIn) -&gt; AccOut),</code>这里是最本质的区别.结合例子说下<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">52</span>&gt; lists:mapfoldl(<span class="keyword">fun</span>(X, Sum) -&gt; &#123;X*<span class="number">2</span>, X + Sum&#125; <span class="keyword">end</span>, <span class="number">0</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]).</span><br><span class="line">&#123;[<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>],<span class="number">15</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>首先第一轮得到的{R, Accu1} = {2, 1},而{Rs, Accu2}需要递归执行mapfoldl,那么第二轮得到一个{R’,Accu1’} = {4, 3},我们每轮能确切知道的只有{R, Accu1},但是mapfoldl要返回的是{[R|Rs],Accu2},所以需要一直递归下去,那么第三轮得到{6, 6},第四轮{8, 10},第五轮得到{10, 15},这时{10, 15}仍然是{R, Accu1},但是接下来由于Tail变成了空列表[],根据模式匹配,这次执行的是第二个mapfoldl函数,那么相当于执行mapfoldl{F, 15, []),得到最底层的{Rs, Accu2} = {[], 15},那么返回的{[R|Rs], Accu2}为{[10|[]], 15}.一直往上递归回去,结果得到{[2,4,6,8,10], 15}.</p>
+<h3 id="mapfoldr-3"><a href="#mapfoldr-3" class="headerlink" title="mapfoldr/3"></a>mapfoldr/3</h3><p>与上面的执行结果一样,只不过foldr是从右边开始,不影响List2的顺序.</p>
+<h3 id="max-1"><a href="#max-1" class="headerlink" title="max/1"></a>max/1</h3><blockquote>
+<p>max(List) -&gt; Max</p>
+</blockquote>
+<p>返回第一个这个List中的最大数.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">54</span>&gt; lists:max([a,b,c]).</span><br><span class="line">c</span><br><span class="line"><span class="number">55</span>&gt; lists:max([<span class="number">100</span>,b,c]).</span><br><span class="line">c</span><br><span class="line"><span class="number">56</span>&gt; lists:max([&#123;<span class="number">100</span>&#125;,b,c]).</span><br><span class="line">&#123;<span class="number">100</span>&#125;</span><br><span class="line"><span class="number">57</span>&gt; lists:max([&#123;<span class="number">100</span>&#125;,b,c,[<span class="number">90</span>]]).</span><br><span class="line"><span class="string">"Z"</span></span><br><span class="line"><span class="number">58</span>&gt; lists:max([&#123;<span class="number">100</span>&#125;,b,c,[<span class="number">2</span>]]). </span><br><span class="line">[<span class="number">2</span>]</span><br><span class="line"><span class="number">59</span>&gt; lists:max([&#123;<span class="number">100</span>&#125;,b,c,[<span class="number">2</span>],&lt;&lt;<span class="number">2</span>&gt;&gt;]).</span><br><span class="line">&lt;&lt;<span class="number">2</span>&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这里注意下不同类型之间的比较顺序</p>
+<blockquote>
+<p>number &lt; atom &lt; reference &lt; fun &lt; port &lt; pid &lt; tuple &lt; list &lt; binary</p>
+</blockquote>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">max</span><span class="params">([H|T])</span> -&gt;</span> max(T, H).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">max</span><span class="params">([H|T], Max)</span> <span class="title">when</span> H &gt; M<span class="title">ax</span> -&gt;</span> max(T, H);</span><br><span class="line"><span class="function"><span class="title">max</span><span class="params">([_|T], Max)</span>              -&gt;</span> max(T, Max);</span><br><span class="line"><span class="function"><span class="title">max</span><span class="params">([],    Max)</span>              -&gt;</span> Max.</span><br></pre></td></tr></table></figure></p>
+<h3 id="member-2"><a href="#member-2" class="headerlink" title="member/2"></a>member/2</h3><blockquote>
+<p>member(Elem, List) -&gt; boolean()</p>
+</blockquote>
+<p>如果Elem是List中的元素就返回true, 否则返回false.BIF.源码是C写的.不贴了.</p>
+<h3 id="merge-1-2-3以及merge3-3"><a href="#merge-1-2-3以及merge3-3" class="headerlink" title="merge/1/2/3以及merge3/3"></a>merge/1/2/3以及merge3/3</h3><blockquote>
+<p>merge(ListOfLists) -&gt; List1.<br>merge(List1, List2) -&gt; List3.<br>merge(Fun, List1, List2) -&gt; List3.<br>merge3(List1, List2, List3) -&gt; List4</p>
+</blockquote>
+<p>暂且叫归并排序吧,merge/1,merge/2完成的就是合并并排序,顺序由小到大,merge3/3只不过可以合并3个列表.merge/3可以依据Fun更改顺序,排序依据是Fun(A, B)如果返回true,那么就是A在B的前面.<br>举几个例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">60</span>&gt; lists:merge([[<span class="number">1</span>],[<span class="number">4</span>],[<span class="number">2</span>,<span class="number">4</span>],[<span class="number">3</span>]]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>]</span><br><span class="line"><span class="number">61</span>&gt; lists:merge([<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>],[<span class="number">1</span>,<span class="number">3</span>]).      </span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">6</span>]</span><br><span class="line"><span class="number">62</span>&gt; lists:merge(<span class="keyword">fun</span>(A,B) -&gt; A &gt; B <span class="keyword">end</span>, [<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>],[<span class="number">8</span>,<span class="number">3</span>,<span class="number">1</span>]).</span><br><span class="line">[<span class="number">8</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"><span class="number">63</span>&gt; lists:merge(<span class="keyword">fun</span>(A,B) -&gt; A &lt; B <span class="keyword">end</span>, [<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>],[<span class="number">8</span>,<span class="number">3</span>,<span class="number">1</span>]).</span><br><span class="line">[<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">1</span>]</span><br><span class="line"><span class="number">64</span>&gt; lists:merge(<span class="keyword">fun</span>(A,B) -&gt; A &lt; B <span class="keyword">end</span>, [<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">1</span>,<span class="number">3</span>,<span class="number">8</span>]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">8</span>]</span><br><span class="line"><span class="number">66</span>&gt; lists:merge3([<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>],[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br></pre></td></tr></table></figure></p>
+<p>所有的排序都要求每个子List在排序前都是排好序的,如63行,由于子列表没有排好序,所以排序结果不正确.<br>merge的源码比较多而且杂,感兴趣自己去lists.erl里面看.</p>
+<h3 id="min-1"><a href="#min-1" class="headerlink" title="min/1"></a>min/1</h3><blockquote>
+<p>min(List) -&gt; Min</p>
+</blockquote>
+<p>与max相反.</p>
+<h3 id="nth-2"><a href="#nth-2" class="headerlink" title="nth/2"></a>nth/2</h3><blockquote>
+<p>nth(N, List) -&gt; Elem</p>
+</blockquote>
+<p>返回第List的第N个元素.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">67</span>&gt; lists:nth(<span class="number">2</span>,[<span class="string">"haha"</span>,atom,<span class="number">2</span>,&lt;&lt;<span class="string">"binary"</span>&gt;&gt;]). </span><br><span class="line">atom</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">nth</span><span class="params">(<span class="number">1</span>, [H|_])</span> -&gt;</span> H;</span><br><span class="line"><span class="function"><span class="title">nth</span><span class="params">(N, [_|T])</span> <span class="title">when</span> N &gt; 1 -&gt;</span></span><br><span class="line">    nth(N - <span class="number">1</span>, T).</span><br></pre></td></tr></table></figure></p>
+<h3 id="nthtail-2"><a href="#nthtail-2" class="headerlink" title="nthtail/2"></a>nthtail/2</h3><blockquote>
+<p>nthtail(N, List) -&gt; Tail</p>
+</blockquote>
+<p>返回List的第N个尾列表.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">68</span>&gt; lists:nthtail(<span class="number">0</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="number">69</span>&gt; lists:nthtail(<span class="number">1</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).</span><br><span class="line">[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="number">70</span>&gt; lists:nthtail(<span class="number">2</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).</span><br><span class="line">[<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="number">71</span>&gt; lists:nthtail(<span class="number">4</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).</span><br><span class="line">[]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">nthtail</span><span class="params">(<span class="number">1</span>, [_|T])</span> -&gt;</span> T;</span><br><span class="line"><span class="function"><span class="title">nthtail</span><span class="params">(N, [_|T])</span> <span class="title">when</span> N &gt; 1 -&gt;</span></span><br><span class="line">    nthtail(N - <span class="number">1</span>, T);</span><br><span class="line"><span class="function"><span class="title">nthtail</span><span class="params">(<span class="number">0</span>, L)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(L)</span> -&gt;</span> L.</span><br></pre></td></tr></table></figure></p>
+<h3 id="partition-2"><a href="#partition-2" class="headerlink" title="partition/2"></a>partition/2</h3><blockquote>
+<p>partition(Fun, List1) -&gt; {List1, List2}.</p>
+</blockquote>
+<p>字面意思是区分开,将List1依据Fun返回的true和false分为两个列表.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">73</span>&gt; lists:partition(<span class="keyword">fun</span>(X) -&gt; X&gt;<span class="number">2</span> <span class="keyword">end</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).</span><br><span class="line">&#123;[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">2</span>]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>源码<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">partition</span><span class="params">(Pred, L)</span> -&gt;</span></span><br><span class="line">    partition(Pred, L, [], []).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">partition</span><span class="params">(Pred, [H | T], As, Bs)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">case</span> Pred(H) <span class="keyword">of</span></span><br><span class="line">	<span class="literal">true</span> -&gt; partition(Pred, T, [H | As], Bs);</span><br><span class="line">	<span class="literal">false</span> -&gt; partition(Pred, T, As, [H | Bs])</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line"><span class="function"><span class="title">partition</span><span class="params">(Pred, [], As, Bs)</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(Pred, <span class="number">1</span>)</span> -&gt;</span></span><br><span class="line">    &#123;reverse(As), reverse(Bs)&#125;.</span><br></pre></td></tr></table></figure></p>
+<h3 id="prefix-2"><a href="#prefix-2" class="headerlink" title="prefix/2"></a>prefix/2</h3><blockquote>
+<p>prefix(List1, List2) -&gt; boolean().</p>
+</blockquote>
+<p>如果List1是List2的前缀则返回true,否则返回false<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">74</span>&gt; lists:prefix([<span class="number">1</span>,<span class="number">2</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).                </span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="number">75</span>&gt; lists:prefix([<span class="number">1</span>,<span class="number">2</span>],[<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>]).  </span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<p>源码很好理解:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">prefix</span><span class="params">([X|PreTail], [X|Tail])</span> -&gt;</span></span><br><span class="line">    prefix(PreTail, Tail);</span><br><span class="line"><span class="function"><span class="title">prefix</span><span class="params">([], List)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(List)</span> -&gt;</span> <span class="literal">true</span>;</span><br><span class="line"><span class="function"><span class="title">prefix</span><span class="params">([_|_], List)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(List)</span> -&gt;</span> <span class="literal">false</span>.</span><br></pre></td></tr></table></figure></p>
+<p>如果第一元素都是X,则递归执行prefix,如果List1为[]了,那么返回true,如果遇到不相同的元素了就返回false.</p>
+<h3 id="reverse-1-2"><a href="#reverse-1-2" class="headerlink" title="reverse/1/2"></a>reverse/1/2</h3><blockquote>
+<p>reverse(List1) -&gt; List2.<br>reverse(List1, Tail) -&gt; List2.</p>
+</blockquote>
+<p>reverse/1返回的是逆序的List1. reverse/2返回的是逆序的List1并且append了Tail.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">76</span>&gt; lists:reverse([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).</span><br><span class="line">[<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"><span class="number">77</span>&gt; lists:reverse([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]).</span><br><span class="line">[<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> reverse<span class="params">(List1)</span> -&gt; List2 when</span><br><span class="line">      List1 :: [T],</span><br><span class="line">      List2 :: [T],</span><br><span class="line">      T :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">reverse</span><span class="params">([] = L)</span> -&gt;</span></span><br><span class="line">    L;</span><br><span class="line"><span class="function"><span class="title">reverse</span><span class="params">([_] = L)</span> -&gt;</span></span><br><span class="line">    L;</span><br><span class="line"><span class="function"><span class="title">reverse</span><span class="params">([A, B])</span> -&gt;</span></span><br><span class="line">    [B, A];</span><br><span class="line"><span class="function"><span class="title">reverse</span><span class="params">([A, B | L])</span> -&gt;</span></span><br><span class="line">    lists:reverse(L, [B, A]).</span><br></pre></td></tr></table></figure></p>
+<p>注意这里比较神奇的是reverse/1调用的是reverse/2,我一直以为reverse/1是BIF,其实reverse/2才是BIF,而且reverse/2在各种merge函数中多次调用,调用reverse/2的次数非常多,估计所以才将reverse/2写成了BIF吧.</p>
+<h3 id="seq-2-3"><a href="#seq-2-3" class="headerlink" title="seq/2/3"></a>seq/2/3</h3><blockquote>
+<p>seq(From, To) -&gt; List1<br>seq(From, To, Incr) -&gt; List2</p>
+</blockquote>
+<p>用于生成From到To的列表,Incr是递增的值.这个函数通常只用于最简单的功能,但是还是需要注意一下,这个函数报错的条件比较苛刻.官方给的说明是在一下会发生error错误.</p>
+<ol>
+<li>To &lt; From - Incr 并且Incr是正数.</li>
+<li>To &gt; From - Incr 并且Incr是负数.</li>
+<li>Incr为0时,From 不等于 To<br>并且官方给出<blockquote>
+<p>length(lists:seq(From, To)) == To-From+1<br>length(lists:seq(From, To, Incr)) == (To-From+Incr) div Incr</p>
+</blockquote>
+</li>
+</ol>
+<p>涵盖了上面3种情况,因为length不能是负数,其实只要看<strong><em>To-From+Incr与Incr相除</em></strong>是正数或者0就不会报错.<br>以下是一些例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">78</span>&gt; lists:seq(<span class="number">1</span>,<span class="number">4</span>).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="number">79</span>&gt; lists:seq(<span class="number">3</span>,<span class="number">1</span>).</span><br><span class="line">** exception error: no function clause matching lists:seq(<span class="number">3</span>,<span class="number">1</span>) (lists.erl, line <span class="number">177</span>)</span><br><span class="line"><span class="number">80</span>&gt; lists:seq(<span class="number">3</span>,<span class="number">1</span>,-<span class="number">1</span>).</span><br><span class="line">[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"><span class="number">81</span>&gt; lists:seq(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>). </span><br><span class="line">** exception error: no <span class="literal">true</span> branch found <span class="keyword">when</span> evaluating an <span class="keyword">if</span> expression</span><br><span class="line">     in function  lists:seq/<span class="number">3</span> (lists.erl, line <span class="number">198</span>)</span><br><span class="line"><span class="number">82</span>&gt; lists:seq(<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>).</span><br><span class="line">[]</span><br><span class="line"><span class="number">83</span>&gt; lists:seq(<span class="number">10</span>,<span class="number">6</span>,<span class="number">1</span>).</span><br><span class="line">** exception error: no <span class="literal">true</span> branch found <span class="keyword">when</span> evaluating an <span class="keyword">if</span> expression</span><br><span class="line">     in function  lists:seq/<span class="number">3</span> (lists.erl, line <span class="number">198</span>)</span><br><span class="line"><span class="number">84</span>&gt; lists:seq(<span class="number">10</span>,<span class="number">6</span>,<span class="number">4</span>).</span><br><span class="line">[]</span><br><span class="line"><span class="number">85</span>&gt; lists:seq(<span class="number">10</span>,<span class="number">6</span>,<span class="number">5</span>).</span><br><span class="line">[]</span><br><span class="line"><span class="number">86</span>&gt; lists:seq(<span class="number">10</span>,<span class="number">6</span>,<span class="number">3</span>).</span><br><span class="line">** exception error: no <span class="literal">true</span> branch found <span class="keyword">when</span> evaluating an <span class="keyword">if</span> expression</span><br><span class="line">     in function  lists:seq/<span class="number">3</span> (lists.erl, line <span class="number">198</span>)</span><br><span class="line"><span class="number">87</span>&gt; lists:seq(<span class="number">1</span>,<span class="number">4</span>).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="number">88</span>&gt; lists:seq(<span class="number">1</span>,<span class="number">0</span>).</span><br><span class="line">[]</span><br><span class="line"><span class="number">89</span>&gt; lists:seq(<span class="number">3</span>,<span class="number">0</span>,-<span class="number">1</span>).</span><br><span class="line">[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line"><span class="number">90</span>&gt; lists:seq(<span class="number">10</span>,<span class="number">6</span>,<span class="number">4</span>).</span><br><span class="line">[]</span><br><span class="line"><span class="number">91</span>&gt; lists:seq(<span class="number">10</span>,<span class="number">6</span>,<span class="number">3</span>).</span><br><span class="line">** exception error: no <span class="literal">true</span> branch found <span class="keyword">when</span> evaluating an <span class="keyword">if</span> expression</span><br><span class="line">     in function  lists:seq/<span class="number">3</span> (lists.erl, line <span class="number">198</span>)</span><br><span class="line"><span class="number">92</span>&gt; lists:seq(<span class="number">6</span>,<span class="number">8</span>,-<span class="number">3</span>).</span><br><span class="line">[]</span><br><span class="line"><span class="number">93</span>&gt; lists:seq(<span class="number">6</span>,<span class="number">10</span>,-<span class="number">3</span>).</span><br><span class="line">** exception error: no <span class="literal">true</span> branch found <span class="keyword">when</span> evaluating an <span class="keyword">if</span> expression</span><br><span class="line">     in function  lists:seq/<span class="number">3</span> (lists.erl, line <span class="number">198</span>)</span><br><span class="line"><span class="number">94</span>&gt; lists:seq(<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>).  </span><br><span class="line">** exception error: no <span class="literal">true</span> branch found <span class="keyword">when</span> evaluating an <span class="keyword">if</span> expression</span><br><span class="line">     in function  lists:seq/<span class="number">3</span> (lists.erl, line <span class="number">198</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="sort-1-2"><a href="#sort-1-2" class="headerlink" title="sort/1/2"></a>sort/1/2</h3><blockquote>
+<p>sort(List1) -&gt; List2.<br>sort(Fun, List1) -&gt; List2</p>
+</blockquote>
+<p>排序函数,应熟记不同类型之间的大小顺序,如例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">95</span>&gt; Ref = make_ref().</span><br><span class="line">#Ref&lt;<span class="number">0.0</span>.<span class="number">0.358</span>&gt;</span><br><span class="line"><span class="number">96</span>&gt; Fun = <span class="keyword">fun</span>(X) -&gt; X <span class="keyword">end</span>.</span><br><span class="line">#Fun&lt;erl_eval.<span class="number">6.111823515</span>&gt;</span><br><span class="line"><span class="number">97</span>&gt; &#123;ok, Port&#125;=gen_tcp:listen(<span class="number">8011</span>,[]).</span><br><span class="line">&#123;ok,#Port&lt;<span class="number">0.619</span>&gt;&#125;</span><br><span class="line"><span class="number">98</span>&gt; Pid = spawn(lists, seq, [<span class="number">1</span>,<span class="number">100</span>]).</span><br><span class="line">&lt;<span class="number">0.151</span>.<span class="number">0</span>&gt;</span><br><span class="line"><span class="number">99</span>&gt; lists:sort([&lt;&lt;<span class="number">2</span>&gt;&gt;,[<span class="number">3</span>],&#123;<span class="number">4</span>&#125;,Pid,Port,Fun,Ref,atom,<span class="number">5</span>]).</span><br><span class="line">[<span class="number">5</span>,atom,#Ref&lt;<span class="number">0.0</span>.<span class="number">0.358</span>&gt;,#Fun&lt;erl_eval.<span class="number">6.111823515</span>&gt;,</span><br><span class="line"> #Port&lt;<span class="number">0.619</span>&gt;,&lt;<span class="number">0.151</span>.<span class="number">0</span>&gt;,</span><br><span class="line"> &#123;<span class="number">4</span>&#125;,</span><br><span class="line"> [<span class="number">3</span>],</span><br><span class="line"> &lt;&lt;<span class="number">2</span>&gt;&gt;]</span><br></pre></td></tr></table></figure></p>
+<p>我在max函数提到过这个顺序,上面的结果也是按照这个顺序来的</p>
+<blockquote>
+<p>number &lt; atom &lt; reference &lt; fun &lt; port &lt; pid &lt; tuple &lt; list &lt; binary</p>
+</blockquote>
+<p>sort/2大致如merge/3,其中Fun可以用来改变默认的由小到大.</p>
+<h3 id="split-2"><a href="#split-2" class="headerlink" title="split/2"></a>split/2</h3><blockquote>
+<p>split(N, List1) -&gt; {List2, List3}</p>
+</blockquote>
+<p>分割函数,将List1分割成前N个元素List2,和剩下的元素List3<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span>&gt; lists:split(<span class="number">3</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]). </span><br><span class="line">&#123;[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> split<span class="params">(N, List1)</span> -&gt; &#123;List2, List3&#125; when</span><br><span class="line">      N :: non_neg_integer<span class="params">()</span>,</span><br><span class="line">      List1 :: [T],</span><br><span class="line">      List2 :: [T],</span><br><span class="line">      List3 :: [T],</span><br><span class="line">      T :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">split</span><span class="params">(N, List)</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(N)</span>, N &gt;= 0, <span class="title">is_list</span><span class="params">(List)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">case</span> split(N, List, []) <span class="keyword">of</span></span><br><span class="line">	&#123;_, _&#125; = Result -&gt; Result;</span><br><span class="line">	Fault <span class="keyword">when</span> is_atom(Fault) -&gt;</span><br><span class="line">	    erlang:error(Fault, [N,List])</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line"><span class="function"><span class="title">split</span><span class="params">(N, List)</span> -&gt;</span></span><br><span class="line">    erlang:error(badarg, [N,List]).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">split</span><span class="params">(<span class="number">0</span>, L, R)</span> -&gt;</span></span><br><span class="line">    &#123;lists:reverse(R, []), L&#125;;</span><br><span class="line"><span class="function"><span class="title">split</span><span class="params">(N, [H|T], R)</span> -&gt;</span></span><br><span class="line">    split(N-<span class="number">1</span>, T, [H|R]);</span><br><span class="line"><span class="function"><span class="title">split</span><span class="params">(_, [], _)</span> -&gt;</span></span><br><span class="line">    badarg.</span><br></pre></td></tr></table></figure></p>
+<h3 id="splitwith-2"><a href="#splitwith-2" class="headerlink" title="splitwith/2"></a>splitwith/2</h3><p>splitwith(Fun, List) -&gt; {List1, List2}</p>
+<p>Fun决定切割的规则,List1是在遇到Fun(X)为false之前的元素,List2是第一个Fun返回为false之后的列表.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">101</span>&gt; lists:splitwith(<span class="keyword">fun</span>(X) -&gt; is_atom(X) <span class="keyword">end</span>, [a,b,c,<span class="number">2</span>,d,e,<span class="number">4</span>]).</span><br><span class="line">&#123;[a,b,c],[<span class="number">2</span>,d,e,<span class="number">4</span>]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> splitwith<span class="params">(Pred, List)</span> -&gt; &#123;List1, List2&#125; when</span><br><span class="line">      Pred :: fun<span class="params">((T)</span> -&gt; boolean<span class="params">()</span>),</span><br><span class="line">      List :: [T],</span><br><span class="line">      List1 :: [T],</span><br><span class="line">      List2 :: [T],</span><br><span class="line">      T :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">splitwith</span><span class="params">(Pred, List)</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(Pred, <span class="number">1</span>)</span> -&gt;</span></span><br><span class="line">    splitwith(Pred, List, []).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">splitwith</span><span class="params">(Pred, [Hd|Tail], Taken)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">case</span> Pred(Hd) <span class="keyword">of</span></span><br><span class="line">	<span class="literal">true</span> -&gt; splitwith(Pred, Tail, [Hd|Taken]);</span><br><span class="line">	<span class="literal">false</span> -&gt; &#123;reverse(Taken), [Hd|Tail]&#125;</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line"><span class="function"><span class="title">splitwith</span><span class="params">(Pred, [], Taken)</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(Pred, <span class="number">1</span>)</span> -&gt;</span></span><br><span class="line">    &#123;reverse(Taken),[]&#125;.</span><br></pre></td></tr></table></figure></p>
+<h3 id="sublist-2-3"><a href="#sublist-2-3" class="headerlink" title="sublist/2/3"></a>sublist/2/3</h3><blockquote>
+<p>sublist(List1, Len) -&gt; List2<br>sublist(List1, Start, Len) -&gt; List2</p>
+</blockquote>
+<p>返回前List中前Len个元素,Len可以大于List的长度,这样整个List会返回.<br>Start可以决定起始位置.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">102</span>&gt; lists:sublist([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],<span class="number">2</span>).                                </span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="number">103</span>&gt; lists:sublist([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],<span class="number">2</span>,<span class="number">2</span>).</span><br><span class="line">[<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="number">104</span>&gt; lists:sublist([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],<span class="number">5</span>).  </span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="number">105</span>&gt; lists:sublist([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],<span class="number">5</span>,<span class="number">1</span>).</span><br><span class="line">[]</span><br></pre></td></tr></table></figure></p>
+<p>源码<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">sublist</span><span class="params">(List, L)</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(L)</span>, <span class="title">is_list</span><span class="params">(List)</span> -&gt;</span></span><br><span class="line">    sublist_2(List, L).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">sublist_2</span><span class="params">([H|T], L)</span> <span class="title">when</span> L &gt; 0 -&gt;</span></span><br><span class="line">    [H|sublist_2(T, L-<span class="number">1</span>)];</span><br><span class="line"><span class="function"><span class="title">sublist_2</span><span class="params">(_, <span class="number">0</span>)</span> -&gt;</span></span><br><span class="line">    [];</span><br><span class="line"><span class="function"><span class="title">sublist_2</span><span class="params">(List, L)</span> <span class="title">when</span> <span class="title">is_list</span><span class="params">(List)</span>, L &gt; 0 -&gt;</span></span><br><span class="line">    [].</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">sublist</span><span class="params">(List, S, L)</span> <span class="title">when</span> <span class="title">is_integer</span><span class="params">(L)</span>, L &gt;= 0 -&gt;</span></span><br><span class="line">    sublist(nthtail(S-<span class="number">1</span>, List), L).</span><br></pre></td></tr></table></figure></p>
+<h3 id="subtract-2"><a href="#subtract-2" class="headerlink" title="subtract/2"></a>subtract/2</h3><blockquote>
+<p>subtract(List1, List2) -&gt; List3</p>
+</blockquote>
+<p>规则是这样的:对于List2中的每一个元素,在List1第一个与这个元素相等的元素被删掉,而成为List3.<br>例如:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">107</span>&gt; lists:subtract([<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>]). </span><br><span class="line">[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">1</span>]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> subtract<span class="params">(List1, List2)</span> -&gt; List3 when</span><br><span class="line">      List1 :: [T],</span><br><span class="line">      List2 :: [T],</span><br><span class="line">      List3 :: [T],</span><br><span class="line">      T :: term<span class="params">()</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">subtract</span><span class="params">(L1, L2)</span> -&gt;</span> L1 -- L2.</span><br></pre></td></tr></table></figure></p>
+<p>很明显这个函数在最坏情况下,有length(List1)*length(List2)的复杂度,代价很高.官方给的建议是</p>
+<blockquote>
+<p>Using ordered lists and ordsets:subtract/2 is a much better choice if both lists are long.</p>
+</blockquote>
+<p>使用ordset中的subtract/2,前提是这两个List是排好序的.<br>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">-spec</span> subtract<span class="params">(Ordset1, Ordset2)</span> -&gt; Ordset3 when</span><br><span class="line">      Ordset1 :: ordset<span class="params">(_)</span>,</span><br><span class="line">      Ordset2 :: ordset<span class="params">(_)</span>,</span><br><span class="line">      Ordset3 :: ordset<span class="params">(_)</span>.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">subtract</span><span class="params">([E1|Es1], [E2|_]=Set2)</span> <span class="title">when</span> E1 &lt; E2 -&gt;</span></span><br><span class="line">    [E1|subtract(Es1, Set2)];</span><br><span class="line"><span class="function"><span class="title">subtract</span><span class="params">([E1|_]=Set1, [E2|Es2])</span> <span class="title">when</span> E1 &gt; E2 -&gt;</span></span><br><span class="line">    subtract(Set1, Es2);</span><br><span class="line"><span class="function"><span class="title">subtract</span><span class="params">([_E1|Es1], [_E2|Es2])</span> -&gt;</span>		<span class="comment">%E1 == E2</span></span><br><span class="line">    subtract(Es1, Es2);</span><br><span class="line"><span class="function"><span class="title">subtract</span><span class="params">([], _)</span> -&gt;</span> [];</span><br><span class="line"><span class="function"><span class="title">subtract</span><span class="params">(Es1, [])</span> -&gt;</span> Es1.</span><br></pre></td></tr></table></figure></p>
+<h3 id="suffix-2"><a href="#suffix-2" class="headerlink" title="suffix/2"></a>suffix/2</h3><blockquote>
+<p>suffix(List1, List2) -&gt; boolean().</p>
+</blockquote>
+<p>如同prefix,如果List1是List2的后缀则返回true,否则返回false.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">108</span>&gt; lists:suffix([<span class="number">3</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>]).                             </span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">suffix</span><span class="params">(Suffix, List)</span> -&gt;</span></span><br><span class="line">    Delta = length(List) - length(Suffix),</span><br><span class="line">    Delta &gt;= <span class="number">0</span> <span class="keyword">andalso</span> nthtail(Delta, List) =:= Suffix.</span><br></pre></td></tr></table></figure></p>
+<h3 id="sum-1"><a href="#sum-1" class="headerlink" title="sum/1"></a>sum/1</h3><blockquote>
+<p>sum(List) -&gt; Sum</p>
+</blockquote>
+<p>得到一个List的和,注意List应为数字组成.否则抛错.<br>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">sum</span><span class="params">(L)</span>          -&gt;</span> sum(L, <span class="number">0</span>).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">sum</span><span class="params">([H|T], Sum)</span> -&gt;</span> sum(T, Sum + H);</span><br><span class="line"><span class="function"><span class="title">sum</span><span class="params">([], Sum)</span>    -&gt;</span> Sum.</span><br></pre></td></tr></table></figure></p>
+<h3 id="takewhile-2"><a href="#takewhile-2" class="headerlink" title="takewhile/2"></a>takewhile/2</h3><blockquote>
+<p>takewhile(Pred, List1) -&gt; List2</p>
+</blockquote>
+<p>从List1中取出满足Pred为true的元素,直到遇到第一个false.也就是取出满足Pred的前缀.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">109</span>&gt; lists:takewhile(<span class="keyword">fun</span>(A) -&gt; A &lt; <span class="number">3</span> <span class="keyword">end</span>, [<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]).</span><br><span class="line">[<span class="number">2</span>,<span class="number">1</span>]</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">takewhile</span><span class="params">(Pred, [Hd|Tail])</span> -&gt;</span></span><br><span class="line">    <span class="keyword">case</span> Pred(Hd) <span class="keyword">of</span></span><br><span class="line">	<span class="literal">true</span> -&gt; [Hd|takewhile(Pred, Tail)];</span><br><span class="line">	<span class="literal">false</span> -&gt; []</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line"><span class="function"><span class="title">takewhile</span><span class="params">(Pred, [])</span> <span class="title">when</span> <span class="title">is_function</span><span class="params">(Pred, <span class="number">1</span>)</span> -&gt;</span> [].</span><br></pre></td></tr></table></figure></p>
+<h3 id="ukeymerge-3"><a href="#ukeymerge-3" class="headerlink" title="ukeymerge/3"></a>ukeymerge/3</h3><blockquote>
+<p>ukeymerge(N, TupleList1, TupleList2) -&gt; TupleList3</p>
+</blockquote>
+<p>类似于keymerge,但是u的意思是unique的意思,就是当TupleList1和TupleList2中有相同key的Tuple时将会删掉TupleList2中的Tuple.而且要求TupleList1和TupleList2在执行函数前自己本身不含有相同key的Tuple,否则结果会只删除一个TupleLIst2中的Tuple.结果不如人意.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>&gt; lists:ukeymerge(<span class="number">2</span>,[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">5</span>,<span class="number">50</span>&#125;],[&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;]).</span><br><span class="line">[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;,&#123;<span class="number">5</span>,<span class="number">50</span>&#125;]</span><br><span class="line"><span class="number">2</span>&gt; lists:keymerge(<span class="number">2</span>,[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">5</span>,<span class="number">50</span>&#125;],[&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;]). </span><br><span class="line">[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;,&#123;<span class="number">5</span>,<span class="number">50</span>&#125;]</span><br><span class="line"><span class="number">3</span>&gt; lists:ukeymerge(<span class="number">2</span>,[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">5</span>,<span class="number">50</span>&#125;],[&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">3</span>,<span class="number">20</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;]).</span><br><span class="line">[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">3</span>,<span class="number">20</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;,&#123;<span class="number">5</span>,<span class="number">50</span>&#125;]</span><br><span class="line"><span class="number">4</span>&gt; lists:ukeymerge(<span class="number">2</span>,[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">5</span>,<span class="number">50</span>&#125;],[&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;]).</span><br><span class="line">[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;,&#123;<span class="number">5</span>,<span class="number">50</span>&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>可以看到keymerge和ukeymerge的差别,而且第3行是在TupleList2中有相同Key的Tuple,倒是结果中也有相同的key,这时因为只删除了第一个与TupleList1中相同的Tuple即{2, 20}.<br>源码不贴了,凡是根merge有关的,都复杂而且长..</p>
+<h3 id="ukeysort-2"><a href="#ukeysort-2" class="headerlink" title="ukeysort/2"></a>ukeysort/2</h3><blockquote>
+<p>ukeysort(N, TupleList1) -&gt; TupleList2</p>
+</blockquote>
+<p>与keysort差不多,同样u也是唯一的意思,只保留一个keyTuple,如以下例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>&gt; lists:ukeysort(<span class="number">2</span>, [&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">3</span>,<span class="number">30</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">5</span>,<span class="number">20</span>&#125;]).         </span><br><span class="line">[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">3</span>,<span class="number">30</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;]</span><br><span class="line"><span class="number">6</span>&gt; lists:keysort(<span class="number">2</span>, [&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">3</span>,<span class="number">30</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">5</span>,<span class="number">20</span>&#125;]). </span><br><span class="line">[&#123;<span class="number">1</span>,<span class="number">10</span>&#125;,&#123;<span class="number">2</span>,<span class="number">20</span>&#125;,&#123;<span class="number">5</span>,<span class="number">20</span>&#125;,&#123;<span class="number">3</span>,<span class="number">30</span>&#125;,&#123;<span class="number">4</span>,<span class="number">40</span>&#125;]</span><br></pre></td></tr></table></figure></p>
+<h3 id="umerge-1-2-3以及-umerge3-3"><a href="#umerge-1-2-3以及-umerge3-3" class="headerlink" title="umerge/1/2/3以及 umerge3/3"></a>umerge/1/2/3以及 umerge3/3</h3><p>参加merge,只不过只保留一个相同的key.</p>
+<h3 id="uzip-1以及uzip3-1"><a href="#uzip-1以及uzip3-1" class="headerlink" title="uzip/1以及uzip3/1"></a>uzip/1以及uzip3/1</h3><blockquote>
+<p>unzip(List1) -&gt; {List2, List3}<br>unzip3(List1) -&gt; {List2, List3, List4}</p>
+</blockquote>
+<p>用于分离TupleList中的每个Tuple的第一个元素进入List2,第二个元素进入List3.unzip3适用于3-Tuple的情况.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span>&gt; lists:unzip([&#123;<span class="number">10210221</span>, fubowen&#125;,&#123;<span class="number">10210222</span>, yuyouqi&#125;, &#123;<span class="number">10201223</span>, xuyue&#125;]).</span><br><span class="line">&#123;[<span class="number">10210221</span>,<span class="number">10210222</span>,<span class="number">10201223</span>],[fubowen,yuyouqi,xuyue]&#125;</span><br><span class="line"><span class="number">8</span>&gt; lists:unzip3([&#123;<span class="number">10210221</span>, fubowen, <span class="number">1</span>&#125;,&#123;<span class="number">10210222</span>, yuyouqi, <span class="number">1</span>&#125;, &#123;<span class="number">102101001</span>, aya, <span class="number">0</span>&#125;]).</span><br><span class="line">&#123;[<span class="number">10210221</span>,<span class="number">10210222</span>,<span class="number">102101001</span>],</span><br><span class="line"> [fubowen,yuyouqi,aya],</span><br><span class="line"> [<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>源码:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">unzip</span><span class="params">(Ts)</span> -&gt;</span> unzip(Ts, [], []).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">unzip</span><span class="params">([&#123;X, Y&#125; | Ts], Xs, Ys)</span> -&gt;</span> unzip(Ts, [X | Xs], [Y | Ys]);</span><br><span class="line"><span class="function"><span class="title">unzip</span><span class="params">([], Xs, Ys)</span> -&gt;</span> &#123;reverse(Xs), reverse(Ys)&#125;.</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">unzip3</span><span class="params">(Ts)</span> -&gt;</span> unzip3(Ts, [], [], []).</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">unzip3</span><span class="params">([&#123;X, Y, Z&#125; | Ts], Xs, Ys, Zs)</span> -&gt;</span></span><br><span class="line">    unzip3(Ts, [X | Xs], [Y | Ys], [Z | Zs]);</span><br><span class="line"><span class="function"><span class="title">unzip3</span><span class="params">([], Xs, Ys, Zs)</span> -&gt;</span></span><br><span class="line">    &#123;reverse(Xs), reverse(Ys), reverse(Zs)&#125;.</span><br></pre></td></tr></table></figure></p>
+<h3 id="zip-2以及zip3-3"><a href="#zip-2以及zip3-3" class="headerlink" title="zip/2以及zip3/3"></a>zip/2以及zip3/3</h3><blockquote>
+<p>zip(List1, List2) -&gt; List3<br>zip3(List1, List2, List3) -&gt; List4</p>
+</blockquote>
+<p>就是unzip的反过程.</p>
+<h3 id="usort-1和usort-2"><a href="#usort-1和usort-2" class="headerlink" title="usort/1和usort/2"></a>usort/1和usort/2</h3><blockquote>
+<p>usort(List1) -&gt; List2<br>usort(Fun, List1) -&gt; List2</p>
+</blockquote>
+<p>见sort,只不过只保留一个相同的值.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span>&gt; lists:usort([<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>]).</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure></p>
+<h3 id="zipwith-3以及zipwith3-4"><a href="#zipwith-3以及zipwith3-4" class="headerlink" title="zipwith/3以及zipwith3/4"></a>zipwith/3以及zipwith3/4</h3><blockquote>
+<p>zipwith(Combine, List1, List2) -&gt; List3<br>zipwith3(Combine, List1, List2, List3) -&gt; List4</p>
+</blockquote>
+<p>功能大致同zip/2,zip3/3相同,只不过多了个Combine Function,这个Combine决定了如何合并.<br>例子:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span>&gt; lists:zipwith(<span class="keyword">fun</span>(X,Y) -&gt; X+Y <span class="keyword">end</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]).</span><br><span class="line">[<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]</span><br></pre></td></tr></table></figure></p>
+<p>至此,lists模块的函数全都介绍完毕,啊,好累,休息会.</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://youthyblog.com/2014/07/11/Erlang中的lists模块/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://youthyblog.com/2014/07/11/Erlang中的lists模块/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//youthyblog.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2014/07/12/linux修改键盘映射/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2014/07/11/vim复制到系统剪切板/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Youthy's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        Contact
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://weibo.com/u/1592381215" target="_blank" title="Weibo me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">person_add</i>
+                        
+                        Weibo me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/10/">十月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/09/">九月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">八月 2014<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/07/">七月 2014<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/06/">六月 2014<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/ACG/">ACG<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/erlang/">erlang<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/随笔/">随笔<span class="sidebar_archives-count">4</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="links" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/shizixiuluo" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/1592381215" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+        <a href="https://www.zhihu.com/people/yu-you-qi-46/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
+                <span class="visuallyhidden">Zhihu</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;youthy的流水账
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//youthyblog.disqus.com/count.js" async></script>
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+<script type="text/ls-javascript" id="Bing-Background-script">
+    queue.offer(function(){
+        $('body').attr('data-original', 'https://api.i-meto.com/bing?[object Object]');
+    });
+</script>
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2014;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
