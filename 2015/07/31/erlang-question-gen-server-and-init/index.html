@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[erlang_question]gen_server and init | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="小技巧? Question Answers: Sergej Jurečko: Loïc Hoguin(cowboy 作者） Max Lapshin Loïc Hoguin   Test gen_server的创建过程 gen_server: gen: proc_lib: gen gen_server: proc_lib   where is the point?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[erlang_question]gen_server and init">
+<meta property="og:url" content="http://youthy.github.io/2015/07/31/erlang-question-gen-server-and-init/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="小技巧? Question Answers: Sergej Jurečko: Loïc Hoguin(cowboy 作者） Max Lapshin Loïc Hoguin   Test gen_server的创建过程 gen_server: gen: proc_lib: gen gen_server: proc_lib   where is the point?">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://storage4.static.itmages.com/i/15/0731/h_1438311976_3257184_46c6e8b7c0.png">
+<meta property="og:image" content="http://storage1.static.itmages.com/i/15/0731/h_1438312022_8979746_d612eb6d7f.png">
+<meta property="og:image" content="http://storage4.static.itmages.com/i/15/0731/h_1438311785_2601988_b290e0c784.png">
+<meta property="article:published_time" content="2015-07-31T08:11:50.000Z">
+<meta property="article:modified_time" content="2018-06-26T09:49:27.734Z">
+<meta property="article:author" content="youthy">
+<meta property="article:tag" content="erlang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://storage4.static.itmages.com/i/15/0731/h_1438311976_3257184_46c6e8b7c0.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">undefined</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap%EF%BC%8Cvim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 10px;">二次元</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 10px;">杂记</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.github.io/">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">undefined</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">undefined</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-erlang-question-gen-server-and-init" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/31/erlang-question-gen-server-and-init/" class="article-date">
+  	<time datetime="2015-07-31T08:11:50.000Z" itemprop="datePublished">7月 31 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [erlang_question]gen_server and init
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/" rel="tag">erlang</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#----">小技巧?</a></li>
+<li><a href="#question">Question</a></li>
+<li><a href="#answers-">Answers:</a><ul>
+<li><a href="#---sergej-jure-ko----"><strong><em>Sergej Jurečko</em></strong>:</a></li>
+<li><a href="#---lo-c-hoguin----cowboy----"><strong><em>Loïc Hoguin</em></strong>(cowboy 作者）</a></li>
+<li><a href="#---max-lapshin---"><strong><em>Max Lapshin</em></strong></a></li>
+<li><a href="#---lo-c-hoguin---"><strong><em>Loïc Hoguin</em></strong></a></li>
+</ul>
+</li>
+<li><a href="#test">Test</a></li>
+<li><a href="#gen-server-----">gen_server的创建过程</a><ul>
+<li><a href="#gen-server-">gen_server:</a></li>
+<li><a href="#gen-">gen:</a></li>
+<li><a href="#proc-lib-">proc_lib:</a></li>
+<li><a href="#gen">gen</a></li>
+<li><a href="#gen-server-">gen_server:</a></li>
+<li><a href="#proc-lib">proc_lib</a></li>
+</ul>
+</li>
+<li><a href="#where-is-the-point-">where is the point?</a></li>
+</ul>
+<!-- tocstop -->
+<span id="more"></span>
+<h2 id="小技巧?">小技巧?</h2><p>这两天复习了一下<a target="_blank" rel="noopener" href="http://zh.scribd.com/doc/87376094/Erlang-and-OTP-in-Action#scribd">Erlang and OTP in action</a><br>其中讲到gen_server的时候，作者用了个小技巧。如下。<br><img src="http://storage4.static.itmages.com/i/15/0731/h_1438311976_3257184_46c6e8b7c0.png" alt=""></p>
+<p><img src="http://storage1.static.itmages.com/i/15/0731/h_1438312022_8979746_d612eb6d7f.png" alt=""></p>
+<p><img src="http://storage4.static.itmages.com/i/15/0731/h_1438311785_2601988_b290e0c784.png" alt=""></p>
+<blockquote>
+<p>第三章图片的引用里handle_call应该是handle_info,此处有错误</p>
+</blockquote>
+<p>作者的意思时如果在init的返回中设置了timeout参数为0，会在init结束后会立即向自己发送一个timeout参数。并且由handle_info(timeout...)处理。意思是可以让一些耗时高的初始化操作在handle_info(timeout。。）里面处理，而让init尽快返回。<br><strong>本以为是个不错的小技巧，结果却有些隐患</strong></p>
+<h2 id="Question">Question</h2><p>这两天的mailist正好有人遇到了这个问题。<br><a target="_blank" rel="noopener" href="http://erlang.org/pipermail/erlang-questions/2015-July/085314.html">[erlang_question]gen_server and init</a><br>问题如下：</p>
+<blockquote>
+<p><strong><em>Matthew Evans</em></strong>:<br>Hi,<br>We have used this pattern in gen_servers for a long time now:<br>init(_) -&gt;   %% Some stuff   {ok, #state{}, 0}.<br>%%%%%%<br>handle_info(timeout, State) -&gt;    %% Init stuff    {noreply,State}<br>Basically the idea is to prevent init from blocking and to have init/1 return with a timeout of 0 causing an immediate timeout message to be invoked in the handle_info.<br>Here&#39;s what&#39;s odd. Sometimes this timeout does not fire. It doesn&#39;t appear that any message is getting sent, but I would imagine that since it&#39;s a registered gen_server there is no way that can happen.<br>Does anyone have any ideas?<br>We are running vsn 17.1, and ntp is enabled on the host (Linux).<br>Thanks                           </p>
+</blockquote>
+<p>提问者与作者的思路一样，想要在timeout里面做些初始化操作。然而却没想到timeout并没有触发。<br>以下摘取一些回答。</p>
+<h2 id="Answers:">Answers:</h2><h3 id="Sergej_Jurečko:"><strong><em>Sergej Jurečko</em></strong>:</h3><blockquote>
+<p>If something is in the message queue before init is done executing, that timeout will never get called. Timeout means execute only if nothing else happens during. You should be using self() ! timeout<br>如果在init没有完成之前消息队列里面存在消息，timeout将永远不会调用。应该使用self()!timeout这种方式</p>
+</blockquote>
+<h3 id="Loïc_Hoguin(cowboy_作者）"><strong><em>Loïc Hoguin</em></strong>(cowboy 作者）</h3><blockquote>
+<p>This and sending yourself a message is a bad idea. It will usually work,<br>until it doesn&#39;t, and you will have a very hard time figuring out why.<br>Instead, start the process using proc_lib:spawn_link or<br>proc_lib:start_link (depending on whether it needs to be synchronous or<br>not), then perform your initialization (calling proc_lib:init_ack where<br>appropriate), and finally calling gen_server:enter_loop.<br>What this gives you is pretty much the ability to customize the<br>initialization of your gen_server process.<br>This is the correct way to do it. Your solution can fail if you receive<br>a message. Sending yourself a message is subject to race conditions<br>where you receive a message before you could init.<br>大体意思说这个方式是bad idea。应该使用proc_lib:spawn_link, proc_lib:start_link, proc_lib:init_ack, gen_server:enter_loop等。</p>
+</blockquote>
+<h3 id="Max_Lapshin"><strong><em>Max Lapshin</em></strong></h3><blockquote>
+<p>Loic is right, but you should understand that you can receive message<br>before your  &quot;self() ! init&quot; message only if you explicitly tell your pid<br>someone in init()  because before the end of init your pid is unknown to<br>others.<br>Loic是对的～但是你应该明白除非你在init的过程中将自己的pid告诉其他进程才会在init返回之前接到消息，因为init没有完成之前，pid对其他是未知的。</p>
+</blockquote>
+<h3 id="Loïc_Hoguin"><strong><em>Loïc Hoguin</em></strong></h3><blockquote>
+<p>(Had problems pasting so hope it&#39;s all OK!)</p>
+</blockquote>
+<blockquote>
+<p>I&#39;m not sure what you wrote there but I can give you two scenarios where<br>it can fail off the top of my head. The first is very unlikely and can<br>only fail if you use the 0 timeout, while the second is actually much<br>easier to observe and can fail with both methods:</p>
+</blockquote>
+<blockquote>
+<p>P1 calls start_link<br>P2 init (returns 0 timeout)<br>P2 yields before calling receive<br>P1 returns from start_link and sends P2 a message<br>P2 receives message</p>
+</blockquote>
+<blockquote>
+<p>And:</p>
+</blockquote>
+<blockquote>
+<p>P1 calls start_link<br>P2 in init subscribes to some kind of pubsub PS<br>PS sends P2 message(s)<br>P2 returns from init and receive those messages</p>
+</blockquote>
+<blockquote>
+<p>I&#39;m not sure why your tool doesn&#39;t catch the first case, Concuerror<br><em>definitely does</em>, and without needing to write all this weird code too. :-)</p>
+</blockquote>
+<blockquote>
+<p>Here is the module:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">-module(z).</span><br><span class="line">-behaviour(gen_server).</span><br><span class="line"></span><br><span class="line">-export([start_link/0]).</span><br><span class="line"></span><br><span class="line">%% Operational API</span><br><span class="line">-export([read/0]).</span><br><span class="line"></span><br><span class="line">%% gen_server API</span><br><span class="line">-export([</span><br><span class="line">          init/1,</span><br><span class="line">          handle_cast/2,</span><br><span class="line">          handle_call/3,</span><br><span class="line">          terminate/2,</span><br><span class="line">          code_change/3,</span><br><span class="line">          handle_info/2,</span><br><span class="line">		 test/0</span><br><span class="line">]).</span><br><span class="line"></span><br><span class="line">test() -&gt;</span><br><span class="line">	start_link(),</span><br><span class="line">	ready = read(),</span><br><span class="line">	stop().</span><br><span class="line"></span><br><span class="line">%% API</span><br><span class="line">start_link() -&gt;</span><br><span class="line">     gen_server:start(&#123;local, ?MODULE&#125;, ?MODULE, [], []).</span><br><span class="line"></span><br><span class="line">read() -&gt;</span><br><span class="line">     gen_server:call(?MODULE, read).</span><br><span class="line"></span><br><span class="line">stop() -&gt;</span><br><span class="line">	gen_server:call(?MODULE, stop).</span><br><span class="line"></span><br><span class="line">%% Callbacks</span><br><span class="line">init([]) -&gt;</span><br><span class="line">     &#123;ok, initializing, 0&#125;.</span><br><span class="line"></span><br><span class="line">handle_call(read, _From, State) -&gt;</span><br><span class="line">     &#123;reply, State, State&#125;;</span><br><span class="line">handle_call(stop, _, State) -&gt;</span><br><span class="line">	&#123;stop, normal, ok, stop&#125;.</span><br><span class="line"></span><br><span class="line">handle_cast(_M, State) -&gt;</span><br><span class="line">     &#123;noreply, State&#125;.</span><br><span class="line"></span><br><span class="line">handle_info(timeout, _State) -&gt;</span><br><span class="line">     &#123;noreply, ready&#125;.</span><br><span class="line"></span><br><span class="line">terminate(_How, _State) -&gt;</span><br><span class="line">     ok.</span><br><span class="line"></span><br><span class="line">code_change(_OldVsn, State, _Extra) -&gt;</span><br><span class="line">     &#123;ok, State&#125;.</span><br></pre></td></tr></table></figure><br>（注：handle_call(stop, _, State)的State应该是_State, 否则编译不过).</p>
+</blockquote>
+<h2 id="Test">Test</h2><p>Loic给出了一个module，用concuerror进行了测试，这个模块的init中指定timeout为0，然后handle_info(timeout。。。）并没有触发。<br>concuerror是一个用来测试erlang中一些看起来没有问题的程序，但是在并行情况下可能发生的问题的工具。<br>参考<br><a target="_blank" rel="noopener" href="http://concuerror.com/">官网</a><br><a target="_blank" rel="noopener" href="http://concuerror.com/tutorials/poolboy-example/">concuerror tutorial</a><br><a target="_blank" rel="noopener" href="https://github.com/parapluu/Concuerror">github</a><br>以下是我运行的结果。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~/code/Concuerror$ ./concuerror -f &quot;../etest/z.erl&quot; -m z -t test --after_timeout 1000 </span><br><span class="line">concuerror: WARNING: file ../etest/z.erl shadows the default ./z.beam</span><br><span class="line">Concuerror started at 31 Jul 2015 07:21:55</span><br><span class="line">Writing results in concuerror_report.txt</span><br><span class="line"></span><br><span class="line">Info: Instrumented z</span><br><span class="line">Info: Instrumented io_lib</span><br><span class="line">Info: Instrumented gen_server</span><br><span class="line">Info: Instrumented gen</span><br><span class="line">Info: Instrumented proc_lib</span><br><span class="line">Info: Instrumented erlang</span><br><span class="line">Info: Instrumented init</span><br><span class="line">Info: Instrumented sys</span><br><span class="line">Info: You can see pairs of racing instructions (in the report and --graph) with &#x27;--show_races true&#x27;</span><br><span class="line">Error: Stop testing on first error. (Check &#x27;-h keep_going&#x27;).</span><br><span class="line"></span><br><span class="line">Done! (Exit status: warning)</span><br><span class="line">  Summary: 1 errors, 4/4 interleavings explored</span><br><span class="line">youthy@youthy:~/code/Concuerror$ vim concuerror_report.txt </span><br></pre></td></tr></table></figure></p>
+<p>concuerror_report.txt:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">Erroneous interleaving 1:</span><br><span class="line">* At step 23 process P exited abnormally</span><br><span class="line">    Reason:</span><br><span class="line">      &#123;&#123;badmatch,initializing&#125;,</span><br><span class="line">       [&#123;z,test,0,[&#123;file,&quot;../etest/z.erl&quot;&#125;,&#123;line,22&#125;]&#125;]&#125;</span><br><span class="line">    Stacktrace:</span><br><span class="line">      [&#123;z,test,0,[&#123;file,&quot;../etest/z.erl&quot;&#125;,&#123;line,22&#125;]&#125;]</span><br><span class="line">* Blocked at a &#x27;receive&#x27; (when all other processes have exited):</span><br><span class="line">    P.1 in gen_server.erl line 348</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Interleaving info:</span><br><span class="line">   1: P: undefined = erlang:whereis(z)</span><br><span class="line">    in gen.erl line 277</span><br><span class="line">   2: P: [] = erlang:process_info(P, registered_name)</span><br><span class="line">    in proc_lib.erl line 648</span><br><span class="line">   3: P: P.1 = erlang:spawn_opt(&#123;proc_lib,init_p,[P,[],gen,init_it,[gen_server,P,self,&#123;local,z&#125;,z,[],[]]],[]&#125;)</span><br><span class="line">    in erlang.erl line 249</span><br><span class="line">   4: P.1: undefined = erlang:put(&#x27;$ancestors&#x27;, [P])</span><br><span class="line">    in proc_lib.erl line 221</span><br><span class="line">   5: P.1: undefined = erlang:put(&#x27;$initial_call&#x27;, &#123;z,init,1&#125;)</span><br><span class="line">    in proc_lib.erl line 222</span><br><span class="line">   6: P.1: true = erlang:register(z, P.1)</span><br><span class="line">    in gen.erl line 280</span><br><span class="line">   7: P.1: &#123;P.1,&#123;get_argument,generic_debug&#125;&#125; = init ! &#123;P.1,&#123;get_argument,generic_debug&#125;&#125;</span><br><span class="line">    in init.erl line 145</span><br><span class="line">   8: Message (&#123;P.1,&#123;get_argument,generic_debug&#125;&#125;) from P.1 reaches init</span><br><span class="line">   9: Message (&#123;init,error&#125;) from init reaches P.1</span><br><span class="line">  10: P.1: receives message (&#123;init,error&#125;)</span><br><span class="line">    in init.erl line 146</span><br><span class="line">  11: P.1: &#123;ack,P.1,&#123;ok,P.1&#125;&#125; = P ! &#123;ack,P.1,&#123;ok,P.1&#125;&#125;</span><br><span class="line">    in proc_lib.erl line 348</span><br><span class="line">  12: Message (&#123;ack,P.1,&#123;ok,P.1&#125;&#125;) from P.1 reaches P</span><br><span class="line">  13: P: receives message (&#123;ack,P.1,&#123;ok,P.1&#125;&#125;)</span><br><span class="line">    in proc_lib.erl line 321</span><br><span class="line">  14: P: P.1 = erlang:whereis(z)</span><br><span class="line">    in gen.erl line 154</span><br><span class="line">  15: P: #Ref&lt;0.0.0.176&gt; = erlang:monitor(process, P.1)</span><br><span class="line">    in gen.erl line 204</span><br><span class="line">  16: P: &#123;&#x27;$gen_call&#x27;,&#123;P,#Ref&lt;0.0.0.176&gt;&#125;,read&#125; = erlang:send(P.1, &#123;&#x27;$gen_call&#x27;,&#123;P,#Ref&lt;0.0.0.176&gt;&#125;,read&#125;, [noconnect])</span><br><span class="line">    in gen.erl line 215</span><br><span class="line">  17: Message (&#123;&#x27;$gen_call&#x27;,&#123;P,#Ref&lt;0.0.0.176&gt;&#125;,read&#125;) from P reaches P.1</span><br><span class="line">  18: P.1: receives message (&#123;&#x27;$gen_call&#x27;,&#123;P,#Ref&lt;0.0.0.176&gt;&#125;,read&#125;)</span><br><span class="line">    in gen_server.erl line 348</span><br><span class="line">  19: P.1: &#123;#Ref&lt;0.0.0.176&gt;,initializing&#125; = P ! &#123;#Ref&lt;0.0.0.176&gt;,initializing&#125;</span><br><span class="line">    in gen_server.erl line 214</span><br><span class="line">  20: Message (&#123;#Ref&lt;0.0.0.176&gt;,initializing&#125;) from P.1 reaches P</span><br><span class="line">  21: P: receives message (&#123;#Ref&lt;0.0.0.176&gt;,initializing&#125;)</span><br><span class="line">    in gen.erl line 217</span><br><span class="line">  22: P: true = erlang:demonitor(#Ref&lt;0.0.0.176&gt;, [flush])</span><br><span class="line">    in gen.erl line 219</span><br><span class="line">  23: P: exits abnormally (&#123;&#123;badmatch,initializing&#125;,[&#123;z,test,0,[&#123;file,[46,46,47,101,116,101,115,116,47|...]&#125;,&#123;line,22&#125;]&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>报告显示P进程（父进程)在第23步的时候崩溃了，错误原因时badmatch，z.erl的22行，即<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ready = read(),</span><br></pre></td></tr></table></figure></p>
+<p>此处read()返回的不是ready而是intiallizing，也就是handle_info(timeout...)并没有执行。<br>上面的１～２３步显示了gen_server的创建过程.以及消息传递过程。十分详细。不过需要挖掘下gen_server的源码才能看懂。</p>
+<h2 id="gen_server的创建过程">gen_server的创建过程</h2><p>下面分析下gen_server的创建过程。假设我们创建一个{local, test}的进程，并传入Args作为初始化参数，Opts为进程的设置参数.</p>
+<h3 id="gen_server:">gen_server:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start_link(&#123;local, test&#125;, test, Args, Opts) -&gt;</span><br><span class="line">   gen:start(gen_server,  link, &#123;local, test&#125;, test, Args, Opts).</span><br></pre></td></tr></table></figure>
+<h3 id="gen:">gen:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">start(gen_server, link, &#123;local, test&#125;, test, Args, Opts) -&gt;</span><br><span class="line">     case where(&#123;local, test&#125;) of %检测名字是否注册</span><br><span class="line">       undefined -&gt;</span><br><span class="line">          do_spawn(gen_server, link, &#123;local, test&#125;, test, Args, Opts);</span><br><span class="line">        Pid -&gt;</span><br><span class="line">           &#123;error, &#123;already_started, Pid&#125;&#125;</span><br><span class="line">      end.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">do_spawn(gen_server, link, &#123;local, test&#125;, test, Args, Opts) -&gt;</span><br><span class="line">        Time = somefun(Opts) % 提取出Opt中的timeout参数, </span><br><span class="line">        proc_lib:start_link(gen, init_it, </span><br><span class="line">        [gen_server, self(), self(), &#123;local, test&#125;, test, Args, Opts], Time, spawn_opts(Opts)).</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此处spawn_opts的作用时查找Opts中有没有spawn_opt这个选项，否则为[].</p>
+</blockquote>
+<h3 id="proc_lib:">proc_lib:</h3><p>上面self()一般情况下为supervisor的Pid。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start_link(gen, init_it, [gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts], Timeout, Opts|[]) -&gt;</span><br><span class="line">  Pid = proc_lib:spawn_opt(gen, init_it, [gen_server, SelfPid, SelfPid, &#123;local, test&#125;, test, Args, Opts|[]], ensure_link(Opts|[])), %ensure_link尝试将link加入Opts</span><br><span class="line">  sync_wait(Pid, Timeout).</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spawn_opt(gen, init_it, [gen_server, selfPid, SelfPid, &#123;local, test&#125;, test, Args, Opts], [link]|[link, Opts]) -&gt;</span><br><span class="line">   Parent = ......%获取当前进程registername为父进程</span><br><span class="line">   Ancestors = ....% 获取进程字典中的$ancestors的值</span><br><span class="line">   check_for_monitor([link]|[link,Opts])....% 检测monitor这个参数在不在其中，在的话直接抛出错误。 </span><br><span class="line">   erlang:spawn_opt(proc_lib, init_p, [Parent, Ancestors, gen, init_it, [gen_server, SelfPid....Opts],[link]|[link, Opts]).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sync_wait(Pid, TimeOut) -&gt;</span><br><span class="line">  receive </span><br><span class="line">  &#123;ack, Pid, Return&#125; -&gt;</span><br><span class="line">    Return;</span><br><span class="line">  &#123;&#x27;EXIT&#x27;, Pid, Reason&#125; -&gt;</span><br><span class="line">    &#123;error, Reason&#125;</span><br><span class="line">  after TimeOut -&gt;</span><br><span class="line">    unlink(Pid),</span><br><span class="line">    exit(Pid, kill),</span><br><span class="line">    flush(Pid),</span><br><span class="line">    &#123;error, timeout&#125;</span><br><span class="line">   end.</span><br></pre></td></tr></table></figure>
+<p>erlang:spawn_opt与spawn类似，只不过支持一些option。所以调用的还是proc_lib的init_p。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">init_p(Parent, Ancestors, gen, init_it, [gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]], [link|[link, Opts]) -&gt;</span><br><span class="line">  put(&#x27;ancestors&#x27;, [Parent|Ancestors]),</span><br><span class="line">  put(&#x27;initial_call&#x27;, trans_init(gen, init_it, [gen_server, Sup.....])),</span><br><span class="line">  init_p_do_apply(gen, init_it, [gen_server, Sup, Sup....]).</span><br></pre></td></tr></table></figure></p>
+<p>其中trans_init的结果返回为{Module, init, 1} 即 {test, init, 1}.<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">init_p_do_apply(gen, init_it, [gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]]) -&gt;</span><br><span class="line">    try</span><br><span class="line">	apply(gen, init_it, [gen_server, Sup... Opts]) </span><br><span class="line">    catch</span><br><span class="line">	Class:Reason -&gt;</span><br><span class="line">	    exit_p(Class, Reason)</span><br><span class="line">    end.</span><br></pre></td></tr></table></figure></p>
+<p>exit_p里面格式化一些错误信息，并用error_logger输出</p>
+<h3 id="gen">gen</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">init_it(gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]) -&gt;</span><br><span class="line">    case name_register(&#123;local, test&#125;) of</span><br><span class="line">	true -&gt;</span><br><span class="line">	    init_it2(gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]);</span><br><span class="line">	&#123;false, Pid&#125; -&gt;</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;error, &#123;already_started, Pid&#125;&#125;)</span><br><span class="line">    end.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name_register(&#123;local, Name&#125; = LN) -&gt;</span><br><span class="line">    try register(Name, self()) of</span><br><span class="line">	true -&gt; true</span><br><span class="line">    catch</span><br><span class="line">	error:_ -&gt;</span><br><span class="line">	    &#123;false, where(LN)&#125;</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init_it2(gen_server, Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]) -&gt;</span><br><span class="line">   gen_server:init_it(Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]).</span><br></pre></td></tr></table></figure>
+<h3 id="gen_server:-1">gen_server:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">init_it(Sup, Sup, &#123;local, test&#125;, test, Args, Opts|[]) -&gt;</span><br><span class="line">    test = name(&#123;local, test&#125;),</span><br><span class="line">    Debug = debug_options(Name, Opts|[]),</span><br><span class="line">    case catch test:init(Args) of</span><br><span class="line">	&#123;ok, State&#125; -&gt;</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;ok, self()&#125;), 	    </span><br><span class="line">	    loop(Sup, test, State, test, infinity, Debug);</span><br><span class="line">	&#123;ok, State, Timeout&#125; -&gt;</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;ok, self()&#125;), 	    </span><br><span class="line">	    loop(Sup, test, State, test, Timeout, Debug);</span><br><span class="line">	&#123;stop, Reason&#125; -&gt;</span><br><span class="line">	    unregister_name(test),</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;error, Reason&#125;),</span><br><span class="line">	    exit(Reason);</span><br><span class="line">	ignore -&gt;</span><br><span class="line">	    unregister_name(test),</span><br><span class="line">	    proc_lib:init_ack(Sup, ignore),</span><br><span class="line">	    exit(normal);</span><br><span class="line">	&#123;&#x27;EXIT&#x27;, Reason&#125; -&gt;</span><br><span class="line">	    unregister_name(test),</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;error, Reason&#125;),</span><br><span class="line">	    exit(Reason);</span><br><span class="line">	Else -&gt;</span><br><span class="line">	    Error = &#123;bad_return_value, Else&#125;,</span><br><span class="line">	    proc_lib:init_ack(Sup, &#123;error, Error&#125;),</span><br><span class="line">	    exit(Error)</span><br><span class="line">    end.</span><br></pre></td></tr></table></figure>
+<h3 id="proc_lib">proc_lib</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">init_ack(Sup, &#123;ok, Pid&#125;|&#123;error, already_exited&#125;) -&gt;</span><br><span class="line">    Parent ! &#123;ack, self(), &#123;ok, Pid&#125;&#125;|&#123;error, already_exited&#125;&#125;,</span><br><span class="line">    ok.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">loop(Sup, test, State, test, Timeout, Debug) -&gt;</span><br><span class="line">    Msg = receive</span><br><span class="line">	      Input -&gt;</span><br><span class="line">		    Input</span><br><span class="line">	  after Time -&gt;</span><br><span class="line">		  timeout</span><br><span class="line">	  end,</span><br><span class="line">    decode_msg(Msg, Parent, Name, State, Mod, Time, Debug, false).</span><br></pre></td></tr></table></figure>
+<p>至此gen_server初始化完成。<br>。<br>由此得知。gen_server再调用test：init之前，主要做了</p>
+<ol>
+<li>判断名字是否被占用，否则报{error, already_exited}</li>
+<li>写入ancestors和initial call</li>
+</ol>
+<p>Opts中的timeout参数主要用来衡量创建进程的time，超时回结束进程并返回。而{ok， State， Timeout}的timeout参数用来参与loop循环，在进程创建后timeout时间内没有接到消息，就会像自己发送timeout这个消息。 而且这个参数在之后的handle_call, handle_cast,handle_info等回调中，使可以修改timeout的数值。参考源码：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">handle_msg(&#123;&#x27;$gen_call&#x27;, From, Msg&#125;, Parent, Name, State, Mod, Debug) -&gt;</span><br><span class="line">    case catch Mod:handle_call(Msg, From, State) of</span><br><span class="line">	&#123;reply, Reply, NState&#125; -&gt;</span><br><span class="line">	    Debug1 = reply(Name, From, Reply, NState, Debug),</span><br><span class="line">	    loop(Parent, Name, NState, Mod, infinity, Debug1);</span><br><span class="line">	&#123;reply, Reply, NState, Time1&#125; -&gt;</span><br><span class="line">	    Debug1 = reply(Name, From, Reply, NState, Debug),</span><br><span class="line">	    loop(Parent, Name, NState, Mod, Time1, Debug1);</span><br><span class="line">	&#123;noreply, NState&#125; -&gt;</span><br><span class="line">	    Debug1 = sys:handle_debug(Debug, fun print_event/3, Name,</span><br><span class="line">				      &#123;noreply, NState&#125;),</span><br><span class="line">	    loop(Parent, Name, NState, Mod, infinity, Debug1);</span><br><span class="line">	&#123;noreply, NState, Time1&#125; -&gt;</span><br><span class="line">	    Debug1 = sys:handle_debug(Debug, fun print_event/3, Name,</span><br><span class="line">				      &#123;noreply, NState&#125;),</span><br><span class="line">	    loop(Parent, Name, NState, Mod, Time1, Debug1);</span><br><span class="line">	&#123;stop, Reason, Reply, NState&#125; -&gt;</span><br><span class="line">	    &#123;&#x27;EXIT&#x27;, R&#125; = </span><br><span class="line">		(catch terminate(Reason, Name, Msg, Mod, NState, Debug)),</span><br><span class="line">	    reply(Name, From, Reply, NState, Debug),</span><br><span class="line">	    exit(R);</span><br><span class="line">	Other -&gt;</span><br><span class="line">	    handle_common_reply(Other, Parent, Name, Msg, Mod, State, Debug)</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure></p>
+<p>可见handle_call的返回值如果包含Time1，就会修改loop的Timeout参数。</p>
+<h2 id="where_is_the_point?">where is the point?</h2><p>问题出现在<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;ok, State, Timeout&#125; -&gt;</span><br><span class="line">    proc_lib:init_ack(Sup, &#123;ok, self()&#125;), 	    </span><br><span class="line">    loop(Sup, test, State, test, Timeout, Debug);</span><br></pre></td></tr></table></figure></p>
+<p>Ｐ进程创建Ｐ.1进程，然后进入receive，期待一个{ack, Pid, Return}的回复。在init结束返回{ok, State, Timeout}后，proc_lib:init_ack完成了向P发送{ack, Pid, Return}的任务。然后进入ｌｏｏｐ循环。但这时Ｐ进程接到消息后立刻发送了read.导致timeout并没有发送出去。造成badmatch的结果。</p>
+<p>在一种情况，其实在name_register的时候名字和Ｐｉｄ就已经注册好了。但此时甚至没有进入ｉｎｉｔ函数，如果有其他进程朝test名字的ｓｅｒｖｅｒ发送消息，自然会导致ｔｉｍｅｏｕｔ的失效。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/04/github%E5%B1%8F%E8%94%BD%E7%99%BE%E5%BA%A6%E7%88%AC%E8%99%AB%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          github屏蔽百度爬虫的解决办法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/31/ubuntu-LAMP%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ubuntu下lamp(apache2+php5+mysql)搭建</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="erlang-question-gen-server-and-init" data-title="[erlang_question]gen_server and init" data-url="http://youthy.github.io/2015/07/31/erlang-question-gen-server-and-init/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

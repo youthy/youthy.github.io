@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>erl命令和参数 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Startup先拿mochiweb生成的一个例子说起，这是start-dev.sh脚本中的内容。启动一个mochiweb应用调用的就是这个1234567#!&#x2F;bin&#x2F;shexec erl \    -pa ebin deps&#x2F;*&#x2F;ebin \    -boot start_sasl \    -sname helloworld_dev \    -s helloworld \    -s relo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="erl命令和参数">
+<meta property="og:url" content="http://youthy.github.io/2015/07/22/erl%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="Startup先拿mochiweb生成的一个例子说起，这是start-dev.sh脚本中的内容。启动一个mochiweb应用调用的就是这个1234567#!&#x2F;bin&#x2F;shexec erl \    -pa ebin deps&#x2F;*&#x2F;ebin \    -boot start_sasl \    -sname helloworld_dev \    -s helloworld \    -s relo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-07-22T02:11:37.000Z">
+<meta property="article:modified_time" content="2018-06-26T09:49:27.735Z">
+<meta property="article:author" content="youthy">
+<meta property="article:tag" content="erlang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">undefined</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap%EF%BC%8Cvim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 10px;">二次元</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 10px;">杂记</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.github.io/">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">undefined</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">undefined</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-erl命令和参数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/22/erl%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0/" class="article-date">
+  	<time datetime="2015-07-22T02:11:37.000Z" itemprop="datePublished">7月 22 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      erl命令和参数
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/" rel="tag">erlang</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Startup">Startup</h2><p>先拿mochiweb生成的一个例子说起，这是start-dev.sh脚本中的内容。启动一个mochiweb应用调用的就是这个<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">exec erl \</span><br><span class="line">    -pa ebin deps/*/ebin \</span><br><span class="line">    -boot start_sasl \</span><br><span class="line">    -sname helloworld_dev \</span><br><span class="line">    -s helloworld \</span><br><span class="line">    -s reloader</span><br></pre></td></tr></table></figure></p>
+<span id="more"></span>
+<p>通用形式就是</p>
+<blockquote>
+<p>erl -a b --sth -c d +f g -extra abc</p>
+</blockquote>
+<p>erl后面的都是参数arguments<br>arguments可以分为<strong>emulator flags</strong>，<strong>flags</strong>，<strong>plain arguments</strong></p>
+<pre><code>* 任何已+开始的参数会被解释为emulator <span class="keyword">flags</span>
+* 任何以-开始的参数会被解释为<span class="keyword">flags</span>，并传入交给了init模块。
+* 在--之后到任何-或者+符号之间的所有<span class="keyword">flags</span>以及-extra之后所有的<span class="keyword">flags</span>都是plain arguments，这些参数不会发生解释行为，只不过被储存起来。同样交给init模块。
+</code></pre><p>init:boot(Args)函数接受上面的flags和plain arguments。</p>
+<blockquote>
+<p><strong>boot(BootArgs) -&gt; no_return()<br>Types:<br>BootArgs = [binary()]</strong><br>Starts the Erlang runtime system. This function is called when the emulator is started and coordinates system start-up.<br>BootArgs are all command line arguments except the emulator flags, that is, flags and plain arguments. See erl(1).<br>init itself interprets some of the flags, see Command Line Flags below. The remaining flags (&quot;user flags&quot;) and plain arguments are passed to the init loop and can be retrieved by callingget_arguments/0 and get_plain_arguments/0, respectively.</p>
+</blockquote>
+<p>flags会被boot函数分为 init flags和user flags。user flags可以通过init:get_arguments()得到，plain arguments通过init:get_plain_arguments()得到。值得注意的是一小部分的“-”后面的flags现在是属于emulator flags。后面提到。</p>
+<!-- toc -->
+<ul>
+<li><a href="#init-flags">Init Flags</a><ul>
+<li><a href="#--------">--(两个横杠)</a></li>
+<li><a href="#-extra">-extra</a></li>
+<li><a href="#-code-path-choice-choice--strict-relexed">-code_path_choice Choice::strict|relexed</a></li>
+<li><a href="#-eval-expr">-eval Expr</a></li>
+<li><a href="#-run-mod-func-arg1-arg2argn">-run Mod Func Arg1 Arg2....ArgN</a></li>
+<li><a href="#-s-mod-func-arg1-arg2--argn">-s Mod Func Arg1 Arg2 ... ArgN</a></li>
+<li><a href="#-applicationname-par-val">-ApplicationName Par Val</a></li>
+<li><a href="#-args-file-filename">-args_file FileName</a></li>
+<li><a href="#-async-shell-start">-async_shell_start</a></li>
+<li><a href="#-boot-file">-boot File</a></li>
+<li><a href="#-boot-var-var-dir">-boot_var Var Dir</a></li>
+<li><a href="#-code-path-cache">-code_path_cache</a></li>
+<li><a href="#-compile-mod1-mod2-">-compile Mod1 Mod2 ...</a></li>
+<li><a href="#connect-all-true-false">connect_all true|false</a></li>
+<li><a href="#-config-config">-config Config</a></li>
+<li><a href="#-cookie-cookie">-cookie Cookie</a></li>
+<li><a href="#-setcookie-cookie">-setcookie Cookie</a></li>
+<li><a href="#-detached">-detached</a></li>
+<li><a href="#-emu-args">-emu_args</a></li>
+<li><a href="#-env-variable-value">-env Variable Value</a></li>
+<li><a href="#-heart">-heart</a></li>
+<li><a href="#-hidden">-hidden</a></li>
+<li><a href="#-init-debug">-init_debug</a></li>
+<li><a href="#-make">-make</a></li>
+<li><a href="#-man-module">-man Module</a></li>
+<li><a href="#-mode-interactive-embedded">-mode interactive|embedded</a></li>
+<li><a href="#-name-sname-name">-name/sname NAME</a></li>
+<li><a href="#-noinput">-noinput</a></li>
+<li><a href="#-noshell">-noshell</a></li>
+<li><a href="#-pa--pz">-pa/-pz</a></li>
+<li><a href="#-remsh-node">-remsh Node</a></li>
+<li><a href="#-rsh-program">-rsh Program</a></li>
+<li><a href="#-set-cookie-cookie">-set_cookie Cookie</a></li>
+<li><a href="#-shutdown-time-time">-shutdown_time Time</a></li>
+<li><a href="#-smp-enable-auto-disable">-smp enable/auto/disable</a></li>
+<li><a href="#-version">-version</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h2 id="Init_Flags">Init Flags</h2><h3 id="-(两个横杠)">--(两个横杠)</h3><p>任何在--到下一个-或者+之间的都是plain arguments，可以通过init:get_plain_arguments()取到.</p>
+<h3 id="-extra">-extra</h3><p>和--的作用一样，extra后面的flags都是plain arguments</p>
+<h3 id="-code_path_choice_Choice::strict|relexed">-code_path_choice Choice::strict|relexed</h3><blockquote>
+<p>When the choice of directories in the code path is strict, the directory that ends up in the code path will be exactly the stated one. This means that if for example the directory \$OTPROOT/lib/mnesia-4.4.7/ebin is explicitly added to the code path, the code server will not load files from $OTPROOT/lib/mnesia-4.4.7.ez/mnesia-4.4.7/ebin and vice versa.</p>
+</blockquote>
+<blockquote>
+<p>This behavior can be controlled via the command line flag -code_path_choice Choice. If the flag is set to relaxed, the code server will instead choose a suitable directory depending on the actual file structure. If there exists a regular application ebin directory,situation it will be chosen. But if it does not exist, the ebin directory in the archive is chosen if it exists. If neither of them exists the original directory will be chosen.<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;/home/yuyouqi/Erlang/lib/snmp-5.1.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/sasl-2.4.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/runtime_tools-1.8.15/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/reltool-0.6.6/ebin&quot;,</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &quot;/home/yuyouqi/Erlang/lib/ssh-3.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/snmp-5.1.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/sasl-2.4.1.ez/sasl-2.4.1/ebin&quot;,</span><br><span class="line"> &quot;/home/yuyouqi/Erlang/lib/runtime_tools-1.8.15/ebin&quot;,</span><br><span class="line"> 3&gt; code:lib_dir(sasl, ebin).</span><br><span class="line">&quot;/home/yuyouqi/Erlang/lib/sasl-2.4.1.ez/sasl-2.4.1/ebin&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="-eval_Expr">-eval Expr</h3><p>Expr是个函数，在erl初始化时按顺序执行，如果fail的，则初始化失败。例如<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">erl -eval &#x27;&#123;X,Y,Z&#125; = now(), random:seed(X,Y,Z).&#x27;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>官方文档Z}旁边多了‘符号，需要去掉</p>
+</blockquote>
+<h3 id="-run_Mod_Func_Arg1_Arg2-ArgN">-run Mod Func Arg1 Arg2....ArgN</h3><p>调用Mod:Func([&quot;Arg1&quot;, &quot;Arg2&quot;, ...&quot;ArgN&quot;]),<br>所有参数都是以string方式传入的。同样按顺序执行，前一个执行完才会执行下一个。但是貌似并不会阻塞shell。</p>
+<h3 id="-s_Mod_Func_Arg1_Arg2_-_ArgN">-s Mod Func Arg1 Arg2 ... ArgN</h3><p>与run完成同样的功能，但是Arg都是atom的形式传入，值得注意的是数字也会变成atom,<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">erl -s test time 5000 atom</span><br></pre></td></tr></table></figure></p>
+<p>就是test:time([&#39;5000&#39;, atom]).<br>一般数字需要atom_to_list, list_to_integer转换。</p>
+<p>##User flags</p>
+<h3 id="-ApplicationName_Par_Val">-ApplicationName Par Val</h3><p>指定应用的名字，属性名称和值，可以将应用的某个参数设置成Val。<br>比如<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> erl -pa ./ebin -s helloworld -helloworld par haha</span><br><span class="line"> 1&gt; application:get_all_key(helloworld).</span><br><span class="line">&#123;ok,[&#123;description,&quot;helloworld&quot;&#125;,</span><br><span class="line">     &#123;id,[]&#125;,</span><br><span class="line">     &#123;vsn,&quot;0.1&quot;&#125;,</span><br><span class="line">     &#123;modules,[helloworld,helloworld_app,helloworld_deps,</span><br><span class="line">               helloworld_dtl,helloworld_sup,helloworld_web]&#125;,</span><br><span class="line">     &#123;maxP,infinity&#125;,</span><br><span class="line">     &#123;maxT,infinity&#125;,</span><br><span class="line">     &#123;registered,[]&#125;,</span><br><span class="line">     &#123;included_applications,[]&#125;,</span><br><span class="line">     &#123;applications,[kernel,stdlib,crypto]&#125;,</span><br><span class="line">     &#123;env,[&#123;par,haha&#125;,&#123;included_applications,[]&#125;]&#125;,</span><br><span class="line">     &#123;mod,&#123;helloworld_app,[]&#125;&#125;,</span><br><span class="line">     &#123;start_phases,undefined&#125;]&#125;</span><br><span class="line">2&gt; application:get_all_env(helloworld).</span><br><span class="line">[&#123;par,haha&#125;,&#123;included_applications,[]&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>启动了一个helloworld应用，并将par参数设置成haha。</p>
+<h3 id="-args_file_FileName">-args_file FileName</h3><p>直接从FileName读取erl所用的参数。例如在agrsfile的文件中写入如下</p>
+<blockquote>
+<p>-eval &#39;io:format(&quot;read from file~n&quot;)&#39; -extra hello -pa ./ebin</p>
+</blockquote>
+<p>实际结果<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">erl -args_file argsfile</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; read from file</span><br><span class="line">1&gt; init:get_arguments().</span><br><span class="line">[&#123;root,[&quot;/usr/local/lib/erlang&quot;]&#125;,</span><br><span class="line"> &#123;progname,[&quot;erl&quot;]&#125;,</span><br><span class="line"> &#123;home,[&quot;/home/yuyouqi&quot;]&#125;]</span><br><span class="line">2&gt; init:get_plain_arguments().</span><br><span class="line">[&quot;hello&quot;,&quot;-pa&quot;,&quot;./ebin&quot;]</span><br></pre></td></tr></table></figure></p>
+<p>可以看到启动的时候执行了io:format函数，但是-extra这个参数是特殊的，正常情况下-extra到下一个-或者+之间的参数才会被认为是plain arguments，可是如果写在文件中就变成-extra后面所有的参数，都会当成plain arguments.只有这点不同。</p>
+<h3 id="-async_shell_start">-async_shell_start</h3><p>名字上来说是异步启动shell</p>
+<h3 id="-boot_File">-boot File</h3><p>试用File.boot启动erl系统,除非File是个绝对路径，否则在当前文件夹和$ROOT/bin下面找（我的:/usr/local/lib/erlang/bin,  $ROOT可以通过code:root_dir()查看),<br>默认情况下是-boot start<br><a target="_blank" rel="noopener" href="http://www.erlang.org/doc/man/script.html">script</a></p>
+<blockquote>
+<p>The command erl -boot Name starts the system with a boot file called Name.boot, which is generated from the Name.script file, using systools:script2boot/1.<br>The .script file is generated by systools from a .rel file and .app files.</p>
+</blockquote>
+<p>.boot文件是用systools产生的，打开后是乱码.<br>文件的生成顺序 .rel -&gt; .script -&gt; .boot<br><a target="_blank" rel="noopener" href="http://erlang.org/doc/man/systools.html">systools</a><br>systools里面提供了生成rel,script, boot等方法。可以在<code>/usr/local/lib/erlang/releases/R15B</code>下找到几个官方的rel，script，boot<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu@desktop:/usr/local/lib/erlang/releases/R15B$ ls</span><br><span class="line">start_all_example.rel  start_clean.boot  start_clean.script  start_sasl.rel     start.script</span><br><span class="line">start.boot             start_clean.rel   start_sasl.boot     start_sasl.script</span><br></pre></td></tr></table></figure></p>
+<p>打开start_sasl.rel<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%注释....</span><br><span class="line">&#123;release, &#123;&quot;OTP  APN 181 01&quot;,&quot;R15B&quot;&#125;, &#123;erts, &quot;5.9&quot;&#125;,</span><br><span class="line"> [&#123;kernel,&quot;2.15&quot;&#125;,</span><br><span class="line">  &#123;stdlib,&quot;1.18&quot;&#125;,</span><br><span class="line">  &#123;sasl, &quot;2.2&quot;&#125;]&#125;.</span><br></pre></td></tr></table></figure></p>
+<p>具体格式在上面的systools链接中有说明<br>仿照它这个样子写一个test<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;release, &#123;&quot;test_rel&quot;,&quot;0.1&quot;&#125;, &#123;erts, &quot;5.9&quot;&#125;,</span><br><span class="line"> [&#123;kernel,&quot;2.15&quot;&#125;,</span><br><span class="line">  &#123;stdlib,&quot;1.18&quot;&#125;,</span><br><span class="line">  &#123;sasl, &quot;2.2&quot;&#125;,</span><br><span class="line">  &#123;crypto, &quot;2.1&quot;&#125;,</span><br><span class="line">  &#123;helloworld,&quot;0.1&quot;&#125;]&#125;.</span><br></pre></td></tr></table></figure></p>
+<p>helloworld使用mochiweb生成的简单框架,用到了crypto，所以讲crypto加入。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; systools:make_script(&quot;test&quot;).       </span><br><span class="line">helloworld: File not found: &quot;helloworld.app&quot;</span><br><span class="line"></span><br><span class="line">error</span><br><span class="line">2&gt; systools:make_script(&quot;test&quot;, [&#123;path, [&quot;ebin&quot;]&#125;]).</span><br><span class="line">ok</span><br></pre></td></tr></table></figure><br>由于helloworld不在默认的ebin下，所以下加上当前路径中的ebin。否则找不到helloworld.app<br>如果是使用systools的make_script命令省的script会自动生成.boot。打开test.script<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">%% script generated at &#123;2015,7,1&#125; &#123;12,5,26&#125;</span><br><span class="line">&#123;script,</span><br><span class="line">    &#123;&quot;test_rel&quot;,&quot;0.1&quot;&#125;,</span><br><span class="line">    [&#123;preLoaded,</span><br><span class="line">         [erl_prim_loader,erlang,init,otp_ring0,prim_file,prim_inet,prim_zip,</span><br><span class="line">          zlib]&#125;,</span><br><span class="line">     &#123;progress,preloaded&#125;,</span><br><span class="line">     &#123;path,[&quot;$ROOT/lib/kernel-2.15/ebin&quot;,&quot;$ROOT/lib/stdlib-1.18/ebin&quot;]&#125;,</span><br><span class="line">     &#123;primLoad,[error_handler]&#125;,</span><br><span class="line">     &#123;kernel_load_completed&#125;,</span><br><span class="line">     &#123;progress,kernel_load_completed&#125;,</span><br><span class="line">     &#123;path,[&quot;$ROOT/lib/kernel-2.15/ebin&quot;]&#125;,</span><br><span class="line">     &#123;primLoad,</span><br><span class="line">         [application,application_controller,application_master,</span><br><span class="line">          application_starter,auth,code,code_server,disk_log,disk_log_1,</span><br><span class="line">          disk_log_server,disk_log_sup,dist_ac,dist_util,erl_boot_server,</span><br><span class="line">          erl_ddll,erl_distribution,erl_epmd,erl_reply,error_logger,</span><br><span class="line">          erts_debug,file,file_io_server,file_server,gen_sctp,gen_tcp,gen_udp,</span><br><span class="line">          global,global_group,global_search,group,heart,hipe_unified_loader,</span><br><span class="line">          inet,inet6_sctp,inet6_tcp,inet6_tcp_dist,inet6_udp,inet_config,</span><br><span class="line">          inet_db,inet_dns,inet_gethost_native,inet_hosts,inet_parse,inet_res,</span><br><span class="line">          inet_sctp,inet_tcp,inet_tcp_dist,inet_udp,kernel,kernel_config,net,</span><br><span class="line">          net_adm,net_kernel,os,packages,pg2,ram_file,rpc,seq_trace,</span><br><span class="line">          standard_error,user,user_drv,user_sup,wrap_log_reader]&#125;,</span><br><span class="line">     &#123;path,[&quot;$ROOT/lib/stdlib-1.18/ebin&quot;]&#125;,</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>有了.boot文件后就可以使用了<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/helloworld$ erl -pa ebin deps/*/ebin -boot test</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,sasl_safe_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.35.0&gt;&#125;,</span><br><span class="line">                       &#123;name,alarm_handler&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;alarm_handler,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,2000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,sasl_safe_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.36.0&gt;&#125;,</span><br><span class="line">                       &#123;name,overload&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;overload,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,2000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,sasl_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.34.0&gt;&#125;,</span><br><span class="line">                       &#123;name,sasl_safe_sup&#125;,</span><br><span class="line">                       &#123;mfargs,</span><br><span class="line">                           &#123;supervisor,start_link,</span><br><span class="line">                               [&#123;local,sasl_safe_sup&#125;,sasl,safe]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,infinity&#125;,</span><br><span class="line">                       &#123;child_type,supervisor&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,sasl_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.37.0&gt;&#125;,</span><br><span class="line">                       &#123;name,release_handler&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;release_handler,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,2000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">         application: sasl</span><br><span class="line">          started_at: nonode@nohost</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,crypto_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.43.0&gt;&#125;,</span><br><span class="line">                       &#123;name,crypto_server&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;crypto_server,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,2000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">         application: crypto</span><br><span class="line">          started_at: nonode@nohost</span><br><span class="line">** Found 0 name clashes in code paths </span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">          supervisor: &#123;local,helloworld_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.48.0&gt;&#125;,</span><br><span class="line">                       &#123;name,helloworld_web&#125;,</span><br><span class="line">                       &#123;mfargs,</span><br><span class="line">                           &#123;helloworld_web,start,</span><br><span class="line">                               [[&#123;ip,&#123;0,0,0,0&#125;&#125;,</span><br><span class="line">                                 &#123;port,8080&#125;,</span><br><span class="line">                                 &#123;docroot,</span><br><span class="line">                                     &quot;/home/yuyouqi/Erlang/helloworld/priv/www&quot;&#125;]]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,5000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">=PROGRESS REPORT==== 1-Jul-2015::12:10:49 ===</span><br><span class="line">         application: helloworld</span><br><span class="line">          started_at: nonode@nohost</span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; </span><br></pre></td></tr></table></figure></p>
+<h3 id="-boot_var_Var_Dir">-boot_var Var Dir</h3><p>指定一个变量Var的路径为Dir，主要用于systools:make_script的{variables, [{&quot;Var&quot;, &quot;Prefix&quot;}]},<br>因为默认的script路径都是在$ROOT/lib下寻找，当在make_script中加入variables选项时，</p>
+<h3 id="-code_path_cache">-code_path_cache</h3><p>使用codepath的缓存，这样做的好处是加载模块更快，而且可以在常数时间找到模块，如果没加则需要search这个codepath才能找到对应模块，在模块数量很多时，可以使用。</p>
+<h3 id="-compile_Mod1_Mod2_-">-compile Mod1 Mod2 ...</h3><p>编译Mod1 Mod2 ... 如果失败会返回非零的错误码 默认同时使用了-noinput参数.<strong>不推荐使用，推荐erlc</strong></p>
+<h3 id="connect_all_true|false">connect_all true|false</h3><p>是否全联通（N1-N2， N2-N3 -&gt; N1-N2-N3），如果是false那么global模块的注册名字的相关机制无法使用</p>
+<h3 id="-config_Config">-config Config</h3><p>读取Config文件，名字为AppName.config.<br>格式</p>
+<blockquote>
+<p>[{AppName, [{Key1, Value1}...]}, {AppName2, [...]}].</p>
+</blockquote>
+<p>见<a target="_blank" rel="noopener" href="http://www.erlang.org/doc/man/config.html">config file</a>.<br>例如新建helloworld.config<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;helloworld, [&#123;key1, val1&#125;, &#123;key2, val2&#125;]&#125;].</span><br></pre></td></tr></table></figure></p>
+<p>并在start脚本中加入-config helloworld.config<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">exec erl \</span><br><span class="line">    -pa ebin deps/*/ebin \</span><br><span class="line">    -boot start_sasl \</span><br><span class="line">    -sname helloworld_dev \</span><br><span class="line">    -s helloworld \</span><br><span class="line">    -s reloader \</span><br><span class="line">    -config helloworld.config</span><br></pre></td></tr></table></figure></p>
+<p>如下看到在env中多了写入的config值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(helloworld_dev@Ubuntu-desktop)1&gt; application:get_all_key(helloworld).</span><br><span class="line">&#123;ok,[&#123;description,&quot;helloworld&quot;&#125;,</span><br><span class="line">     &#123;id,[]&#125;,</span><br><span class="line">     &#123;vsn,&quot;0.1&quot;&#125;,</span><br><span class="line">     &#123;modules,[helloworld,helloworld_app,helloworld_deps,</span><br><span class="line">               helloworld_dtl,helloworld_sup,helloworld_web]&#125;,</span><br><span class="line">     &#123;maxP,infinity&#125;,</span><br><span class="line">     &#123;maxT,infinity&#125;,</span><br><span class="line">     &#123;registered,[]&#125;,</span><br><span class="line">     &#123;included_applications,[]&#125;,</span><br><span class="line">     &#123;applications,[kernel,stdlib,crypto]&#125;,</span><br><span class="line">     &#123;env,[&#123;included_applications,[]&#125;,&#123;key2,val2&#125;,&#123;key1,val1&#125;]&#125;,</span><br><span class="line">     &#123;mod,&#123;helloworld_app,[]&#125;&#125;,</span><br><span class="line">     &#123;start_phases,undefined&#125;]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="-cookie_Cookie">-cookie Cookie</h3><p>过时的没有任何效果的标志，是setcookie的错误拼写，用setcookie代替。</p>
+<h3 id="-setcookie_Cookie">-setcookie Cookie</h3><p>和erlang:set_cookie(Node, Cookie)的效果一样。给本地结点设置需要给本地结点起个名字-name/sname</p>
+<h3 id="-detached">-detached</h3><p>以background的形式运行erl，与当前shell分离开，但是需要知道如何停止这个系统<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/15464606/erlang-kill-all-processes-running-in-background">How to stop</a>.</p>
+<h3 id="-emu_args">-emu_args</h3><p>打印传给emulator的参数，比如在start-dev.sh脚本中加入它，可以看到<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ./start-dev.sh </span><br><span class="line">Executing: /usr/local/lib/erlang/erts-5.9/bin/beam.smp /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -pa ebin deps/erlydtl/ebin deps/eunit_formatters/ebin deps/merl/ebin deps/mochiweb/ebin -boot start_sasl -sname helloworld_dev -s helloworld -s reloader</span><br><span class="line"></span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br></pre></td></tr></table></figure></p>
+<h3 id="-env_Variable_Value">-env Variable Value</h3><p>设置OS模块的环境变量Variable为Value.<br>通过os:getenv/0 getenv/1可以得到</p>
+<h3 id="-heart">-heart</h3><p>开启心跳检测，尽管erlang有各种supervisor监管机制，但是如果emulator down掉了就完了，-heart会开启一个heart进程监控整个emulator，在规定时间内如果没有收到心跳，这个进程就会执行HEART_COMMAND参数，如果这个参数没有设定，那么只会弹出警告，而不会重启。一般HEART_COMMAND就是重启emulator。麻烦的是如果设定了heart，但是没有用-sname，是无法回到这个erlang shell的，也就是无法调用init：stop()来终止heart的监控策略。</p>
+<p>在没有开启任何erl shell的情况下调用<code>ps -ef|grep erl</code>看到跟erl有关的进程如下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef |grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3329  2862  0 10:58 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>启动一个erl emulator,然后Ctrl + z放到挂起<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl </span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; </span><br><span class="line">[1]+  已停止               erl</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef |grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3333  2862  0 11:01 pts/2    00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi --</span><br><span class="line">yuyouqi   3346  2862  0 11:01 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>可以看到3333这个进程后面的命令是开启一个erl emulator的<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ kill -9 3333</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef | grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3366  2862  0 11:04 pts/2    00:00:00 grep --color=auto erl</span><br><span class="line">[1]+  已杀死               erl</span><br></pre></td></tr></table></figure></p>
+<p>可以看到将他kill掉是没问题的<br>下面启动一个-heart erl shell<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test1 -heart -env HEART_COMMAND &quot;erl -sname test1 -heart&quot;</span><br><span class="line">heart_beat_kill_pid = 3369</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test1@yuyouqi-desktop)1&gt; </span><br><span class="line">[1]+  已停止               erl -sname test1 -heart -env HEART_COMMAND &quot;erl -sname test1 -heart&quot;</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef | grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3369  2862  1 11:05 pts/2    00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3376  2219  0 11:05 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3387  2862  0 11:06 pts/2    00:00:00 grep --color=auto erl</span><br><span class="line"></span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ heart: Fri Jul  3 11:06:57 2015: heart-beat time-out.</span><br><span class="line">heart_beat_kill_pid = 3390</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef | grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3376  2219  0 11:05 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3389  3383  0 11:06 ?        00:00:00 sh -c erl -sname test1 -heart</span><br><span class="line">yuyouqi   3390  3389  0 11:06 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3410  2862  0 11:07 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>上面命令是我用-heart启动一个erl shell，可以看到多了3369 和3376这两个进程，把erl shell挂起，一段时间后，由于heart进程没有接收到“心跳”，重启了erl shell,pid变为3390。而且多出了一个3389这个进程，而3390这个erl shell是3389的子进程。可以看到3389就是执行我们的HEART_COMMAND<br>如果不指定HEART_COMMAND<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test2 -heart</span><br><span class="line">heart_beat_kill_pid = 3685</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test2@yuyouqi-desktop)1&gt; </span><br><span class="line">[1]+  已停止               erl -sname test2 -heart</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef|grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3376  2219  0 11:05 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3389  3383  0 11:06 ?        00:00:00 sh -c erl -sname test1 -heart</span><br><span class="line">yuyouqi   3390  3389  0 11:06 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3685  2862  2 12:15 pts/2    00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test2 -heart</span><br><span class="line">yuyouqi   3703  2862  0 12:15 pts/2    00:00:00 grep --color=auto erl</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ jobs</span><br><span class="line">[1]+  已停止               erl -sname test2 -heart</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ fg</span><br><span class="line">erl -sname test2 -heart</span><br><span class="line"></span><br><span class="line">(test2@yuyouqi-desktop)1&gt; </span><br><span class="line">User switch command</span><br><span class="line"> --&gt; q</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ heart: Fri Jul  3 12:16:10 2015: Erlang has closed.</span><br><span class="line">heart: Fri Jul  3 12:16:10 2015: Would reboot. Terminating.</span><br><span class="line"></span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef|grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3376  2219  0 11:05 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3389  3383  0 11:06 ?        00:00:00 sh -c erl -sname test1 -heart</span><br><span class="line">yuyouqi   3390  3389  0 11:06 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3705  2862  0 12:16 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>新建一个test2 shell，不设置HEART_COMMAND，<br>可以看到如果没有设置HEART_COMMAND 使用ctrl g退出后不会重启，但是test1是会重启的。<br>而且新建节点后发现-daemon进程并没有增加，我猜测-daemon有可能是heart监控进程。<br>但是无论怎样kill都是无效的，依然会重启<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ kill -9 3376 3389 3390</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ heart: Fri Jul  3 12:21:15 2015: Executed &quot;erl -sname test1 -heart&quot;. Terminating.</span><br><span class="line">heart: Fri Jul  3 12:21:15 2015: Erlang has closed.</span><br><span class="line">heart_beat_kill_pid = 3716</span><br><span class="line"></span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef|grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3715  3404  0 12:21 ?        00:00:00 sh -c erl -sname test1 -heart</span><br><span class="line">yuyouqi   3716  3715  3 12:21 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/beam.smp -- -root /usr/local/lib/erlang -progname erl -- -home /home/yuyouqi -- -sname test1 -heart</span><br><span class="line">yuyouqi   3723  2219  0 12:21 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3734  2862  0 12:21 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>这时就需要进入test1，调用init:stop()来结束<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test2</span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test2@yuyouqi-desktop)1&gt; </span><br><span class="line">User switch command</span><br><span class="line"> --&gt; r &#x27;test1@yuyouqi-desktop&#x27;</span><br><span class="line"> --&gt; c</span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test1@yuyouqi-desktop)1&gt; init:stop().</span><br><span class="line">*** ERROR: Shell process terminated! (^G to start new job) ***</span><br><span class="line">heart: Fri Jul  3 12:23:40 2015: Executed &quot;erl -sname test1 -heart&quot;. Terminating.</span><br><span class="line"></span><br><span class="line">User switch command</span><br><span class="line"> --&gt; j</span><br><span class="line">   1  &#123;shell,start,[init]&#125;</span><br><span class="line"> --&gt; c 1</span><br><span class="line"></span><br><span class="line">(test2@yuyouqi-desktop)1&gt;        </span><br><span class="line">User switch command</span><br><span class="line"> --&gt; q</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ ps -ef|grep erl</span><br><span class="line">yuyouqi   2475  2345  0 10:23 ?        00:00:01 /usr/bin/perl /usr/bin/shutter --min_at_startup</span><br><span class="line">yuyouqi   3723  2219  0 12:21 ?        00:00:00 /usr/local/lib/erlang/erts-5.9/bin/epmd -daemon</span><br><span class="line">yuyouqi   3760  2862  0 12:24 pts/2    00:00:00 grep --color=auto erl</span><br></pre></td></tr></table></figure></p>
+<p>这样才能将heart监控的shell关闭(或者使用rpc)<br>参考<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/7217892/is-there-a-way-to-kill-the-erlang-vm-when-it-is-running-with-heart">Is there a way to kill the erlang vm when it is running with -heart</a></p>
+<h3 id="-hidden">-hidden</h3><p>已hidden启动的结点在于其他结点连接时，他的连接时隐藏的，不会再nodes()中得到自己的名字。只有与自己同属于一个<a target="_blank" rel="noopener" href="http://www.erlang.org/doc/man/global_group.html#type-group_name">global_group</a>的其他结点才能知道自己。<br>比如建立一个kernel.config,定义一个global_group<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;kernel, [&#123;global_groups, [&#123;test, [&#x27;test1@yuyouqi-desktop&#x27;, &#x27;test2@yuyouqi-desktop&#x27;]&#125;]&#125;]&#125;].</span><br></pre></td></tr></table></figure></p>
+<p>然后启动3个结点test1，test2，test3<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test1 -config kernel.config </span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test1@yuyouqi-desktop)1&gt; global_group:global_groups().</span><br><span class="line">&#123;test,[]&#125;</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test2 -hidden -config kernel.config </span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test2@yuyouqi-desktop)1&gt; global_group:global_groups().</span><br><span class="line">&#123;test,[]&#125;</span><br><span class="line">yuyouqi@yuyouqi-desktop:~/Erlang/mochiweb/helloworld$ erl -sname test3 -config kernel.config </span><br><span class="line">Erlang R15B (erts-5.9) [source] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(test3@yuyouqi-desktop)1&gt; global_group:global_groups().</span><br><span class="line">&#123;no_name,[test]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中test2已hidden形式启动，test3不在global_group中，可以看到test1和test2返回自己的global_group为test。<br>用<code>net_kernel:connect</code>将它们互联。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(test2@yuyouqi-desktop)2&gt; net_kernel:connect(&#x27;test1@yuyouqi-desktop&#x27;).</span><br><span class="line">true</span><br><span class="line">(test2@yuyouqi-desktop)3&gt; nodes().</span><br><span class="line">[&#x27;test1@yuyouqi-desktop&#x27;]</span><br><span class="line">(test2@yuyouqi-desktop)5&gt; net_kernel:connect(&#x27;test3@yuyouqi-desktop&#x27;).</span><br><span class="line">true</span><br><span class="line">(test2@yuyouqi-desktop)6&gt; nodes().</span><br><span class="line">[&#x27;test1@yuyouqi-desktop&#x27;]</span><br><span class="line">(test1@yuyouqi-desktop)2&gt; nodes().</span><br><span class="line">[&#x27;test2@yuyouqi-desktop&#x27;]</span><br><span class="line">(test3@yuyouqi-desktop)2&gt; nodes().</span><br><span class="line">[]</span><br></pre></td></tr></table></figure></p>
+<p>test1和test2是可以互相看到的，而test3的nodes()返回的是空</p>
+<h3 id="-init_debug">-init_debug</h3><p>启动的时候打印调试参数。可以尝试下<code>erl -init_debug</code> 然后对照着<code>/usr/local/lib/erlang/releases/RXXB/start.script</code></p>
+<h3 id="-make">-make</h3><p>相当于make:all(),见<br><a target="_blank" rel="noopener" href="http://www.erlang.org/doc/man/make.html">make</a></p>
+<h3 id="-man_Module">-man Module</h3><p>查询某个模块的手册，首先需要去官网下载相应的手册</p>
+<h3 id="-mode_interactive|embedded">-mode interactive|embedded</h3><p>erlang system载入代码的方式，interactive模式下，系统只载入一部分代码，当使用为载入的代码时，会尝试自动载入这个模块。如果是embeded模式，实在系统初始化时，根据启动的script文件载入所有代码，如果文件上没有提到，不会载入，如果调用为载入模块的函数，会报exception error</p>
+<h3 id="-name/sname_NAME">-name/sname NAME</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">erl -sname test1</span><br><span class="line">erl -name test2@192.168.1.10</span><br></pre></td></tr></table></figure>
+<p>sname 与name之间的结点不能通信，必须命名方式相同才可以。 sname只能用于同一子网内的机器。</p>
+<h3 id="-noinput">-noinput</h3><p>erl不读入任何参数</p>
+<h3 id="-noshell">-noshell</h3><p>常用，不显示erl shell。一般都是执行一系列的-eval，-s，-ran，然后init:stop().</p>
+<h3 id="-pa/-pz">-pa/-pz</h3><p>添加code路径，没什么可说的同code:addpathsa/addpathsz</p>
+<h3 id="-remsh_Node">-remsh Node</h3><p>远程链接一个节点。例如在shell1中启动一个mochiweb例子<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~/code/helloworld$ ./start-dev.sh </span><br><span class="line">...=PROGRESS REPORT==== 17-Jul-2015::12:20:43 ===</span><br><span class="line">          supervisor: &#123;local,kernel_safe_sup&#125;</span><br><span class="line">             started: [&#123;pid,&lt;0.74.0&gt;&#125;,</span><br><span class="line">                       &#123;id,timer_server&#125;,</span><br><span class="line">                       &#123;mfargs,&#123;timer,start_link,[]&#125;&#125;,</span><br><span class="line">                       &#123;restart_type,permanent&#125;,</span><br><span class="line">                       &#123;shutdown,1000&#125;,</span><br><span class="line">                       &#123;child_type,worker&#125;]</span><br><span class="line"></span><br><span class="line">(helloworld_dev@youthy)1&gt; </span><br></pre></td></tr></table></figure></p>
+<p>然后在shell2中链接这个节点。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~$ erl -sname test2 -remsh helloworld_dev@youthy</span><br><span class="line">Erlang R15B (erts-5.9) [source] [64-bit] [smp:4:4] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V7.0  (abort with ^G)</span><br><span class="line">(helloworld_dev@youthy)1&gt; helloworld_web:</span><br><span class="line">loop/2         module_info/0  module_info/1  start/1        stop/0         </span><br><span class="line"></span><br><span class="line">(helloworld_dev@youthy)1&gt; helloworld_web:module_info().</span><br><span class="line">[&#123;module,helloworld_web&#125;,</span><br><span class="line"> &#123;exports,[&#123;start,1&#125;,</span><br><span class="line">           &#123;stop,0&#125;,</span><br><span class="line">           &#123;loop,2&#125;,</span><br><span class="line">           &#123;module_info,0&#125;,</span><br><span class="line">           &#123;module_info,1&#125;]&#125;,</span><br><span class="line"> &#123;attributes,[&#123;vsn,[243820355007545606700617893262330487884]&#125;,</span><br><span class="line">              &#123;author,&quot;Mochi Media &lt;dev@mochimedia.com&gt;&quot;&#125;]&#125;,</span><br><span class="line"> &#123;compile,[&#123;options,[&#123;outdir,&quot;ebin&quot;&#125;,</span><br><span class="line">                     debug_info,debug_info,</span><br><span class="line">                     &#123;i,&quot;include&quot;&#125;]&#125;,</span><br><span class="line">           &#123;version,&quot;6.0&quot;&#125;,</span><br><span class="line">           &#123;time,&#123;2015,7,17,4,17,8&#125;&#125;,</span><br><span class="line">           &#123;source,&quot;/home/youthy/code/helloworld/src/helloworld_web.erl&quot;&#125;]&#125;,</span><br><span class="line"> &#123;native,false&#125;,</span><br><span class="line"> &#123;md5,&lt;&lt;183,110,23,159,102,166,62,91,144,171,107,229,135,</span><br><span class="line">        128,228,76&gt;&gt;&#125;]</span><br><span class="line">(helloworld_dev@youthy)2&gt; </span><br><span class="line">User switch command</span><br><span class="line"> --&gt; q</span><br><span class="line">youthy@youthy:~$ </span><br></pre></td></tr></table></figure></p>
+<p>值得注意的是1 必须给节点一个名字且命名方式需要一致。2退出时，不要用q()之类的，否则退出的时对面的节点。需要用ctrl+G然后q的方式。</p>
+<h3 id="-rsh_Program">-rsh Program</h3><p>一般用来启用slave节点时用到。下面例子一开始我们进程中没有erl shell先启动一个master节点。然后在master节点里调用slave:start_link(Host, Name, Args)的方式。启动一个slave节点。这时我们看到进程里面有了两个erl shell。其中一个是已-noshell, noinput等方式启动的。这个就是slave启动的奴隶节点。我们可以用rpc调用一个功能，然后结果会返回给master节点。<br>因为我只有一台机器，如果不用&quot;-rsh ssh&quot;也是可以成功的。但是如果真是在其他机器上还是要加上ssh。两台节点环境，erl版本需一致。master节点退出后，不管时start_link启动还是start启动的slave节点都会退出。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~$ ps -ef | grep erl</span><br><span class="line">youthy   13884  2086  0 14:47 ?        00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/epmd -daemon</span><br><span class="line">youthy   23280 13177  0 15:19 pts/0    00:00:00 grep --color=auto erl</span><br><span class="line">youthy@youthy:~$ erl -sname master</span><br><span class="line">Erlang R15B (erts-5.9) [source] [64-bit] [smp:4:4] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">(master@youthy)1&gt; </span><br><span class="line">[1]+  已停止               erl -sname master</span><br><span class="line">youthy@youthy:~$ ps -ef | grep erl</span><br><span class="line">youthy   13884  2086  0 14:47 ?        00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/epmd -daemon</span><br><span class="line">youthy   23299 13177  1 15:19 pts/0    00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/beam.smp -- -root /home/youthy/erls/R15B -progname erl -- -home /home/youthy -- -sname master</span><br><span class="line">youthy   23336 13177  0 15:19 pts/0    00:00:00 grep --color=auto erl</span><br><span class="line">youthy@youthy:~$ fg</span><br><span class="line">erl -sname master</span><br><span class="line"></span><br><span class="line">(master@youthy)1&gt; slave:start_link(&#x27;youthy&#x27;, &#x27;slave&#x27;, &quot;-rsh ssh&quot;).</span><br><span class="line">&#123;ok,slave@youthy&#125;</span><br><span class="line">(master@youthy)2&gt; </span><br><span class="line">[1]+  已停止               erl -sname master</span><br><span class="line">youthy@youthy:~$ ps -ef | grep erl</span><br><span class="line">youthy   13884  2086  0 14:47 ?        00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/epmd -daemon</span><br><span class="line">youthy   23299 13177  0 15:19 pts/0    00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/beam.smp -- -root /home/youthy/erls/R15B -progname erl -- -home /home/youthy -- -sname master</span><br><span class="line">youthy   23546  2086  0 15:20 ?        00:00:00 /home/youthy/erls/R15B/erts-5.9/bin/beam.smp -- -root /home/youthy/erls/R15B -progname erl -- -home /home/youthy -- -noshell -noinput -noshell -noinput -master master@youthy -sname slave@youthy -s slave slave_start master@youthy slave_waiter_0 -rsh ssh</span><br><span class="line">youthy   23587 13177  0 15:20 pts/0    00:00:00 grep --color=auto erl</span><br><span class="line">youthy@youthy:~$ fg</span><br><span class="line">erl -sname master</span><br><span class="line"></span><br><span class="line">(master@youthy)2&gt; rpc:call(&#x27;slave@youthy&#x27;, lists, sum, [[2,3,4]]).</span><br><span class="line">9</span><br><span class="line">(master@youthy)3&gt; </span><br></pre></td></tr></table></figure></p>
+<h3 id="-set_cookie_Cookie">-set_cookie Cookie</h3><p>等同于erlang:set_cookie/2</p>
+<h3 id="-shutdown_time_Time">-shutdown_time Time</h3><p>Time是ms毫秒。设置关闭erl节点的时间，如果时间到了还没有结束完，就强制结束掉还存在的进程。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~$ erl -shutdown_time 1000</span><br><span class="line">Erlang R15B (erts-5.9) [source] [64-bit] [smp:4:4] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; q().</span><br><span class="line">ok</span><br><span class="line">2&gt; &#123;init,shutdown_timeout&#125;</span><br><span class="line">youthy@youthy:~$ </span><br><span class="line">youthy@youthy:~$ erl -shutdown_time 4000</span><br><span class="line">Erlang R15B (erts-5.9) [source] [64-bit] [smp:4:4] [async-threads:0] [hipe] [kernel-poll:false]</span><br><span class="line"></span><br><span class="line">Eshell V5.9  (abort with ^G)</span><br><span class="line">1&gt; q().</span><br><span class="line">ok</span><br><span class="line">2&gt; youthy@youthy:~$ </span><br></pre></td></tr></table></figure></p>
+<p>如上，1秒的时间看来时不够用的。</p>
+<h3 id="-smp_enable/auto/disable">-smp enable/auto/disable</h3><p>是否启用smp，默认时auto。auto自动检测。如果符合会自动开启smp。<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/me-sa/archive/2012/02/01/erlang0035.html">关于smp</a>.</p>
+<h3 id="-version">-version</h3><p>打印version信息。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/31/ubuntu-LAMP%E6%90%AD%E5%BB%BA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          ubuntu下lamp(apache2+php5+mysql)搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/15/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84toc/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于hexo的toc</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="erl命令和参数" data-title="erl命令和参数" data-url="http://youthy.github.io/2015/07/22/erl%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

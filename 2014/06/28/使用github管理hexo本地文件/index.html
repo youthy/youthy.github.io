@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用github管理hexo本地文件 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="用github管理hexo本地文件夹实现两台电脑同步  由于hexo+github搭建博客很依赖hexo本地文件,如果家里和公司的hexo本地文件夹不同那么生成的博客样子就不同,每次deploy的时候就有可能会覆盖.加入公司的_post里面有4篇日志,家里的里面有3篇,那么在家里hexo generate后在hexo deploy就有可能将4篇覆盖成3篇,所以需要公司和家里电脑的hexo本地文件夹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用github管理hexo本地文件">
+<meta property="og:url" content="http://youthy.github.io/2014/06/28/%E4%BD%BF%E7%94%A8github%E7%AE%A1%E7%90%86hexo%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="用github管理hexo本地文件夹实现两台电脑同步  由于hexo+github搭建博客很依赖hexo本地文件,如果家里和公司的hexo本地文件夹不同那么生成的博客样子就不同,每次deploy的时候就有可能会覆盖.加入公司的_post里面有4篇日志,家里的里面有3篇,那么在家里hexo generate后在hexo deploy就有可能将4篇覆盖成3篇,所以需要公司和家里电脑的hexo本地文件夹">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_004.png">
+<meta property="og:image" content="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_005.png">
+<meta property="og:image" content="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_007.png">
+<meta property="article:published_time" content="2014-06-28T03:43:57.000Z">
+<meta property="article:modified_time" content="2018-06-26T09:49:27.739Z">
+<meta property="article:author" content="youthy">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="github">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_004.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">undefined</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap%EF%BC%8Cvim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 10px;">二次元</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 10px;">杂记</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.github.io/">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">undefined</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">undefined</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-使用github管理hexo本地文件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/06/28/%E4%BD%BF%E7%94%A8github%E7%AE%A1%E7%90%86hexo%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6/" class="article-date">
+  	<time datetime="2014-06-28T03:43:57.000Z" itemprop="datePublished">6月 28 2014</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用github管理hexo本地文件
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/hexo/">hexo</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="用github管理hexo本地文件夹实现两台电脑同步">用github管理hexo本地文件夹实现两台电脑同步</h1><hr>
+<blockquote>
+<p>由于hexo+github搭建博客很依赖hexo本地文件,如果家里和公司的hexo本地文件夹不同那么生成的博客样子就不同,每次deploy的时候就有可能会覆盖.加入公司的_post里面有4篇日志,家里的里面有3篇,那么在家里<code>hexo generate</code>后在<code>hexo deploy</code>就有可能将4篇覆盖成3篇,所以需要公司和家里电脑的hexo本地文件夹同步,我采用github托管.</p>
+</blockquote>
+<span id="more"></span>
+<ol>
+<li>首先需要安装git,当然既然已经用hexo写blog了那就肯定安装了git,npm,python,nodejs等了.</li>
+<li>然后要有github账户,当然和上面一样,既然在github上写blog肯定也已经有了.(废话)</li>
+<li>我们新建一个repository,我命名为hexoblog吧.</li>
+<li>假设本地hexo文件夹为hexoblog,我们首先需要用git初始化管理这个目录.<br><code>git init</code><br>这时hexoblog下有个.git隐藏文件夹可以用 ls -al查看出,这是git管理这个文件夹的所有用到的文件.<br>5.init后git只不过建立了.git还未对任何文件进行管理,我们需要用<br><code>git add .</code><br>&quot;.&quot;代表所有文件,我们把hexoblog所有文件加入到git的管理中,这时我们用<code>git status</code>可以看到一大片绿的文件名,表明我们已经添加了这些文件的管理.</li>
+<li>我们在运行<br><code>git commit -m &quot;first commit&quot;</code>提交这些文件的修改.这时我们本的hexoblog管理就完成了,但是还没有提交的github上.</li>
+<li>我们在运行<br><code>git remote add origin https://github.com/你的用户名/你的repository名字.git</code><br>指定把本地的文件托管到这个地方.加入我托管的地址是 <blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/youthy/hexoblog">https://github.com/youthy/hexoblog</a> (就是浏览器上面的地址)</p>
+</blockquote>
+</li>
+</ol>
+<p>那么我的命令就是<br><code>git remote add origin https://github.com/youthy/hexoblog.git</code></p>
+<ol start="8">
+<li>我们这次制定了托管的地址,下面就可以提交了<br><code>git push origin master</code><br>origin就是我们制定的地址,类似于c++中 define定义的名字一样,如果制定的是<code>git remote add another http***.git</code><br>那么就可以用another代替origin. master是分支名字,如果你建立了其他分支可以更换这个名字.<br>这时我们回到github上可以看到提交成功了.<br><img src="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_004.png" alt=""></li>
+<li>之后在家里的电脑上执行<br><code>git clone https://你的托管的地址.git</code><br>就可以将文件复制到本地了</li>
+</ol>
+<hr>
+<p>###实际上还有点小问题.<br>我们进入themes文件夹下会看到<br><img src="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_005.png" alt=""><br>主题中有几个没有提交成功.只有landscape提交成功了,对比他们我发现失败的原因是其他的theme本身就有git在负责管理,比如我们在light下执行ls -al 可以看到.git文件夹,但是landscape中没有,这是没有提交成功的原因.<br>我用<code>rm -rf .git</code><br>移除了这几个文件夹的git管理文件,然后回到hexoblog下同样移除.git文件.再按上述步骤重新生成提交了一遍就ok了<br><img src="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_007.png" alt=""><br>这下终于可以再公司和家两端同步写blog了.</p>
+<blockquote>
+<p>##另外发现用git管理hexo后每次进行deploy提交时不用输入用户名和密码了,以前每次deploy都需要输入验证信息.顺便解决了这个反复验证的烦人问题.</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/06/28/Linux%E4%B8%8B%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0shadowsocks/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Linux下代理实现:shadowsocks
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/06/26/Markdown%E6%89%80%E8%83%BD%E8%AF%86%E5%88%AB%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E7%9A%84%E8%AF%AD%E8%A8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Markdown所能识别代码高亮的语言</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="使用github管理hexo本地文件" data-title="使用github管理hexo本地文件" data-url="http://youthy.github.io/2014/06/28/%E4%BD%BF%E7%94%A8github%E7%AE%A1%E7%90%86hexo%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

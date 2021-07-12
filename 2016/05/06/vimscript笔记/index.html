@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vimscript笔记 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Remeber :help always be with you  -- albert einstein记住:help　与你同在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vimscript笔记">
+<meta property="og:url" content="http://youthy.github.io/2016/05/06/vimscript%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="Remeber :help always be with you  -- albert einstein记住:help　与你同在">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-05-06T07:33:21.000Z">
+<meta property="article:modified_time" content="2018-06-26T09:49:27.737Z">
+<meta property="article:author" content="youthy">
+<meta property="article:tag" content="vim">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">undefined</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap%EF%BC%8Cvim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 10px;">二次元</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 10px;">杂记</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.github.io/">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">undefined</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">undefined</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-vimscript笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/06/vimscript%E7%AC%94%E8%AE%B0/" class="article-date">
+  	<time datetime="2016-05-06T07:33:21.000Z" itemprop="datePublished">5月 6 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vimscript笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Remeber <code>:help</code> always be with you  -- albert einstein<br>记住<code>:help</code>　与你同在</p>
+</blockquote>
+<span id="more"></span>
+<!-- toc -->
+<ul>
+<li><a href="#first-of-all">First of all</a></li>
+<li><a href="#echo-echom----------">echo echom  打印信息帮助调试</a></li>
+<li><a href="#--">注释</a></li>
+<li><a href="#------">(布尔)选项</a></li>
+<li><a href="#map-------">map 映射!映射!</a></li>
+<li><a href="#leader--">leader按键</a></li>
+<li><a href="#iabbrev">iabbrev</a></li>
+<li><a href="#autocmd-----">autocmd 自动命令</a></li>
+<li><a href="#operator-pending">operator_pending</a></li>
+<li><a href="#-normal">:normal</a></li>
+<li><a href="#-execute">:execute</a></li>
+<li><a href="#set-statusline">set statusline</a></li>
+<li><a href="#let----">let  变量</a></li>
+<li><a href="#---">寄存器</a></li>
+<li><a href="#--">管道</a></li>
+<li><a href="#if">if</a><ul>
+<li><a href="#--">比较</a></li>
+</ul>
+</li>
+<li><a href="#--">函数</a><ul>
+<li><a href="#--">参数</a></li>
+<li><a href="#----">可变参数</a></li>
+<li><a href="#----">命名空间</a></li>
+</ul>
+</li>
+<li><a href="#---">字符串</a><ul>
+<li><a href="#---">连接符</a></li>
+<li><a href="#-----">字符串函数</a></li>
+</ul>
+</li>
+<li><a href="#--">列表</a></li>
+<li><a href="#--">循环</a><ul>
+<li><a href="#for">for</a></li>
+</ul>
+</li>
+<li><a href="#dict">dict</a></li>
+<li><a href="#-----">函数式编程</a><ul>
+<li><a href="#deepcopy--copy">deepcopy 与copy</a></li>
+</ul>
+</li>
+<li><a href="#--">路径</a></li>
+<li><a href="#regex------">Regex 正则表达式</a></li>
+</ul>
+<!-- tocstop -->
+<h3 id="First_of_all">First of all</h3><p>首先<code>:help echo/function/....</code>　help可以查看一个关键词的帮助.首先要习惯使用它</p>
+<h3 id="echo_echom_打印信息帮助调试">echo echom  打印信息帮助调试</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:echo &quot;test&quot;</span><br><span class="line">:echo &quot;test2&quot;</span><br><span class="line">:messages</span><br></pre></td></tr></table></figure>
+<p>test2在message中，而test不在。<br>echom 主要用来调试。</p>
+<h3 id="注释">注释</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot; 这是注释</span><br></pre></td></tr></table></figure>
+<h3 id="(布尔)选项">(布尔)选项</h3><p><code>:set</code> 用于设置内置的选项。有的是布尔选项，有的不是 see <code>:help set</code><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:set number</span><br><span class="line">:set nonumber</span><br><span class="line">:set number!</span><br><span class="line">:set number?</span><br><span class="line">:set number numberwidth=4</span><br><span class="line">:set omnifunc=XXX#complete</span><br></pre></td></tr></table></figure></p>
+<p>number是一个布尔选项。任何布尔选项都可以通过<code>set</code> ,<code>set no(Bool)</code>, 设置开启关闭<code>set Bool!</code>切换开关状态.<br><code>set &#123;Option&#125;?</code> 用来查看当前值.<br>有些选项可以赋值.多选项用空格隔开一次赋值<br>number是用来显示行号的布尔值<br>omnifunc 是补全函数<br>在脚本中如果要引用某个选项使用<code>&amp;</code>, 比如<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if &amp;filetype == &quot;vim&quot;</span><br></pre></td></tr></table></figure></p>
+<p>判断当前文件类型是否是vimscript</p>
+<h3 id="map_映射!映射!">map 映射!映射!</h3><p><code>:help map-commands</code><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">:map - x  //  任何模式下将&#x27;-&#x27;映射为&#x27;x&#x27;</span><br><span class="line">:map &lt;space&gt; x</span><br><span class="line">:map &lt;c-d&gt; x</span><br><span class="line">:nmap - x</span><br><span class="line">:vmap - x</span><br><span class="line">:imap - x</span><br><span class="line">:noremap - x</span><br><span class="line">:noremap \ -</span><br></pre></td></tr></table></figure></p>
+<p>map通用于所有模式下。nmap,vmap, imap分别映射在不同的模式下。<br>noremap不存在递归风险。任何时候都应该使用这种方式。<strong>对，任何时候</strong></p>
+<h3 id="leader按键">leader按键</h3><p><code>:help mapleader</code><br>很多插件中存在各种映射都用的<leader>这个按键<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:let mapleader=&quot;-&quot;</span><br><span class="line">:nnoremap &lt;leader&gt;d dd</span><br><span class="line">let maplocalleader = &quot;\\&quot;</span><br><span class="line">:noremap &lt;buffer&gt; &lt;localleader&gt;d dd</span><br></pre></td></tr></table></figure></p>
+<p>leader 默认为<code>\</code>, 如果修改可以通过<code>echo mapleader</code>查看<br>localleader 只针对某个buffer</p>
+<blockquote>
+<p>除了map 还有各种其他地方指定<code>&lt;buffer&gt;</code>的设置。比如autocmd,加上buffer比较安全。</p>
+</blockquote>
+<p>同样有的选项也支持<code>:setlocal number</code></p>
+<h3 id="iabbrev">iabbrev</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:iabbrev waht what</span><br></pre></td></tr></table></figure>
+<p>自动替换。　可以将ｗａｈｔ　替换为ｗｈａｔ<br>iabbrev是结束insert mode时发生的。 如果what前后有别的则不会发生替换.这点与<code>inoremap waht what</code>不同<br>同样可以接受<code>:iabbrev &lt;buffer&gt; XXXX</code>　只对当前buffer生效</p>
+<h3 id="autocmd_自动命令">autocmd 自动命令</h3><p><code>:help autocmd</code><br><code>:help Event</code><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:autocmd BufNewFild,BufRead *.html :normal gg=G</span><br><span class="line">         事件                模式   执行命令</span><br></pre></td></tr></table></figure></p>
+<p><code>autocmd Event File Command</code>  对File文件接收到event事件后　触发command</p>
+<p>Event后面的模式每个pattern不一样。<br>比如 <code>:autocmd FileType vim call SomeFun()</code><br><strong>这里有个危险的地方</strong><br>单纯的<code>autocmd</code> 并不会覆盖之前的命令。如果同一个<code>autocmd</code>加载多次他们会同时存在也就是可能对于同一个事件执行多次<code>SomeFun()</code>.<br>这里vim有一种自动命令组的方法<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup</span><br><span class="line">:    autocmd BufWrite * :echom &quot;Foo&quot;</span><br><span class="line">:    autocmd BufWrite * :echom &quot;Bar&quot;</span><br><span class="line">:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>上面将&quot;Foo&quot;, &quot;Bar&quot;两个事件归到testgroup组中。这时testgroup相当于一个<code>autocmd</code>　同样多次执行testgroup也会造成上面的情况。同样，如果之后在执行<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup</span><br><span class="line">:    autocmd BufWrite * :echom &quot;Baz&quot;</span><br><span class="line">:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>&quot;Foo&quot;, &quot;Bar&quot;并没有清除.而是将&quot;Baz&quot;合并到了testgroup中.这样没有解决多次读取事件造成重复调用的问题。<br>解决的办法是在组开始的地方调用 <code>autocmd!</code>来清除这个组的事件<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:augroup testgroup</span><br><span class="line">:    autocmd!</span><br><span class="line">:    autocmd BufWrite * :echom &quot;Cats&quot;</span><br><span class="line">:    autocmd XXXXX....</span><br><span class="line">:augroup END</span><br></pre></td></tr></table></figure></p>
+<p>这样解决了多次重复调用的问题</p>
+<h3 id="operator_pending">operator_pending</h3><p><code>:onoremap p ic</code></p>
+<p>w, p, t 各种定位词　ｏｎｏｒｅｍａｐ可以修改定位词映射</p>
+<h3 id=":normal">:normal</h3><p><code>:normal gg</code><br><code>:normal</code> 后面会跟一个字符串。相当于在ｎｏｒｍａｌ模式下按下这些按键</p>
+<p>当然永远不要用normal 而是用<code>normal!</code> 后者无视映射。因为你永远不知道用户把按键映射成了什么</p>
+<h3 id=":execute">:execute</h3><p>`:execute &quot;:normal!  gg&quot;</p>
+<p>execute 后面跟脚本。</p>
+<p>为什么不直接用normal!,而是用execute呢<br>因为normal不能识别特殊字符。比如<cr>回车符等所以一般要包个execute命令。<br>比如<code>:normal! a\&lt;cr&gt;</code> 我们设想先按下a进入insert模式然后输出回车符换行.但是实际上这个命令进入插入模式后，直<br>接将<code>\&lt;cr&gt;</code>输入到了buffer中.我们可以用`execute &quot;normal! a\<cr>&quot;完成这个动作</p>
+<h3 id="set_statusline">set statusline</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set statusline=%f\ -\ %y</span><br><span class="line">:set statusline+=%=</span><br><span class="line">:set statusline+=%L</span><br></pre></td></tr></table></figure>
+<p>修改状态条显示内容。类似printf %f 是文件名%y是文件类型 %=表示后面的右对齐%L显示总行数。</p>
+<h3 id="let_变量">let  变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">:let foo=&quot;bar&quot;</span><br><span class="line">:echo foo  //显示ｂａｒ</span><br><span class="line">:set number</span><br><span class="line">:echo &amp;number //1</span><br><span class="line">:let number = 100</span><br><span class="line">:echo number //100</span><br><span class="line">:let &amp;number=&amp;number-1</span><br><span class="line">:echo &amp;number //0　number是是否显示行号的布尔值</span><br></pre></td></tr></table></figure>
+<p>let 用来定义一个变量,这个变量可以与某个选项同名(set), 只不过选项的引用需要前面加<code>&amp;</code><br>set 只能给选项赋值常量值<br>而let 可以用变量给变量赋值,如上面的<code>&amp;number</code><br><code>:let &amp;l:number = 100</code>可以给本地变量赋值而不影响其他buffer</p>
+<h3 id="寄存器">寄存器</h3><p><code>:register</code> 查看所有寄存器内容<br><code>&quot;ap</code> a是寄存器名字. 表示将a中的内容粘贴到此处<br><code>echo @a</code> 打印a中的内容<br><code>let @a=&quot;test&quot;</code> 修改a中内容<br><code>&quot;</code>寄存器是为指定寄存器所有为指定寄存器的复制操作,内容都会写入这里</p>
+<h3 id="管道">管道</h3><p><code>:echo &quot;haha&quot; | echo &quot;heihei</code></p>
+<h3 id="if">if</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">:if &quot;20haha&quot;</span><br><span class="line">:   echo &quot;true&quot;</span><br><span class="line">:endif</span><br><span class="line"></span><br><span class="line">:if &quot;haha20&quot;</span><br><span class="line">:   echo &quot;true&quot;</span><br><span class="line">:else</span><br><span class="line">:   echo &quot;false&quot;</span><br><span class="line">:endif</span><br></pre></td></tr></table></figure>
+<p>第一个会显示ｔｒｕｅ　第二个是ｆａｌｓｅ　<br>因为字符串在强制转换时第一个是数字会转化为相应的数字。否则是０</p>
+<h4 id="比较">比较</h4><p>不能完全信任<code>==</code><br>因为vim的大小写敏感时用户设置的<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase</span><br><span class="line">:if &quot;foo&quot; == &quot;FOO&quot;</span><br></pre></td></tr></table></figure></p>
+<p>这个语句真假取决于ignorecase的设置。<br>替代品<br><code>==?</code> 大小写不敏感比较<br><code>==#</code> 大小写敏感比较</p>
+<h3 id="函数">函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">:function Test()</span><br><span class="line">:   XXXXX</span><br><span class="line">:endfunction</span><br><span class="line">:function s:testb()</span><br><span class="line">:   echom &quot;script test&quot;</span><br><span class="line">:endfunction</span><br><span class="line">:call Test()</span><br></pre></td></tr></table></figure>
+<p><strong>没有限制作用域的函数必须以大写字母开头</strong><br>脚本内的私有函数以<code>s:</code>开头<br>函数没有显示指定<code>return XX</code>则默认返回0</p>
+<h4 id="参数">参数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:function EchoTest(name)</span><br><span class="line">:   echo a:name</span><br><span class="line">:endfunction</span><br></pre></td></tr></table></figure>
+<p>函数的参数总要加a这个作用域否则会提示找不到</p>
+<h4 id="可变参数">可变参数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:function Test(...)  // 假如 call Test(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</span><br><span class="line">:   echo a:0         // 3 参数个数</span><br><span class="line">:   echo a:1         // &quot;a&quot;</span><br><span class="line">:   echo a:000       // [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;] 000指参数列表.不能用echom输出只能用echo</span><br><span class="line">:endfunction</span><br></pre></td></tr></table></figure>
+<p><code>:call Test(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code><br>a:0 指的是参数数量。 a:1 是 &quot;a&quot;.以此类推</p>
+<h4 id="命名空间">命名空间</h4><blockquote>
+<p>|buffer-variable|    b:      Local to the current buffer.<br>|window-variable|    w:      Local to the current window.<br>|tabpage-variable|   t:      Local to the current tab page.<br>|global-variable|    g:      Global.<br>|local-variable|     l:      Local to a function.<br>|script-variable|    s:      Local to a |:source|&#39;ed Vim script.<br>|function-argument|  a:      Function argument (only inside a function).<br>|vim-variable|         v:      Global, predefined by Vim.</p>
+</blockquote>
+<p>命名空间可以当做dict使用<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for k in keys(b:)</span><br><span class="line">    unlet b:[k]</span><br><span class="line">endfor</span><br></pre></td></tr></table></figure></p>
+<p>可以混合可变参数和固定参数<br><code>:function Test(a, ...)</code></p>
+<p>不能对函数的参数改变赋值<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:function Test(foo)</span><br><span class="line">:   let a:foo=&quot;change&quot; //这样做会报错</span><br><span class="line">:   let tmp=a:foo      // 这样才可以</span><br><span class="line">:   let tmp=&quot;change&quot;</span><br><span class="line">:endfunction</span><br></pre></td></tr></table></figure></p>
+<h3 id="字符串">字符串</h3><h4 id="连接符">连接符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:echo &quot;haha&quot;.&quot;heihei&quot; </span><br></pre></td></tr></table></figure>
+<p>上面输出&quot;hahaheihei&quot;</p>
+<h4 id="字符串函数">字符串函数</h4><p><code>:help function-list</code> 查看所有函数分类列表</p>
+<p><code>strlen(&quot;string&quot;)</code><br><code>len(&quot;string&quot;)</code><br><code>echo split(&quot;one two&quot;)</code><br><code>echo split(&quot;one,two&quot;,&quot;,&quot;)</code><br><code>echo join([&quot;one&quot;,&quot;two&quot;], &quot;,&quot;)</code><br><code>echo tolower(&quot;BIG&quot;)</code><br><code>echo toupper(&quot;low&quot;)</code></p>
+<h3 id="列表">列表</h3><ol>
+<li>有序，异质</li>
+<li><p>索引从0开始 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:echo [1,2,3][0] // 1</span><br><span class="line">:echo [1,2,3][-1] //3</span><br><span class="line">:echo &quot;abc&quot;[1] // b</span><br><span class="line">:echo &quot;abc&quot;[-1] // 无效。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切割</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:echo [1,2,3][:1] // [1,2]</span><br><span class="line">:echo [1,2,3][1:] // [2,3]</span><br><span class="line">:echo [1,2,3][:1000] // [1,2,3] 可以越界</span><br><span class="line">:echo [1,2,3,4][-2:-1] //[3,4]</span><br><span class="line">:echo [1,2,3,4][-2:1] // []</span><br><span class="line">:echo &quot;abc&quot;[-2:-1] // bc。上面的负数索引无效。切割却有效。。。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.连接<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:echo [&#x27;a&#x27;,&#x27;b&#x27;] + [&#x27;c&#x27;] // [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;]</span><br><span class="line">:echo [1,2] + [3]//[1,2,3]</span><br><span class="line">:echo [a,b] + [c] // 错误。</span><br><span class="line">:echo &quot;ab&quot;.&quot;c&quot; //&quot;abc&quot;</span><br></pre></td></tr></table></figure></p>
+<ol start="5">
+<li>列表函数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">:echo add([1,2],3) // [1,2,3]</span><br><span class="line">:echo get([1,2,3], 0, &#x27;default&#x27;) // 1</span><br><span class="line">:echo get([1,2,3], 4, &#x27;default&#x27;) // default</span><br><span class="line">:echo index([1,2,3], 1) // 0</span><br><span class="line">:echo index([1,2,3], 4) // -1 不存在返回-1</span><br><span class="line">:echo join([1,2], &quot;-&quot;) // 1-2</span><br><span class="line">:echo reverse([1,2]) //[2,1]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>更多阅读<code>:help List</code> <code>:help functions</code></p>
+<h3 id="循环">循环</h3><h4 id="for">for</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:for i in [1,2,3,4]</span><br><span class="line">:   let c += i</span><br><span class="line">:endfor</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:let c=1</span><br><span class="line">:while c &lt; 3</span><br><span class="line">: let t += c</span><br><span class="line">: let c += 1</span><br><span class="line">:endwhile</span><br></pre></td></tr></table></figure>
+<h3 id="dict">dict</h3><p><code>&#123;&#39;a&#39;:1, 2:&quot;two&quot;,&#125;</code> 字典的key总是会自动转为字符串.  应该总是结尾留一个<code>,</code> (个人很讨厌这种语法)<br>索引可以用.来索引<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:echo &#123;&#x27;a&#x27;:1, 2:&quot;two&quot;,&#125;[&#x27;a&#x27;] // 1</span><br><span class="line">:echo &#123;&#x27;a&#x27;:1, 2:&quot;two&quot;,&#125;[2] // two</span><br><span class="line">:echo &#123;&#x27;a&#x27;:1, 2:&quot;two&quot;,&#125;.a // 1</span><br></pre></td></tr></table></figure></p>
+<p>增加键值<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:let dic=&#123;&#x27;a&#x27;:1,&#125;</span><br><span class="line">:let dic.b=2</span><br><span class="line">:echo dic // &#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:let tmp=remove(dic, &#x27;a&#x27;) //移除dic中a，但是把a的值赋值给tmp</span><br><span class="line">:unlet dic.b //移除b。但是不返回值</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:echo has_key(&#123;&#x27;a&#x27;:1&#125;, &#x27;a&#x27;) // 1</span><br><span class="line">:echo has_key(&#123;&#x27;a&#x27;:1&#125;, &#x27;b&#x27;) //0</span><br><span class="line">:echo items(&#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2&#125;) // [[&#x27;a&#x27;,1],[&#x27;b&#x27;,2]] items返回是无序的。因为dict本身是无序的</span><br><span class="line">:echo keys(&#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2&#125;) // [&#x27;a&#x27;, &#x27;b&#x27;]</span><br><span class="line">:echo values(&#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2&#125;) //[1,2]</span><br></pre></td></tr></table></figure>
+<p>list中的get函数同样可以用于dict</p>
+<h3 id="函数式编程">函数式编程</h3><ol>
+<li>在函数内部赋值传入的参数。已达到不影响外部变量。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function! Reversed(l)</span><br><span class="line">    let new_list = deepcopy(a:l)</span><br><span class="line">    call reverse(new_list)</span><br><span class="line">    return new_list</span><br><span class="line">endfunction</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="deepcopy_与copy">deepcopy 与copy</h4><p> 区别如下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let a=[1,2]</span><br><span class="line">let b=[a,3,4] // [[1,2],3,4]</span><br><span class="line">let c=copy(b) // [[1,2],3,4]</span><br><span class="line">let d=deepcopy(b) //[[1,2],3,4]</span><br><span class="line">let b[0][0]=5</span><br><span class="line">let b[1]=6</span><br><span class="line">echo a  //[5,2]</span><br><span class="line">echo b  //[[5,2],6,4]</span><br><span class="line">echo c  //[[5,2],3,4]</span><br><span class="line">echo d  //[[1,2],3,4]</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>将函数赋值给变量。变量名字首字母大写<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:let Myfunc = function(&quot;add&quot;)</span><br><span class="line">:echo Myfunc([1,2],3) // [1,2,3]</span><br><span class="line">:let funclist=[function(&quot;add&quot;), function(&quot;reverse&quot;)]</span><br><span class="line">:echo funclist[0]([1,2],3) // [1,2,3]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="路径">路径</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:echo expand(&#x27;%&#x27;) // filename  相对路径</span><br><span class="line">:echo expand(&#x27;%:p&#x27;) // /home/.../filename 绝对路径</span><br><span class="line">:echo fnamemodify(&#x27;test.erl&#x27;, &#x27;:p&#x27;) // /home/youthy/.../test.erl 无论文件test是否存在</span><br><span class="line">:echo globpath(&#x27;.&#x27;, &#x27;*.erl&#x27;) // 显示当前目录下所有erl文件的路径</span><br><span class="line">:echo split(globpath(&#x27;.&#x27;,&#x27;*.erl&#x27;), &#x27;\n&#x27;) //将上述结果分割成列表</span><br></pre></td></tr></table></figure>
+<p><code>:set runtimepath=/XX/XXX</code> 修改运行时路径。</p>
+<h3 id="Regex_正则表达式">Regex 正则表达式</h3><p>for starters <code>:help user_27</code></p>
+<p>所有的search 受大小写设置的影响<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase // 忽略</span><br><span class="line">:set noignorecase // 不忽略大小写</span><br><span class="line">:set ingorecase smartcase //智能模式。 小写时match所有。有一个大写字母时精确匹配。</span><br></pre></td></tr></table></figure></p>
+<p><code>\c</code>, <code>\C</code> 无视ignorecase设置。用于自己某个特殊的匹配。前者 表示ignorecase 后者是noignorecase</p>
+<blockquote>
+<p>   pattern            matches    ~<br>    \Cword            word<br>    \CWord            Word<br>    \cword            word, Word, WORD, WoRd, etc.<br>    \cWord            word, Word, WORD, WoRd, etc.</p>
+</blockquote>
+<p><code>*</code> 0至多个<br><code>\+</code> 1至多个<br><code>\=</code> 0至1个<br><code>&#39;\&#123;n, m&#125;&#39;</code> 重复n至m次<br><code>&#39;\\|&#39;</code> 或者<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x27;ab*&#x27;   // a, ab, abb, abbb...</span><br><span class="line">&#x27;c\(ab\)*&#x27; // c, cab, cabab, cababab...  需用括号括起，但是需要转义</span><br><span class="line">&#x27;c\(ab\)\&#123;2, 3&#125;&#x27; // cabab, cababab</span><br><span class="line">&#x27;ab\+&#x27; // ab, abb, abbb...</span><br><span class="line">&#x27;ab\=&#x27; // a, ab</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>   item    matches            equivalent ~<br>    \d    digit            [0-9]<br>    \D    non-digit        [^0-9]<br>    \x    hex digit        [0-9a-fA-F]<br>    \X    non-hex digit        [^0-9a-fA-F]<br>    \s    white space        [     ]     (<Tab> and <Space>)<br>    \S    non-white characters    [^     ]     (not <Tab> and <Space>)<br>    \l    lowercase alpha        [a-z]<br>    \L    non-lowercase alpha    [^a-z]<br>    \u    uppercase alpha        [A-Z]<br>    \U    non-uppercase alpha    [^A-Z]<br>    \h [A-Za-z_]<br>    \w [A-Za-z0-9_]</p>
+</blockquote>
+<p>以上不能用于<code>[]</code>里面</p>
+<p>注意　<code>&#39;</code>, <code>&quot;</code>的影响。<code>&quot;</code>会转义<code>\</code>, 导致<code>&#39;\w\+&#39;</code>这种变成<code>&quot;\\w\\+&quot;</code></p>
+<p><a target="_blank" rel="noopener" href="http://learnvimscriptthehardway.onefloweroneworld.com/">笨方法学vimscript</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/06/Regex-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Regex 正则表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/04/ssh%E7%99%BB%E9%99%86%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ssh登陆远程主机</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="vimscript笔记" data-title="vimscript笔记" data-url="http://youthy.github.io/2016/05/06/vimscript%E7%AC%94%E8%AE%B0/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

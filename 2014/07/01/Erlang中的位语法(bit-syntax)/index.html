@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Erlang中的位语法(bit syntax) | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记得第一天来实习的时候,我师傅给我展示了一个命令然后耍下一句话:&quot;erlang中的数字是没有大小限制的,它取决于你的内存&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Erlang中的位语法(bit syntax)">
+<meta property="og:url" content="http://youthy.github.io/2014/07/01/Erlang%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%AF%AD%E6%B3%95(bit-syntax)/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="记得第一天来实习的时候,我师傅给我展示了一个命令然后耍下一句话:&quot;erlang中的数字是没有大小限制的,它取决于你的内存&quot;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_018.png">
+<meta property="og:image" content="http://youthy-picture.qiniudn.com/9345d688d43f8794da4c2d44d01b0ef41bd53a2c.jpg">
+<meta property="og:image" content="http://youthy.github.io/img/test.png">
+<meta property="og:image" content="http://youthy.github.io/img/24.png">
+<meta property="og:image" content="http://youthy.github.io/img/选区_025.png">
+<meta property="og:image" content="http://youthy.github.io/img/选区_026.png">
+<meta property="og:image" content="http://youthy-picture.qiniudn.com/7_23.gif">
+<meta property="article:published_time" content="2014-07-01T10:03:23.000Z">
+<meta property="article:modified_time" content="2018-06-26T09:49:27.733Z">
+<meta property="article:author" content="youthy">
+<meta property="article:tag" content="erlang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_018.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">undefined</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap%EF%BC%8Cvim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 10px;">二次元</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 10px;">杂记</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.github.io/">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">undefined</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">undefined</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Erlang中的位语法(bit-syntax)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/07/01/Erlang%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%AF%AD%E6%B3%95(bit-syntax)/" class="article-date">
+  	<time datetime="2014-07-01T10:03:23.000Z" itemprop="datePublished">7月 1 2014</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Erlang中的位语法(bit syntax)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/" rel="tag">erlang</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Erlang/">Erlang</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记得第一天来实习的时候,我师傅给我展示了一个命令<br><img src="http://youthy-picture.qiniudn.com/%E9%80%89%E5%8C%BA_018.png" alt=""><br>然后耍下一句话:&quot;<strong>erlang中的数字是没有大小限制的,它取决于你的内存</strong>&quot;</p>
+<span id="more"></span>
+<p>当时我就斯巴达了,完全就是这个表情<br><img src="http://youthy-picture.qiniudn.com/9345d688d43f8794da4c2d44d01b0ef41bd53a2c.jpg" alt=""></p>
+<p>后来才明白上面的意思(<code>bsl</code>是<code>bit shift left</code>,上面是将1左移2000位,相当于2^2000方).<br>erlang中对位数据的处理很简单高效,这也是为什么erlang非常适合开往网络应用,因为套接字传来的都是二进制流.</p>
+<hr>
+<p>位语法基本格式</p>
+<blockquote>
+<p>&lt;&lt;Value&gt;&gt;<br>  &lt;&lt;Value:Size&gt;&gt;<br>  &lt;&lt;Value/TypeSpecifierList&gt;&gt;<br>  &lt;&lt;Value:Size/TypeSpecifierList&gt;&gt;</p>
+</blockquote>
+<p>##构造</p>
+<ul>
+<li>Value是数值,可以是数,也可以是变量,也可以是返回值为数的表达式,同时也可以是文本串.</li>
+<li>Size给Value分配N个<code>type</code>类型的空间,Size为<code>type</code>默认数值的整数倍,<code>type</code>未指定时为<code>integer</code>.此时size默认为8</li>
+<li>TypeSpecifierList是<code>Type-Signedess-Endianess-Unit</code>的形式,<ul>
+<li>Type可以为<code>integer</code>,<code>float</code>,<code>binary</code>,<code>bytes</code>,<code>bitstring</code>,<code>bits</code>,<code>utf8</code>,<code>utf16</code>,<code>utf32</code>.其中<code>bytes</code>是<code>binary</code>的缩写<code>bits</code>是<code>bitstring</code>的缩写.</li>
+<li>Signedess可以是<code>signed</code>和<code>unsigned</code>,只有<code>type</code>为<code>integer</code>时有效</li>
+<li>Endianess可以为<code>big</code>,<code>little</code>,<code>native</code>,这个类似于大端和小端存储的概念,默认是<code>big</code>,<code>native</code>是让程序在运行时根据计算机决定使用哪种方式.</li>
+<li>Uint:形式通常是<code>&lt;&lt;Value:Size/unit:integer</code>&gt;&gt;,integer的范围是1~256.系统会给Value分配Size X integer的空间.</li>
+</ul>
+</li>
+</ul>
+<p><img src="../../../../img/test.png" alt=""></p>
+<p>上面是简单的二进制流构造,不过位语法的最大用处不在构造,而是erlang中无处不在的matching,模式匹配.</p>
+<hr>
+<p>##模式匹配</p>
+<blockquote>
+<p>   Color = 16#32F682.<br>我们在上面定义了一个Color变量,这时我们常见的16进制色彩数据,玩过ps的人应该经常遇到.假如我们需要提取出Color中的RGB分量各是多少,应该怎么做呢?<br>这在erlang中非常容易:</p>
+</blockquote>
+<p><img src="../../../../img/24.png" alt=""></p>
+<p>如上所见,我们用R匹配Color前8位,G匹配中间8位,B匹配最后8位.那么R,G,B就是Color的红色,绿色和蓝色分量了.<br>如果只需要红色,我们可以用</p>
+<p><img src="../../../../img/选区_025.png" alt=""></p>
+<p>/binary放在末尾可以匹配剩下的所有二进制流,但是需要注意的是/binary只有放在末尾才可以不指定size.</p>
+<p><img src="../../../../img/选区_026.png" alt=""></p>
+<blockquote>
+<p>需要注意的是<code>binary</code>与默认<code>integer</code>的size的差别,<code>integer</code>默认是8,<code>binary</code>的1其实相当于占用<code>integer</code>的8一样的空间.而且<code>binary</code>的返回值不再是整数,而是一个二进制流.</p>
+</blockquote>
+<p><img src="http://youthy-picture.qiniudn.com/7_23.gif" alt=""><br>如上是TCP的报文格式,我们可以用模式匹配轻松得到这些数据.</p>
+<blockquote>
+<p> &lt;&lt;SourcePort:16, DestinationPort:16,PosNumber:32,AckNumber:32,DataOffset:4, _Reserved:4, Flags:8, WindowSize:16,CheckSum: 16, UrgentPointer:16,Payload/binary&gt;&gt; = TcpPackage.</p>
+</blockquote>
+<p>先到这,改天想起来在补充.</p>
+<blockquote>
+<p> 参考:<br><a target="_blank" rel="noopener" href="http://learnyousomeerlang.com/starting-out-for-real#bit-syntax">learn you some erlang</a><br>        <a target="_blank" rel="noopener" href="http://www.erlang.org/doc/reference_manual/expressions.html#bit_syntax">Erlang官方文档</a><br>（<a target="_blank" rel="noopener" href="http://www.cnblogs.com/me-sa/archive/2011/12/25/erlang0024.html）">http://www.cnblogs.com/me-sa/archive/2011/12/25/erlang0024.html）</a><br>（<a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhongwencool/p/erlang_binary.html）">http://www.cnblogs.com/zhongwencool/p/erlang_binary.html）</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/07/03/%E4%B8%80%E8%BE%88%E5%AD%90%E3%81%AE%E5%A5%BD%E6%9C%8B%E5%8F%8B%E5%8A%B5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          一辈子の好朋友劵
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/06/30/%E4%BB%8A%E5%A4%A9%E7%9C%8B%E4%BA%86%E5%8F%98%E5%BD%A2%E9%87%91%E5%88%9A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">今天看了变形金刚4</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Erlang中的位语法(bit-syntax)" data-title="Erlang中的位语法(bit syntax)" data-url="http://youthy.github.io/2014/07/01/Erlang%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%AF%AD%E6%B3%95(bit-syntax)/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

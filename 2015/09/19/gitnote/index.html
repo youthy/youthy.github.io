@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gitnote | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="git##startup 配置文件    &#x2F;etc&#x2F;.gitconfig 最顶级 &#x2F;home&#x2F;$USERNAME&#x2F;.gitconfig 用户设定 project&#x2F;.gitconfig 当前项目下面会把上面的设定覆盖.  git config --global user.name &quot;XXX&quot;修改&#x2F;home&#x2F;username configgit config (--local) u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitnote">
+<meta property="og:url" content="http://youthy.github.io/2015/09/19/gitnote/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="git##startup 配置文件    &#x2F;etc&#x2F;.gitconfig 最顶级 &#x2F;home&#x2F;$USERNAME&#x2F;.gitconfig 用户设定 project&#x2F;.gitconfig 当前项目下面会把上面的设定覆盖.  git config --global user.name &quot;XXX&quot;修改&#x2F;home&#x2F;username configgit config (--local) u">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-09-19T04:22:10.000Z">
+<meta property="article:modified_time" content="2018-06-26T09:49:27.736Z">
+<meta property="article:author" content="youthy">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">undefined</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap%EF%BC%8Cvim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 10px;">二次元</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 10px;">杂记</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.github.io/">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">undefined</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">undefined</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-gitnote" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/19/gitnote/" class="article-date">
+  	<time datetime="2015-09-19T04:22:10.000Z" itemprop="datePublished">9月 19 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gitnote
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="git">git</h1><p>##startup</p>
+<p>配置文件  </p>
+<ol>
+<li>/etc/.gitconfig 最顶级</li>
+<li>/home/$USERNAME/.gitconfig 用户设定</li>
+<li>project/.gitconfig 当前项目<br>下面会把上面的设定覆盖.</li>
+</ol>
+<p><code>git config --global user.name &quot;XXX&quot;</code><br>修改/home/username config<br><code>git config (--local) user.name &quot;YY&quot;</code><br>修改当前项目下的gitconfig<br><code>git config --system user.name &quot;ZZZ&quot;</code><br>系统通用配置文件</p>
+<p><code>git config --global|system|local --get user.name  -&gt; XXX</code><br><code>git config user.name</code> 简写</p>
+<span id="more"></span>
+<p>##2nd<br><code>git init</code> -&gt; generate .git file<br><code>git add</code> -&gt; 可以跟踪新文件，也可以将修改文件放入暂存区</p>
+<p>gitignore遵循glob匹配</p>
+<ol>
+<li><code>#</code>之后是注释</li>
+<li>名字后面是/表示目录</li>
+<li>!表示取反</li>
+<li>*匹配一个或多个字符</li>
+<li>[abc]匹配ａｂｃ中任意一个字符</li>
+<li>？表示任意一个字符</li>
+<li>[0-9], [a-z] 两个字符之间</li>
+</ol>
+<p><code>git diff</code> 比较暂存和未暂存的区别<br><code>git diff --cached</code>　比较暂存和上次提交的区别</p>
+<p><code>git commit</code> 提交暂存区<br><code>git commit -a</code> 跳过git add 步骤，跳过暂存区, 直接提交<br><code>git rm</code> 删除跟踪的某个文件,如果文件已在暂存区需要<code>-f</code>,该命令同时删除文件<br><code>git rm --cached</code> 不删除文件,只删除暂存去或者跟踪<br><code>git mv</code> 重命名</p>
+<p><code>git log</code>: <code>-p</code> 显示差异 <code>-2</code> 最近两次log <code>--name-status</code> 显示文件状态 <code>--relative-data</code>显示诸如几周前这种相对时间 <code>--pretty=oneline|short|full|fuller|format</code>定制显示格式<br><code>git log --since=2.weeks</code> 两周以内 <code>--since=&quot;2015-08-01&quot;</code> 指定日期之后 <code>--until=&quot;2015-08-01&quot;</code> 指定日期之前<br><code>git log　--author=XXX --grep= sometest --all-match(与关系)</code></p>
+<p>###gitk　<br>git log 图形化界面</p>
+<p><code>git --amend</code> 修改上一次提交,如果上一次commit落下了一些文件没有提交可以在commit之后 git add等操作之后amend，之产生一次提交</p>
+<p><code>git reset HEAD &lt;filename&gt;</code> 移除暂存区<br><code>git checkout --&lt;filename&gt;</code> 撤销为加入暂存区的文件的修改</p>
+<p><code>git remote -v</code> 显示远程仓库<br><code>git tag (-l &quot;0.4.*|[0-9]&quot;)</code> 显示特定标签 glob匹配</p>
+<p>分支的原理<br><a target="_blank" rel="noopener" href="http://git.oschina.net/progit/3-Git-%E5%88%86%E6%94%AF.html#3.1-%E4%BD%95%E8%B0%93%E5%88%86%E6%94%AF">pro git</a><br>建立分支步骤：<br><code>git branch (-v)</code> 列出所有分支<br><code>git branch branchname</code> (建立） -&gt; <code>git checkout branchname</code> (跳到对应branch).<br>以上等同于<br><code>git checkout -b branchname</code><br><code>git branch -d branchname</code> 删除分支<br><code>git branch --merged(--no-merged)</code></p>
+<p>##搭建git服务器<br>以下例子是在我自己的linode的vps上搭的步骤<br>由于买的vps自带ssh-server. 不需要安装ssh-server<br>如果是自己的需要执行(ubuntu下)<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br><span class="line">sudo /etc/init.d/ssh start(sshd start)</span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure><br>centos用yum安装<br>安装ssh_server. 客户端默认安装了ssh_client.<br>安装完成后可以通过shell<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@ip</span><br></pre></td></tr></table></figure></p>
+<p>的方式登陆远程服务器<br>如果提示connect to host xxx.xxx.xxx.xxxport 22: Connection refused<br>说明openssh_server没安装成功或者没有start</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~$ ssh  root@XXX.XXX.XXX.XXX</span><br><span class="line">root@xxx.xxx.xxx.xxx&#x27;s password: </span><br><span class="line">Last login: Sat Sep 19 07:09:43 2015 from xxx.xxx.xxx.xxx</span><br><span class="line">[root@li1166-59 ~]# adduser test</span><br><span class="line">[root@li1166-59 ~]# passwd test</span><br><span class="line">更改用户 test 的密码 。</span><br><span class="line">新的 密码：</span><br><span class="line">重新输入新的 密码：</span><br><span class="line">passwd： 所有的身份验证令牌已经成功更新。</span><br><span class="line">[root@li1166-59 ~]# su test</span><br><span class="line">[test@li1166-59 root]$ </span><br></pre></td></tr></table></figure>
+<p>输入exit退出ssh<br>接下来创建需要传到服务器上的文件(例子用是博客的源文件)<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone --bare https://github.com/youthy/youthy.github.io test.git</span><br><span class="line">youthy@youthy:~$ ls test.git/</span><br><span class="line">branches  config  description  HEAD  hooks  info  objects  packed-refs  refs</span><br></pre></td></tr></table></figure></p>
+<p>--bare 用来创建裸版本库。<code>git clone --bare REPOS NAME.git</code> REPOS 可以为本地文件<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~$ scp -r test.git test@xxx.xxx.xxx.xxx:/home/test</span><br><span class="line">test@xxx.xxx.xxx.xxx&#x27;s password: </span><br><span class="line">HEAD                                                                                                                                                                       100%   23     0.0KB/s   00:00    </span><br><span class="line">packed-refs                                                                                                                                                                100%   98     0.1KB/s   00:00    </span><br><span class="line">prepare-commit-msg.sample                                                                                                                                                  100% 1239     1.2KB/s   00:00    </span><br><span class="line">pre-rebase.sample                                                                                                                                                          100% 4898     4.8KB/s   00:00    </span><br><span class="line">commit-msg.sample                                                                                                                                                          100%  896     0.9KB/s   00:00    </span><br><span class="line">post-update.sample                                                                                                                                                         100%  189     0.2KB/s   00:00    </span><br><span class="line">pre-applypatch.sample                                                                                                                                                      100%  398     0.4KB/s   00:00    </span><br><span class="line">pre-push.sample                                                                                                                                                            100% 1352     1.3KB/s   00:00    </span><br><span class="line">applypatch-msg.sample                                                                                                                                                      100%  452     0.4KB/s   00:00    </span><br><span class="line">pre-commit.sample                                                                                                                                                          100% 1642     1.6KB/s   00:00    </span><br><span class="line">update.sample                                                                                                                                                              100% 3611     3.5KB/s   00:00    </span><br><span class="line">exclude                                                                                                                                                                    100%  240     0.2KB/s   00:00    </span><br><span class="line">description                                                                                                                                                                100%   73     0.1KB/s   00:00    </span><br><span class="line">pack-b7cb7743297b04547b0401b940914333ed2d513b.pack                                                                                                                         100% 3025KB 504.2KB/s   00:06    </span><br></pre></td></tr></table></figure></p>
+<p>此时所有安装git的用户可以通过输入密码的方式<code>git clone test@XXX.XXX.XXX.XXX:/home/test/test.git</code><br>克隆这个库和修改这个库，</p>
+<p>####免密码<br>为了在不用每次提交都输入密码<br>需要将自己的.ssh/id_rsa.pub 公钥加入到test/.ssh/authorize_keys 中，如果没有需要自己建立。没有公钥的话，用<br><code>ssh-kegen (-t rsa|dsa)</code> 生成(默认时dsa加密方式)<br>但是需要注意以下两点<br><strong><em>authorize_keys</em></strong>需要权限是600 <code>chmod 600 test/.ssh/authorized_keys</code><br><strong><em>将自己的私钥</em></strong>加入到ssh_agent中：在客户端执行<code>ssh-add   ~/.ssh/id_rsa</code><br>否则会出现<code>Agent admitted failure to sign using the key.</code> 无法免密码登陆</p>
+<p><strong>有时候github上面自己的项目虽然加入了公钥，但是每次push仍需要密码</strong><br>那是因为这个项目clone时用的时https方式。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~/hexoblog$ git remote -v</span><br><span class="line">origin	https://github.com/youthy/blogfiles.git (fetch)</span><br><span class="line">origin	https://github.com/youthy/blogfiles.git (push)</span><br></pre></td></tr></table></figure></p>
+<p>通过<code>git remote rm origin</code>的方式删掉在添加ssh方式<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">youthy@youthy:~/hexoblog$ git remote add origin git@github.com:youthy/blogfiles.git</span><br><span class="line">youthy@youthy:~/hexoblog$ git remote -v</span><br><span class="line">origin	git@github.com:youthy/blogfiles.git (fetch)</span><br><span class="line">origin	git@github.com:youthy/blogfiles.git (push)</span><br></pre></td></tr></table></figure></p>
+<p>####安全措施：<br>以上完成之后参与者都可以通过<code>ssh test@XXX.XXX.XXX.XXX</code>登陆我的vps，可以通过以下方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@li1166-59 ~]# which git-shell</span><br><span class="line">/usr/bin/git-shell</span><br><span class="line">[root@li1166-59 ~]# vim /etc/passwd</span><br></pre></td></tr></table></figure>
+<p>passwd文件内容如下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">NTP:X:38:38::/ETC/NTP:/SBIN/NOLOGIN</span><br><span class="line">test:x:500:500::/home/git:/bin/bash</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>将 test用户的bin/bash改为git-shell或者去掉<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test:x:500:500::/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure></p>
+<p>这样就无法通过test登陆服务器<br>更多参考<br><a target="_blank" rel="noopener" href="http://git.oschina.net/progit/4-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git.html#">pro git</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/28/ranch%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          ranch笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/04/github%E5%B1%8F%E8%94%BD%E7%99%BE%E5%BA%A6%E7%88%AC%E8%99%AB%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">github屏蔽百度爬虫的解决办法</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="gitnote" data-title="gitnote" data-url="http://youthy.github.io/2015/09/19/gitnote/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

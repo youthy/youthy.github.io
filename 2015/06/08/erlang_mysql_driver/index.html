@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>erlang_mysql_driver 源码分析(一) | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这两天抽时间看了看erlang_mysql_driver这个项目，用来建立管理服务器端mysql方面的处理。听说emysql也不错，过两天看看对比下。这个项目主体有这么几个文件  mysql.erlmysql_auth.erlmysql_conn.erlmysql_recv.erl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="erlang_mysql_driver 源码分析(一)">
+<meta property="og:url" content="http://youthy.github.io/2015/06/08/erlang_mysql_driver/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="这两天抽时间看了看erlang_mysql_driver这个项目，用来建立管理服务器端mysql方面的处理。听说emysql也不错，过两天看看对比下。这个项目主体有这么几个文件  mysql.erlmysql_auth.erlmysql_conn.erlmysql_recv.erl">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-06-08T12:13:07.000Z">
+<meta property="article:modified_time" content="2018-06-26T09:49:27.734Z">
+<meta property="article:author" content="youthy">
+<meta property="article:tag" content="erlang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">undefined</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap%EF%BC%8Cvim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 10px;">二次元</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 10px;">杂记</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://suexcxine.github.io/">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">undefined</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">undefined</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-erlang_mysql_driver" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/08/erlang_mysql_driver/" class="article-date">
+  	<time datetime="2015-06-08T12:13:07.000Z" itemprop="datePublished">6月 8 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      erlang_mysql_driver 源码分析(一)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erlang/" rel="tag">erlang</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/erlang/">erlang</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这两天抽时间看了看erlang_mysql_driver这个项目，用来建立管理服务器端mysql方面的处理。听说emysql也不错，过两天看看对比下。<br>这个项目主体有这么几个文件</p>
+<blockquote>
+<p>mysql.erl<br>mysql_auth.erl<br>mysql_conn.erl<br>mysql_recv.erl</p>
+</blockquote>
+<span id="more"></span>
+<p>#mysql:start_link<br>主要接口在mysql里面。<br>mysql文件头有作者写的功能使用注释</p>
+<blockquote>
+<p>%%% Usage:<br>%%%<br>%%%<br>%%% Call one of the start-functions before any call to fetch/2<br>%%%<br>%%%   start_link(PoolId, Host, User, Password, Database)<br>%%%   start_link(PoolId, Host, Port, User, Password, Database)<br>%%%   start_link(PoolId, Host, User, Password, Database, LogFun)<br>%%%   start_link(PoolId, Host, Port, User, Password, Database, LogFun)<br>%%%<br>%%% (These functions also have non-linking coutnerparts.)</p>
+</blockquote>
+<p>让我们在使用任何fetch之前先start_link,如果不需要link，同时提供了start接口。<br>好，找到start_link.<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">start_link(PoolId, Host, User, Password, Database) -&gt;</span><br><span class="line">    start_link(PoolId, Host, ?PORT, User, Password, Database).</span><br><span class="line"></span><br><span class="line">start_link(PoolId, Host, Port, User, Password, Database) -&gt;</span><br><span class="line">    start_link(PoolId, Host, Port, User, Password, Database, undefined,</span><br><span class="line">	       undefined).</span><br><span class="line"></span><br><span class="line">start_link(PoolId, Host, undefined, User, Password, Database, LogFun) -&gt;</span><br><span class="line">    start_link(PoolId, Host, ?PORT, User, Password, Database, LogFun,</span><br><span class="line">	       undefined);</span><br><span class="line">start_link(PoolId, Host, Port, User, Password, Database, LogFun) -&gt;</span><br><span class="line">    start_link(PoolId, Host, Port, User, Password, Database, LogFun,</span><br><span class="line">	       undefined).</span><br><span class="line"></span><br><span class="line">start_link(PoolId, Host, undefined, User, Password, Database, LogFun,</span><br><span class="line">	   Encoding) -&gt;</span><br><span class="line">    start1(PoolId, Host, ?PORT, User, Password, Database, LogFun, Encoding,</span><br><span class="line">	   start_link);</span><br><span class="line">start_link(PoolId, Host, Port, User, Password, Database, LogFun, Encoding) -&gt;</span><br><span class="line">    start1(PoolId, Host, Port, User, Password, Database, LogFun, Encoding,</span><br><span class="line">	   start_link).</span><br></pre></td></tr></table></figure></p>
+<p>start与start_link大致相同，只不过最后参数是start不是start_link<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">start(PoolId, Host, undefined, User, Password, Database, LogFun, Encoding) -&gt;</span><br><span class="line">    start1(PoolId, Host, ?PORT, User, Password, Database, LogFun, Encoding,</span><br><span class="line">	   start);</span><br><span class="line">start(PoolId, Host, Port, User, Password, Database, LogFun, Encoding) -&gt;</span><br><span class="line">    start1(PoolId, Host, Port, User, Password, Database, LogFun, Encoding,</span><br><span class="line">	   start).</span><br></pre></td></tr></table></figure></p>
+<p>其中</p>
+<blockquote>
+<p>PoolId: 这个进程的id，随便起，比如my_sql_game.<br>Host: 目标ip, 本机写&quot;127.0.0.1&quot;<br>Port: 端口号，不改的话默认是3306<br>User: 数据库的用户名：比如 youthy<br>Password：密码<br>Database:数据库名<br>LogFun:日志输出函数，如果undefined则会用默认的输出<br>Encoding:编码方式，我们这里用utf8.</p>
+</blockquote>
+<p>然后转入start1这个函数<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">start1(PoolId, Host, Port, User, Password, Database, LogFun, Encoding,</span><br><span class="line">       StartFunc) -&gt;</span><br><span class="line">    crypto:start(),</span><br><span class="line">    gen_server:StartFunc(</span><br><span class="line">      &#123;local, ?SERVER&#125;, ?MODULE,</span><br><span class="line">      [PoolId, Host, Port, User, Password, Database, LogFun, Encoding], []).</span><br></pre></td></tr></table></figure></p>
+<p>crypto是之后需要一些加密算法， 比如md5，sha等，使用前必须先start。<br>而后就是再熟悉不过的gen_server,这里面根据方式不同，分别调用start_link, start,然后找到init函数<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">init([PoolId, Host, Port, User, Password, Database, LogFun, Encoding]) -&gt;</span><br><span class="line">    erlang:process_flag(priority, high),</span><br><span class="line">    LogFun1 = if LogFun == undefined -&gt; fun log/4; true -&gt; LogFun end,</span><br><span class="line">    case mysql_conn:start(Host, Port, User, Password, Database, LogFun1,</span><br><span class="line">			  Encoding, PoolId) of</span><br><span class="line">	&#123;ok, ConnPid&#125; -&gt;</span><br><span class="line">	    Conn = new_conn(PoolId, ConnPid, true, Host, Port, User, Password,</span><br><span class="line">			    Database, Encoding),</span><br><span class="line">	    State = #state&#123;log_fun = LogFun1&#125;,</span><br><span class="line">	    &#123;ok, add_conn(Conn, State)&#125;;</span><br><span class="line">	&#123;error, Reason&#125; -&gt;</span><br><span class="line">	    ?Log(LogFun1, error,</span><br><span class="line">		 &quot;failed starting first MySQL connection handler, &quot;</span><br><span class="line">		 &quot;exiting&quot;),</span><br><span class="line">	    &#123;stop, &#123;error, Reason&#125;&#125;</span><br><span class="line">    end.</span><br></pre></td></tr></table></figure></p>
+<p>首先用process_flag将优先级设为高。之后调用mysql_conn:start/8,等会再进去看它内部，我们只知道它返回一个ConnPid,或者出错，然后将这个Pid用new_conn生成一个Conn。然后用add_conn将Conn加入State中，返回，至此这个gen_server创建完毕。名字是&quot;my_sql_game&quot;（随便取）。我们看一下new_conn和add_conn这两个函数<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">new_conn(PoolId, ConnPid, Reconnect, Host, Port, User, Password, Database,</span><br><span class="line">	 Encoding) -&gt;</span><br><span class="line">    case Reconnect of</span><br><span class="line">	true -&gt;</span><br><span class="line">	    #conn&#123;pool_id = PoolId,</span><br><span class="line">		  pid = ConnPid,</span><br><span class="line">		  reconnect = true,</span><br><span class="line">		  host = Host,</span><br><span class="line">		  port = Port,</span><br><span class="line">		  user = User,</span><br><span class="line">		  password = Password,</span><br><span class="line">		  database = Database,</span><br><span class="line">		  encoding = Encoding</span><br><span class="line">		 &#125;;</span><br><span class="line">	false -&gt;                        </span><br><span class="line">	    #conn&#123;pool_id = PoolId,</span><br><span class="line">		  pid = ConnPid,</span><br><span class="line">		  reconnect = false&#125;</span><br><span class="line">    end.</span><br><span class="line">---------</span><br><span class="line">add_conn(Conn, State) -&gt;</span><br><span class="line">    Pid = Conn#conn.pid,</span><br><span class="line">    erlang:monitor(process, Conn#conn.pid),</span><br><span class="line">    PoolId = Conn#conn.pool_id,</span><br><span class="line">    ConnPools = State#state.conn_pools,</span><br><span class="line">    NewPool = </span><br><span class="line">	case gb_trees:lookup(PoolId, ConnPools) of</span><br><span class="line">	    none -&gt;</span><br><span class="line">		&#123;[Conn],[]&#125;;</span><br><span class="line">	    &#123;value, &#123;Unused, Used&#125;&#125; -&gt;</span><br><span class="line">		&#123;[Conn | Unused], Used&#125;</span><br><span class="line">	end,</span><br><span class="line">    State#state&#123;conn_pools =</span><br><span class="line">		gb_trees:enter(PoolId, NewPool,</span><br><span class="line">			       ConnPools),</span><br><span class="line">		pids_pools = gb_trees:enter(Pid, PoolId,</span><br><span class="line">					    State#state.pids_pools)&#125;.</span><br></pre></td></tr></table></figure></p>
+<p>这里涉及了两个结构<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-record(conn, &#123;</span><br><span class="line">	  pool_id,      %% atom(), the pool&#x27;s id</span><br><span class="line">	  pid,          %% pid(), mysql_conn process	 </span><br><span class="line">	  reconnect,	%% true | false, should mysql_dispatcher try</span><br><span class="line">                        </span><br><span class="line">	  host,		%% string()</span><br><span class="line">	  port,		%% integer()</span><br><span class="line">	  user,		%% string()</span><br><span class="line">	  password,	%% string()</span><br><span class="line">	  database,	%% string()</span><br><span class="line">	  encoding</span><br><span class="line">	 &#125;).</span><br><span class="line">	 </span><br><span class="line">-record(state, &#123;</span><br><span class="line">	</span><br><span class="line">	  conn_pools = gb_trees:empty(), </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	  pids_pools = gb_trees:empty(),                               </span><br><span class="line"></span><br><span class="line">	  log_fun,	</span><br><span class="line"></span><br><span class="line">	  prepares = gb_trees:empty()</span><br><span class="line">	 &#125;).</span><br></pre></td></tr></table></figure></p>
+<p>conn这个结构大部分就是把函数参数存了起来，其中只有pid需要注意下，它就是mysql_conn:start返回的Pid，new_conn这个函数将参数转成了#conn这个record，然后通过add_conn将#conn存入了#state的conn_pools.字面理解就是链接池。值得注意的是my_sql_game这个gen_server的state用了3个gb_trees这个存储结构。也就是二叉查找树。erlang:monitor(process, Conn#conn.pid).</p>
+<blockquote>
+<p>monitor(Type, Item) -&gt; MonitorRef<br>Types:<br>Type = process<br>Item = pid() | {RegName, Node} | RegName<br> RegName = atom()<br> Node = node()<br>MonitorRef = reference()</p>
+</blockquote>
+<p>目前Type只接受process这个参数，这个函数字面理解就是监控，让这个gen_server监控之前建立的conn进程，被监控进程如果崩溃了，一条{&#39;DOWN&#39;, MonitorRef, Type, Object，Info}<br>消息会发往监控者，这时可以被handle_info处理。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">handle_info(&#123;&#x27;DOWN&#x27;, _MonitorRef, process, Pid, Info&#125;, State) -&gt;</span><br><span class="line">    LogFun = State#state.log_fun,</span><br><span class="line">    case remove_conn(Pid, State) of</span><br><span class="line">	&#123;ok, Conn, NewState&#125; -&gt;</span><br><span class="line">	    LogLevel = case Info of</span><br><span class="line">			   normal -&gt; normal;</span><br><span class="line">			   _ -&gt; error</span><br><span class="line">		       end,</span><br><span class="line">	    ?Log2(LogFun, LogLevel,</span><br><span class="line">		&quot;connection pid ~p exited : ~p&quot;, [Pid, Info]),</span><br><span class="line">	    case Conn#conn.reconnect of</span><br><span class="line">		true -&gt;</span><br><span class="line">		    start_reconnect(Conn, LogFun);</span><br><span class="line">		false -&gt;</span><br><span class="line">		    ok</span><br><span class="line">	    end,</span><br><span class="line">	    &#123;noreply, NewState&#125;;</span><br><span class="line">	error -&gt;</span><br><span class="line">	    ?Log2(LogFun, error,</span><br><span class="line">		  &quot;received &#x27;DOWN&#x27; signal from pid ~p not in my list&quot;, [Pid]),</span><br><span class="line">	    &#123;noreply, State&#125;</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出主要是讲state里面的conn_pool里面把这个崩掉的进程conn移除，然后如果这个链接conn的属性是reconnect，那么会重新start_reconnect。先不展开，以机会再说，要不init的过程就跑远了。<br>回到erlang:monitor.(还有个对应的函数是demonitor，可以取消监控)<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NewPool = </span><br><span class="line">	case gb_trees:lookup(PoolId, ConnPools) of</span><br><span class="line">	    none -&gt;</span><br><span class="line">		&#123;[Conn],[]&#125;;</span><br><span class="line">	    &#123;value, &#123;Unused, Used&#125;&#125; -&gt;</span><br><span class="line">		&#123;[Conn | Unused], Used&#125;</span><br><span class="line">	end,</span><br></pre></td></tr></table></figure></p>
+<p>从ConnPool中找到PoolId的结点，由case可见这个结点存的是{Unused， Used}的形式。<br>gb_tree的结构是{Size, Tree}.Size表示这个tree有多少个结点。tree的结构是{key, Value, Smaller, Biger}.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1&gt; gb_trees:empty().</span><br><span class="line">&#123;0,nil&#125;</span><br><span class="line">2&gt; gb_trees:insert(5, v0, v(1)).</span><br><span class="line">&#123;1,&#123;5,v0,nil,nil&#125;&#125;</span><br><span class="line">3&gt; gb_trees:insert(8, v1, v(2)).</span><br><span class="line">&#123;2,&#123;5,v0,nil,&#123;8,v1,nil,nil&#125;&#125;&#125;</span><br><span class="line">4&gt; gb_trees:insert(3, v2, v(3)).</span><br><span class="line">&#123;3,&#123;5,v0,&#123;3,v2,nil,nil&#125;,&#123;8,v1,nil,nil&#125;&#125;&#125;</span><br><span class="line">5&gt; gb_trees:insert(7, v3, v(4)).</span><br><span class="line">&#123;4,&#123;5,v0,&#123;3,v2,nil,nil&#125;,&#123;8,v1,&#123;7,v3,nil,nil&#125;,nil&#125;&#125;&#125;</span><br><span class="line">6&gt; gb_trees:insert(1, v4, v(5)).</span><br><span class="line">&#123;5,</span><br><span class="line"> &#123;5,v0,&#123;3,v2,&#123;1,v4,nil,nil&#125;,nil&#125;,&#123;8,v1,&#123;7,v3,nil,nil&#125;,nil&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>上面演示了一个gb_tree的建立，gb_tree的大小判断是基于key的。二叉树数据结构都学过。<br>我们可以看一下state里面的结构究竟是什么样子<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql:613: state:&#123;state,</span><br><span class="line">                     &#123;1,</span><br><span class="line">                      &#123;my_sql_game,</span><br><span class="line">                          &#123;[&#123;conn,my_sql_game,&lt;0.62.0&gt;,true,&quot;127.0.0.1&quot;,3306,</span><br><span class="line">                                &quot;aries&quot;,&quot;arig&quot;,&quot;aries_game&quot;,utf8&#125;,</span><br><span class="line">                            &#123;conn,my_sql_game,&lt;0.58.0&gt;,true,&quot;127.0.0.1&quot;,3306,</span><br><span class="line">                                &quot;aries&quot;,&quot;arig&quot;,&quot;aries_game&quot;,utf8&#125;,</span><br><span class="line">                            &#123;conn,my_sql_game,&lt;0.54.0&gt;,true,&quot;127.0.0.1&quot;,3306,</span><br><span class="line">                                &quot;aries&quot;,&quot;arig&quot;,&quot;aries_game&quot;,utf8&#125;],</span><br><span class="line">                           [&#123;conn,my_sql_game,&lt;0.41.0&gt;,true,&quot;127.0.0.1&quot;,3306,</span><br><span class="line">                                &quot;aries&quot;,&quot;arig&quot;,&quot;aries_game&quot;,utf8&#125;]&#125;,</span><br><span class="line">                          nil,nil&#125;&#125;,</span><br><span class="line">                     &#123;4,</span><br><span class="line">                      &#123;&lt;0.41.0&gt;,my_sql_game,nil,</span><br><span class="line">                       &#123;&lt;0.54.0&gt;,my_sql_game,nil,</span><br><span class="line">                        &#123;&lt;0.58.0&gt;,my_sql_game,nil,</span><br><span class="line">                         &#123;&lt;0.62.0&gt;,my_sql_game,nil,nil&#125;&#125;&#125;&#125;&#125;,</span><br><span class="line">                     #Fun&lt;mysql.0.74618748&gt;,</span><br><span class="line">                     &#123;0,nil&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可见我们my_sql_game的conn_pool的size始终为1，<br>因为我们在add_conn函数中的最后总是将conn enter进poolId为my_sql_game的链接池，之后又以pid为key，enter进pid_pool,因为pid不是唯一的，所以pid_pool的size会不断变大。至此我们了解了my_sql_game这个gen_server的创建过程。下篇看一下之前没看到部分。<br>相关参考</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/me-sa/archive/2012/06/23/erlang-gb_trees.html">gb_trees(坚强2002博客）</a><br><a target="_blank" rel="noopener" href="http://learnyousomeerlang.com/a-short-visit-to-common-data-structures">A Short Visit to Common Data Structures(推荐！)</a><br><a target="_blank" rel="noopener" href="http://www.erlang.org/doc/man/gb_trees.html">gb_trees(官方doc)</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/09/erlang_mysql_driver%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(%E4%BA%8C)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          erlang_mysql_driver　源码分析(二)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/25/Erlang-ETS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Erlang存储模块之ETS</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="erlang_mysql_driver" data-title="erlang_mysql_driver 源码分析(一)" data-url="http://youthy.github.io/2015/06/08/erlang_mysql_driver/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
