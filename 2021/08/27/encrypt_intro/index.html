@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>加密技术概览 | Youthy的伟大航路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="风险行为 对称加密&#x2F;共享密钥加密 One-Time Pad&#x2F;一次性密码本 DES（Data Encryption Standard）&#x2F;3DES DES-CBC简单实现 Feistel网格结构 feistel函数(cipherFunc) 密钥置换   AES（Advanced Encryption Standard） AES-CBC简单实现 Add Round Key SubBytes Shif">
+<meta property="og:type" content="article">
+<meta property="og:title" content="加密技术概览">
+<meta property="og:url" content="https://youthy.github.io/2021/08/27/encrypt_intro/index.html">
+<meta property="og:site_name" content="Youthy的伟大航路">
+<meta property="og:description" content="风险行为 对称加密&#x2F;共享密钥加密 One-Time Pad&#x2F;一次性密码本 DES（Data Encryption Standard）&#x2F;3DES DES-CBC简单实现 Feistel网格结构 feistel函数(cipherFunc) 密钥置换   AES（Advanced Encryption Standard） AES-CBC简单实现 Add Round Key SubBytes Shif">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%201.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%202.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%203.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%204.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%205.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/flow.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-08-18-1833.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/fesitial.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/subkey.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/AES-AddRoundKey.svg">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/AES-SubBytes.svg">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/AES-ShiftRows.svg">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/AES-MixColumns.svg">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%206.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%207.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-07-07-1112.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-08-03-2120.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-08-03-2121.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/ctr.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%208.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%209.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2010.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2011.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2012.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/2560px-MAC.svg.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Hash_function.svg">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/f89190c72a307b34f1e6b53b5f944a7ae81a3958.svg">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/SHAhmac.svg">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%203.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2013.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2014.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2015.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2016.png">
+<meta property="og:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Linear_congruential_generator_visualisation.svg">
+<meta property="article:published_time" content="2021-08-26T16:17:19.000Z">
+<meta property="article:modified_time" content="2021-08-27T04:18:35.898Z">
+<meta property="article:author" content="youthy">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content="安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youthy.github.io/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Youthy的伟大航路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">undefined</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/erlang">erlang</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="https://weibo.com/1592381215" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/erlang/" style="font-size: 20px;">erlang</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 13.33px;">github</a> <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/makefile/" style="font-size: 10px;">makefile</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/ranch/" style="font-size: 10px;">ranch</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/xmodmap%EF%BC%8Cvim/" style="font-size: 10px;">xmodmap，vim</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 10px;">二次元</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 10px;">杂记</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://suexcxine.github.io/">铎哥的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.neozone.me">秋歌的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.evercoding.net">Ever</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">梦想做单机游戏。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">undefined</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/chizuoqian.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">undefined</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/erlang">erlang</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="https://weibo.com/1592381215" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-encrypt_intro" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/27/encrypt_intro/" class="article-date">
+  	<time datetime="2021-08-26T16:17:19.000Z" itemprop="datePublished">8月 27 2021</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      加密技术概览
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/" rel="tag">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/golang/">golang</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#----">风险行为</a></li>
+<li><a href="#-----------">对称加密/共享密钥加密</a><ul>
+<li><a href="#one-time-pad-------">One-Time Pad/一次性密码本</a></li>
+<li><a href="#des-data-encryption-standard--3des">DES（Data Encryption Standard）/3DES</a><ul>
+<li><a href="#des-cbc----">DES-CBC简单实现</a></li>
+<li><a href="#feistel----">Feistel网格结构</a></li>
+<li><a href="#feistel---cipherfunc-">feistel函数(cipherFunc)</a></li>
+<li><a href="#----">密钥置换</a></li>
+</ul>
+</li>
+<li><a href="#aes-advanced-encryption-standard-">AES（Advanced Encryption Standard）</a><ul>
+<li><a href="#aes-cbc----">AES-CBC简单实现</a></li>
+<li><a href="#add-round-key">Add Round Key</a></li>
+<li><a href="#subbytes">SubBytes</a></li>
+<li><a href="#shiftrows--">ShiftRows步骤</a></li>
+<li><a href="#mixcolumns">MixColumns</a></li>
+</ul>
+</li>
+<li><a href="#padding--">Padding方案</a></li>
+<li><a href="#----">分组模式</a><ul>
+<li><a href="#--ebc-electronic-code-book---------"><strong>EBC(electronic code book)/电子密码本</strong></a></li>
+<li><a href="#--cbc-cipher-block-chaining----------"><strong>CBC(cipher block chaining)/密文分组链接</strong></a></li>
+<li><a href="#ctr-counter-------">CTR(CounTeR)/计数器模式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#----------">非对称加密/公钥加密</a><ul>
+<li><a href="#rsa">RSA</a><ul>
+<li><a href="#-----">中间人攻击</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#------message-authentication-code-mac-">消息认证码（Message Authentication Code/MAC)</a><ul>
+<li><a href="#------">单向散列函数</a></li>
+<li><a href="#hmac--hash-mac-">HMAC （Hash MAC)</a></li>
+</ul>
+</li>
+<li><a href="#----">数字签名</a></li>
+<li><a href="#----">数字证书</a></li>
+<li><a href="#---">随机数</a><ul>
+<li><a href="#---">伪随机</a><ul>
+<li><a href="#--------linear-congruential-generator-lcg-">线性同余生成器/Linear congruential generator(LCG)</a></li>
+<li><a href="#-----------etc">单向散列函数/密码法/etc</a></li>
+</ul>
+</li>
+<li><a href="#--------------">&quot;真“随机（密码安全伪随机）</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1 id="风险行为">风险行为</h1><p>窃听</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled.png"></p>
+<p>篡改</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%201.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%201.png"></p>
+<span id="more"></span>
+<p>假冒</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%202.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%202.png"></p>
+<p>否认</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%203.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%203.png"></p>
+<h1 id="对称加密/共享密钥加密">对称加密/共享密钥加密</h1><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%204.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%204.png"></p>
+<h2 id="One-Time_Pad/一次性密码本">One-Time Pad/一次性密码本</h2><p>无条件安全的，理论上绝对无法破译（无穷计算能力计算器遍历密钥空间条件下，无法确定是不是明文）</p>
+<p>XOR：A xor B = C ,  C xor B = A</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%205.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%205.png"></p>
+<p>缺点</p>
+<ul>
+<li>密匙长度和明文必须等长</li>
+<li>密匙如何安全的告诉对方（因为上面一点等同于明文如何安全告诉对方，矛盾）</li>
+<li>密匙要随机不重复</li>
+</ul>
+<h2 id="DES（Data_Encryption_Standard）/3DES">DES（Data Encryption Standard）/3DES</h2><blockquote>
+<p>数据加密标准（英语：Data Encryption Standard，缩写为 DES）是一种对称密钥加密块密码算法，1976年被美国联邦政府的国家标准局确定为联邦资料处理标准（FIPS），它基于使用56位密钥的对称算法。<br>DES现在已经不是一种安全的加密方法，主要因为它使用的56位密钥过短。1999年1月，distributed.net与电子前哨基金会合作，在22小时15分钟内即公开破解了一个DES密钥。虽然在实际中难以应用。为了提供实用所需的安全性，可以使用DES的派生算法3DES来进行加密，虽然3DES也存在理论上的攻击方法。DES标准和3DES标准已逐渐被高级加密标准（AES）所取代。另外，DES已经不再作为国家标准科技协会（前国家标准局）的一个标准</p>
+</blockquote>
+<h3 id="DES-CBC简单实现">DES-CBC简单实现</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DesCBCEncrypt</span><span class="params">()</span> <span class="params">([]bytes, error)</span></span> &#123;</span><br><span class="line">  <span class="comment">// key是8个byte共64bit数据,iv是用于cbc分组的初始化向量64bit数据</span></span><br><span class="line">	data := []<span class="keyword">byte</span>(<span class="string">&quot;raw data&quot;</span>)</span><br><span class="line">	key := []<span class="keyword">byte</span>(<span class="string">&quot;12345678&quot;</span>)</span><br><span class="line">	iv := []<span class="keyword">byte</span>(<span class="string">&quot;10242398&quot;</span>)</span><br><span class="line"></span><br><span class="line">	block, err := des.NewCipher(key)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">   </span><br><span class="line">  <span class="comment">// PKCS7分组，分成blocksize(8bytes)大小的数据块</span></span><br><span class="line">	data = pkcs7Padding(data, block.BlockSize())</span><br><span class="line">	cryptText := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="built_in">len</span>(data))</span><br><span class="line"></span><br><span class="line">	blockMode := cipher.NewCBCEncrypter(block, iv)</span><br><span class="line">	blockMode.CryptBlocks(cryptText, data)</span><br><span class="line">	<span class="keyword">return</span> cryptText, err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/flow.png" alt="flow.png"></p>
+<h3 id="Feistel网格结构">Feistel网格结构</h3><blockquote>
+<p>费斯妥结构保证了加密和解密过程足够相似—唯一的区别在于子密钥在解密时是以反向的顺序应用的，而剩余部分均相同。这样的设计大大简化了算法的实现，尤其是硬件实现，因为没有区分加密和解密算法的需要</p>
+</blockquote>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-08-18-1833.png" alt="无标题-2021-08-18-1833.png"></p>
+<p><strong>Initial Permutation|初始置换</strong></p>
+<p>将64bit打乱</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">permuteInitialBlock</span><span class="params">(block <span class="keyword">uint64</span>)</span> <span class="title">uint64</span></span> &#123;</span><br><span class="line">  DoSomething...</span><br><span class="line">  <span class="comment">// block is the permutation:</span></span><br><span class="line">	<span class="comment">// 6 14 22 30 38 46 54 62</span></span><br><span class="line">	<span class="comment">// 4 12 20 28 36 44 52 60</span></span><br><span class="line">	<span class="comment">// 2 10 18 26 34 42 50 58</span></span><br><span class="line">	<span class="comment">// 0  8 16 24 32 40 48 56</span></span><br><span class="line">	<span class="comment">// 7 15 23 31 39 47 55 63</span></span><br><span class="line">	<span class="comment">// 5 13 21 29 37 45 53 61</span></span><br><span class="line">	<span class="comment">// 3 11 19 27 35 43 51 59</span></span><br><span class="line">	<span class="comment">// 1  9 17 25 33 41 49 57</span></span><br><span class="line">	<span class="keyword">return</span> block</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="feistel函数(cipherFunc)">feistel函数(cipherFunc)</h3><ol>
+<li><strong>扩张</strong>：32位输入通过E扩张，到8个6bit块,每块包含4位对应的输入位，加上两个邻接的块中紧邻的位,共48位</li>
+<li><strong>混合</strong>：上述的48bit结果与48bit key 异或</li>
+<li><strong>s盒处理</strong>：将异或结果分为8个6bit块分别输入对应的s盒，8个S盒的每一个都使用以查找表方式提供的非线性的变换将它的6个输入位变成4个输出位。S盒提供了DES的核心安全性—如果没有S盒，密码会是线性的，很容易破解</li>
+<li><strong>置换</strong>：S盒的32个输出位利用固定的置换，“P置换”进行重组。这个设计是为了将每个S盒的4位输出在下一回次的扩张后，使用4个不同的S盒进行处理</li>
+</ol>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/fesitial.png" alt="fesitial.png"></p>
+<p>Golang中并没有使用expand，而是采用了另外的方式</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Used to expand an input block of 32 bits, producing an output block of 48</span></span><br><span class="line"><span class="comment">// bits.</span></span><br><span class="line"><span class="keyword">var</span> expansionFunction = [<span class="number">48</span>]<span class="keyword">byte</span>&#123;</span><br><span class="line">	<span class="number">0</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">29</span>, <span class="number">28</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">27</span>,</span><br><span class="line">	<span class="number">26</span>, <span class="number">25</span>, <span class="number">24</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">23</span>, <span class="number">22</span>, <span class="number">21</span>,</span><br><span class="line">	<span class="number">20</span>, <span class="number">19</span>, <span class="number">20</span>, <span class="number">19</span>, <span class="number">18</span>, <span class="number">17</span>, <span class="number">16</span>, <span class="number">15</span>,</span><br><span class="line">	<span class="number">16</span>, <span class="number">15</span>, <span class="number">14</span>, <span class="number">13</span>, <span class="number">12</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">11</span>,</span><br><span class="line">	<span class="number">10</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">5</span>,</span><br><span class="line">	<span class="number">4</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">31</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// feistelBox[s][16*i+j] contains the output of permutationFunction</span></span><br><span class="line"><span class="comment">// for sBoxes[s][i][j] &lt;&lt; 4*(7-s)</span></span><br><span class="line"><span class="keyword">var</span> feistelBox [<span class="number">8</span>][<span class="number">64</span>]<span class="keyword">uint32</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">feistel</span><span class="params">(l, r <span class="keyword">uint32</span>, k0, k1 <span class="keyword">uint64</span>)</span> <span class="params">(lout, rout <span class="keyword">uint32</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> t <span class="keyword">uint32</span></span><br><span class="line"></span><br><span class="line">	t = r ^ <span class="keyword">uint32</span>(k0&gt;&gt;<span class="number">32</span>)</span><br><span class="line">	l ^= feistelBox[<span class="number">7</span>][t&amp;<span class="number">0x3f</span>] ^</span><br><span class="line">		feistelBox[<span class="number">5</span>][(t&gt;&gt;<span class="number">8</span>)&amp;<span class="number">0x3f</span>] ^</span><br><span class="line">		feistelBox[<span class="number">3</span>][(t&gt;&gt;<span class="number">16</span>)&amp;<span class="number">0x3f</span>] ^</span><br><span class="line">		feistelBox[<span class="number">1</span>][(t&gt;&gt;<span class="number">24</span>)&amp;<span class="number">0x3f</span>]</span><br><span class="line"></span><br><span class="line">	t = ((r &lt;&lt; <span class="number">28</span>) | (r &gt;&gt; <span class="number">4</span>)) ^ <span class="keyword">uint32</span>(k0)</span><br><span class="line">	l ^= feistelBox[<span class="number">6</span>][(t)&amp;<span class="number">0x3f</span>] ^</span><br><span class="line">		feistelBox[<span class="number">4</span>][(t&gt;&gt;<span class="number">8</span>)&amp;<span class="number">0x3f</span>] ^</span><br><span class="line">		feistelBox[<span class="number">2</span>][(t&gt;&gt;<span class="number">16</span>)&amp;<span class="number">0x3f</span>] ^</span><br><span class="line">		feistelBox[<span class="number">0</span>][(t&gt;&gt;<span class="number">24</span>)&amp;<span class="number">0x3f</span>]</span><br><span class="line">  <span class="comment">//......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="密钥置换">密钥置换</h3><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/subkey.png" alt="subkey.png"></p>
+<ol>
+<li><p>64bit key 通过选择置换1 选出56bit数据</p>
+ <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Used in the key schedule to select 56 bits</span></span><br><span class="line"><span class="comment">// from a 64-bit input.</span></span><br><span class="line"><span class="keyword">var</span> permutedChoice1 = [<span class="number">56</span>]<span class="keyword">byte</span>&#123;</span><br><span class="line">	<span class="number">7</span>, <span class="number">15</span>, <span class="number">23</span>, <span class="number">31</span>, <span class="number">39</span>, <span class="number">47</span>, <span class="number">55</span>, <span class="number">63</span>,</span><br><span class="line">	<span class="number">6</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">30</span>, <span class="number">38</span>, <span class="number">46</span>, <span class="number">54</span>, <span class="number">62</span>,</span><br><span class="line">	<span class="number">5</span>, <span class="number">13</span>, <span class="number">21</span>, <span class="number">29</span>, <span class="number">37</span>, <span class="number">45</span>, <span class="number">53</span>, <span class="number">61</span>,</span><br><span class="line">	<span class="number">4</span>, <span class="number">12</span>, <span class="number">20</span>, <span class="number">28</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">17</span>, <span class="number">25</span>,</span><br><span class="line">	<span class="number">33</span>, <span class="number">41</span>, <span class="number">49</span>, <span class="number">57</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">18</span>, <span class="number">26</span>,</span><br><span class="line">	<span class="number">34</span>, <span class="number">42</span>, <span class="number">50</span>, <span class="number">58</span>, <span class="number">3</span>, <span class="number">11</span>, <span class="number">19</span>, <span class="number">27</span>,</span><br><span class="line">	<span class="number">35</span>, <span class="number">43</span>, <span class="number">51</span>, <span class="number">59</span>, <span class="number">36</span>, <span class="number">44</span>, <span class="number">52</span>, <span class="number">60</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将置换的数据分为左右28bit，分16轮进入rotate函数分别得到16组旋转后的28bit数据</p>
+ <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Size of left rotation per round in each half of the key schedule</span></span><br><span class="line"><span class="keyword">var</span> ksRotations = [<span class="number">16</span>]<span class="keyword">uint8</span>&#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rotate halves of permuted key according to the rotation schedule</span></span><br><span class="line">leftRotations := ksRotate(<span class="keyword">uint32</span>(permutedKey &gt;&gt; <span class="number">28</span>))</span><br><span class="line">rightRotations := ksRotate(<span class="keyword">uint32</span>(permutedKey&lt;&lt;<span class="number">4</span>) &gt;&gt; <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ksRotate</span><span class="params">(in <span class="keyword">uint32</span>)</span> <span class="params">(out []<span class="keyword">uint32</span>)</span></span> &#123;</span><br><span class="line">	out = <span class="built_in">make</span>([]<span class="keyword">uint32</span>, <span class="number">16</span>)</span><br><span class="line">	last := in</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">16</span>; i++ &#123;</span><br><span class="line">		<span class="comment">// 28-bit circular left shift</span></span><br><span class="line">		left := (last &lt;&lt; (<span class="number">4</span> + ksRotations[i])) &gt;&gt; <span class="number">4</span></span><br><span class="line">		right := (last &lt;&lt; <span class="number">4</span>) &gt;&gt; (<span class="number">32</span> - ksRotations[i])</span><br><span class="line">		out[i] = left | right</span><br><span class="line">		last = out[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将旋转后的left，right组合输入选择置换2，生成48bit subkey用于feistel网格</p>
+ <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// generate subkeys</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">16</span>; i++ &#123;</span><br><span class="line">		<span class="comment">// combine halves to form 56-bit input to PC2</span></span><br><span class="line">		pc2Input := <span class="keyword">uint64</span>(leftRotations[i])&lt;&lt;<span class="number">28</span> | <span class="keyword">uint64</span>(rightRotations[i])</span><br><span class="line">		<span class="comment">// apply PC2 permutation to 7 byte input</span></span><br><span class="line">		c.subkeys[i] = unpack(permuteBlock(pc2Input, permutedChoice2[:]))</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="AES（Advanced_Encryption_Standard）">AES（Advanced Encryption Standard）</h2><blockquote>
+<p>高级加密标准（英语：Advanced Encryption Standard，缩写：AES），又称Rijndael加密法（荷兰语发音：[ˈrɛindaːl]，音似英文的“Rhine doll”），是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。经过五年的甄选流程，高级加密标准由美国国家标准与技术研究院（NIST）于2001年11月26日发布于FIPS PUB 197，并在2002年5月26日成为有效的标准。现在，高级加密标准已然成为对称密钥加密中最流行的算法之一。</p>
+</blockquote>
+<h3 id="AES-CBC简单实现">AES-CBC简单实现</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AesEncrypt</span><span class="params">(plaintext []<span class="keyword">byte</span>, key, iv []<span class="keyword">byte</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">    block, err := aes.NewCipher(key)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    blockSize := block.BlockSize()<span class="comment">//16 bytes</span></span><br><span class="line">    plaintext = PKCS7Padding(plaintext, blockSize)</span><br><span class="line">    blockMode := cipher.NewCBCEncrypter(block, iv)</span><br><span class="line">    crypted := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="built_in">len</span>(plaintext))</span><br><span class="line">    blockMode.CryptBlocks(crypted, plaintext)</span><br><span class="line">    <span class="keyword">return</span> crypted, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>AES是Rijndael的一种标准实现，AES blocksize固定128bit，密钥可以为128，192，256bit，Rijindael blocksize和密钥长度均可以为128，192，256</p>
+<p>a矩阵代表plaintext 128bit的block，矩阵4X4 每个元素是一个byte</p>
+<p>b矩阵是通过Rijndael密钥生成方案将key转化的矩阵</p>
+<h3 id="Add_Round_Key">Add Round Key</h3><p>矩阵中的每一个字节都与该次回合密钥（round key）做XOR运算；每个子密钥由密钥生成方案产生</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/AES-AddRoundKey.svg" alt="AES-AddRoundKey.svg"></p>
+<h3 id="SubBytes">SubBytes</h3><p>在SubBytes步骤中，矩阵中的各字节透过一个8位的S-box进行转换。这个步骤提供了加密法非线性的变换能力</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/AES-SubBytes.svg" alt="AES-SubBytes.svg"></p>
+<h3 id="ShiftRows步骤">ShiftRows步骤</h3><p>第一列维持不变，第二列里的每个字节都向左循环移动一格。同理，第三列及第四列向左循环位移的偏移量就分别是2和3</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/AES-ShiftRows.svg" alt="AES-ShiftRows.svg"></p>
+<h3 id="MixColumns">MixColumns</h3><p>Rijndael有限域内的矩阵乘法，主要是让转换后的每个byte依赖于之前整列的byte</p>
+<p>有限域计算： <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%89%E9%99%90%E5%9F%9F%E7%AE%97%E6%9C%AF#Rijndael%E6%9C%89%E9%99%90%E5%9F%9F">wiki</a></p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/AES-MixColumns.svg" alt="AES-MixColumns.svg"></p>
+<p>${\left[ \begin{array}{cccc}2 &amp; 3 &amp; 1 &amp; 1\1 &amp; 2 &amp; 3 &amp; 1\1 &amp; 1 &amp; 2 &amp; 3\3 &amp; 1 &amp; 1 &amp; 2\end{array} \right ]}\times{\left[ \begin{array}{cccc}a_{0,0} &amp; a_{0,1} &amp; a_{0,2} &amp; a_{0,3}\ a_{1,0} &amp;a_{1,1} &amp; a_{1,2} &amp; a_{1,3}\ a_{2,0} &amp;a_{2,1} &amp; a_{2,2} &amp; a_{2,3}\  a_{3,0} &amp;a_{3,1} &amp; a_{3,2} &amp; a_{3,3}\end{array}\right ]}={\left[ \begin{array}{cccc}r_{0,0} &amp; r_{0,1} &amp; r_{0,2} &amp; r_{0,3}\ r_{1,0} &amp;r_{1,1} &amp; r_{1,2} &amp; r_{1,3}\ r_{2,0} &amp;r_{2,1} &amp; r_{2,2} &amp; r_{2,3}\  r_{3,0} &amp;r_{3,1} &amp; r_{3,2} &amp; r_{3,3}\end{array}\right ]}$</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">r00  = <span class="number">2</span>*a00 ^ <span class="number">3</span>*a10 ^ <span class="number">1</span>*a20 ^ <span class="number">1</span>*a30</span><br><span class="line">r10  = <span class="number">1</span>*a00 ^ <span class="number">2</span>*a10 ^ <span class="number">3</span>*a20 ^ <span class="number">1</span>*a30</span><br><span class="line">r20  = <span class="number">1</span>*a00 ^ <span class="number">1</span>*a10 ^ <span class="number">2</span>*a20 ^ <span class="number">3</span>*a30</span><br><span class="line">r30  = <span class="number">3</span>*a00 ^ <span class="number">1</span>*a10 ^ <span class="number">1</span>*a20 ^ <span class="number">2</span>*a30</span><br><span class="line"></span><br><span class="line">r01  = <span class="number">2</span>*a01 ^ <span class="number">3</span>*a11 ^ <span class="number">1</span>*a21 ^ <span class="number">1</span>*a31</span><br><span class="line">r02  = <span class="number">2</span>*a02 ^ <span class="number">3</span>*a12 ^ <span class="number">1</span>*a22 ^ <span class="number">1</span>*a32</span><br><span class="line">r03  = <span class="number">2</span>*a03 ^ <span class="number">3</span>*a13 ^ <span class="number">1</span>*a23 ^ <span class="number">1</span>*a33</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将矩阵运算转化为4个查找表</span></span><br><span class="line"><span class="comment">// te0[i] = 2*i | 1*i | 1*i | 3*i</span></span><br><span class="line"><span class="comment">// te1[i] = 3*i | 2*i | 1*i | 1*i</span></span><br><span class="line"><span class="comment">// te2[i] = 1*i | 3*i | 2*i | 1*i</span></span><br><span class="line"><span class="comment">// te3[i] = 1*i | 1*i | 3*i | 2*i</span></span><br><span class="line"><span class="keyword">for</span> r := <span class="number">0</span>; r &lt; nr; r++ &#123;</span><br><span class="line">		t0 = xk[k+<span class="number">0</span>] ^ te0[<span class="keyword">uint8</span>(s0&gt;&gt;<span class="number">24</span>)] ^ te1[<span class="keyword">uint8</span>(s1&gt;&gt;<span class="number">16</span>)] ^ te2[<span class="keyword">uint8</span>(s2&gt;&gt;<span class="number">8</span>)] ^ te3[<span class="keyword">uint8</span>(s3)]</span><br><span class="line">		t1 = xk[k+<span class="number">1</span>] ^ te0[<span class="keyword">uint8</span>(s1&gt;&gt;<span class="number">24</span>)] ^ te1[<span class="keyword">uint8</span>(s2&gt;&gt;<span class="number">16</span>)] ^ te2[<span class="keyword">uint8</span>(s3&gt;&gt;<span class="number">8</span>)] ^ te3[<span class="keyword">uint8</span>(s0)]</span><br><span class="line">		t2 = xk[k+<span class="number">2</span>] ^ te0[<span class="keyword">uint8</span>(s2&gt;&gt;<span class="number">24</span>)] ^ te1[<span class="keyword">uint8</span>(s3&gt;&gt;<span class="number">16</span>)] ^ te2[<span class="keyword">uint8</span>(s0&gt;&gt;<span class="number">8</span>)] ^ te3[<span class="keyword">uint8</span>(s1)]</span><br><span class="line">		t3 = xk[k+<span class="number">3</span>] ^ te0[<span class="keyword">uint8</span>(s3&gt;&gt;<span class="number">24</span>)] ^ te1[<span class="keyword">uint8</span>(s0&gt;&gt;<span class="number">16</span>)] ^ te2[<span class="keyword">uint8</span>(s1&gt;&gt;<span class="number">8</span>)] ^ te3[<span class="keyword">uint8</span>(s2)]</span><br><span class="line">		k += <span class="number">4</span></span><br><span class="line">		s0, s1, s2, s3 = t0, t1, t2, t3</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>[<a target="_blank" rel="noopener" href="https://blog.tclaverie.eu/posts/understanding-golangs-aes-implementation-t-tables/">证明过程</a>]</p>
+<p><strong>Early Bounds Check</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">encryptBlockGo</span><span class="params">(xk []<span class="keyword">uint32</span>, dst, src []<span class="keyword">byte</span>)</span></span> &#123;</span><br><span class="line">	_ = src[<span class="number">15</span>] <span class="comment">// early bounds check</span></span><br><span class="line">	s0 := binary.BigEndian.Uint32(src[<span class="number">0</span>:<span class="number">4</span>])</span><br><span class="line">	s1 := binary.BigEndian.Uint32(src[<span class="number">4</span>:<span class="number">8</span>])</span><br><span class="line">	s2 := binary.BigEndian.Uint32(src[<span class="number">8</span>:<span class="number">12</span>])</span><br><span class="line">	s3 := binary.BigEndian.Uint32(src[<span class="number">12</span>:<span class="number">16</span>])</span><br><span class="line">  <span class="comment">//....</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(bigEndian)</span> <span class="title">Uint32</span><span class="params">(b []<span class="keyword">byte</span>)</span> <span class="title">uint32</span></span> &#123;</span><br><span class="line">	_ = b[<span class="number">3</span>] <span class="comment">// bounds check hint to compiler; see golang.org/issue/14808</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">uint32</span>(b[<span class="number">3</span>]) | <span class="keyword">uint32</span>(b[<span class="number">2</span>])&lt;&lt;<span class="number">8</span> | <span class="keyword">uint32</span>(b[<span class="number">1</span>])&lt;&lt;<span class="number">16</span> | <span class="keyword">uint32</span>(b[<span class="number">0</span>])&lt;&lt;<span class="number">24</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">(s []<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">  _ = s[<span class="number">1</span>]</span><br><span class="line">	_ = s[<span class="number">2</span>]	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>减少CX寄存器的 CMPQ指令</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%206.png" alt="Untitled"></p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%207.png" alt="Untitled"></p>
+<p>对特定CPU aes加密是直接用优化后的汇编代码执行</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> supportsAES = cpu.X86.HasAES || cpu.ARM64.HasAES</span><br><span class="line"><span class="keyword">var</span> supportsGFMUL = cpu.X86.HasPCLMULQDQ || cpu.ARM64.HasPMULL</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newCipher</span><span class="params">(key []<span class="keyword">byte</span>)</span> <span class="params">(cipher.Block, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> !supportsAES &#123;</span><br><span class="line">		<span class="keyword">return</span> newCipherGeneric(key)</span><br><span class="line">	&#125;</span><br><span class="line">	n := <span class="built_in">len</span>(key) + <span class="number">28</span></span><br><span class="line">	c := aesCipherAsm&#123;aesCipher&#123;<span class="built_in">make</span>([]<span class="keyword">uint32</span>, n), <span class="built_in">make</span>([]<span class="keyword">uint32</span>, n)&#125;&#125;</span><br><span class="line">	<span class="keyword">var</span> rounds <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">switch</span> <span class="built_in">len</span>(key) &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">128</span> / <span class="number">8</span>:</span><br><span class="line">		rounds = <span class="number">10</span></span><br><span class="line">	<span class="keyword">case</span> <span class="number">192</span> / <span class="number">8</span>:</span><br><span class="line">		rounds = <span class="number">12</span></span><br><span class="line">	<span class="keyword">case</span> <span class="number">256</span> / <span class="number">8</span>:</span><br><span class="line">		rounds = <span class="number">14</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	expandKeyAsm(rounds, &amp;key[<span class="number">0</span>], &amp;c.enc[<span class="number">0</span>], &amp;c.dec[<span class="number">0</span>])</span><br><span class="line">	<span class="keyword">if</span> supportsAES &amp;&amp; supportsGFMUL &#123;</span><br><span class="line">		<span class="keyword">return</span> &amp;aesCipherGCM&#123;c&#125;, <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> &amp;c, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Padding方案">Padding方案</h2><p>RFC 2315 PKCS #7: Crytographic Message Syntax March 1998</p>
+<blockquote>
+<p>Some content-encryption algorithms assume the<br>input length is a multiple of k octets, where k &gt; 1, and<br>let the application define a method for handling inputs<br>whose lengths are not a multiple of k octets. For such<br>algorithms, the method shall be to pad the input at the<br>trailing end with k - (l mod k) octets all having value k -<br>(l mod k), where l is the length of the input. In other<br>words, the input is padded at the trailing end with one of<br>the following strings:<br>01 -- if l mod k = k-1<br>02 02 -- if l mod k = k-2<br>.<br>.<br>.<br>k k ... k k -- if l mod k = 0<br>The padding can be removed unambiguously since all input is<br>padded and no padding string is a suffix of another. This<br>padding method is well-defined if and only if k &lt; 256;<br>methods for larger k are an open issue for further study.</p>
+</blockquote>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-07-07-1112.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-07-07-1112.png"></p>
+<p>PKCS5是 blocksize=8的PKCS7<br>zeroPadding是末尾固定用0补位</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//golang实现</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PKCS7Padding</span><span class="params">(cipherText []<span class="keyword">byte</span>, blockSize <span class="keyword">int</span>)</span> []<span class="title">byte</span></span> &#123;</span><br><span class="line">   padding := blockSize - <span class="built_in">len</span>(cipherText)%blockSize</span><br><span class="line">   padText := bytes.Repeat([]<span class="keyword">byte</span>&#123;<span class="keyword">byte</span>(padding)&#125;, padding)</span><br><span class="line">   <span class="keyword">return</span> <span class="built_in">append</span>(cipherText, padText...)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PKCS5Padding</span><span class="params">(cipherText []<span class="keyword">byte</span>)</span> []<span class="title">byte</span></span> &#123;</span><br><span class="line">   <span class="keyword">return</span> PKCS7Padding(cipherText, <span class="number">8</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分组模式">分组模式</h2><h3 id="EBC(electronic_code_book)/电子密码本"><strong>EBC(electronic code book)/电子密码本</strong></h3><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-08-03-2120.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-08-03-2120.png"></p>
+<p>优点：</p>
+<ul>
+<li>简单</li>
+<li>快速</li>
+<li>支持并行</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>无需解密就可对明文进行操作（如交换密文分组，删除密文分组等）</li>
+<li>明文中的重复可以体现在密文中</li>
+</ul>
+<p>案例：比如A给B汇款，可以通过修改密文顺序变更成B给A汇款</p>
+<h3 id="CBC(cipher_block_chaining)/密文分组链接"><strong>CBC(cipher block chaining)/密文分组链接</strong></h3><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-08-03-2121.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/%E6%97%A0%E6%A0%87%E9%A2%98-2021-08-03-2121.png"></p>
+<p>优点</p>
+<ul>
+<li>明文重复不影响密文</li>
+<li>解密支持并行</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>加密不支持并行</li>
+</ul>
+<h3 id="CTR(CounTeR)/计数器模式">CTR(CounTeR)/计数器模式</h3><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/ctr.png" alt="ctr.png"></p>
+<p>对称加密需要解决的问题就是密钥如何安全发送给接收者（蛋生鸡鸡生蛋）</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%208.png" alt="Untitled"></p>
+<p>以此衍生的技术是：</p>
+<ul>
+<li>非对称加密</li>
+<li>密钥交换（Diffie-Hellman）</li>
+</ul>
+<h1 id="非对称加密/公钥加密">非对称加密/公钥加密</h1><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%209.png" alt="Untitled"></p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2010.png" alt="Untitled"></p>
+<p>加密用公钥加密，解密用私钥</p>
+<h2 id="RSA">RSA</h2><p>加密</p>
+<blockquote>
+<p>$ciphertext = plaintext^E \% N$</p>
+</blockquote>
+<p>解密</p>
+<blockquote>
+<p>$plaintext = ciphertext^D\%N$</p>
+</blockquote>
+<p>公钥：(N,E)  私钥:(N,D)</p>
+<p>步骤</p>
+<ol>
+<li>N=pq, pq为大素数且p≠q</li>
+<li>$R = \varphi(N)=\varphi(p)*\varphi(q) = (p-1)p^0(q-1)q^0=(p-1)(q-1)$，求N的欧拉函数值</li>
+<li>选择一个小于r的整数E，使E与R互质。并求得E关于R的模逆元，命名为D 即(E*D)%R=1</li>
+</ol>
+<p>处理速度是对称加密的几百分之一</p>
+<h3 id="中间人攻击">中间人攻击</h3><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2011.png" alt="Untitled"></p>
+<ol>
+<li>B发送pubB公钥给A，被X截获，然后X将自己的pubX发给A</li>
+<li>A以为pubX是B的公钥，用pubX加密内容发送给B</li>
+<li>X窃取A发送的内容，用priX解密，获得明文</li>
+<li>X修改内容，用pubB加密发送给B</li>
+<li>B用priB解密以为是A发送的内容，实际是X发送的内容</li>
+</ol>
+<h1 id="消息认证码（Message_Authentication_Code/MAC)">消息认证码（Message Authentication Code/MAC)</h1><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2012.png" alt="Untitled"></p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/2560px-MAC.svg.png" alt="2560px-MAC.svg.png"></p>
+<h2 id="单向散列函数">单向散列函数</h2><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Hash_function.svg" alt="Hash_function.svg"></p>
+<p><strong>特性</strong></p>
+<ul>
+<li>任意输入输出长度固定</li>
+<li><p>单向性</p>
+<blockquote>
+<p>对于每一个输入，函数值都容易计算（多项式时间）；但是对于一个随机的函数值，算出其对应的输入却比较困难（无法在多项式时间内使用确定性图灵机计算）。 单向函数是否存在仍然是计算机科学中的一个开放性问题</p>
+</blockquote>
+</li>
+<li><p>碰撞抗性</p>
+<ul>
+<li>弱碰撞抗性：Given an input m1, it should be difficult to find a different input m2 such that hash(m1) = hash(m2)</li>
+<li>强碰撞抗性：It should be difficult to find two different messages m1 and m2 such that hash(m1) = hash(m2).</li>
+</ul>
+</li>
+</ul>
+<p><strong>常用算法</strong></p>
+<ul>
+<li>MD5</li>
+<li>SHA-1, SHA-2(SHA-256,SHA-384,SHA-512),SHA-3</li>
+</ul>
+<p>MD5 由Ronald Rivest于 1991年设计以取代早期的散列函数 MD4，并于 1992 年指定为 RFC 1321。与 MD5 的冲突可以在几秒钟内计算出来，这使得该算法不适用于大多数需要加密散列的用例。MD5 生成 128 位（16 字节）的摘要。</p>
+<p>2005年，密码分析人员发现了对SHA-1的有效攻击方法，这表明该算法可能不够安全，不能继续使用</p>
+<h2 id="HMAC_（Hash_MAC)">HMAC （Hash MAC)</h2><blockquote>
+<p>rfc2104:<br>We define two fixed and different strings ipad and opad as follows<br>(the &#39;i&#39; and &#39;o&#39; are mnemonics for inner and outer):<br>ipad = the byte 0x36 repeated B times<br>opad = the byte 0x5C repeated B times.<br>To compute HMAC over the data `text&#39; we perform<br>H(K XOR opad, H(K XOR ipad, text))</p>
+</blockquote>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/f89190c72a307b34f1e6b53b5f944a7ae81a3958.svg" alt="f89190c72a307b34f1e6b53b5f944a7ae81a3958.svg"></p>
+<p>H 是加密哈希函数（任何加密用散列函数，比如sha家族）<br>m是要认证的消息<br>K是密钥<br>K &#39;是从密钥K派生的块大小的密钥；要么用 0 向右填充到块大小，要么先散列到小于或等于块大小，然后用零填充到右边<br>‖ 表示串联<br>⊕ 表示按位异或(XOR)<br>opad是块大小的外部填充，由值为 0x5c 的重复字节组成<br>ipad是块大小的内部填充，由值为 0x36 的重复字节组成</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/SHAhmac.svg" alt="SHAhmac.svg"></p>
+<h1 id="数字签名">数字签名</h1><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%203.png" alt="%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%203.png"></p>
+<p>生成签名</p>
+<blockquote>
+<p>$signature = plaintext^D \% N$</p>
+</blockquote>
+<p>验证</p>
+<blockquote>
+<p>$plaintext = signature^E\%N$</p>
+</blockquote>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2013.png" alt="Untitled"></p>
+<p>如何确定B的pubA就是A生成的？</p>
+<h1 id="数字证书">数字证书</h1><p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2014.png" alt="Untitled"></p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2015.png" alt="Untitled"></p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Untitled%2016.png" alt="Untitled"></p>
+<ol>
+<li>A用生成的pubA想CA（证书认证机构)注册</li>
+<li>CA用自己的私钥生成数字签名</li>
+<li>A发送证书给B</li>
+<li>B通过CA的pubC验证证书是否合法</li>
+<li>合法后提取pubA</li>
+</ol>
+<h1 id="随机数">随机数</h1><p>随机数围绕3个特性，越往下越难实现。</p>
+<ol>
+<li>随机性：不存在统计学偏差，杂乱无章  (弱伪随机）</li>
+<li>不可预测：不能通过过去的数推到下一个数 （密码学安全伪随机，强伪随机）</li>
+<li>不可重现</li>
+</ol>
+<blockquote>
+<p>其定义为随机样本不可重现。实际上只要给定边界条件，真随机数并不存在，可是如果产生一个真随机数样本的边界条件十分复杂且难以捕捉（比如当地的背景辐射波动值），可以认为用这个方法演算出来了真随机数。但实际上，这也只是非常接近真随机数的伪随机数，一般认为，无论是背景辐射、物理噪音、抛硬币等等都是可被观察了解的，任何基于经典力学产生的随机数，都只是伪随机数。</p>
+</blockquote>
+<h2 id="伪随机">伪随机</h2><h3 id="线性同余生成器/Linear_congruential_generator(LCG)">线性同余生成器/Linear congruential generator(LCG)</h3><p>$$X_{n+1} = (aX_n+c) \%m$$</p>
+<p><img src="/img/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0%2048aff8cbada34d7fa1b9a42bd48f413e/Linear_congruential_generator_visualisation.svg" alt="Linear_congruential_generator_visualisation.svg"></p>
+<blockquote>
+<p>线性同余方法可见C的rand和java的util.Random方法<br>c的rand还包含了线性累加反馈法，即LAFM（linear additive feedback method）的实现具体使用取决于state状态</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a = 1103515245, c = 12345, m = 2^31</span></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">__random_r (struct random_data *buf, <span class="keyword">int32_t</span> *result)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//.....</span></span><br><span class="line">  <span class="keyword">if</span> (buf-&gt;rand_type == TYPE_0)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">int32_t</span> val = ((state[<span class="number">0</span>] * <span class="number">1103515245U</span>) + <span class="number">12345U</span>) &amp; <span class="number">0x7fffffff</span>;</span><br><span class="line">      state[<span class="number">0</span>] = val;</span><br><span class="line">      *result = val;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//.....</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1.必须遍历2^31后才能轮到&quot;同一个&quot;数<br>2.具有周期性，不具备不可预测性</p>
+<h3 id="单向散列函数/密码法/etc">单向散列函数/密码法/etc</h3><h2 id="&quot;真“随机（密码安全伪随机）">&quot;真“随机（密码安全伪随机）</h2><p>在linux系统，crypto/rand 使用syscall获取信息熵来作为随机数，可以在密码学上认为接近真随机</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// golang: crypto/rand</span></span><br><span class="line"><span class="keyword">const</span> urandomDevice = <span class="string">&quot;/dev/urandom&quot;</span></span><br><span class="line"><span class="keyword">var</span> altGetRandom <span class="function"><span class="keyword">func</span><span class="params">([]<span class="keyword">byte</span>)</span> <span class="params">(ok <span class="keyword">bool</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *devReader)</span> <span class="title">Read</span><span class="params">(b []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> atomic.CompareAndSwapInt32(&amp;r.used, <span class="number">0</span>, <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="comment">// First use of randomness. Start timer to warn about</span></span><br><span class="line">		<span class="comment">// being blocked on entropy not being available.</span></span><br><span class="line">		t := time.AfterFunc(<span class="number">60</span>*time.Second, warnBlocked)</span><br><span class="line">		<span class="keyword">defer</span> t.Stop()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> altGetRandom != <span class="literal">nil</span> &amp;&amp; r.name == urandomDevice &amp;&amp; altGetRandom(b) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">len</span>(b), <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	r.mu.Lock()</span><br><span class="line">	<span class="keyword">defer</span> r.mu.Unlock()</span><br><span class="line">	<span class="keyword">if</span> r.f == <span class="literal">nil</span> &#123;</span><br><span class="line">		f, err := os.Open(r.name)</span><br><span class="line">		<span class="keyword">if</span> f == <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> runtime.GOOS == <span class="string">&quot;plan9&quot;</span> &#123;</span><br><span class="line">			r.f = f</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			r.f = bufio.NewReader(hideAgainReader&#123;f&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> r.f.Read(b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>od -vAn -N4 -tu4 &lt; /dev/urandom<br>可以使用od工具查看urandom产生的结果</p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Linear_congruential_generator">Linear congruential generator - Wikipedia</a></p>
+<p>@<a target="_blank" rel="noopener" href="https://m.sohu.com/n/476868293/?wscrid=95360_2">https://m.sohu.com/n/476868293/?wscrid=95360_2</a></p>
+<pre><code>@[<span class="link_label">https://www.mscs.dal.ca/~selinger/random/</span>](<span class="link_url">https://www.mscs.dal.ca/~selinger/random/</span>)
+</code></pre><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%8A%A0%E5%AF%86%E6%A8%99%E6%BA%96">資料加密標準 - 维基百科，自由的百科全书</a></p>
+<p>@<a target="_blank" rel="noopener" href="https://www.ruanx.net/des/">https://www.ruanx.net/des/</a></p>
+<p>@<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HMAC">https://en.wikipedia.org/wiki/HMAC</a></p>
+<p>@<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/S%E7%9B%92">https://zh.wikipedia.org/wiki/S盒</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/06/Regex-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Regex 正则表达式</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="encrypt_intro" data-title="加密技术概览" data-url="https://youthy.github.io/2021/08/27/encrypt_intro/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 youthy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
